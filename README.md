@@ -14,8 +14,8 @@ Project skill-tree is a free application that allows users to create, share, and
 3. Make education fun, visually appealing, and decentralized.
 4. Solve the "What next?" question through well-trodden learning paths in the form of recommendations.
 5. Encourage academic experimentation by putting options to create one's own path first.
-6. Passively creating a decentralized method of recording the process of world knowledge acquisition across many people.
-7. Decentralize the grading verification process: a system of verified professional graders (teachers, professors, instructors) can log in and grade their student's work. Each node will have an end-product project link to view their project somewhere on the web.
+6. Passively create a decentralized method of recording the process of world knowledge acquisition across many people.
+7. Decentralize the grading or verification process: a system of professional graders (teachers, professors, instructors) can log in and grade their student's work. Each node will have an end-product project link to view their project somewhere on the web.
 ## Motivation
 I was presenting example ideas of how to improve the U.S. education system for a school project and I came up with an idea of gamifying knowledge acquisition through skill trees. Months later, I was somehow reminded of this idea this week because I have been teaching my sibling a lot lately. Having gone through a fairly terrible education system, myself, I have thought a lot about improving U.S. education. I'm not a great web developer yet so I think this will be a fun project to work on while I'm in school.
 ## Tech Stack
@@ -43,3 +43,8 @@ I was presenting example ideas of how to improve the U.S. education system for a
 - I mentioned this at standup, but ability for students to link their projects to skill tree nodes, showing their work on a particular subskill.
 
 - Students' projects could be verified by trusted educators/validators. Educators could leave constructive feedback on projects.
+
+- Look into this D3 model:
+    https://observablehq.com/@drewsapple/curriculum-skill-tree
+    https://observablehq.com/@bartok32/step-by-step-directed-graph-drawing-dagre-layout
+
