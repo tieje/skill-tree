@@ -1,0 +1,13 @@
+9/30/2021
+
+I'm going to attempt to play around with animxyz with TypeScript.
+
+https://animxyz.com/docs#react-installation
+
+I'll be using create-react --typescript template
+
+
+Create the typescript template:
+
+yarn create react-app animxyz_trial_1 --template typescript
+

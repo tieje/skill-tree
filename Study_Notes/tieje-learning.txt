@@ -32,11 +32,19 @@ Testing Django in Python
 Animxyz for css
     - Read the documentation
         - https://animxyz.com/docs
+React Router
+    - Read this article
+        - https://www.freecodecamp.org/news/a-complete-beginners-guide-to-react-router-include-router-hooks/
+    - Read the documentation
+        - https://reactrouter.com/web/guides/quick-start
 
-There are 7 things that I need to study. I'd like to spend one 25 min pomodoro session per day on each of these topics: 3.5 hours.
+There are 8 things that I need to study. I'd like to spend one 25 min pomodoro session per day on each of these topics: 4 hours.
 I'll do this later in the day when I visit my sibling.
 
 I'll also need to work on the final project. An hour per day should be fine.
 
-So more like 4.5 hours
+So more like 5 hours... per day.
+
+I've decide on using yarn since it was built in mind to combat the weaknesses of npm.
+I've thought about using nextjs, but it doesn't fit our website.
 
