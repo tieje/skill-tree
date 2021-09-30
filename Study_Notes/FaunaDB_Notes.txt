@@ -1,0 +1,11 @@
+9/30/2021
+
+I went through the initial tutorial on their website. Not sure if I learned much but I'm on the documentation now.
+https://docs.fauna.com/fauna/current/
+
+Since I'll be using graphql for this project through graphene, I think should be using the graphql driver.
+
+Check these out later.
+https://dev.to/chukslord1/how-to-build-a-soccer-data-web-scraper-with-django-and-fauna-2l1o
+https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck1
+

@@ -47,4 +47,3 @@ So more like 5 hours... per day.
 
 I've decide on using yarn since it was built in mind to combat the weaknesses of npm.
 I've thought about using nextjs, but it doesn't fit our website.
-

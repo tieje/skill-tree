@@ -1,0 +1,31 @@
+9/30/2021
+
+This will simply be a continuation from the old react + typescript book.
+
+I'm going to update my code and my book from gumroad.
+
+ImmerJS
+pg 91
+"Adding tasks is a bit more complex because they need to be added to a specific list’s
+tasks array.
+So first we’ll need to find the target list index. Then we override this list with a new
+one, where we add the new task. And then we return a new state object, where we
+override the target list with the updated one.
+
+This is a lot of code. If only we could mutate the state and just push the new task to
+the target list.
+Thanks to ImmerJS it is possible. This is a library that allows you to mutate an object
+and it will create a new object instance based on your mutations. That’s exactly what
+we need."
+pg 93
+"Here we renamed the state into draft, so we know that we can mutate it. Also we’ve
+changed the ADD_LIST case so that it just pushes the new list object to the lists array.
+We don’t need to return the new state value anymore, ImmerJS will handle it
+automatically."
+
+ImmerJS allows me to "mutate" state so that I only need to change one thing instead of creating the entire object again with state.
+
+Paused on pg 94
+I think I'll review generics and arrow bracket types in TS first a bit. I forgot what they did.
+Instead, I think I might want to take time to review the TS language and maybe even the Python language as well.
+
