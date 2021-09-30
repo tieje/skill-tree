@@ -25,10 +25,10 @@ I was presenting example ideas of how to improve the U.S. education system for a
 - Version Control
     - Git
 - Frontend
-    - React
-    - Pick an animation framework. Gamification will be important.
+    - React + TypeScript
+    - D3 for data visualization. Good animation is nice to have, but it's not functional.
 - Backend
-    - I like django, but it might be limited by the maintainers... I could just fork django if I need to. I think it's a solid base
+    - django
 - Deployment
     - Docker
 - Database
@@ -38,6 +38,8 @@ I was presenting example ideas of how to improve the U.S. education system for a
 - Marketing
     - Email service
     - Giving presentations to teachers and education boards
+
+We will definitely be using all the technologies above.
 ### Justin's Ideas
 - Similar to the way GitHub manages repos: Open and closed skill trees. Open skill trees can be edited by all collaborators, closed can only be edited by the owner. Closed skill trees can either be publicly viewed or not. Of course, the real value of this project would be in the open skill trees.
 
