@@ -9,9 +9,27 @@ When you want to import files from the same folder, start with a "."
 from .config import AppConfig
 
 https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python
-__all__ means when "import *" is used, only those modules specified in "import *" are used.
+__all__ means when "import *" is used, only those modules specified in "__all__" are used.
 Users can expect that the names in the __all__ will not change.
 
 Read this next time
 https://github.com/django/django/blob/main/django/apps/config.py
+
+10/1/2021
+
+One of the classes that are imported is definitely a class called AppConfig
+
+Perhaps I should look at django.contrib.admin first.
+Or perhaps I should figure out how to build the search function for the application?
+
+.rpartition("string")
+https://www.w3schools.com/python/ref_string_rpartition.asp
+Returns a tuple that's breaks the string into three elements: before, searched string, and after.
+
+.isidentifier()
+https://www.w3schools.com/python/ref_string_isidentifier.asp
+https://www.askpython.com/python/python-identifiers-rules-best-practices
+"Python identifiers are user-defined names. They are used to define entities in the python program. We should use proper names to hint the use of the identifier. Follow the rule to “keep it simple and meaningful”.
+
+This is an easy way to ensure that the user names their entities appropriately.
 
