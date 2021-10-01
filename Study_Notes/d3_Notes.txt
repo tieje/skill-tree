@@ -4,3 +4,13 @@ https://github.com/d3/d3/wiki
 
 I'll check the tutorials out later. The observable website is just insufferable so I might want to get a course from newline.
 
+10/1/2021
+
+I'm going to follow this guide for now:
+
+https://wattenberger.com/blog/react-and-d3
+
+yarn create react-app d3_trial_1 --template typescript
+
+It works as intended so far so that's cool.
+

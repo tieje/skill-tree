@@ -6,6 +6,31 @@ https://docs.fauna.com/fauna/current/
 Since I'll be using graphql for this project through graphene, I think should be using the graphql driver.
 
 Check these out later.
-https://dev.to/chukslord1/how-to-build-a-soccer-data-web-scraper-with-django-and-fauna-2l1o
 https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck1
+
+10/1/2021
+
+I ended up signing up to dev.to just to see what's out there.
+
+The code I am most interested:
+
+from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.http import HttpResponseNotFound
+from faunadb import query as q
+import pytz
+from faunadb.objects import Ref
+from faunadb.client import FaunaClient
+import hashlib
+import datetime
+
+client = FaunaClient(secret="SECRET_KEY")
+
+indexes = client.query(q.paginate(q.indexes()))
+
+user = client.query(q.get(q.match(q.index("users_index"), username)))
+
+I guess this is the typical way to get info from faunadb.
+
+I'll create a django project next to test it out.
 

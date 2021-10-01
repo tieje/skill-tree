@@ -20,3 +20,45 @@ The tutorial works as intended, but I did need to change strict type-checking to
 I'll look into queries again next:
 
 https://www.apollographql.com/docs/react/data/queries/
+
+10/1/2021
+
+Like React Context and React.Provider, the ApolloProvider must wrap around your entire application in order to edit state.
+
+useQuery is React hook that is the primary API used for executing queries
+
+import { gql, useQuery } from '@apollo/client';
+
+const GET_DOGS = gql`
+  query GetDogs {
+    dogs {
+      id
+      breed
+    }
+  }
+`;
+const {loading, error, data} = useQuery(GET_DOGS)
+
+if (loading) return 'Loading...'
+if (error) return 'Error! $(error.message}')
+
+return (
+    ...
+)
+
+This is the basics of how to use useQuery() hook to get data.
+
+Apollo Client caches results locally to make subsequent executions very fast.
+
+Updating cached query results can be done by setting the pollInterval in useQuery
+Or by Refetching in response to an action.
+
+<button onClick={() => refetch()}>
+
+useQuery() can be used to show when information is being refetched is so desired as part of loading state.
+
+useLazyQuery is used instead when we don't want to immediately execute a query, such as for a button press.
+
+Keep going from here
+https://www.apollographql.com/docs/react/data/queries/#manual-execution-with-uselazyquery
+

@@ -11,3 +11,17 @@ Create the typescript template:
 
 yarn create react-app animxyz_trial_1 --template typescript
 
+10/1/2021
+
+yarn add @animxyz/react
+
+My first goal will be to create the fade in and out transition in the example of the front page.
+
+http://reactcommunity.org/react-transition-group/switch-transition
+
+I want to fade in and out the react svg from the default page.
+
+appearing and disappearing work but the css is not working yet. Will need some more work.
+
+10/2/2021
+
