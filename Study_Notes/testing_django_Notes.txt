@@ -1,0 +1,19 @@
+9/30/2021
+
+https://docs.djangoproject.com/en/3.2/topics/testing/
+Django does not support alternative test tools, but it can be done because django has an API for testing.
+
+Python's built-in unit-tests will be the primary testing method.
+There some advanced testing topics that I will avoid for now. It's mostly about testing view functions.
+
+Interesting that django has their own testing client.
+Since I'm not using django for rendering templates, I have no use for their testing client. Well, not really.
+
+https://docs.djangoproject.com/en/3.2/topics/testing/overview/
+It seems like all the info so far is pushing to studying the django.test module. I guess I'll read that too.
+
+The tests in django very similar to normal unit Tests, therefore, I may want to just read a book about unit testing python.
+
+Read this next:
+https://github.com/django/django/tree/main/django/test
+

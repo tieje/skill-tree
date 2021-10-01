@@ -47,3 +47,20 @@ So more like 5 hours... per day.
 
 I've decide on using yarn since it was built in mind to combat the weaknesses of npm.
 I've thought about using nextjs, but it doesn't fit our website.
+
+... So I've added learning TypeScript, Python, and CSS as well. Altogether, it's 10 topics.
+This is 5 hours per day. Sheesh.
+
+I'm thinking...
+
+8am - wake up
+8:30am - start studying for 3 hours
+11:30am - attend standup
+12pm - lunch break and take bear out
+1pm - visit sibling
+2pm - study for an additional 2 hours
+4pm - work on the final project
+6pm - eat dinner and chill
+
+If missed any study windows, I'll make them up at night during my night reading.
+

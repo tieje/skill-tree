@@ -1,2 +1,17 @@
 9/30/2021
 
+Rather than trying to learn advanced python programming topics, I should just read the raw django source code.
+This way, not only will I learn more about django, I'll probably learn more advanced python programming techniques.
+
+https://github.com/django/django/blob/main/django/apps/__init__.py
+When you want to import files from the same folder, start with a "."
+
+from .config import AppConfig
+
+https://stackoverflow.com/questions/44834/can-someone-explain-all-in-python
+__all__ means when "import *" is used, only those modules specified in "import *" are used.
+Users can expect that the names in the __all__ will not change.
+
+Read this next time
+https://github.com/django/django/blob/main/django/apps/config.py
+
