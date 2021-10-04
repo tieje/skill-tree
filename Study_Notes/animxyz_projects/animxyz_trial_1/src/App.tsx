@@ -1,10 +1,11 @@
+import "@animxyz/core"
 import React from 'react';
 import './App.css';
 import { useState } from 'react';
 import { XyzTransition } from "@animxyz/react";
 
 function App() {
-  const [state, setState] = useState(false)
+  const [state, setState] = useState(true)
   const fadeNOut = () => {
     if (state) {
       setState(false)

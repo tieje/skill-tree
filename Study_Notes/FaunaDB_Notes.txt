@@ -34,3 +34,26 @@ I guess this is the typical way to get info from faunadb.
 
 I'll create a django project next to test it out.
 
+10/4/2021
+
+Create a django project that displays data from faunadb.
+
+https://www.craigfranklin.dev/python/serverless/database/graphql/2020/12/06/faunadb-local/
+
+REDIS is best for caching
+Wide column database
+    - CQL, easy to scale up, scaling time series data: frequent writes
+Document db
+    - Collections, logical hierarchy.
+
+The multi-model db
+    - just want json
+    - how to access data through graphql
+    - automatically determines the best data modeling paradigm to use
+
+https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck1
+
+Figure out how to model data with Django, apply that model graphql, have graphql interact with the faunadb.
+
+Because it's a multi-paradigm db, faunadb does not need a model defined. The ORM is not needed.
+If I don't need an ORM, then I don't really need djang

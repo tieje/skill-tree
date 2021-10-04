@@ -14,3 +14,11 @@ yarn create react-app d3_trial_1 --template typescript
 
 It works as intended so far so that's cool.
 
+10/4/2021
+
+Learning d3 will be easier if I define what I want to build first.
+
+Each tree will need a maximum amount of nodes allowed to be displayed.
+
+I'll need to figure out this design later.
+

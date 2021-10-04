@@ -62,3 +62,10 @@ useLazyQuery is used instead when we don't want to immediately execute a query, 
 Keep going from here
 https://www.apollographql.com/docs/react/data/queries/#manual-execution-with-uselazyquery
 
+10/4/2021
+
+I'm pretty sure I was just reading.
+
+I wonder what React + TS uses for state management.
+Whenever a reactive variable is updated in Apollo, the Component that uses it, re-renders, which can save some code.
+

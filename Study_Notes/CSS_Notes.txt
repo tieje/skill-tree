@@ -25,5 +25,21 @@ So... Grid is best used for like the background and flexbox is best used for the
 
 Continue on with the guide tomorrow.
 
-10/2/2021
+10/4/2021
+
+Perhaps I should not be using flexbox for the background
+
+https://www.quackit.com/css/flexbox/examples/flexbox_website_layout_examples.cfm
+I'm trying to figure out how to do website layouts with flexbox.
+
+Perhaps I should be using more html instead of trying rewrite everything as a div element...
+
+Perhaps my problem is not so much with learning how to use css, but rather about learning how to html effectively.
+
+https://planflow.dev/blog/how-to-get-better-at-css
+https://tailwindcss.com/
+
+Consider looking into tailwind CSS
+
+Can use Tailwind for CSS and animxyz for animations exclusively.
 

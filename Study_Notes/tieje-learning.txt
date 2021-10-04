@@ -56,11 +56,44 @@ I'm thinking...
 8am - wake up
 8:30am - start studying for 3 hours
 11:30am - attend standup
-12pm - lunch break and take bear out
-1pm - visit sibling
-2pm - study for an additional 2 hours
-4pm - work on the final project
-6pm - eat dinner and chill
+12pm - work out, shower, take bear out, eat
+1pm - study for an additional 2 hours
+3pm - visit sibling
+6pm - eat dinner
+9pm - 12am - study or work on any additional things that you didn't get done today.
 
 If missed any study windows, I'll make them up at night during my night reading.
+
+10/4/2021
+
+I have 12 things to learn now... Perhaps this is... getting out of hand.
+
+2 before 12pm
+4 from 1-3pm
+4 from 4:30pm to 6:30pm
+2 from 10-11pm
+
+It would be a good idea to create a project that combines a little bit of everything.
+Connect the faunadb db to django.
+Connect apollo to django.
+Show an animated list with animxyz and an example of data nodes with d3.
+Actually perform testing with django and react as practice.
+Provide pagination through results with react-router.
+
+I'll hold off on it until I figure out other things like d3.
+
+
+The REST paradigm is no longer needed. The future is graphQL.
+
+This means that I won't need to learn Python or Django.
+Instead, I can just focus on TypeScript and nodeJS with graphQL.
+
+The backend would be fairly simple.
+
+https://www.freecodecamp.org/news/get-started-with-graphql-and-nodejs/
+
+https://graphql.org/graphql-js/
+
+I guess I'm going full on TS. Python and Django has been switched to nodeJS and graphQL
+And graphQL is pretty easy from what I remember. I might not even need to learn it again.
 

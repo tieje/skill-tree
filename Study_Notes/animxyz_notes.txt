@@ -23,5 +23,10 @@ I want to fade in and out the react svg from the default page.
 
 appearing and disappearing work but the css is not working yet. Will need some more work.
 
-10/2/2021
+10/4/2021
+
+I figured it out. I needed to import @animxyz/core.
+It works as intended now. So that's cool.
+
+I'll want to practice with creating a real react component that has a list. The list items will fade out together.
 

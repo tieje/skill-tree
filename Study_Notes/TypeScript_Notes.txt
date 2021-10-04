@@ -10,3 +10,7 @@ I should be using typeof "number", as in type guards with if-statements.
 Left off here
 https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing
 
+10/4/2021
+
+Skip ahead to see what they use for state management.
+
