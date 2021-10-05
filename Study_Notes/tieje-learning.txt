@@ -134,3 +134,15 @@ If the JS is all good then faunadb actually has everything I need.
 I will want to use a state management library. Just not Apollo though.
 
 It looks like I'll finally be learning about Redux.
+
+10/5/2021
+
+I've gotten down the architecture. I'll need to focus on the final project for school now.
+
+Layer 1: React + TypeScript + D3 + Animxyz + Tailwind CSS
+Layer 2: Redux (state management) + React Router (URL/URI routing) + faunadbJS library (grab data from fauna)
+Layer 3: faunadb "serverless", noSQL, scalable cloud storage
+
+I'll be working on this final project even after school. I'll need to finish this thing before I work on project skill-trees.
+
+~ Sayonara ~
