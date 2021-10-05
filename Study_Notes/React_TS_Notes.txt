@@ -29,3 +29,25 @@ Paused on pg 94
 I think I'll review generics and arrow bracket types in TS first a bit. I forgot what they did.
 Instead, I think I might want to take time to review the TS language and maybe even the Python language as well.
 
+10/4/2021
+
+I'll be skimming around to see what technologies they actually end up using.
+
+pg 4 is table of contents
+Rather using something like express, it looks like normal node js was used instead.
+What are the advantages of express then?
+
+Good to know that the book and I have come to the same conclusion about using Apollo client.
+
+Apollo-server is probably a fairly simple way to implement the graphql schema.
+
+https://docs.fauna.com/fauna/current/tutorials/graphql/quick_start
+We would just send a graphql mutation query, which would mutate the data.
+There are no posts.
+
+We would use Apollo client to construct a graphql or FQL 
+
+
+It looks like I might not need Apollo server express to host the graphql backend.
+It looks like I can grab data directly from the faunadb service through graphql or fql.
+https://fauna.com/blog/getting-started-with-fauna-and-node-js-using-fastify

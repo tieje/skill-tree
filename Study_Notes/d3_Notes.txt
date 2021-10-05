@@ -22,3 +22,6 @@ Each tree will need a maximum amount of nodes allowed to be displayed.
 
 I'll need to figure out this design later.
 
+I found my tutorial for D3. So that's cool.
+https://www.freecodecamp.org/learn/data-visualization/
+

@@ -97,3 +97,40 @@ https://graphql.org/graphql-js/
 I guess I'm going full on TS. Python and Django has been switched to nodeJS and graphQL
 And graphQL is pretty easy from what I remember. I might not even need to learn it again.
 
+It seems like Writing and Reading data is actually a fairly simple process in JS.
+It's all about constructing the correct JSON statement.
+
+So I just don't need to really do much huh... >_>
+I don't need Apollo backend to host the graphql site.
+I will need express as an HTTP web framework.
+
+Apollo client is a state management library. It's meant to grab data from a graphql endpoint.
+
+FaunaDB has their own idea about grabbing data from their collections though. So I don't necessarily need
+the graphql or even Apollo.
+
+Apollo is great that you could manage data from graphql, but honestly...
+If I'm using a db service, I don't even really need the graphql since I'll be grabbing data directly from the database.
+
+curl 'https://graphql.us.fauna.com/graphql' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://dashboard.fauna.com' -H 'authorization: Basic Zm5BRVV0TEF5Q0FBUWNPZWZyRVhVME5DN3FhT01hMzJqU0dSV1p1WDpmaXJzdGRiOmFkbWlu' --data-binary 'query {
+  allCustomers {
+    data {
+      firstName
+    }
+  }
+}
+' --compressed
+
+I'm wondering how I would write a query.
+I know how I would write a collection, but the query, I'm not so sure.
+https://fauna.github.io/faunadb-js/Client.html#query__anchor
+
+Comparing these two, it looks like you actually use a syntax like FQL to query things in JavaScript.
+https://docs.fauna.com/fauna/current/api/fql/types?lang=shell
+https://github.com/fauna/faunadb-js
+
+If the JS is all good then faunadb actually has everything I need.
+
+I will want to use a state management library. Just not Apollo though.
+
+It looks like I'll finally be learning about Redux.

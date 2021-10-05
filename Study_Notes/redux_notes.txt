@@ -1,0 +1,10 @@
+10/4/2021
+
+Fortunately, the React + TS book already has a redux tutorial in chapter 4, so I think I'll use that.
+
+around pg 350
+
+stopped at pg 352
+Really interesting stuff. I'm really happy that I built that poor man's reducer.
+I have a good idea of how redux works at its core.
+

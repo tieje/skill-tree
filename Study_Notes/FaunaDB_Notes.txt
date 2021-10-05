@@ -56,4 +56,6 @@ https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck
 Figure out how to model data with Django, apply that model graphql, have graphql interact with the faunadb.
 
 Because it's a multi-paradigm db, faunadb does not need a model defined. The ORM is not needed.
-If I don't need an ORM, then I don't really need djang
+If I don't need an ORM, then I don't really need django
+
+https://github.com/fauna/faunadb-js

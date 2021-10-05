@@ -1,0 +1,9 @@
+10/4/2021
+
+I'll be using express simply to build my URL endpoints.
+I won't be using express to host a graphQL API.
+
+Actually, since I'll be using React Router for my URL routing, I might not need express...
+
+I definitely don't need express to route URLs or URIs since react router can handle that.
+
