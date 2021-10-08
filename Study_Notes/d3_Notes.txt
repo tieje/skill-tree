@@ -25,3 +25,8 @@ I'll need to figure out this design later.
 I found my tutorial for D3. So that's cool.
 https://www.freecodecamp.org/learn/data-visualization/
 
+10/8/2021
+
+Let's see what we got here.
+
+https://www.freecodecamp.org/learn/data-visualization/data-visualization-with-d3/work-with-data-in-d3

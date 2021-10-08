@@ -146,3 +146,26 @@ Layer 3: faunadb "serverless", noSQL, scalable cloud storage
 I'll be working on this final project even after school. I'll need to finish this thing before I work on project skill-trees.
 
 ~ Sayonara ~
+
+10/8/2021
+
+And before you know it, I'm back. I imagine it will take a while for me to get a server from Kay so I guess that's that.
+In the meantime, I have no excuse for not studying for... how many topics now?... 10 topics so 5 hours per day should do it.
+I should also commit an hour or two of real work to this project. I'm not sure how I'm actually going to achieve this without burning out.
+But we'll try.
+
+8am - wake up
+8:30am - start studying for 3 hours
+11:30am - attend standup
+12pm - work out, shower, take bear out, eat
+1pm - study for an additional 2 hours
+3pm - visit sibling
+6pm - eat dinner
+9pm - 12am - study or work on any additional things that you didn't get done today.
+
+I think my limit for studying is about five hours during the day.
+I'd like to spend the two hours with my sibling working on the actual project.
+I might get farther than I think.
+
+I'm a bit tired today so I think I'm going to focus on learning d3 on FCC
+
