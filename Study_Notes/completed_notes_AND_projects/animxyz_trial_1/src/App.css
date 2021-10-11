@@ -41,3 +41,16 @@
   height: 5rem;
   background-color: #56ccf2;
 }
+
+.example-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 5rem);
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}

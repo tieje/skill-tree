@@ -30,3 +30,11 @@ It works as intended now. So that's cool.
 
 I'll want to practice with creating a real react component that has a list. The list items will fade out together.
 
+10/11/2021
+
+Going over the documentation I think I'm done with going animxyz. It's simple enough and it's fairly easy to implement.
+https://codesandbox.io/s/f8tww?buttonTitle=AnimXYZ+React+Router+Template&module=%2Fsrc%2FApp.jsx
+
+The react router gave me some insight on how url routing changes.
+It doesn't really bring you to a new page, rather it just switches to a different react component.
+So that's cool.

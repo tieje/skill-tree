@@ -59,3 +59,19 @@ Because it's a multi-paradigm db, faunadb does not need a model defined. The ORM
 If I don't need an ORM, then I don't really need django
 
 https://github.com/fauna/faunadb-js
+
+10/11/2021
+
+I'm going to need to set up a practice database real quick.
+
+I guess I should start small.
+They have two small projects, two intermediate projects, and one advanced project.
+I should probably work through all of the examples just to see how they're built.
+Can faunadb basically replace the backend???
+
+Sample App page
+https://docs.fauna.com/fauna/current/learn/sample_apps/
+
+The first small project:
+https://github.com/fauna-labs/todo-vanillajs
+
