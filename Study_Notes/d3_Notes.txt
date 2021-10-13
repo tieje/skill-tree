@@ -33,3 +33,7 @@ https://www.freecodecamp.org/learn/data-visualization/data-visualization-with-d3
 
 https://www.freecodecamp.org/learn/data-visualization/data-visualization-with-d3/change-the-presentation-of-a-bar-chart
 
+10/13/2021
+
+I'm back.
+https://www.freecodecamp.org/learn/data-visualization/data-visualization-with-d3/invert-svg-elements

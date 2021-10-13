@@ -75,3 +75,22 @@ https://docs.fauna.com/fauna/current/learn/sample_apps/
 The first small project:
 https://github.com/fauna-labs/todo-vanillajs
 
+10/13/2021
+
+secret key for second db
+fnAEVcJ_sRAAQoZT2BPWMzVS0ZVD8AXPgsDgABb2
+
+The first project is not working so we'll use the second project.
+https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+Well this is deploying the app using vercel. I'm not about learning vercel right now.
+
+I guess I'm skipping to the intermediate examples now.
+https://github.com/fauna-labs/aws-http-api.git
+Well I guess I'm not using this either since you need an AWS account...
+
+https://github.com/fauna-labs/faunaflix
+
+anon
+fnAEVcN0OSAAQzxz9PLJ0t-OPIStGZFdvbPENbcf
+
+Complete step 5 for next time
