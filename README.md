@@ -25,12 +25,13 @@ I was presenting example ideas of how to improve the U.S. education system for a
 - Version Control
     - Git
 - Frontend
-    - React + TypeScript
-    - D3 for data visualization. Good animation is nice to have, but it's not functional.
+    - React + TypeScript + nextJS?
+    - D3 for data visualization. Good animation is important.
+    - TailwindCSS
 - Backend
-    - django
+    - client-side rendering with nextjs
 - Deployment
-    - Docker
+    - nextjs
 - Database
     - FaunaDB
 - Security
