@@ -28,6 +28,7 @@ I was presenting example ideas of how to improve the U.S. education system for a
     - React + TypeScript + nextJS?
     - D3 for data visualization. Good animation is important.
     - TailwindCSS
+    - AnimXyz for animation?
 - Backend
     - client-side rendering with nextjs
 - Deployment

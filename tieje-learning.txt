@@ -1,0 +1,42 @@
+9/30/2021
+
+- create a learning schedule
+
+Things I need to learn
+
+Main Things that I need to learn
+
+
+
+
+FaunaDB
+    - Read the documentation
+        https://docs.fauna.com/fauna/current/
+React + TypeScript
+    - Fullstack React with TypeScript pdf book
+Apollo
+    - Read the documentation
+        - https://www.apollographql.com/docs/react/
+D3js
+    - Read the documentation
+        - https://github.com/d3/d3/wiki
+
+Testing in React
+    - Read this article
+        - https://www.freecodecamp.org/news/testing-react-hooks/
+    - Read Cypress documentation
+        - https://docs.cypress.io/guides/overview/why-cypress#In-a-nutshell
+Testing Django in Python
+    - Ready this
+        https://docs.djangoproject.com/en/3.2/topics/testing/
+Animxyz for css
+    - Read the documentation
+        - https://animxyz.com/docs
+
+There are 7 things that I need to study. I'd like to spend one 25 min pomodoro session per day on each of these topics: 3.5 hours.
+I'll do this later in the day when I visit my sibling.
+
+I'll also need to work on the final project. An hour per day should be fine.
+
+So more like 4.5 hours
+
