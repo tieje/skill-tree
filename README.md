@@ -25,12 +25,13 @@ I was presenting example ideas of how to improve the U.S. education system for a
 - Version Control
     - Git
 - Frontend
-    - React + TypeScript + nextJS?
+    - React + TypeScript (probably not nextjs because I'll need to control backend implementation)
+        - create react app
     - D3 for data visualization. Good animation is important.
     - TailwindCSS
     - AnimXyz for animation?
 - Backend
-    - client-side rendering with nextjs
+    - Django is not built out to use FaunaDB yet...
 - Deployment
     - nextjs
 - Database
