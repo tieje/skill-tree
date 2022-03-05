@@ -1,0 +1,20 @@
+3/5/2022
+
+Generally, I should always be devoting 2 or 3 hours to studying technology while also designing sites and creating posts.
+
+
+TASKS
+
++ Write and share a post of your idea.
++ Write and share a post of the tech stack for your idea.
+- Design the website on Figma
+    - Write a post on your design decisions
+- Build the website
+
+
+STUDY FOR TWO TO THREE HOURS:
+
+- NextJS
+- Cypress
+- D3
+- FaunaDB
