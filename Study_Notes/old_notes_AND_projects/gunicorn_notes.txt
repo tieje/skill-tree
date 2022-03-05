@@ -1,0 +1,10 @@
+10/1/2021
+
+I might study this tomorrow instead since I used this time slot to make a huge change in the tools that I'll be using.
+
+10/11/2021
+
+I won't be needing gunicorn since its a python wsgi.
+I did learn enough about gunicorn to tell someone else what is, so not a total loss.
+I'm done with gunicorn notes.
+

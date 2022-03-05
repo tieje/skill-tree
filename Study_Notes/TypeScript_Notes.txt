@@ -1,0 +1,16 @@
+9/30/2021
+
+I think I'll review generics and arrow bracket types in TS first a bit. I forgot what they did.
+
+https://www.typescriptlang.org/docs/handbook/2/narrowing.html#truthiness-narrowing
+"it turns out that in JavaScript, typeof null is actually "object"! This is one of those unfortunate accidents of history."
+
+I should be using typeof "number", as in type guards with if-statements.
+
+Left off here
+https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing
+
+10/4/2021
+
+Skip ahead to see what they use for state management.
+

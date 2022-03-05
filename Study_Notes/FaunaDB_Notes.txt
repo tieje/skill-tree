@@ -1,0 +1,96 @@
+9/30/2021
+
+I went through the initial tutorial on their website. Not sure if I learned much but I'm on the documentation now.
+https://docs.fauna.com/fauna/current/
+
+Since I'll be using graphql for this project through graphene, I think should be using the graphql driver.
+
+Check these out later.
+https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck1
+
+10/1/2021
+
+I ended up signing up to dev.to just to see what's out there.
+
+The code I am most interested:
+
+from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.http import HttpResponseNotFound
+from faunadb import query as q
+import pytz
+from faunadb.objects import Ref
+from faunadb.client import FaunaClient
+import hashlib
+import datetime
+
+client = FaunaClient(secret="SECRET_KEY")
+
+indexes = client.query(q.paginate(q.indexes()))
+
+user = client.query(q.get(q.match(q.index("users_index"), username)))
+
+I guess this is the typical way to get info from faunadb.
+
+I'll create a django project next to test it out.
+
+10/4/2021
+
+Create a django project that displays data from faunadb.
+
+https://www.craigfranklin.dev/python/serverless/database/graphql/2020/12/06/faunadb-local/
+
+REDIS is best for caching
+Wide column database
+    - CQL, easy to scale up, scaling time series data: frequent writes
+Document db
+    - Collections, logical hierarchy.
+
+The multi-model db
+    - just want json
+    - how to access data through graphql
+    - automatically determines the best data modeling paradigm to use
+
+https://dev.to/chukslord1/how-i-built-a-resume-builder-with-django-and-fauna-4ck1
+
+Figure out how to model data with Django, apply that model graphql, have graphql interact with the faunadb.
+
+Because it's a multi-paradigm db, faunadb does not need a model defined. The ORM is not needed.
+If I don't need an ORM, then I don't really need django
+
+https://github.com/fauna/faunadb-js
+
+10/11/2021
+
+I'm going to need to set up a practice database real quick.
+
+I guess I should start small.
+They have two small projects, two intermediate projects, and one advanced project.
+I should probably work through all of the examples just to see how they're built.
+Can faunadb basically replace the backend???
+
+Sample App page
+https://docs.fauna.com/fauna/current/learn/sample_apps/
+
+The first small project:
+https://github.com/fauna-labs/todo-vanillajs
+
+10/13/2021
+
+secret key for second db
+fnAEVcJ_sRAAQoZT2BPWMzVS0ZVD8AXPgsDgABb2
+
+The first project is not working so we'll use the second project.
+https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+Well this is deploying the app using vercel. I'm not about learning vercel right now.
+
+I guess I'm skipping to the intermediate examples now.
+https://github.com/fauna-labs/aws-http-api.git
+Well I guess I'm not using this either since you need an AWS account...
+
+https://github.com/fauna-labs/faunaflix
+
+anon
+fnAEVcN0OSAAQzxz9PLJ0t-OPIStGZFdvbPENbcf
+
+Complete step 5 for next time
