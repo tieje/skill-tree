@@ -2,6 +2,8 @@
 
 Generally, I should always be devoting 2 or 3 hours to studying technology while also designing sites and creating posts.
 
+ended
+https://nextjs.org/learn/basics/create-nextjs-app/setup
 
 TASKS
 
