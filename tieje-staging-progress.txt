@@ -5,14 +5,51 @@ Generally, I should always be devoting 2 or 3 hours to studying technology while
 ended
 https://nextjs.org/learn/basics/create-nextjs-app/setup
 
+3/7/2022
+
+create-next-app can bootstrap next.js
+
+ended
+
+
 TASKS
 
-+ Write and share a post of your idea.
-+ Write and share a post of the tech stack for your idea.
-- Design the website on Figma
-    - Write a post on your design decisions
-- Build the website
+All posts can be found here:
+https://dev.to/dashboard
 
++ Write and share a post of your idea.
+    https://dev.to/tieje/the-beginning-of-project-skill-tree-1je2
++ Write and share a post of the tech stack for your idea.
+    https://dev.to/tieje/project-skill-tree-tech-stack-1274
++ go through user experience - write a post about it
+    https://dev.to/tieje/project-skill-tree-user-experience-part-1-defining-the-app-utilities-1kak
+    + make a post defining the App Utilities
+         I will not be making a part 2 of the Application.
+         I DO have a much better idea of what I would like to build though.
++ make a post on refining your idea and what problem you're trying to solve
+    https://dev.to/tieje/project-skill-tree-idea-refinement-48jc
+- Design the application page of the website on Figma
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A19
+    - application page
+        - desktop
+        - tablet
+        - mobile
+- Design the technical frontend
+- Design the technical backend
+- write tests for the frontend
+- write tests for the backend
+- build the technical frontend
+- build the technical backend
+- Design the rest of the website on Figma
+    - home page
+        - desktop
+        - tablet
+        - mobile
+    - user settings page
+    - sign-in page
+    - sign-out page
+    - password change page
+    - 404 error page
 
 STUDY FOR TWO TO THREE HOURS:
 
