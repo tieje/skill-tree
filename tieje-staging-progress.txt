@@ -6,11 +6,14 @@ ended
 https://nextjs.org/learn/basics/create-nextjs-app/setup
 
 3/7/2022
-
 create-next-app can bootstrap next.js
+ended
+https://nextjs.org/learn/basics/navigate-between-pages
+
+3/8/2022
 
 ended
-
+https://nextjs.org/learn/basics/navigate-between-pages/client-side
 
 TASKS
 
@@ -30,7 +33,11 @@ https://dev.to/dashboard
     https://dev.to/tieje/project-skill-tree-idea-refinement-48jc
 - Design the application page of the website on Figma
     https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A19
-    - application page
+    - student view application page
+        ~ desktop
+        - tablet
+        - mobile
+    - teacher view application page
         - desktop
         - tablet
         - mobile
@@ -57,3 +64,13 @@ STUDY FOR TWO TO THREE HOURS:
 - Cypress
 - D3
 - FaunaDB
+
+TODO
+
+- Come up with a color schema.
+    - I should come up with several color schemas for the UI and leave that choice up to the user.
+- Think of how you're going to procedurally create the skill tree.
+- Think of how you're going to implement user view-navigation on the skill tree.
+- Think of the final visual design of the skill trees. I'm thinking of copying Skyrim.
+- Think of node icon defaults
+- Think of background image defaults. This will be the background beneath the skill tree.
