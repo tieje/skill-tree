@@ -15,6 +15,17 @@ https://nextjs.org/learn/basics/navigate-between-pages
 ended
 https://nextjs.org/learn/basics/navigate-between-pages/client-side
 
+3/10/2021
+If you need to add attributes like, for example, className, add it to the a tag, not to the Link tag.
+
+Setting up TypeScript
+https://nextjs.org/learn/excel/typescript
+
+Install TypeScript
+npm install --save-dev typescript @types/react @types/node
+nextjs specific types
+https://nextjs.org/learn/excel/typescript/nextjs-types
+
 TASKS
 
 All posts can be found here:
@@ -31,17 +42,34 @@ https://dev.to/dashboard
          I DO have a much better idea of what I would like to build though.
 + make a post on refining your idea and what problem you're trying to solve
     https://dev.to/tieje/project-skill-tree-idea-refinement-48jc
-- Design the application page of the website on Figma
++ Design the application page of the website on Figma
     https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A19
-    - student view application page
-        ~ desktop
-        - tablet
-        - mobile
-    - teacher view application page
-        - desktop
-        - tablet
-        - mobile
+    + student view application page
+        + desktop
+        + tablet
+        + mobile
+    + teacher view application page
+        + desktop
+        + tablet
+        + mobile
 - Design the technical frontend
+    + Write about what features you'll need for the frontend
+    - Make a post about Markdown document, edit, and preview using Forem open source code
+
+
+perhaps an alternative library
+Search bar
+Algola
+Menu drop down
+Tailwind CSS
+Statistics bar graph
+d3
+Overlay Node Data loading
+NextJS lazyLoading
+Image Upload
+skill tree line and node building
+d3
+
 - Design the technical backend
 - write tests for the frontend
 - write tests for the backend
@@ -74,3 +102,7 @@ TODO
 - Think of the final visual design of the skill trees. I'm thinking of copying Skyrim.
 - Think of node icon defaults
 - Think of background image defaults. This will be the background beneath the skill tree.
+
+Potential Features
+
+- Instead of procedurally generating a skill tree, allow teachers to create points on a picture they upload.
