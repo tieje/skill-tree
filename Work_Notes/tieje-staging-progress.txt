@@ -56,6 +56,9 @@ https://dev.to/dashboard
     + Write about what features you'll need for the frontend
     + Make a post about Markdown document, edit, and preview using Forem open source code
         The Markdown document editing feature is not core to the application and will instead be a feature that is nice to have.
+    + start with the create-app-nextjs command to help define file structure
+    - define file structure based on what you think is going to happen
+
 
 perhaps an alternative library
 Search bar
