@@ -54,8 +54,8 @@ https://dev.to/dashboard
         + mobile
 - Design the technical frontend
     + Write about what features you'll need for the frontend
-    - Make a post about Markdown document, edit, and preview using Forem open source code
-
+    + Make a post about Markdown document, edit, and preview using Forem open source code
+        The Markdown document editing feature is not core to the application and will instead be a feature that is nice to have.
 
 perhaps an alternative library
 Search bar
@@ -89,7 +89,7 @@ d3
 STUDY FOR TWO TO THREE HOURS:
 
 - NextJS
-- Cypress
+x Cypress
 - D3
 - FaunaDB
 
@@ -106,3 +106,8 @@ TODO
 Potential Features
 
 - Instead of procedurally generating a skill tree, allow teachers to create points on a picture they upload.
+
+Utility Links
+Image Hosting in Article Writing
+https://imgbb.com/
+
