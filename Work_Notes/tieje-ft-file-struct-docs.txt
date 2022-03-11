@@ -1,0 +1,42 @@
+3/11/2022
+
+- tailwind css implementation
+    Example
+    https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss
+    Tailwind Docs implementation for nextjs
+    https://tailwindcss.com/docs/guides/nextjs
+    Files created:
+        tailwind.config.js
+        globals.css
++ does animxyz work with d3 and tailwind css?
+    https://animxyz.com/docs#react-installation
+    It should work fine because it uses a custom xyz property rather than className
+- faunadb implementation. How would the implementation change if you choose one or the other.
+    Example
+    https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+
+- what does d3 implementation look like in React code?
+    https://www.freecodecamp.org/learn/data-visualization/#data-visualization-with-d3
+    - Create example histogram tutorial for d3
+        https://www.d3-graph-gallery.com/histogram.html
+    - Create example network graph tutorial for d3
+        https://www.d3-graph-gallery.com/network.html
+- API endpoints or graphQL?
+    according to the example, it doesn't need to be a binary choice
+    schema.gql file - simple graphql schema
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/schema.gql
+    fauna.js file - makes queries to faunadb
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/lib/fauna.js
+    index.js file for the api
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/pages/api/entries/index.js
+    It turns out that I don't actually need a big complex backend framework like django... yet.
+- what are all the custom types that you'll need
+    according to the example, I only really need a types folder at the top level
+    https://github.com/vercel/next.js/blob/canary/examples/blog-starter-typescript/types/post.ts
+- Will I need a state manager like Redux or Apollo? If so, which one? What would the implementation look like.
+    https://www.smashingmagazine.com/2021/08/state-management-nextjs/
+    https://daveceddia.com/react-state-management/
+    Consider React Query as well as the vanilla React library components.
+    Even before considering a state manager, it's probably best to define exactly what state I'm trying to track.
+    - define what kinds of state you'll be managing
+        
