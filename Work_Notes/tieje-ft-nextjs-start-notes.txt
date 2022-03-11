@@ -1,0 +1,8 @@
+3/11/2022
+
+The objective is to create the nextjs template so that outlining the file structure is easier when
+going in depth in what will actually be built out.
+
+https://nextjs.org/docs/api-reference/create-next-app
+
+- set up basic nextjs template with the typescript flag
