@@ -14,6 +14,7 @@
 - faunadb implementation. How would the implementation change if you choose one or the other.
     Example
     https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+    It looks easy enough.
 
 - what does d3 implementation look like in React code?
     https://www.freecodecamp.org/learn/data-visualization/#data-visualization-with-d3
@@ -38,5 +39,13 @@
     https://daveceddia.com/react-state-management/
     Consider React Query as well as the vanilla React library components.
     Even before considering a state manager, it's probably best to define exactly what state I'm trying to track.
-    - define what kinds of state you'll be managing
-        
+    - define what kinds of state you'll be managing?
+        search bar
+        skill tree background
+        skill tree buttons
+        text form input
+        edit feedback button > 
+
+What I'm predicting the file structure:
+
+- 
