@@ -23,6 +23,7 @@ const App = () => {
             <HexGrid width={1} height={1} viewBox="-100 -100 200 200">
                 {/*Layout seems to be the only thing that matters in terms of size.*/}
                 <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
+                    <Path start={new Hex(0, -1, 1)} end={new Hex(-2, 0, 1)} />
                     <Hexagon q={0} r={0} s={0}>
                         <Text>
                             0, 0, 0
@@ -52,7 +53,6 @@ const App = () => {
                     <Hexagon q={-3} r={0} s={1}>
                         <Text>-3, 0, 1</Text>
                     </Hexagon>
-                    <Path start={new Hex(0, 0, 0)} end={new Hex(-2, 0, 1)} />
                     <Pattern id="pat-1" link="https://www.blackpast.org/wp-content/uploads/prodimages/files/blackpast_images/President_Abraham_Lincoln_November_8_1863_Photo_by_Alexander_Gardner.jpg" />
                 </Layout>
             </HexGrid>
