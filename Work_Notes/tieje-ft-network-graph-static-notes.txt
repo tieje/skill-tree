@@ -178,11 +178,61 @@ Figuring out the basics:
             so I'll do it if I need to.
         x decrease hexagon size?
             I would need to change the pattern size for images as well.
+3/21/2022
+It seems like there are three major interfaces that the hexagons can have:
+    - Transparent hexagons with only the paths and outlines showing: background picture allowed
+    - basic prussian blue background: no background picture allowed, but custom images 
+    - no hexagons showing, just paths: background picture allowed
+I'll need to code out all three.
+Utility-wise, using a big background picture is a bit annoying and can be visually disruptive.
+Instead, have custom pictures on each hexagon tile can be helpful or even mandatory for finding the tile.
+Text on the tile will be necessary as well, I'm pretty sure. Sometimes you'll want to have chapter numbers for example.
+- have a separate optional view where you just see the paths and pictures: this is to see the "skill tree"
+    This is to have a visualization?
+Actually, I don't need to worry about paths because I can put the svg paths underneath the hexagons. Perfect.
+Can have custom color paths: green for easy, blue for hard, red paths for very hard. Well as a suggestion.
+A custom background picture is in bad taste.
+I'll need to create a custom zoom on the last-interacted with node.
+
 
 Figure out when to build the interface
-- 
+
+- make a unique ID for every hexagon
+- create a custom initial zoom
 - bind v key for pointer
 - bind h key for hand scrolling
-- make a unique ID for every hexagon
-- 
-- 
+- create the instructor interface
+    Modules to Create
+    - node module
+        - CRUD functionality
+            CRUD functionality will be in the dialog box in the right side.
+            To create a node
+            - Clicking on a hexagon will change the color temporarily and open the dialog box with one tab: the update tab
+        - node visual design
+            - node text or node image, never both
+        - node teacher's notes
+            - teacher's links
+            - subject title (The subject title will appear at the side and the bottom of each node)
+            - teacher's notes
+        - allow feedback
+            - checkbox allow quantitative feedback
+            - checkbox allow verbal feedback
+- custom initial zoom on the node that was last interacted-with
+- search function
+    - search for node by title for the node - use regex
+- Path module - press P button
+    - CRUD functionality
+    - Enter mode for drawing paths
+        - option to change the color of the path being created
+        - click on one node and then another node to draw a path
+    - Path-viewing function
+- create student module
+    - quantitative feedback form
+    - verbal feedback form
+- create custom themes
+    - The first custom theme must be skyrim skill tree
+
+Accounts
+- account set-up form
+- account email verification
+- send email with skill tree link to a list of students on a form separated by a new-line
