@@ -1,53 +1,27 @@
 import type { NextPage } from 'next'
 import { HexGrid, Layout, Hexagon, Text, Path, Hex } from 'react-hexgrid';
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { UncontrolledReactSVGPanZoom } from 'react-svg-pan-zoom'
-
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // only execute all the code below in client side
-    if (typeof window !== 'undefined') {
-      // Handler to call on window resize
-      function handleResize() {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
-
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-
-      // Call handler right away so state gets updated with initial window size
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-
-      // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
-}
+import { useRef, useEffect } from 'react';
+import { useWindowSize } from '../utils/utils';
+import { ReactSVGPanZoom, UncontrolledReactSVGPanZoom, fitToViewer, ALIGN_CENTER } from 'react-svg-pan-zoom'
 
 const Home: NextPage = () => {
   const { height, width } = useWindowSize()
+  const hexElement = useRef()
+  useEffect(() => {
+    hexElement.current.fitToViewer()
+  }, [])
   return (
     <UncontrolledReactSVGPanZoom
+      ref={hexElement}
       width={width}
       height={height}
     >
-      <HexGrid width={width} height={height} viewBox="-50 -50 100 100">
+      {/*The Hexgrid width and height do not matter due to scaling of the svg
+      The viewbox actually matters. I need to see how big I should make the viewbox in terms how small I can make the font in text.
+      */}
+      <HexGrid width={1} height={1} viewBox="-100 -100 200 200">
+        {/*Layout seems to be the only thing that matters in terms of size.*/}
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           <Hexagon q={0} r={0} s={0}>
             <Text>

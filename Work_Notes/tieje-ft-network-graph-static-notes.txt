@@ -1,0 +1,188 @@
+3/14/2022
+
+- what does d3 implementation look like in React code?
+    https://www.freecodecamp.org/learn/data-visualization/#data-visualization-with-d3
+    - Create example histogram tutorial for d3
+        https://www.d3-graph-gallery.com/histogram.html
+    - Create example network graph tutorial for d3
+        https://www.d3-graph-gallery.com/network.html
+
+https://www.data-to-viz.com/graph/network.html
+I'll need a directed and weighted graph.
+
+Well, React Diagrams exists... so... I might just use that instead.
+https://github.com/projectstorm/react-diagrams
+
+While the documentation is poor, it should be hackable enough for me to build something with it.
+
+Well... Perhaps because the documentation is poor, I use it... It's good creating diagrams,
+but I'm going to need something... spicy. Perhaps ThreeJS.
+ThreeJS is cool... but I'm building an MVP. D3 should work fine.
+
+D3 is meant more for visualizing data, not really for interactivity.
+
+I could... possibly... build it myself. But's kind of a huge pain.
+
+A quick search on libhunt yielded react-flow which looks really good actually.
+The documentation exists so that's cool.
+https://reactflow.dev/docs/introduction/
+https://github.com/wbkd/react-flow
+
+I'm going to use react-flow for this project.
+... Or not. React-flow was strictly meant for diagramming.
+
+https://app.easyskilltree.com/compositions/dec1a1e9-a979-40dd-a3ac-9c749369a79a/viewer
+https://github.com/handihow/skilltree
+It turns out that it may be better to simply add to this repo than to entirely create my own...
+Let's see what handihow says... Worst comes to worse, I'll just fork his code and create my own.
+
+I have decided to contribute to handihow's skilltree website instead.
+We'll see where it takes me.
+
+Honestly, just create your own package for building skill trees.
+
+Look into next:
+https://learnawesome.org/
+https://github.com/niyue/skillmap
+
+Other people are just... not doing it right. No one is building the skill tree mechanism the way I would want it to look.
+
+So what I'm thinking is use this library to help create the background for this thing.
+https://github.com/Hellenic/react-hexgrid
+I can make the hexagons fairly small to the point that it's barely registered...
+Or invisible. Or transparent. Then perhaps use a Path...
+
+Great, drag to scroll is built into the site.
+https://javascriptsource.com/drag-to-scroll/
+
+This will do. I'll start from here and work my way through.
+
+Honestly... left-click to drag-scroll, scroll to zoom in and out.
+Right-click for CRUD options.
+
+When I think about it... I could just... use squares and make the grid myself.
+But am I really going to use a grid?
+Or am I going to use hexagons?
+https://www.youtube.com/watch?v=thOifuHs6eY
+The problem with squares and triangles is that they have fairly sharp edges that makes dragging and scrolling harder...
+I'll stick with hexagons and study the library.
+
+Features that I want in the skill tree background module
+
+Perform these basic actions first and study the source code.
+
+Curriculum:
+- 4 hours studying the source code and figuring out what you're trying to do
+    There is no documentation so maybe... I'll make it myself?
+    - Contribute documentation to react-hexgrid library
+- 2 hours of actually coding
+
+Figuring out the basics:
++ implement drag to scroll
++ use scroll wheel to zoom in and out
+    I'm just going to need this first personally
+    https://htmldom.dev/drag-to-scroll/   
+    + I'm going to need to figure out how to interact with the DOM with react.
+        Interacting with the DOM in react is possible through Refs
+            https://medium.com/codezillas/interacting-with-dom-elements-in-react-e7e409d7874e
+            https://reactjs.org/docs/refs-and-the-dom.html
+            instead of coding it out myself, I can just use this npm package:
+            https://github.com/norserium/react-indiana-drag-scroll
+                Left and right drag scrolling works fine. When its in effect
+                Up an
+                This does not work for my purposes. I need a true pan zoom
+    x I'm going to try this library instead:
+        https://github.com/woutervh-/react-pan-and-zoom-hoc
+        This is probably the one I'll be using.
+        The type of movement is well-defined as a pan-zoom.
+        Now... I just need to figure it out.
+        https://github.com/woutervh-/react-pan-and-zoom-hoc/blob/master/src/panAndZoomHoc.tsx
+        It's just one big function.
+        Just figure out how to use it.
+        + Learn the differences between React functions and classes
+            y value is returning NaN. Bug is probably related to Indiana scroll.
+            monitoring mouse events
+            https://stackoverflow.com/questions/10213703/how-do-i-view-events-fired-on-an-element-in-chrome-devtools
+            MouseEvent clientX and clientY located
+            monitorEvents($0)
+            Tracking mouse position with this script:
+            https://stackoverflow.com/questions/45748194/what-is-the-proper-way-to-get-the-mouse-position-in-a-react-component
+            The problem is that offSetTop does not exist at least for React
+            https://reactjs.org/docs/refs-and-the-dom.html
+            Source of the bug: by default, you may not use the ref attribute on function components because they don't have instances.
+            Which is weird because it works for X but not Y...
+            The above is wrong. offsetLeft and offsetTop does exist but only out the div.
+            Furthermore, it still results in NaN. Maybe it needs a parent.
+            Break.
+            I basically achieved what I wanted.
+            My conversion from class component to functional component was mostly correct except for a part about transforming the x and y.
+            Because of React hooks, there isn't really a need for classes. React hooks even handle state so... *shrug*
+        x now that I have a working example of what I basically want, I'll need to experiment with style options and x, y, and scale calculations
+            + increase interactive range to 5k px height and width
+            + decrease scaling minimum to allow for greater dragging movement.
+            + hexgrid scale with div: hexgrid must have the same dimensions as its container div
+                The problem with hexgrid is that it's not as simple as adding style.
+                Fortunately, it is as easy as keeping the dimensions the same.
+            + invert dragging so that it is no longer inverted: normal dragging
+            + increase dragged amount at each scaling
+            x fix zooming
+                x zooming should not affect the value of x and y but it should affect scaling
+                    It works as intended in the example. As long as the mouse is within the object, you'll get the intended effect.
+                    The main problem seems to be the difference between scale and this.state.scale... Interesting.
+                    For the example, doubling the width and height causes the box to move in the same way during scaling.
+                    Let's copy the dimensions and try to get something that works.
+                    Scaling factor does not matter here.
+                    The problem is with transformPoint.
+                    x - this.state.x
+                    What is the difference between the two in this equation?
+                    x is the i  nput variable for this thing.
+                    Perhaps I should not try to do it the functional way. The reason being that recording state actually matters for positioning.
+                    I'll use a class component instead like in the example.
+    + I have decided to just not use the panAndZoom component library. I've been experimenting with for a few days and it's just way too annoying.
+    x I might just create my own package that adds zoom calculation functionality to react-indiana-drag-scroll
+    + I might need to stop using OpenBase. There may have been obviously better libraries:
+        https://github.com/prc5/react-zoom-pan-pinch
+        Even better, I could possibly just use this since hexgrid is just an svg element
+        https://github.com/chrvadala/react-svg-pan-zoom
+        custom React Hook for windows dimensions
+        https://stackoverflow.com/a/36862446
+        The above does not work for nextjs but this does:
+        https://stackoverflow.com/a/63408216
+    + I've settled on react-svg-pan-zoom. It serves my purposes best.
+    + react-svg-pan-zoom works
+        + make pan-zoom window reactive to window size
+        + put window resizer function in a utils folder and import it
+        + MAJOR CHANGE DUE TO THIS TECHNICAL BOTTLENECK: Make svg start in the center of the screen
+            I may not be able to utilize nextjs after all.
+            I tested it with create-react-app and my suspicions were confirmed.
+            Since nextjs pre-renders the web page, I cannot exactly get the window size beforehand, needed for useEffect.
+            I have fully transitioned to create-react-app for this reason. NextJS does not make sense for this project, unfortunately.
+        + create hexgrid that is 1024 hexagons which is... 32 by 32 hexagons
+            creating a hexgrid in a specific shape is already coded out for me
+            Make the svg have many hexagons
+                How many hexagons?
+                    It does not make sense to make the number of hexagons as a power of 2 since hexagons are not simply vertical and horizontal.
+                    What about powers of three?
+                    Connecting hexagons centrally to make the greatest area.
+                    3 ^ 1 = 3 hexagons
+                    3 ^ 2 = 9 hexagons
+                    It turns out that I simply use a power of 2. Nothing fancy is needed.
+                    The tricky part is generating that many hexagons.
+                    I'll need to generate the coordinates for each hexagon.
+                    Fortunately, there is already a grid generator with several options for common shapes, including rectangles.
+                    I'll need to play around with this.
+                    What I will do is resize the hexgrid based on the orientation of the nodes. What happens when a node goes out of the specified grid?
+                        The node gets cut off, which means I'll need to resize the hex-grid based on if the node goes out of range of the hexgrid, which is fine.
+        x decrease text size?
+            The text component is pretty easy to copy and paste to reduce text size... It's not important for the final design
+            so I'll do it if I need to.
+        x decrease hexagon size?
+            I would need to change the pattern size for images as well.
+
+Figure out when to build the interface
+- 
+- bind v key for pointer
+- bind h key for hand scrolling
+- make a unique ID for every hexagon
+- 
+- 
