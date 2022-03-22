@@ -1,0 +1,88 @@
+3/21/2022
+
+3/22/2022
+
+I might use the react testing library. Well, I want to use the react testing library.
+It's still very early on. I'm pretty sure I know what I want to do and it is fairly simple... I think.
+https://testing-library.com/docs/react-testing-library/intro/
+Do I need to make tests fo this application? Is it even big enough.
+Well it probably is... I'll learn it at the very end. I don't think it will help yet.
+
++ make a unique ID for every hexagon
+    The unique ID should be its position in the hexgrid.
+    I actually don't need to create a unique id for every hexagon.
+    I thought that I might need to create a unique id for every hexagon because I would be using path to refer to their position.
+    If I'm going to add a IDs to the hexagons, I'm going to either use a pull request or fork it myself...
+    Fortunately, I can use class instead. The pathfinding example pretty much has what I want. I won't need to fork it.
+    the unique classes are of the form of:
+    hexagon-group 18,3,-21
+    This is how it's done in the pathfinding example:
+    https://github.com/Hellenic/react-hexgrid/blob/master/examples/pathfinding/src/App.js
+    It may be a good idea to implement its cursor-finder as well.
++ create a custom initial zoom
+    For the custom initial zoom, I'm going to need to determine where I can get this from panZoom...
+    I certainly will not be using the fitToView functionf for this one.
+    https://github.com/chrvadala/react-svg-pan-zoom
+    I'll need to change the useEffect function...
+    https://github.com/chrvadala/react-svg-pan-zoom/blob/main/docs/documentation.md#methods
+    zoomOnViewerCenter(scaleFactor) - This is function I'll need.
+    It works but it's focusing on the true center of the window instead of the SVG...
+    It's assuming the SVG is rendered in the center of the window.
+    I'll try moving the SVG to the center of the window with Tailwind?
+    Or do I use fitToViewer in combination with zoomOnViewerCenter?
+    perhaps I'll just use the normal zoom() function instead
+    - Unfortunately, for smaller screens, it will start slightly to the left, which is not the worst thing.
++ bind v key for pointer
++ bind h key for hand scrolling
+    onKeyPress is for the input text field
+    This was insightful.
+    https://www.querythreads.com/listen-to-keypress-for-document-in-reactjs/
+    I may use this package though:
+    https://github.com/donavon/use-event-listener
+    The actual code was a bit confusing, but looking at the example allowed me to figure out how to accomplish tool changes.
+    https://github.com/chrvadala/react-svg-pan-zoom/blob/main/examples/controlled-component/src/App.js
++ install tailwind
+- Write an article about what you accomplished today and how you did it.
+
+3/23/2022
+
+- create the instructor interface
+    - Create the sidebar. It must have:
+        - title input
+        - lesson text input
+        - feedback checkboxes
+            - quantitative
+            - verbal
+    - node module
+        - CRUD functionality
+            CRUD functionality will be in the dialog box in the right side.
+            To create a node:
+                Clicking on a hexagon will change the color temporarily and open the dialog box with one tab: the update tab
+        - node visual design
+            - node text or node image, never both
+        - node teacher's notes
+            - teacher's links
+            - subject title (The subject title will appear at the side and the bottom of each node)
+            - teacher's notes
+        - allow feedback
+            - checkbox allow quantitative feedback
+            - checkbox allow verbal feedback
+    - custom initial zoom on the node that was last interacted-with
+    - search function
+        - search for node by title for the node - use regex
+    - Path module - press P button
+        - CRUD functionality
+        - Enter mode for drawing paths
+            - option to change the color of the path being created
+            - click on one node and then another node to draw a path
+        - Path-viewing function
+- create student interface
+    - quantitative feedback form
+    - verbal feedback form
+- create custom themes
+    - The first custom theme must be skyrim skill tree
+
+Accounts
+- account set-up form
+- account email verification
+- send email with skill tree link to a list of students on a form separated by a new-line
