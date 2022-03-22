@@ -1,3 +1,5 @@
+/* Testing below */
+/*
 import { HexGrid, Layout, Hexagon, Text, Path, Hex, Pattern } from 'react-hexgrid';
 import React from 'react'
 import { useRef, useEffect } from 'react';
@@ -17,11 +19,7 @@ const App = () => {
             width={width}
             height={height}
         >
-            {/*The Hexgrid width and height do not matter due to scaling of the svg
-      The viewbox actually matters. I need to see how big I should make the viewbox in terms how small I can make the font in text.
-      */}
             <HexGrid width={1} height={1} viewBox="-100 -100 200 200">
-                {/*Layout seems to be the only thing that matters in terms of size.*/}
                 <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
                     <Path start={new Hex(0, -1, 1)} end={new Hex(-2, 0, 1)} />
                     <Hexagon q={0} r={0} s={0}>
@@ -61,49 +59,80 @@ const App = () => {
 }
 
 export default App
-
-/*
-import { HexGrid, Layout, Hexagon, Text, Path, Hex, GridGenerator } from 'react-hexgrid';
+*/
+/* Real code */
+import {
+  HexGrid, Layout, Hexagon, Text,
+  // Path,
+  // Hex,
+  GridGenerator, HexUtils
+} from 'react-hexgrid';
 import React from 'react'
-import { useRef, useEffect } from 'react';
-import { UncontrolledReactSVGPanZoom, ALIGN_CENTER } from 'react-svg-pan-zoom'
+import { useRef, useEffect, useState } from 'react';
+import {
+  // UncontrolledReactSVGPanZoom,
+  ReactSVGPanZoom,
+  ALIGN_CENTER,
+  TOOL_PAN,
+  TOOL_NONE,
+  INITIAL_VALUE
+} from 'react-svg-pan-zoom'
 import { useWindowSize } from '@react-hook/window-size';
 import './App.css'
-
-
-
+import useEventListener from '@use-it/event-listener'
 
 const App = () => {
-  const [width, height] = useWindowSize()
+  // variables
+  const hexList = GridGenerator.orientedRectangle(32, 32)
+  // refs
   const hexElement = useRef(null)
+  // initial hook values 
+  const [width, height] = useWindowSize()
+  const [tool, setTool] = useState(TOOL_NONE)
+  const [value, setValue] = useState(INITIAL_VALUE)
+  // functions
+  const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
+    switch (event.key) {
+      case 'v':
+        setTool(TOOL_NONE)
+        break
+      case 'h':
+        setTool(TOOL_PAN)
+        break
+    }
+  }
+  // use hooks
+  useEventListener('keypress', handlePanZoomModeSwitch)
   useEffect(() => {
     hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
+    hexElement.current.zoom(230, 285, 16)
   }, [])
-  const hexList = GridGenerator.orientedRectangle(32, 32)
-  console.log(hexList)
   return (
-    <UncontrolledReactSVGPanZoom
+    <ReactSVGPanZoom
       ref={hexElement}
       width={width}
       height={height}
+      tool={tool}
+      onChangeTool={setTool}
+      value={value}
+      onChangeValue={setValue}
     >
       <HexGrid width={1} height={1} viewBox="0 0 520 605">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-          {hexList.map((hex) => {
+          {hexList.map((hex, i: number) => {
+            const id: string = HexUtils.getID(hex)
             return (
-              <Hexagon q={hex.q} r={hex.r} s={hex.s}>
+              <Hexagon key={i} className={id} q={hex.q} r={hex.r} s={hex.s}>
                 <Text>
-                  {hex.q}, {hex.r}, {hex.s}
+                  {id}
                 </Text>
               </Hexagon>
             )
           })}
-          <Path start={new Hex(0, 0, 0)} end={new Hex(-2, 0, 1)} />
         </Layout>
       </HexGrid>
-    </UncontrolledReactSVGPanZoom>
+    </ReactSVGPanZoom>
   )
 }
 
 export default App
-*/
