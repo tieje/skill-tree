@@ -42,22 +42,27 @@ Well it probably is... I'll learn it at the very end. I don't think it will help
     The actual code was a bit confusing, but looking at the example allowed me to figure out how to accomplish tool changes.
     https://github.com/chrvadala/react-svg-pan-zoom/blob/main/examples/controlled-component/src/App.js
 + install tailwind
-- Write an article about what you accomplished today and how you did it.
++ Wrote an article on what I did in the past about searching for the right library.
+- Write an article about binding keys to actions using the hook module and refer to the link that you found
+
 
 3/23/2022
 
 - create the instructor interface
-    - Create the sidebar. It must have:
+    - Create static sidebar. It must have:
         - title input
         - lesson text input
         - feedback checkboxes
             - quantitative
             - verbal
+        - node picture link input
+            - default pics
     - node module
         - CRUD functionality
             CRUD functionality will be in the dialog box in the right side.
             To create a node:
                 Clicking on a hexagon will change the color temporarily and open the dialog box with one tab: the update tab
+            Use local json storage until you figure out how to use Fauna and graphQL
         - node visual design
             - node text or node image, never both
         - node teacher's notes
