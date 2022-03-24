@@ -43,20 +43,32 @@ Well it probably is... I'll learn it at the very end. I don't think it will help
     https://github.com/chrvadala/react-svg-pan-zoom/blob/main/examples/controlled-component/src/App.js
 + install tailwind
 + Wrote an article on what I did in the past about searching for the right library.
-- Write an article about binding keys to actions using the hook module and refer to the link that you found
 
 
 3/23/2022
 
-- create the instructor interface
-    - Create static sidebar. It must have:
-        - title input
-        - lesson text input
-        - feedback checkboxes
-            - quantitative
-            - verbal
-        - node picture link input
-            - default pics
+Consider buy this svg:
+https://www.vectorstock.com/royalty-free-vector/kawaii-school-background-with-cute-education-vector-15321280
+
+- make toolbar bigger for both desktop and mobile.
+    It's a bit... difficult. I'll need to do this later.
++ get cute pencil and office stationary wall-paper background
++ add a tool tip for image link
++ create static instructor interface
+    + Create static sidebar on the left. It must have:
+        + title input
+        + lesson text input
+        + feedback checkboxes
+            + quantitative
+            + verbal
+        + node picture link input
+            x default pics
+                no need yet
++ Write an article about binding keys to actions using the hook module and refer to the link that you found
+- Write an article about the static instructor sidebar interface that you made
+- create stateful instructor interface with json served by graphQL
+    - set up Apollo?
+    - must disappear while in drag mode
     - node module
         - CRUD functionality
             CRUD functionality will be in the dialog box in the right side.
