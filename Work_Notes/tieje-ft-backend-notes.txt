@@ -1,0 +1,92 @@
+3/24/2022
+I'm just going to use django since I'm already familiar with it and it serves my needs.
+
++ install xcode
++ get homebrew working
+    + uninstall homebrew
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+    + install homebrew
+        https://www.djangocookbook.com/recipes/django-development-environment-on-apple-m1/
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    + install emacs
+    https://macresearch.org/fix-cant-be-opened-because-apple-cannot-check-it-for-malicious-software/
+        Ran into apple problem
+    I need to reinstall homebrew as arm64
+    https://apple.stackexchange.com/questions/410825/apple-silicon-port-all-homebrew-packages-under-usr-local-opt-to-opt-homebrew
+    I'll need to preface each command with:
+    arch -arm64 brew install
+    pyenv and asdf aren't working for the newest version of python. Let's 3.9 instead of 3.10.
+    None of the python versions are working installation from the python website worked though...
+    Well. It worked. Shrug.
+x get pyenv working again
+    uninstalled pyenv
+x install postgresql and openssl with brew
+    https://gist.github.com/peter-gy/
+    path to pg_config
+    /usr/local/Cellar/postgresql//14.2_1/bin/pg_config
+    path to openssl
+    /usr/local/Cellar/openssl@3/3.0.2/bin/openssl
+    add to path
+    export PATH=$PATH:/usr/local/Cellar/postgresql//14.2_1/bin/pg_config
+    export PATH=$PATH:/usr/local/Cellar/openssl@3/3.0.2/bin/openssl
+x choose your version of python
+    I guess it's going to be 3.8.11 because something about the m1 architecture messes it up
+    Changing archflag env variable
+    export ARCHFLAGS="-arch arm64"
+    I'm going to uninstall 3.8.11 as well.
+    https://stackoverflow.com/questions/65447875/how-to-uninstall-homebrew-using-an-arm-based-mac
+    I need to reinstall homebrew as arm64
+    https://apple.stackexchange.com/questions/410825/apple-silicon-port-all-homebrew-packages-under-usr-local-opt-to-opt-homebrew
+x get pipenv working properly on mac
+    https://stackoverflow.com/questions/67733566/how-to-use-pipenv-on-mac
+    https://pypa.github.io/pipx/
+    The idea is to use pipx, which isolates packages.
+    A good explanation:
+    "In pipx, we install the package once and we can use the package anywhere on our system isolated from other virtual environments."
+    https://mr-destructive.github.io/techstructive-blog/pipx-intro/
+    "It uses its own virtual environment for managing packages and python version."
+    Copying what I need from my old semblance Pipfile
+    https://github.com/tieje/semblance/blob/staging/Backend/Pipfile
+    + pipenv install django
+    - pipenv install psycopg2
+        https://gist.github.com/peter-gy/0ebe072acb9065944ecb04d95a4c3096
+        Ran into SSL module error
+        brew install libpq --build-from-source
+        export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+        pipenv install psycopg2-binary
+        https://stackoverflow.com/questions/58280484/ssl-module-in-python-is-not-available-on-osx
+        just use brew to install python
+    - pipenv install graphene-django djangorestframework django-cors-headers dj-rest-auth django-allauth graphene django-graphiql pyyaml uritemplate drf-yasg gunicorn sendgrid
+x look for psycopg2 workarounds on m1 mac
+    psycopg3 is still under development
+    https://github.com/psycopg/psycopg2/issues/1286
+
+==========================================================================================================================================
+
+It appears that apple got their shit together and they don't want to rely on 3rd party package managers like homebrew anymore.
+
+Using postgresql with django. This is from the source so this will be useful later:
+https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+
+
+PostgreSQL will be installed here automatically
+/Library/PostgreSQL/14
+
+Run this for homebrew if needed
+echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+
+Run this for postgresql
+echo 'export PATH="/Library/PostgreSQL/14/bin:$PATH"' >> ~/.zshrc
+
+uninstall pyenv or asdf or whatever version manager you're using
+download the python 3.10.4 installation directly from the python website and run the installation
++ pip3 install pipenv
++ pipenv install django
++ pipenv install psycopg2-binary
++ pipenv install graphene-django djangorestframework django-cors-headers dj-rest-auth django-allauth graphene django-graphiql pyyaml uritemplate drf-yasg gunicorn sendgrid
++ write a brief article on what you just learned
+
+3/25/2022
+
+Build out the entire backend
+- model data
