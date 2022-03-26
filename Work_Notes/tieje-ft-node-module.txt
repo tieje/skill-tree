@@ -67,6 +67,7 @@ https://www.vectorstock.com/royalty-free-vector/kawaii-school-background-with-cu
 + Write an article about binding keys to actions using the hook module and refer to the link that you found
 - Write an article about the static instructor sidebar interface that you made
 x create stateful instructor interface with json served by graphQL
+    I may just give up graphQL in favor of REST... is GraphQL worth setting up? It probably is...
     - it's probably better if I just set up a django backend
     - set up Apollo?
     - must disappear while in drag mode

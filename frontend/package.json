@@ -12,6 +12,7 @@
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "@use-it/event-listener": "^0.1.7",
+    "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hexgrid": "^1.0.4",

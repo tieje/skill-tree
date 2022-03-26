@@ -105,7 +105,7 @@ Build out the entire backend
     test with python manage.py runserver
     go to /admin
 - python manage.py startapp skilltree
-- model data in skilltree
++ model data in skilltree
     + skill tree
         + skill tree ID
         + owner ID
@@ -119,10 +119,34 @@ Build out the entire backend
         + image address
         + title
         + notes
-    - skill tree paths
-        - skill tree ID
-        - starting hexagon ID
-        - ending hexagon ID
-- python manage.py makemigrations
-- python manage.py migrate
-
+    + skill tree paths
+        + skill tree ID
+        + starting hexagon ID
+        + ending hexagon ID
++ add to app list in config settings
+    + SkillTree
+    + djangorestframework
+    + drf-yasg
++ register models to admin.py in config
++ add skilltree URL pattern to urls.py in config
++ add serializers for each model in skilltree.serializers
++ add viewsets for each model in skilltree.views
++ add views to urls in skilltree.urls
++ add skilltree urls to config
++ python manage.py makemigrations
++ python manage.py migrate
+    + test with python manage.py runserver
++ add localhost 3000 to cors white list
+    https://stackoverflow.com/questions/47228488/django-allowed-hosts-vs-corsdjango-cors-headers
+    https://github.com/adamchainz/django-cors-headers
+    + add "corsheaders" to installed apps
+    + add as high as possible to middleware
+        "corsheaders.middleware.CorsMiddleware",
+        "django.middleware.common.CommonMiddleware",
+    + add localhost:3000 to the whitelist
++ test backend access with axios
+    + cd skill-tree/frontend
+    + npm install axios
+    + create simple console.log() function to test data from the backend
+    SUCCESS
+- add urls on the backend to make it easier to grab data

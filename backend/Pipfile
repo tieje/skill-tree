@@ -18,12 +18,14 @@ uritemplate = "*"
 drf-yasg = "*"
 gunicorn = "*"
 sendgrid = "*"
+djangorestframework-queryfields = "*"
 
 [dev-packages]
 mypy = "*"
 autopep8 = "*"
 django-stubs = "*"
 ipython = "*"
+djangorestframework-stubs = "*"
 
 [requires]
 python_version = "3.10"

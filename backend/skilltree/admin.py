@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import SkillTree, SkillTreeHexagons, SkillTreePaths
 
-# Register your models here.
+models = [
+    SkillTree,
+    SkillTreeHexagons,
+    SkillTreePaths
+]
+
+admin.site.register(models)

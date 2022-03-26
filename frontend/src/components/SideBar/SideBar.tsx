@@ -1,4 +1,7 @@
 import React from 'react'
+import { sampleData } from '../../utils/informal_tests'
+
+console.log(sampleData)
 
 const SideBar = () => {
     return (
