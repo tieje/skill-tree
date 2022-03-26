@@ -88,5 +88,41 @@ download the python 3.10.4 installation directly from the python website and run
 
 3/25/2022
 
+3/26/2022
+
+When I think about it... I really should be using developer mode and a production mode.
+I'll just use normal json data perhaps then... But actually, I would need to set up graphQL data...
+Or I could just set up sample data in the database... And that might be better.
+
 Build out the entire backend
-- model data
+
++ in vscode workspace settings change python interpreter to this virtual environment python interpreter
+- pipenv install pylint-django mypy
++ django-admin startproject config .
+    test with python manage.py runserver
++ python manage.py migrate
++ python manage.py createsuperuser
+    test with python manage.py runserver
+    go to /admin
+- python manage.py startapp skilltree
+- model data in skilltree
+    + skill tree
+        + skill tree ID
+        + owner ID
+        + theme
+    + skill tree hexagons
+        + skill tree ID
+        + hexagon ID
+            Hexagons used. A hexagon is used if it contains data
+        + allow verbal feedback
+        + allow quantitative feedback
+        + image address
+        + title
+        + notes
+    - skill tree paths
+        - skill tree ID
+        - starting hexagon ID
+        - ending hexagon ID
+- python manage.py makemigrations
+- python manage.py migrate
+

@@ -20,6 +20,10 @@ gunicorn = "*"
 sendgrid = "*"
 
 [dev-packages]
+mypy = "*"
+autopep8 = "*"
+django-stubs = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.10"
