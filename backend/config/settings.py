@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    # 'graphene_django',
 
     # Local Apps
     'skilltree.apps.SkilltreeConfig',
@@ -139,3 +140,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
+'''
+GRAPHENE = {
+    "SCHEMA": "django_root.schema.schema"
+}
+'''

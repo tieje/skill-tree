@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import SkillTree, SkillTreeHexagons, SkillTreePaths
+from .models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
 
 models = [
-    SkillTree,
+    SkillTrees,
     SkillTreeHexagons,
-    SkillTreePaths
+    SkillTreePaths,
+    SkillTreeHexagonNotes,
 ]
 
 admin.site.register(models)

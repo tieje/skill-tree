@@ -97,14 +97,13 @@ Or I could just set up sample data in the database... And that might be better.
 Build out the entire backend
 
 + in vscode workspace settings change python interpreter to this virtual environment python interpreter
-- pipenv install pylint-django mypy
 + django-admin startproject config .
     test with python manage.py runserver
 + python manage.py migrate
 + python manage.py createsuperuser
     test with python manage.py runserver
     go to /admin
-- python manage.py startapp skilltree
++ python manage.py startapp skilltree
 + model data in skilltree
     + skill tree
         + skill tree ID
@@ -149,4 +148,12 @@ Build out the entire backend
     + npm install axios
     + create simple console.log() function to test data from the backend
     SUCCESS
-- add urls on the backend to make it easier to grab data
+x add urls on the backend to make it easier to grab data
+    FAILURE
+- create view set that queries the data that you need by combining everything.
+    x set up graphene django
+        It's a bit tedious. I've simply decided not to do it unless I really need to since I'll need to query data normally anyways.
+    - utilize django rest apis to return nested json
+        https://stackoverflow.com/questions/65540356/creating-a-nested-json-from-a-value-in-django-rest-framework
+        https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield
+

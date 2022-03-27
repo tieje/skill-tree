@@ -1,25 +1,38 @@
 from rest_framework import serializers
-from skilltree.models import SkillTree, SkillTreeHexagons, SkillTreePaths
+from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
 from drf_queryfields import QueryFieldsMixin
-
-
-class SkillTreeSerializer(QueryFieldsMixin, serializers.ModelSerializer):
-    class Meta:
-        model = SkillTree
-        fields = ('skill_tree_id', 'theme',
-                  # 'owner_id'
-                  )
 
 
 class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = SkillTreeHexagons
-        fields = ('hex_id', 'hex_q', 'hex_r', 'hex_s', 'skill_tree_id', 'allow_verbal_feedback',
-                  'allow_quantitative_feedback', 'image_address', 'title', 'notes')
+        fields = ('__all__')
 
 
 class SkillTreePathsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = SkillTreePaths
-        fields = ('path_id', 'skill_tree_id', 'starting_hex_q', 'starting_hex_r',
-                  'starting_hex_s', 'ending_hex_q', 'ending_hex_r', 'ending_hex_s')
+        fields = ('__all__')
+
+
+class SkillTreeHexagonNotesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+    class Meta:
+        model = SkillTreeHexagonNotes
+        fields = ('__all__')
+
+
+class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+    path_ids = serializers.SerializerMethodField()
+    hex_ids = serializers.SerializerMethodField()
+
+    class Meta:
+        model = SkillTrees
+        fields = ('__all__')
+
+    def get_hex_ids(self, obj):
+        '''Get all hex ids that have the skill_tree_id'''
+        pass
+
+    def get_path_ids(self, obj):
+        '''Get all hex ids that have the skill_tree_id'''
+        pass
