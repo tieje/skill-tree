@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from rest_framework import serializers
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
 from drf_queryfields import QueryFieldsMixin
@@ -22,17 +23,24 @@ class SkillTreeHexagonNotesSerializer(QueryFieldsMixin, serializers.ModelSeriali
 
 
 class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
-    path_ids = serializers.SerializerMethodField()
-    hex_ids = serializers.SerializerMethodField()
-
     class Meta:
         model = SkillTrees
         fields = ('__all__')
+    paths = serializers.SerializerMethodField()
+    hexagons = serializers.SerializerMethodField()
 
-    def get_hex_ids(self, obj):
-        '''Get all hex ids that have the skill_tree_id'''
-        pass
+    def get_hexagons(self, obj: SkillTrees) -> QuerySet:
+        '''
+        Get all hex ids that have the skill_tree_id
+        The object is the SkillTrees instance
+        For example, print(obj.skill_tree_id) will print each skill tree instance's skill_tree_id
+        '''
+        hexagons: QuerySet = SkillTreeHexagons.objects.filter(
+            skill_tree_id=obj.skill_tree_id).values()
+        return hexagons
 
-    def get_path_ids(self, obj):
+    def get_paths(self, obj: SkillTrees) -> QuerySet:
         '''Get all hex ids that have the skill_tree_id'''
-        pass
+        paths: QuerySet = SkillTreePaths.objects.filter(
+            skill_tree_id=obj.skill_tree_id).values()
+        return paths
