@@ -65,12 +65,12 @@ https://www.vectorstock.com/royalty-free-vector/kawaii-school-background-with-cu
             x default pics
                 no need yet
 + Write an article about binding keys to actions using the hook module and refer to the link that you found
-- Write an article about the static instructor sidebar interface that you made
+- write an article about how to nest JSON with djangorestframework and serializermethodfield() function
 x create stateful instructor interface with json served by graphQL
-    I may just give up graphQL in favor of REST... is GraphQL worth setting up? It probably is...
-    - it's probably better if I just set up a django backend
-    - set up Apollo?
-    - must disappear while in drag mode
+    I *can* do it. But I built the backend exactly how I want it AND I know how to update it so... I don't really need graphQL.
+    Now I can think about using React Query... Though... It may be overkill.
+- look into React query
+- sidebar must disappear while in drag mode
     - node module
         - CRUD functionality
             CRUD functionality will be in the dialog box in the right side.
@@ -98,6 +98,7 @@ x create stateful instructor interface with json served by graphQL
 - create student interface
     - quantitative feedback form
     - verbal feedback form
+- Write an article about the static instructor sidebar interface that you made
 - create custom themes
     - The first custom theme must be skyrim skill tree
 

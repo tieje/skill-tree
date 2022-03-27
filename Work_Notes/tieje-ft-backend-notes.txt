@@ -159,5 +159,6 @@ x add urls on the backend to make it easier to grab data
         https://stackoverflow.com/questions/65540356/creating-a-nested-json-from-a-value-in-django-rest-framework
         https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield
         https://docs.djangoproject.com/en/4.0/ref/models/querysets/#django.db.models.query.QuerySet
-- write an article about how to nest JSON with djangorestframework and serializermethodfield() function
-The backend core is complete.
+
+THE BACKEND CORE IS COMPLETE
+
