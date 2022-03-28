@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@react-hook/window-size": "^3.0.7",
+    "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -12,10 +13,12 @@
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "@use-it/event-listener": "^0.1.7",
-    "axios": "^0.26.1",
+    "nanoid": "^3.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hexgrid": "^1.0.4",
+    "react-query": "^3.34.19",
+    "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
     "react-svg-pan-zoom": "^3.11.0",
     "typescript": "^4.6.2",
@@ -47,6 +50,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
+    "axios": "^0.26.1",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
   }

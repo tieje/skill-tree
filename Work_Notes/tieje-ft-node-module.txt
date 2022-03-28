@@ -65,36 +65,54 @@ https://www.vectorstock.com/royalty-free-vector/kawaii-school-background-with-cu
             x default pics
                 no need yet
 + Write an article about binding keys to actions using the hook module and refer to the link that you found
-- write an article about how to nest JSON with djangorestframework and serializermethodfield() function
 x create stateful instructor interface with json served by graphQL
     I *can* do it. But I built the backend exactly how I want it AND I know how to update it so... I don't really need graphQL.
-    Now I can think about using React Query... Though... It may be overkill.
-- look into React query
+
+3/28/2022
+
+I'll just use React Query instead of Axios. If I did use Axios, I would need to create my own promise and async await functions.
+
+Node Module Design
+Node text or node image, never both. If no node image, then the title will be used with ellipses in the hexagon.
+Look into React query.
+I'm going to need a state manager... Probably something like Redux.
+State that I need to manage:
+    - Drag mode vs pointer mode
+        - Within Pointer mode: Path creation mode:
+            While in pointer mode, paths can be created
+            Path Creation shortcut should probably be the "k" key
+            - Starting hexagon
+            - ending hexagon
+            - Paths can only be deleted and created, not updated
+    - pointer mode
+        - clicking on the node grabs note data for that node
+            Only the owner will have edit buttons for editing
+        - edit button changes the state of that component to edit mode
+    - theme
+Redux middleware: this is going to be useful for whenever I need to update the API
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/61
+Great graphic for what it means for me:
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/62
+
+
+
+
+Make sidebar stateful
++ breakdown the sidebar into components
+- try using Redux to manage pointer mode and drag mode
 - sidebar must disappear while in drag mode
-    - node module
-        - CRUD functionality
-            CRUD functionality will be in the dialog box in the right side.
-            To create a node:
-                Clicking on a hexagon will change the color temporarily and open the dialog box with one tab: the update tab
-            Use local json storage until you figure out how to use Fauna and graphQL
-        - node visual design
-            - node text or node image, never both
-        - node teacher's notes
-            - teacher's links
-            - subject title (The subject title will appear at the side and the bottom of each node)
-            - teacher's notes
-        - allow feedback
-            - checkbox allow quantitative feedback
-            - checkbox allow verbal feedback
-    - custom initial zoom on the node that was last interacted-with
-    - search function
-        - search for node by title for the node - use regex
-    - Path module - press P button
-        - CRUD functionality
-        - Enter mode for drawing paths
-            - option to change the color of the path being created
-            - click on one node and then another node to draw a path
-        - Path-viewing function
+- sidebar must appear while in drag mode
+- checkbox allow quantitative feedback
+- checkbox allow verbal feedback
+- custom initial zoom on the node that was last interacted-with
+- search function
+- search for node by title for the node - use regex
+- Path module - press P button
+- CRUD functionality
+- Enter mode for drawing paths
+- option to change the color of the path being created
+- click on one node and then another node to draw a path
+- Path-viewing function
 - create student interface
     - quantitative feedback form
     - verbal feedback form
@@ -106,3 +124,4 @@ Accounts
 - account set-up form
 - account email verification
 - send email with skill tree link to a list of students on a form separated by a new-line
+
