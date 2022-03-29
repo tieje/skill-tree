@@ -8,36 +8,39 @@ import {
 import { useRef, useEffect, useState } from 'react';
 import {
   // UncontrolledReactSVGPanZoom,
-  ReactSVGPanZoom,
-  ALIGN_CENTER,
   TOOL_PAN,
   TOOL_NONE,
+  ReactSVGPanZoom,
+  ALIGN_CENTER,
   INITIAL_VALUE
 } from 'react-svg-pan-zoom'
 import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
+import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
+import { changeToDragMode, changeToPointerMode } from './PanModeSlices';
 
 const PanZoomHexGrid = () => {
   // variables
   const hexList = GridGenerator.orientedRectangle(32, 32)
-  // refs
   const hexElement = useRef(null)
-  // initial hook values 
+  const tool = useReduxSelector(state => state.panMode.tool)
+  const [aTool, setATool] = useState(tool)
   const [width, height] = useWindowSize()
-  const [tool, setTool] = useState(TOOL_NONE)
   const [value, setValue] = useState(INITIAL_VALUE)
+  const dispatch = useReduxDispatch()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
     switch (event.key) {
       case 'v':
-        setTool(TOOL_NONE)
+        dispatch(changeToPointerMode())
+        setATool(TOOL_NONE)
         break
       case 'h':
-        setTool(TOOL_PAN)
+        dispatch(changeToDragMode())
+        setATool(TOOL_PAN)
         break
     }
   }
-  // use hooks
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
   useEffect(() => {
     hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
@@ -48,8 +51,8 @@ const PanZoomHexGrid = () => {
       ref={hexElement}
       width={width}
       height={height}
-      tool={tool}
-      onChangeTool={setTool}
+      tool={aTool}
+      onChangeTool={setATool}
       value={value}
       onChangeValue={setValue}
     >

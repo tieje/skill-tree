@@ -94,20 +94,41 @@ https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/6
 Great graphic for what it means for me:
 https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/62
 
-
-
-
 Make sidebar stateful
+
 + breakdown the sidebar into components
-- try using Redux to manage pointer mode and drag mode
-- sidebar must disappear while in drag mode
-- sidebar must appear while in drag mode
-- checkbox allow quantitative feedback
-- checkbox allow verbal feedback
++ try using Redux to manage pointer mode and drag mode
++ sidebar must disappear while in drag mode and appear while in pointer mode
+    So actually, There are two kinds of modes: keyboard shortcuts change visibility and dragging while one-screen buttons change only dragging.
+    This bug is now a feature. I need to make sure I don't reproduce this in other features
+
+3/29/2022
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/62
+Use an existing skill tree
+Some logic like verbal, quantitative feedback will be updated frequently.
+I won't be using RTK Query because it's meant to be used with createAPI. I already have an API.
+It turns out that a lot of middleware is actually included by default.
+I should focus on createAsyncThunk and createEntityAdapter.
+extraReducers are used to respond to other action types beside the types generated.
+They are meant to reference external actions.
+https://redux-toolkit.js.org/api/createSlice
+extraReducers allows you to respond to an action in your slice reducer but does not create an action creator function
+For example, they would be used in responding to a createAsyncThunk action, or perhaps responding to an action from another slice.
+I'm actually supposed to use multiple slices - perhaps one slice per each functionality.
+x I'm going to wire up slices such that there is an extraReducer function handling the visibility of the sidebar...
+    I won't do this because I'm using useEffect already for this and it might get needlessly complicated.
+
+
+
++ Image address will need an edit button
+- checkboxes allow quantitative feedback allow verbal feedback
+    - pass functions as props to function react component
+
 - custom initial zoom on the node that was last interacted-with
+    - add this to localstorage or something like that
 - search function
 - search for node by title for the node - use regex
-- Path module - press P button
+- Path module - press k button
 - CRUD functionality
 - Enter mode for drawing paths
 - option to change the color of the path being created

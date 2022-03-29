@@ -5,7 +5,7 @@ const ImgAddress = () => {
     const img_tag_id: string = nanoid()
     return (
         <>
-            <label className='text-right text-xl' htmlFor={img_tag_id}>
+            <label className='text-left text-xl' htmlFor={img_tag_id}>
                 Image Address
                 <a href="https://www.wikihow.com/Get-the-URL-for-Pictures" className='pl-2 opacity-50'>
                     (what's this?)

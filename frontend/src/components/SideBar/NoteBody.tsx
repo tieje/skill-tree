@@ -10,8 +10,8 @@ const NoteBody = ({ someText }: { someText: string }) => {
             <textarea id={label_id} name={label_id} rows={7} cols={25}
                 className='p-2 overflow-y-scroll rounded-lg'
                 placeholder='Instructional text and links for students'
+                value={someText}
             >
-                {someText}
             </textarea>
             <EditButton />
         </>
