@@ -122,7 +122,10 @@ x I'm going to wire up slices such that there is an extraReducer function handli
 
 + Image address will need an edit button
 - checkboxes allow quantitative feedback allow verbal feedback
-    - pass functions as props to function react component
+    x pass functions as props to function react component
+    + add checkbox state to store
+    + manually testing state changes
+    - test posting boolean data to skill tree with skill_tree_id of 3
 
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that

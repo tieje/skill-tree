@@ -1,6 +1,4 @@
 import { combineReducers, createSlice } from "@reduxjs/toolkit";
-import SideBar from "./SideBar";
-
 
 const CheckBoxesSlice = createSlice({
     name: 'checkboxes',
@@ -9,18 +7,24 @@ const CheckBoxesSlice = createSlice({
         quantitative: true,
     },
     reducers: {
-        changeVerbalToTrue: state => {
-            state.verbal = true
+        changeVerbalBool: state => {
+            switch (state.verbal) {
+                case true:
+                    state.verbal = false
+                    break;
+                default:
+                    state.verbal = true
+            }
         },
-        changeQuantitativeToTrue: state => {
-            state.quantitative = true
+        changeQuantitativeBool: state => {
+            switch (state.quantitative) {
+                case true:
+                    state.quantitative = false
+                    break;
+                default:
+                    state.quantitative = true
+            }
         },
-        changeVerbalToFalse: state => {
-            state.verbal = false
-        },
-        changeQuantitativeToFalse: state => {
-            state.quantitative = false
-        }
     }
 })
 
@@ -28,5 +32,5 @@ const SideBarReducer = combineReducers({
     checkboxes: CheckBoxesSlice.reducer,
 })
 
-export const { changeVerbalToTrue, changeQuantitativeToTrue, changeVerbalToFalse, changeQuantitativeToFalse } = CheckBoxesSlice.actions
+export const { changeQuantitativeBool, changeVerbalBool } = CheckBoxesSlice.actions
 export default SideBarReducer

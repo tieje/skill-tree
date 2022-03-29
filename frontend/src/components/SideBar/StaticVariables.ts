@@ -1,6 +1,13 @@
-const VERBAL: string = 'Verbal Feedback'
-const QUANTITATIVE: string = 'Quantitative Feedback'
-const CHECKBOXES: string[] = [VERBAL, QUANTITATIVE]
+import { CheckboxType } from './Types';
+
+const VERBAL: CheckboxType = {
+    label: 'Verbal Feedback'
+}
+const QUANTITATIVE: CheckboxType = {
+    label: 'Quantitative Feedback'
+}
+
+const CHECKBOXES: CheckboxType[] = [VERBAL, QUANTITATIVE]
 const NOTE_TITLE: string = 'The French Revolution'
 const SOME_TEXT: string = ''
 

@@ -10,7 +10,7 @@ import { useReduxSelector } from '../../redux/hooks'
 import { TOOL_PAN,
     // TOOL_NONE,
 } from 'react-svg-pan-zoom'
-import { CHECKBOXES, NOTE_TITLE, SOME_TEXT } from './staticVariables'
+import { CHECKBOXES, NOTE_TITLE, SOME_TEXT } from './StaticVariables'
 
 const SideBar = () => {
     // variables
@@ -33,7 +33,7 @@ const SideBar = () => {
     return (
         < section id='sidebar' className={section_className} >
             <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
-                {CHECKBOXES.map((label) => { return (<Checkbox key={nanoid()} label={label} />) })}
+                {CHECKBOXES.map((checkbox) => { return (<Checkbox key={nanoid()} checkbox={checkbox} />)})}
             </div>
             <div className='relative grid grid-cols-1 gap-1 bg-paper-yellow p-5 m-3 rounded-lg opacity-95'>
                 <ImgAddress key={nanoid()} />
