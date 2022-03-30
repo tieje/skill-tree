@@ -126,15 +126,29 @@ It looks like the way that queryClient actually works is that it saves everythin
 This contrasts from Redux in that redux is functional and pure but storing variables in cache stores state...
 I figured out redux, but... well... It might be worth building with React Query instead. Someone who has gone through all of these
 libraries says not to learn redux and to just use anything else. It's not that hard.
+There's actually a little tidbit about how "React Query is not a replacement for local/client state management."
+It even cites cases where I should use a state manager.
+https://react-query.tanstack.com/guides/does-this-replace-client-state
+I've decided that I won't be using React Query because I'm going to need a real state manager for this project.
 
 + Image address will need an edit button
+x Change sidebar visibility logic to react query
+
+3/30/2022
+
+- Write an article about the static instructor sidebar interface that you made
+- Write an article about how to create nested JSON with serializers in django
+
+- use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
+- Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback
     x pass functions as props to function react component
     + add checkbox state to store
     + manually testing state changes
     + test posting boolean data to skill tree with skill_tree_id of 3
-    - make git commit before fully switching to React Query
-    - build checkboxes with React Query
+    x make git commit before fully switching to React Query
+    x checkboxes functional with React Query, DO NOT delete Redux-related code yet
+    - use RTK Query to update the hexagon that you're on
 
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that
@@ -149,7 +163,6 @@ libraries says not to learn redux and to just use anything else. It's not that h
 - create student interface
     - quantitative feedback form
     - verbal feedback form
-- Write an article about the static instructor sidebar interface that you made
 - create custom themes
     - The first custom theme must be skyrim skill tree
 
