@@ -16,22 +16,11 @@ import {
     // NOTE_TITLE,
     SOME_TEXT
 } from './StaticVariables'
-import { useQuery } from 'react-query'
 
 
 const SideBar = () => {
     // variables
-    const { isLoading, error, data } = useQuery('skillTreeData', () =>
-        fetch('http://127.0.0.1:8000/api/v1/skilltrees/3/').then(res => res.json())
-    )
-    if (isLoading) {
-        console.log('Loading sidebar')
-    }
-    if (error) {
-        console.log('An error has occurred in Sidebar: ')
-        console.log(error)
-    }
-    const title = data.hexagons[0].title
+    const title: string = 'The French Revolution'
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full'
     const [section_className, setSection] = useState(base_section_class)

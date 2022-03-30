@@ -1,4 +1,4 @@
-import { CheckboxType } from './Types';
+import { CheckboxType } from '../../types/Types';
 
 const VERBAL: CheckboxType = {
     label: 'Verbal Feedback'

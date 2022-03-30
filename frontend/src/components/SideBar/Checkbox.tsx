@@ -4,7 +4,7 @@ import {
 } from '../../redux/hooks';
 import { changeQuantitativeBool, changeVerbalBool } from './SideBarSlices';
 import { VERBAL, QUANTITATIVE } from './StaticVariables'
-import { CheckboxType } from './Types';
+import { CheckboxType } from '../../types/Types';
 
 const Checkbox = ({ checkbox }: { checkbox: CheckboxType; }) => {
     // variables

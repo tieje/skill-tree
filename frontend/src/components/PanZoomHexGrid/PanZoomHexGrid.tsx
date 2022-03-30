@@ -18,8 +18,9 @@ import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
 import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
 import { changeToDragMode, changeToPointerMode } from './PanModeSlices';
+import { SkillTreeType } from '../../types/Types';
 
-const PanZoomHexGrid = () => {
+const PanZoomHexGrid = ({treeData}: {treeData: SkillTreeType}) => {
   // variables
   const hexList = GridGenerator.orientedRectangle(32, 32)
   const hexElement = useRef(null)
