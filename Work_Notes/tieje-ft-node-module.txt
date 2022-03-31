@@ -140,6 +140,7 @@ x Change sidebar visibility logic to react query
 - Write an article about how to create nested JSON with serializers in django
 
 - use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
+    I can't use a normal useQuery because it refreshes too much.
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback
     x pass functions as props to function react component

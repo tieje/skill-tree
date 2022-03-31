@@ -2,6 +2,7 @@ from django.db.models import Model, AutoField, CharField, ForeignKey, BooleanFie
 
 title_length: int = 70
 
+
 class SkillTreeHexagonNotes(Model):
     note_id: AutoField = AutoField(primary_key=True)
     note: TextField = TextField(blank=True, null=True)
@@ -28,6 +29,16 @@ class SkillTreeHexagons(Model):
     image_address: TextField = TextField(blank=True, null=True)
     title: CharField = CharField(max_length=title_length)
 
+    hex_string: CharField = CharField(null=False, max_length=11)
+
+    def save(self, *args, **kwargs):
+        self.hex_string = ','.join([
+            str(self.hex_q),
+            str(self.hex_r),
+            str(self.hex_s)
+        ])
+        super().save(*args, **kwargs)
+
 
 class SkillTreePaths(Model):
     path_id: AutoField = AutoField(primary_key=True)
@@ -38,3 +49,19 @@ class SkillTreePaths(Model):
     ending_hex_q: IntegerField = IntegerField(null=False)
     ending_hex_r: IntegerField = IntegerField(null=False)
     ending_hex_s: IntegerField = IntegerField(null=False)
+
+    starting_hex_string: CharField = CharField(null=False, max_length=11)
+    ending_hex_string: CharField = CharField(null=False, max_length=11)
+
+    def save(self, *args, **kwargs):
+        self.starting_hex_string = ','.join([
+            str(self.starting_hex_q),
+            str(self.starting_hex_r),
+            str(self.starting_hex_s)
+        ])
+        self.ending_hex_string = ','.join([
+            str(self.ending_hex_q),
+            str(self.ending_hex_r),
+            str(self.ending_hex_s)
+        ])
+        super().save(*args, **kwargs)

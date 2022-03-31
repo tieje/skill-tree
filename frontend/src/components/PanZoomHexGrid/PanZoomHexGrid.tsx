@@ -1,9 +1,11 @@
 import React from 'react'
 import {
-  HexGrid, Layout, Hexagon, Text,
+  HexGrid,
+  Layout,
+  Hexagon,
+  Text,
+  Pattern,
   // Path,
-  // Hex,
-  GridGenerator, HexUtils
 } from 'react-hexgrid';
 import { useRef, useEffect, useState } from 'react';
 import {
@@ -18,11 +20,11 @@ import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
 import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
 import { changeToDragMode, changeToPointerMode } from './PanModeSlices';
-import { SkillTreeType } from '../../types/Types';
+import { GenHexObjectType } from '../../types/Types';
+import { nanoid } from 'nanoid';
 
-const PanZoomHexGrid = ({treeData}: {treeData: SkillTreeType}) => {
+const PanZoomHexGrid = ({ hexesObject }: { hexesObject: GenHexObjectType }) => {
   // variables
-  const hexList = GridGenerator.orientedRectangle(32, 32)
   const hexElement = useRef(null)
   const tool = useReduxSelector(state => state.panMode.tool)
   const [aTool, setATool] = useState(tool)
@@ -47,6 +49,28 @@ const PanZoomHexGrid = ({treeData}: {treeData: SkillTreeType}) => {
     hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
     hexElement.current.zoom(230, 285, 16)
   }, [])
+  /*
+  useEffect(() => {
+    treeData.hexagons.forEach((newHex: HexagonType) => {
+      hexes.every((initialHex: BasicHexType, idx: number) => {
+        const initial_id: string = HexUtils.getID(initialHex)
+        if (initial_id === newHex.hex_string) {
+          const newHexList = [...hexes]
+          newHexList[idx] = {
+            q: newHex.hex_q,
+            r: newHex.hex_r,
+            s: newHex.hex_s,
+            id: newHex.hex_string,
+            pattern: newHex.image_address
+          }
+          console.log(newHexList[idx])
+          setHexList(newHexList)
+          return false
+        }
+        return true
+      })
+    })
+  }, [treeData, hexes])*/
   return (
     <ReactSVGPanZoom
       ref={hexElement}
@@ -59,14 +83,20 @@ const PanZoomHexGrid = ({treeData}: {treeData: SkillTreeType}) => {
     >
       <HexGrid width={1} height={1} viewBox="0 0 520 605">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-          {hexList.map((hex, i: number) => {
-            const id: string = HexUtils.getID(hex)
+          {Object.entries(hexesObject).map(([key, value]) => {
+            let pid: string;
+            if (value.pattern) {
+              pid = 'p' + key
+            }
             return (
-              <Hexagon key={i} className={id} q={hex.q} r={hex.r} s={hex.s}>
-                <Text>
-                  {id}
-                </Text>
-              </Hexagon>
+              <>
+                <Hexagon key={nanoid()} className={key} q={value.q} r={value.r} s={value.s} fill={pid}>
+                  <Text>
+                    {key}
+                  </Text>
+                </Hexagon>
+                <Pattern key={nanoid()} id={pid} link={value.pattern} />
+              </>
             )
           })}
         </Layout>

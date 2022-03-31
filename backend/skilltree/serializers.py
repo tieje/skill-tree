@@ -1,3 +1,5 @@
+import string
+from typing import List
 from django.db.models import QuerySet
 from rest_framework import serializers
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
@@ -5,6 +7,8 @@ from drf_queryfields import QueryFieldsMixin
 
 
 class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+    hexList = serializers.SerializerMethodField()
+
     class Meta:
         model = SkillTreeHexagons
         fields = ('__all__')
@@ -28,6 +32,7 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         fields = ('__all__')
     paths = serializers.SerializerMethodField()
     hexagons = serializers.SerializerMethodField()
+    hex_string_list = serializers.SerializerMethodField()
 
     def get_hexagons(self, obj: SkillTrees) -> QuerySet:
         '''
@@ -44,3 +49,9 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         paths: QuerySet = SkillTreePaths.objects.filter(
             skill_tree_id=obj.skill_tree_id).values()
         return paths
+
+    def get_hex_string_list(self, obj: SkillTrees) -> QuerySet:
+        '''Collect all hex string ids'''
+        hex_string_ids_obj: QuerySet = SkillTreeHexagons.objects.filter(
+            skill_tree_id=obj.skill_tree_id).values_list('hex_string')
+        return hex_string_ids_obj
