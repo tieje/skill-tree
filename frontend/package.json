@@ -13,6 +13,7 @@
     "@types/react": "^17.0.41",
     "@types/react-dom": "^17.0.14",
     "@use-it/event-listener": "^0.1.7",
+    "axios": "^0.26.1",
     "nanoid": "^3.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -49,7 +50,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
-    "axios": "^0.26.1",
     "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
   }

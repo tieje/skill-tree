@@ -1,3 +1,6 @@
+import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+
 type undefinedPayloadType = {
     payload: undefined;
     type: string;
@@ -62,6 +65,12 @@ type GenHexObjectType = {
 
 type GeneratedHexListType = GenHexType[]
 
+type IncomingData = {
+    data?: SkillTreeType;
+    error?: FetchBaseQueryError | SerializedError;
+    isLoading?: boolean
+}
+
 export type {
     CheckboxType,
     undefinedPayloadType,
@@ -72,4 +81,5 @@ export type {
     GenHexType,
     GenHexObjectType,
     GeneratedHexListType,
+    IncomingData,
 }

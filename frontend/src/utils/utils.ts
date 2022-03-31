@@ -29,4 +29,17 @@ function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexe
     return hexagons;
 }
 
-export { CustomRectHexGridGenerator }
+function CustomRectHexGrid(original: GenHexObjectType, addHexes: HexagonType[]): GenHexObjectType {
+    const newState: GenHexObjectType = { ...original }
+    addHexes.forEach((hex: HexagonType): void => {
+        newState[hex.hex_string] = {
+            q: hex.hex_q,
+            r: hex.hex_r,
+            s: hex.hex_s,
+            pattern: hex.image_address,
+        }
+    });
+    return newState
+}
+
+export { CustomRectHexGridGenerator, CustomRectHexGrid }

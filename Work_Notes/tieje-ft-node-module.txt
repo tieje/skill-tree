@@ -136,11 +136,27 @@ x Change sidebar visibility logic to react query
 
 3/30/2022
 
-- Write an article about the static instructor sidebar interface that you made
-- Write an article about how to create nested JSON with serializers in django
+I can't use a normal useQuery because it refreshes too much.
+I can't use a hook query because updating re-rendering constantly is pretty bad for the client.
+Every time I move anything, setState causes a re-render of the whole thing.
+I don't think I actually need RTK Query...
+I need to figure out where and when to fetch data in redux.
+https://daveceddia.com/where-fetch-data-redux/
+
+3/31/2022
+I need to look at this later.
+https://redux-toolkit.js.org/usage/usage-guide
+
+Write an article about:
+- the static instructor sidebar interface that you made
+- how to create nested JSON with serializers in django
+- modern redux tool kit development
 
 - use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
-    I can't use a normal useQuery because it refreshes too much.
+    + attempt to save initial hex state in the store
+    + apply patterns
+    - apply paths
+
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback
     x pass functions as props to function react component

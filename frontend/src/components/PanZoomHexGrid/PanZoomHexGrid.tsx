@@ -19,13 +19,18 @@ import {
 import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
 import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
-import { changeToDragMode, changeToPointerMode } from './PanModeSlices';
-import { GenHexObjectType } from '../../types/Types';
+import { reloadHexagons, changeToDragMode, changeToPointerMode } from './PanModeSlices';
+import { useGetTreeByIdQuery } from '../../redux/api';
 import { nanoid } from 'nanoid';
+import { IncomingData } from '../../types/Types';
 
-const PanZoomHexGrid = ({ hexesObject }: { hexesObject: GenHexObjectType }) => {
+const PanZoomHexGrid = () => {
   // variables
+  const { data, error, isLoading }: IncomingData = useGetTreeByIdQuery('3')
+  if (error) console.log(error)
+  if (isLoading) console.log(isLoading)
   const hexElement = useRef(null)
+  const hexesObject = useReduxSelector(state => state.panMode.initialHexagons)
   const tool = useReduxSelector(state => state.panMode.tool)
   const [aTool, setATool] = useState(tool)
   const [width, height] = useWindowSize()
@@ -47,30 +52,14 @@ const PanZoomHexGrid = ({ hexesObject }: { hexesObject: GenHexObjectType }) => {
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
   useEffect(() => {
     hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
-    hexElement.current.zoom(230, 285, 16)
+    hexElement.current.zoom(65, 55, 16)
   }, [])
-  /*
   useEffect(() => {
-    treeData.hexagons.forEach((newHex: HexagonType) => {
-      hexes.every((initialHex: BasicHexType, idx: number) => {
-        const initial_id: string = HexUtils.getID(initialHex)
-        if (initial_id === newHex.hex_string) {
-          const newHexList = [...hexes]
-          newHexList[idx] = {
-            q: newHex.hex_q,
-            r: newHex.hex_r,
-            s: newHex.hex_s,
-            id: newHex.hex_string,
-            pattern: newHex.image_address
-          }
-          console.log(newHexList[idx])
-          setHexList(newHexList)
-          return false
-        }
-        return true
-      })
-    })
-  }, [treeData, hexes])*/
+    if (data) {
+      console.log(data)
+      dispatch(reloadHexagons(data.hexagons))
+    }
+  }, [data, dispatch])
   return (
     <ReactSVGPanZoom
       ref={hexElement}
@@ -81,7 +70,7 @@ const PanZoomHexGrid = ({ hexesObject }: { hexesObject: GenHexObjectType }) => {
       value={value}
       onChangeValue={setValue}
     >
-      <HexGrid width={1} height={1} viewBox="0 0 520 605">
+      <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Object.entries(hexesObject).map(([key, value]) => {
             let pid: string;
