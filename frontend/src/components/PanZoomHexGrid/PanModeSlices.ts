@@ -1,12 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import axios from 'axios';
 import { TOOL_NONE, TOOL_PAN } from 'react-svg-pan-zoom'
-import { CustomRectHexGridGenerator, CustomRectHexGrid } from "../../utils/utils";
+import { AppDispatch } from '../../redux/store';
+import { CustomRectHexGrid, CustomRectHexGridGenerator } from "../../utils/utils";
+import { createSlice } from '@reduxjs/toolkit';
+import { IDLE, PENDING } from './states';
 
 const PanModeSlice = createSlice({
     name: 'PanMode',
     initialState: {
         tool: TOOL_NONE,
-        initialHexagons: CustomRectHexGridGenerator(16, 16)
+        loading: IDLE,
+        hexagons: CustomRectHexGridGenerator(16, 16),
+        paths: []
     },
     reducers: {
         changeToDragMode: state => {
@@ -15,11 +20,30 @@ const PanModeSlice = createSlice({
         changeToPointerMode: state => {
             state.tool = TOOL_NONE
         },
-        reloadHexagons: (state, action) => {
-            state.initialHexagons = CustomRectHexGrid(state.initialHexagons, action.payload)
+        skillTreeLoading: state => {
+            if(state.loading === IDLE) {
+                state.loading = PENDING
+            }
+        },
+        skillTreeReceived: (state, action) => {
+            if(state.loading === PENDING) {
+                state.loading = IDLE
+            }
+            state.hexagons = CustomRectHexGrid(state.hexagons, action.payload.hexagons)
+            state.paths = action.payload.paths
         }
     },
 })
 
-export const { changeToDragMode, changeToPointerMode, reloadHexagons } = PanModeSlice.actions
+export const { changeToDragMode, changeToPointerMode, skillTreeLoading, skillTreeReceived} = PanModeSlice.actions
 export default PanModeSlice.reducer
+
+// Actions
+
+const fetchSkillTreeThree = () => async (dispatch: AppDispatch) => {
+    dispatch(skillTreeLoading())
+    const response = await axios.get('http://127.0.0.1:8000/api/v1/skilltrees/3')
+    dispatch(skillTreeReceived(response.data))
+}
+
+export { fetchSkillTreeThree }

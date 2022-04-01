@@ -144,18 +144,30 @@ I need to figure out where and when to fetch data in redux.
 https://daveceddia.com/where-fetch-data-redux/
 
 3/31/2022
+4/1/2022
 I need to look at this later.
 https://redux-toolkit.js.org/usage/usage-guide
+There are no default paths to generate, but I can keep an object of paths.
+    Create new paths state in redux to keep track of >
+    Path. In this case, it's probably ok to do play Hex() objects within this state.
+    The only problem is creating the object.
+I'm running into a problem with RTK query. I'm not using is correctly. I need to redo the slice for everything.
+https://www.softkraft.co/how-to-setup-slices-with-redux-toolkit/
+There is an "old" way of doing this, and then there is the more streamlined approach.
+It's not really an "old" way, more like a "custom" way to grab data.
+Mission accomplished. Paths were successfully applied and state is better managed by redux in the actual component.
 
 Write an article about:
 - the static instructor sidebar interface that you made
-- how to create nested JSON with serializers in django
+- how to create nested JSON with serializers in django rest apis
 - modern redux tool kit development
 
 - use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
-    + attempt to save initial hex state in the store
-    + apply patterns
-    - apply paths
+    - Grab data from API and apply it
+        + apply patterns
+        + apply paths
+        - apply data to sidebar
+        - memoize data with Immer in your custom fetch
 
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback

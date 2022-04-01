@@ -1,4 +1,4 @@
-import { GenHexObjectType, GenHexType, HexagonType } from "../types/Types";
+import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
     const hexagons = {}
@@ -42,4 +42,13 @@ function CustomRectHexGrid(original: GenHexObjectType, addHexes: HexagonType[]):
     return newState
 }
 
-export { CustomRectHexGridGenerator, CustomRectHexGrid }
+function AddToPathsObject(original: PathType[], addPath: PathType): PathType[] {
+    const newState: PathType[] = [...original, addPath]
+    return newState
+}
+
+export {
+    CustomRectHexGridGenerator,
+    CustomRectHexGrid,
+    AddToPathsObject
+}
