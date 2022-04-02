@@ -1,5 +1,3 @@
-import string
-from typing import List
 from django.db.models import QuerySet
 from rest_framework import serializers
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes

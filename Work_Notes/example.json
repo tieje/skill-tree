@@ -1,0 +1,60 @@
+{
+  "skill_tree_id": 3,
+  "paths": [
+    {
+      "path_id": 1,
+      "skill_tree_id": 3,
+      "starting_hex_q": 0,
+      "starting_hex_r": 0,
+      "starting_hex_s": 0,
+      "ending_hex_q": 2,
+      "ending_hex_r": 0,
+      "ending_hex_s": -2,
+      "starting_hex_string": "0,0,0",
+      "ending_hex_string": "2,0,-2"
+    },
+    {
+      "path_id": 2,
+      "skill_tree_id": 3,
+      "starting_hex_q": 0,
+      "starting_hex_r": 0,
+      "starting_hex_s": 0,
+      "ending_hex_q": 0,
+      "ending_hex_r": 2,
+      "ending_hex_s": -2,
+      "starting_hex_string": "0,0,0",
+      "ending_hex_string": "0,2,-2"
+    }
+  ],
+  "hexagons": [
+    {
+      "hex_id": 1,
+      "note_id": null,
+      "hex_q": 1,
+      "hex_r": 1,
+      "hex_s": 1,
+      "skill_tree_id": 3,
+      "allow_verbal_feedback": false,
+      "allow_quantitative_feedback": true,
+      "image_address": "https://www.knowol.com/wp-content/uploads/2017/02/abraham-lincoln-1863.jpg",
+      "title": "ok",
+      "hex_string": "1,1,1"
+    },
+    {
+      "hex_id": 2,
+      "note_id": 1,
+      "hex_q": 2,
+      "hex_r": 2,
+      "hex_s": 2,
+      "skill_tree_id": 3,
+      "allow_verbal_feedback": true,
+      "allow_quantitative_feedback": false,
+      "image_address": "https://thecolloquial.com/wp-content/uploads/2020/07/Thomas_Paine_rev1-e1593883311631-319x180.jpg",
+      "title": "asdf",
+      "hex_string": "2,2,2"
+    }
+  ],
+  "hex_string_list": [["1,1,1"], ["2,2,2"]],
+  "name": "test tree",
+  "theme": "yagami"
+}

@@ -142,3 +142,9 @@ Or even
 Five 12 hour days of work and two days off
 60 / 7 = ~8.5 hours of "work" per day
 
+4/1/2022
+
+Helpful markdown functions:
+
+def markify(a: str) -> str:
+    return(a.lower().replace(' ', '-'))

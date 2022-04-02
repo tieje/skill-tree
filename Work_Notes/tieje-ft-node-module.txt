@@ -154,20 +154,32 @@ There are no default paths to generate, but I can keep an object of paths.
 I'm running into a problem with RTK query. I'm not using is correctly. I need to redo the slice for everything.
 https://www.softkraft.co/how-to-setup-slices-with-redux-toolkit/
 There is an "old" way of doing this, and then there is the more streamlined approach.
+https://stackoverflow.com/questions/60290580/how-do-i-make-an-api-call-using-createslice#60325398
 It's not really an "old" way, more like a "custom" way to grab data.
 Mission accomplished. Paths were successfully applied and state is better managed by redux in the actual component.
 
++ how to create nested JSON with serializers in django rest apis
+
+4/2/2022
+
+Check page 72 of the Fullstack React with TypeScript book for a better idea of what you're trying to do.
+
+
 Write an article about:
 - the static instructor sidebar interface that you made
-- how to create nested JSON with serializers in django rest apis
 - modern redux tool kit development
 
-- use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
++ use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
     - Grab data from API and apply it
         + apply patterns
         + apply paths
-        - apply data to sidebar
-        - memoize data with Immer in your custom fetch
+        x memoize data with Immer in your custom fetch
+            That's... not how immer works...
+- apply data to sidebar
+    - create static data display for the sidebar: use jsx conditionals and useState
+    - automatically focus on input using refs: page 72 of Fullstack React TypeScript
+
+- make it so that clicking on a hexagon changes sidebar data
 
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback
