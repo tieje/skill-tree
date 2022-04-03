@@ -4,11 +4,20 @@ import React
 import { nanoid } from "nanoid";
 import EditButton from "./EditButton";
 import { NoteBodySwitch } from "./SideBarSlices";
+import { useFocusTextArea } from "../../utils/utils";
+import { useReduxDispatch } from "../../redux/hooks";
 
 const NoteBody = ({ edit, body }: { edit: boolean, body?: string }) => {
-
     const [note, setNote] = useState(body)
     const label_id: string = nanoid()
+    const textAreaRef = useFocusTextArea()
+    const dispatch = useReduxDispatch()
+    const handleAddText = (
+        event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === 'Enter' && event.shiftKey) {
+            dispatch(NoteBodySwitch())
+        }
+    }
     if (edit) {
         return (
             <>
@@ -16,6 +25,7 @@ const NoteBody = ({ edit, body }: { edit: boolean, body?: string }) => {
                     Notes
                 </label>
                 <textarea
+                    ref={textAreaRef}
                     id={label_id}
                     name={label_id}
                     rows={7}
@@ -24,6 +34,7 @@ const NoteBody = ({ edit, body }: { edit: boolean, body?: string }) => {
                     placeholder='Instructional text and links for students'
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
+                    onKeyDown={handleAddText}
                 >
                 </textarea>
                 <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />

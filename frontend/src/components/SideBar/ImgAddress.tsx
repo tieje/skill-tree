@@ -1,9 +1,22 @@
 import React, { useState } from "react"
 import { nanoid } from "nanoid"
+import { useFocusInput } from "../../utils/utils"
+import { useReduxDispatch } from "../../redux/hooks"
+import { ImgAddressSwitch } from "./SideBarSlices"
 
 const ImgAddress = ({ edit, imgAddress }: { edit: boolean, imgAddress?: string }) => {
     const [newImgAddress, setNewImgAddress] = useState(imgAddress)
+    const inputRef = useFocusInput()
     const img_tag_id: string = nanoid()
+    const dispatch = useReduxDispatch()
+    const handleAddText = (
+        event: React.KeyboardEvent<HTMLInputElement>) => {
+        switch (event.key) {
+            case 'Enter':
+                dispatch(ImgAddressSwitch())
+                break
+        }
+    }
     if (edit) {
         return (
             <>
@@ -14,12 +27,14 @@ const ImgAddress = ({ edit, imgAddress }: { edit: boolean, imgAddress?: string }
                     </a>
                 </label>
                 <input
+                    ref={inputRef}
                     className='w-full rounded-md p-2'
                     type='text'
                     id={img_tag_id}
                     name='img_tag_id'
                     value={newImgAddress}
                     onChange={(e) => setNewImgAddress(e.target.value)}
+                    onKeyDown={handleAddText}
                 />
             </>
         )

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { sampleData } from '../../utils/informal_tests'
 import { CheckboxType } from '../../types/Types'
 import { nanoid } from 'nanoid'
 import Checkbox from './Checkbox'
@@ -7,18 +6,22 @@ import ImgAddress from './ImgAddress'
 import NoteTitle from './NoteTitle'
 import NoteBody from './NoteBody'
 import EditButton from './EditButton'
-import { useReduxSelector } from '../../redux/hooks'
+import { useReduxDispatch, useReduxSelector } from '../../redux/hooks'
 import {
     TOOL_PAN,
     // TOOL_NONE,
 } from 'react-svg-pan-zoom'
-import { changeQuantitativeBool, changeVerbalBool, ImgAddressSwitch } from './SideBarSlices'
+import { changeQuantitativeBool, changeVerbalBool, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
 import { useGetTreeByIdQuery } from '../../redux/api'
+import useEventListener from '@use-it/event-listener'
+import { any } from '../../utils/utils'
+import { INVISIBLE } from './StaticVariables'
 
 
 const SideBar = () => {
     // variables
     const { data, error, isLoading } = useGetTreeByIdQuery('3')
+    const dispatch = useReduxDispatch()
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
@@ -26,10 +29,26 @@ const SideBar = () => {
     const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full'
     const [section_className, setSection] = useState(base_section_class)
     // functions and useEffect
+    const handleShortcuts = (event: KeyboardEvent) => {
+        if (section_className !== INVISIBLE && !any([editImgAddress, editNoteBody, editNoteTitle])) {
+            switch (event.key) {
+                case 's':
+                    dispatch(ImgAddressSwitch())
+                    break
+                case 'd':
+                    dispatch(NoteTitleSwitch())
+                    break
+                case 'f':
+                    dispatch(NoteBodySwitch())
+                    break
+            }
+        }
+    }
+    useEventListener('keypress', handleShortcuts)
     useEffect(() => {
         switch (tool) {
             case TOOL_PAN:
-                setSection('invisible');
+                setSection(INVISIBLE);
                 break
             /*case TOOL_NONE:
             section_class = base_section_class + 'invisible';
@@ -44,7 +63,9 @@ const SideBar = () => {
         )
     }
     if (error) {
-        <div>Error</div>
+        return (
+            <div>Error</div>
+        )
     }
     const VERBAL: CheckboxType = {
         label: 'Verbal Feedback',

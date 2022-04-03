@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
@@ -47,8 +48,34 @@ function AddToPathsObject(original: PathType[], addPath: PathType): PathType[] {
     return newState
 }
 
+const useFocusInput = () => {
+    const ref = useRef<HTMLInputElement>(null)
+    useEffect(() => {
+        ref.current?.focus()
+    }, [])
+    return ref
+}
+
+const useFocusTextArea = () => {
+    const ref = useRef<HTMLTextAreaElement>(null)
+    useEffect(() => {
+        ref.current?.focus()
+    }, [])
+    return ref
+}
+
+function any(iterable) {
+    for (let index = 0; index < iterable.length; index++) {
+        if (iterable[index]) return true;
+    }
+    return false;
+}
+
 export {
     CustomRectHexGridGenerator,
     CustomRectHexGrid,
-    AddToPathsObject
+    AddToPathsObject,
+    useFocusInput,
+    useFocusTextArea,
+    any,
 }

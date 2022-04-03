@@ -27,31 +27,44 @@ import { nanoid } from 'nanoid';
 import { changeToPointerMode, changeToDragMode, fetchSkillTreeThree } from './PanModeSlices';
 import { PENDING } from './states';
 import { PathType } from '../../types/Types';
+import { any } from '../../utils/utils';
+import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 
 const PanZoomHexGrid = () => {
-  // variables, setState
+  // variables
   const dispatch = useReduxDispatch()
+  // useRef
   const hexElement = useRef(null)
+  // useReduxSelector
   const tool = useReduxSelector(state => state.panMode.tool)
   const hexagons = useReduxSelector(state => state.panMode.hexagons)
   const paths = useReduxSelector(state => state.panMode.paths)
   const loading = useReduxSelector(state => state.panMode.loading)
+  const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
+  const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
+  const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
+  // useState
   const [hexes, setHexes] = useState(hexagons)
-  const [pathObjectList, setPathObjectList] = useState(paths)
   const [aTool, setATool] = useState(tool)
-  const [width, height] = useWindowSize()
   const [value, setValue] = useState(INITIAL_VALUE)
+  const [pathObjectList, setPathObjectList] = useState(paths)
+  const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
-    switch (event.key) {
-      case 'v':
-        dispatch(changeToPointerMode())
-        setATool(TOOL_NONE)
-        break
-      case 'h':
-        dispatch(changeToDragMode())
-        setATool(TOOL_PAN)
-        break
+    if (!any([editImgAddress, editNoteBody, editNoteTitle])) {
+      switch (event.key) {
+        case 'v':
+          dispatch(changeToPointerMode())
+          setATool(TOOL_NONE)
+          break
+        case 'h':
+          dispatch(changeToDragMode())
+          if(editImgAddress) dispatch(ImgAddressSwitch)
+          if(editNoteTitle) dispatch(NoteTitleSwitch)
+          if(editNoteBody) dispatch(NoteBodySwitch)
+          setATool(TOOL_PAN)
+          break
+      }
     }
   }
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
