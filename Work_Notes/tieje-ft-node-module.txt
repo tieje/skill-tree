@@ -183,13 +183,15 @@ One thing at a time.
 
 The way that the checkboxes work right now, make it a little complicated to have a shortcut for it.
 Well, it's probably for the best that checkboxes don't have shortcuts because they're so easy to mess up and miss.
+It feels like I'll need to extend the Hexagon component.
 
-
-Write an article about:
-- the static instructor sidebar interface that you made
-- modern redux tool kit development
-- figure out how to safely delete a table in Django (do this on an example different project)
-
++ checkboxes allow quantitative feedback allow verbal feedback
+    x pass functions as props to function react component
+    + add checkbox state to store
+    + manually testing state changes
+    + test posting boolean data to skill tree with skill_tree_id of 3
+    x make git commit before fully switching to React Query
+    x checkboxes functional with React Query, DO NOT delete Redux-related code yet
 + automatically focus on input or textarea using refs: page 72 of Fullstack React TypeScript
 + SVG shortcuts will not work when something is being edited in the sidebar
 + create sidebar shortcuts that only activate when the sidebar is not invisible and when nothing is being edited in the sidebar:
@@ -201,17 +203,25 @@ Write an article about:
         + d - title
         + f - body
 + pressing Enter submits the text to the input or textarea
+
+
+4/4/2022
+I need to save the last hexagon focused to localStorage.
+https://dev.to/link2twenty/react-redux-and-localstorage-2lih
+https://redux.js.org/api/createstore/
+
+
+Write an article about:
+- the static instructor sidebar interface that you made
+- modern redux tool kit development
+- figure out how to safely delete a table in Django (do this on an example different project)
+
 - make it so that clicking on a hexagon loads that hexagon's sidebar data
+    - last hexagon focused should be saved in localStorage
+
 
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
-- checkboxes allow quantitative feedback allow verbal feedback
-    x pass functions as props to function react component
-    + add checkbox state to store
-    + manually testing state changes
-    + test posting boolean data to skill tree with skill_tree_id of 3
-    x make git commit before fully switching to React Query
-    x checkboxes functional with React Query, DO NOT delete Redux-related code yet
-    - use RTK Query to update the hexagon that you're on
+- use RTK Query to update the hexagon that you're on
 
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that

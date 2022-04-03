@@ -45,8 +45,10 @@ class SkillTreePaths(Model):
     ending_hex_r: IntegerField = IntegerField(null=False)
     ending_hex_s: IntegerField = IntegerField(null=False)
 
-    starting_hex_string: CharField = CharField(null=False, max_length=11, blank=True)
-    ending_hex_string: CharField = CharField(null=False, max_length=11, blank=True)
+    starting_hex_string: CharField = CharField(
+        null=False, max_length=11, blank=True)
+    ending_hex_string: CharField = CharField(
+        null=False, max_length=11, blank=True)
 
     def save(self, *args, **kwargs):
         self.starting_hex_string = ','.join([

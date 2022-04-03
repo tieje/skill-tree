@@ -24,7 +24,7 @@ import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
 import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
 import { nanoid } from 'nanoid';
-import { changeToPointerMode, changeToDragMode, fetchSkillTreeThree } from './PanModeSlices';
+import { changeToPointerMode, changeToDragMode, fetchSkillTreeThree, changeHexagonFocus } from './PanModeSlices';
 import { PENDING } from './states';
 import { PathType } from '../../types/Types';
 import { any } from '../../utils/utils';
@@ -59,9 +59,9 @@ const PanZoomHexGrid = () => {
           break
         case 'h':
           dispatch(changeToDragMode())
-          if(editImgAddress) dispatch(ImgAddressSwitch)
-          if(editNoteTitle) dispatch(NoteTitleSwitch)
-          if(editNoteBody) dispatch(NoteBodySwitch)
+          if (editImgAddress) dispatch(ImgAddressSwitch)
+          if (editNoteTitle) dispatch(NoteTitleSwitch)
+          if (editNoteBody) dispatch(NoteBodySwitch)
           setATool(TOOL_PAN)
           break
       }
@@ -109,7 +109,15 @@ const PanZoomHexGrid = () => {
             }
             return (
               <>
-                <Hexagon key={nanoid()} className={key} q={value.q} r={value.r} s={value.s} fill={pid}>
+                <Hexagon
+                  key={nanoid()}
+                  className={key}
+                  q={value.q}
+                  r={value.r}
+                  s={value.s}
+                  fill={pid}
+                  onClick={() => dispatch(changeHexagonFocus(value.id))}
+                >
                   <Text>
                     {key}
                   </Text>

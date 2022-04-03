@@ -11,7 +11,7 @@ export const store = configureStore({
         [treeApi.reducerPath]: treeApi.reducer,
     },
     devTools: true,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(treeApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(treeApi.middleware),
 })
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 setupListeners(store.dispatch)

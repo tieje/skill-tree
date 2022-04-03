@@ -15,7 +15,7 @@ import { changeQuantitativeBool, changeVerbalBool, ImgAddressSwitch, NoteBodySwi
 import { useGetTreeByIdQuery } from '../../redux/api'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
-import { INVISIBLE } from './StaticVariables'
+import { INVISIBLE } from '../../StaticVariables'
 
 
 const SideBar = () => {

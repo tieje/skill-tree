@@ -49,6 +49,7 @@ type SkillTreeType = {
 }
 
 type GenHexType = {
+    id?: number,
     q: number,
     r: number,
     s: number,
@@ -58,8 +59,6 @@ type GenHexType = {
 type GenHexObjectType = {
     [key: string]: GenHexType
 }
-
-type GeneratedHexListType = GenHexType[]
 
 type IncomingData = {
     data?: SkillTreeType;
@@ -79,7 +78,6 @@ export type {
     PathType,
     GenHexType,
     GenHexObjectType,
-    GeneratedHexListType,
     IncomingData,
     EditButtonPropsType,
 }
