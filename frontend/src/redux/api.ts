@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { HexagonType, NoteType, SkillTreeType } from '../types/Types'
+import { HexagonType, SkillTreeType } from '../types/Types'
 
 const treeApi = createApi({
     reducerPath: 'treeApi',
@@ -7,9 +7,6 @@ const treeApi = createApi({
     endpoints: (build) => ({
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
-        }),
-        getNoteById: build.query<NoteType, string>({
-            query: (id) => `skilltreehexagonnotes/${id}`,
         }),
         createHex: build.mutation<HexagonType, Partial<HexagonType>>({
             query: (body) => {
@@ -25,7 +22,6 @@ const treeApi = createApi({
 
 export const {
     useGetTreeByIdQuery,
-    useGetNoteByIdQuery,
     useCreateHexMutation,
 } = treeApi
 

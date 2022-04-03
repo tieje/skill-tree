@@ -1,11 +1,7 @@
+from ast import Mod
 from django.db.models import Model, AutoField, CharField, ForeignKey, BooleanField, TextField, CASCADE, IntegerField
 
 title_length: int = 70
-
-
-class SkillTreeHexagonNotes(Model):
-    note_id: AutoField = AutoField(primary_key=True)
-    note: TextField = TextField(blank=True, null=True)
 
 
 class SkillTrees(Model):
@@ -18,8 +14,7 @@ class SkillTrees(Model):
 
 class SkillTreeHexagons(Model):
     hex_id: AutoField = AutoField(primary_key=True)
-    note: ForeignKey = ForeignKey(
-        SkillTreeHexagonNotes, on_delete=CASCADE, blank=True, null=True)
+    note: TextField = TextField(blank=True, null=True)
     hex_q: IntegerField = IntegerField(null=False)
     hex_r: IntegerField = IntegerField(null=False)
     hex_s: IntegerField = IntegerField(null=False)
@@ -29,7 +24,7 @@ class SkillTreeHexagons(Model):
     image_address: TextField = TextField(blank=True, null=True)
     title: CharField = CharField(max_length=title_length)
 
-    hex_string: CharField = CharField(null=False, max_length=11)
+    hex_string: CharField = CharField(null=False, max_length=11, blank=True)
 
     def save(self, *args, **kwargs):
         self.hex_string = ','.join([
@@ -50,8 +45,8 @@ class SkillTreePaths(Model):
     ending_hex_r: IntegerField = IntegerField(null=False)
     ending_hex_s: IntegerField = IntegerField(null=False)
 
-    starting_hex_string: CharField = CharField(null=False, max_length=11)
-    ending_hex_string: CharField = CharField(null=False, max_length=11)
+    starting_hex_string: CharField = CharField(null=False, max_length=11, blank=True)
+    ending_hex_string: CharField = CharField(null=False, max_length=11, blank=True)
 
     def save(self, *args, **kwargs):
         self.starting_hex_string = ','.join([

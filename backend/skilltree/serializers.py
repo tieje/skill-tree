@@ -1,11 +1,11 @@
 from django.db.models import QuerySet
 from rest_framework import serializers
-from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
+from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths
 from drf_queryfields import QueryFieldsMixin
 
 
 class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
-    hexList = serializers.SerializerMethodField()
+    # hexList = serializers.SerializerMethodField()
 
     class Meta:
         model = SkillTreeHexagons
@@ -15,12 +15,6 @@ class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer)
 class SkillTreePathsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = SkillTreePaths
-        fields = ('__all__')
-
-
-class SkillTreeHexagonNotesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
-    class Meta:
-        model = SkillTreeHexagonNotes
         fields = ('__all__')
 
 

@@ -7,12 +7,9 @@ type undefinedPayloadType = {
 }
 
 type CheckboxType = {
-    label: string
-}
-
-type NoteType = {
-    note_id: number;
-    note: string;
+    label: string;
+    initial: boolean;
+    editMethod(): { payload: undefined; type: string; };
 }
 
 type PathType = {
@@ -37,10 +34,9 @@ type HexagonType = {
     allow_quantitative_feedback: boolean;
     image_address: string;
     title: string;
-    note?: number;
+    note?: string;
     skill_tree: number;
     hex_string: string
-
 }
 
 type SkillTreeType = {
@@ -71,15 +67,19 @@ type IncomingData = {
     isLoading?: boolean
 }
 
+type EditButtonPropsType = {
+    editMethod(): { payload: undefined; type: string; }
+}
+
 export type {
     CheckboxType,
     undefinedPayloadType,
     SkillTreeType,
     HexagonType,
     PathType,
-    NoteType,
     GenHexType,
     GenHexObjectType,
     GeneratedHexListType,
     IncomingData,
+    EditButtonPropsType,
 }

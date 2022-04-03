@@ -163,11 +163,15 @@ Mission accomplished. Paths were successfully applied and state is better manage
 4/2/2022
 
 Check page 72 of the Fullstack React with TypeScript book for a better idea of what you're trying to do.
-
+file:///Users/thomasfrancis/Desktop/fullstack-react-with-typescript-book-r11-basic.pdf
+I'm running into some big problems. The shortcuts are fighting with me.
+I need to make sure that the shortcuts only work when the SVG Pan is the current Ref.
+One thing at a time.
 
 Write an article about:
 - the static instructor sidebar interface that you made
 - modern redux tool kit development
+- figure out how to safely delete a table in Django (do this on an example different project)
 
 + use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
     - Grab data from API and apply it
@@ -176,10 +180,14 @@ Write an article about:
         x memoize data with Immer in your custom fetch
             That's... not how immer works...
 - apply data to sidebar
-    - create static data display for the sidebar: use jsx conditionals and useState
+    + create static data display for the sidebar: use jsx conditionals and useState
+    + change backend such that the notes are returned as well with skill trees
+    + make it so that only one text input can be edited at a time
     - automatically focus on input using refs: page 72 of Fullstack React TypeScript
-
+- Sidebar shortcuts work only when the sidebar is the current Ref
+- turn off drifting for the svg
 - make it so that clicking on a hexagon changes sidebar data
+- SVG shortcuts only work whenh the SVG Pan is the current Ref
 
 - Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
 - checkboxes allow quantitative feedback allow verbal feedback

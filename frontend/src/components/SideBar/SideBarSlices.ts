@@ -1,10 +1,13 @@
-import { combineReducers, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-const CheckBoxesSlice = createSlice({
-    name: 'checkboxes',
+const SideBarSlice = createSlice({
+    name: 'sidebar',
     initialState: {
         verbal: true,
         quantitative: true,
+        editImgAddress: false,
+        editNoteTitle: false,
+        editNoteBody: false
     },
     reducers: {
         changeVerbalBool: state => {
@@ -25,12 +28,47 @@ const CheckBoxesSlice = createSlice({
                     state.quantitative = true
             }
         },
+        ImgAddressSwitch: state => {
+            switch (state.editImgAddress) {
+                case true:
+                    state.editImgAddress = false
+                    break;
+                default:
+                    state.editImgAddress = true
+                    state.editNoteTitle = false
+                    state.editNoteBody = false
+            }
+        },
+        NoteTitleSwitch: state => {
+            switch (state.editNoteTitle) {
+                case true:
+                    state.editNoteTitle = false
+                    break;
+                default:
+                    state.editNoteTitle = true
+                    state.editImgAddress = false
+                    state.editNoteBody = false
+            }
+        },
+        NoteBodySwitch: state => {
+            switch (state.editNoteBody) {
+                case true:
+                    state.editNoteBody = false
+                    break;
+                default:
+                    state.editNoteBody = true
+                    state.editNoteTitle = false
+                    state.editImgAddress = false
+            }
+        },
     }
 })
 
-const SideBarReducer = combineReducers({
-    checkboxes: CheckBoxesSlice.reducer,
-})
-
-export const { changeQuantitativeBool, changeVerbalBool } = CheckBoxesSlice.actions
-export default SideBarReducer
+export const {
+    changeQuantitativeBool,
+    changeVerbalBool,
+    ImgAddressSwitch,
+    NoteTitleSwitch,
+    NoteBodySwitch,
+} = SideBarSlice.actions
+export default SideBarSlice.reducer

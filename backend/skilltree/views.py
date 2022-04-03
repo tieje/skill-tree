@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeHexagonNotes
-from .serializers import SkillTreesSerializer, SkillTreeHexagonsSerializer, SkillTreePathsSerializer, SkillTreeHexagonNotesSerializer
+from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths
+from .serializers import SkillTreesSerializer, SkillTreeHexagonsSerializer, SkillTreePathsSerializer
 
 
 class SkillTreeHexagonsViewSet(viewsets.ModelViewSet):
@@ -11,11 +11,6 @@ class SkillTreeHexagonsViewSet(viewsets.ModelViewSet):
 class SkillTreePathsViewSet(viewsets.ModelViewSet):
     queryset = SkillTreePaths.objects.all()
     serializer_class = SkillTreePathsSerializer
-
-
-class SkillTreeHexagonNotesViewSet(viewsets.ModelViewSet):
-    queryset = SkillTreeHexagonNotes.objects.all()
-    serializer_class = SkillTreeHexagonNotesSerializer
 
 
 class SkillTreesViewSet(viewsets.ModelViewSet):
