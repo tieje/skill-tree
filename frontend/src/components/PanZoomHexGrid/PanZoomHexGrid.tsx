@@ -116,7 +116,14 @@ const PanZoomHexGrid = () => {
                   r={value.r}
                   s={value.s}
                   fill={pid}
-                  onClick={() => dispatch(changeHexagonFocus(value.id))}
+                  onClick={() => {
+                    dispatch(changeHexagonFocus({
+                      hex_id: value.id,
+                      hex_q: value.q,
+                      hex_r: value.r,
+                      hex_s: value.s,
+                    }))
+                  }}
                 >
                   <Text>
                     {key}

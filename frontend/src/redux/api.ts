@@ -8,15 +8,24 @@ const treeApi = createApi({
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
         }),
-        getHexagonById: build.query<HexagonType, string> ({
+        getHexagonById: build.query<HexagonType, string>({
             query: (id) => `skilltreehexagons/${id}`,
         }),
         createHex: build.mutation<HexagonType, Partial<HexagonType>>({
-            query: (body) => {
+            query: (info) => {
                 return {
-                    url: `skilltreehexagons`,
-                    method: `CREATE`,
-                    body: body,
+                    url: `skilltreehexagons/`,
+                    method: `POST`,
+                    body: info,
+                }
+            }
+        }),
+        updateHex: build.mutation<HexagonType, Partial<HexagonType>>({
+            query: (id, ...info) => {
+                return {
+                    url: `skilltreehexagons/${id}`,
+                    method: `PUT`,
+                    body: info,
                 }
             }
         })
@@ -27,6 +36,7 @@ export const {
     useGetTreeByIdQuery,
     useGetHexagonByIdQuery,
     useCreateHexMutation,
+    useUpdateHexMutation,
 } = treeApi
 
 export { treeApi }

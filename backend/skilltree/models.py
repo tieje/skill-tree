@@ -19,10 +19,10 @@ class SkillTreeHexagons(Model):
     hex_r: IntegerField = IntegerField(null=False)
     hex_s: IntegerField = IntegerField(null=False)
     skill_tree: ForeignKey = ForeignKey(SkillTrees, on_delete=CASCADE)
-    allow_verbal_feedback: BooleanField = BooleanField(default=False)
-    allow_quantitative_feedback: BooleanField = BooleanField(default=False)
+    allow_verbal_feedback: BooleanField = BooleanField(default=True)
+    allow_quantitative_feedback: BooleanField = BooleanField(default=True)
     image_address: TextField = TextField(blank=True, null=True)
-    title: CharField = CharField(max_length=title_length)
+    title: CharField = CharField(max_length=title_length, blank=True, null=True)
 
     hex_string: CharField = CharField(null=False, max_length=11, blank=True)
 

@@ -1,5 +1,14 @@
 import { SerializedError } from "@reduxjs/toolkit";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import {
+    // BaseQueryFn,
+    // FetchArgs,
+    FetchBaseQueryError,
+    // FetchBaseQueryMeta,
+    // MutationDefinition
+} from "@reduxjs/toolkit/dist/query";
+import {
+    // MutationTrigger,
+} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 type undefinedPayloadType = {
     payload: undefined;

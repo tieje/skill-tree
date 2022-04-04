@@ -21,7 +21,7 @@ import { INVISIBLE } from '../../StaticVariables'
 const SideBar = () => {
     // variables
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused))
+    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const dispatch = useReduxDispatch()
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
@@ -91,13 +91,15 @@ const SideBar = () => {
                         edit={editImgAddress}
                         imgAddress={''} />
                     <EditButton
-                        editMethod={() => ImgAddressSwitch()} />
+                        editMethod={() => ImgAddressSwitch()}
+                    />
                 </div>
                 <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
                     <NoteTitle
                         key={nanoid()}
                         edit={editNoteTitle}
-                        title={'Title'} />
+                        title={'Title'}
+                    />
                 </div>
                 <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
                     <NoteBody

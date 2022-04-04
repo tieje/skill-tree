@@ -17,10 +17,15 @@ import {
 const PanModeSlice = createSlice({
     name: 'PanMode',
     initialState: {
+        hexagons: CustomRectHexGridGenerator(16, 16),
         tool: TOOL_NONE,
         loading: IDLE,
-        hexagonFocused: 0,
-        hexagons: CustomRectHexGridGenerator(16, 16),
+        hexagonFocused: {
+            hex_id: 0,
+            hex_q: 0,
+            hex_r: 0,
+            hex_s: 0,
+        },
         paths: [],
     },
     reducers: {
@@ -44,7 +49,7 @@ const PanModeSlice = createSlice({
         },
         changeHexagonFocus: (state, action) => {
             state.hexagonFocused = action.payload
-        }
+        },
     },
 })
 

@@ -9,9 +9,6 @@ const Checkbox = ({ checkbox }: { checkbox: CheckboxType; }) => {
     const { label, initial } = checkbox
     const label_id: string = label.replace(/ /g, '-').toLowerCase()
     const dispatch = useReduxDispatch()
-    //const testing_verbal = useReduxSelector(state => state.sideBar.checkboxes.verbal)
-    // functions
-    //console.log(testing_verbal)
     return (
         <div className='text-xl'>
             <label className='pr-2' htmlFor={label_id}>
