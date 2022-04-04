@@ -12,7 +12,7 @@ import {
     // TOOL_NONE,
 } from 'react-svg-pan-zoom'
 import { changeQuantitativeBool, changeVerbalBool, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
-import { useGetTreeByIdQuery } from '../../redux/api'
+import { useGetHexagonByIdQuery, } from '../../redux/api'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
 import { INVISIBLE } from '../../StaticVariables'
@@ -20,7 +20,8 @@ import { INVISIBLE } from '../../StaticVariables'
 
 const SideBar = () => {
     // variables
-    const { data, error, isLoading } = useGetTreeByIdQuery('3')
+    const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
+    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused))
     const dispatch = useReduxDispatch()
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
@@ -63,18 +64,59 @@ const SideBar = () => {
         )
     }
     if (error) {
+        const VERBAL: CheckboxType = {
+            label: 'Verbal Feedback',
+            initial: false,
+            editMethod: changeVerbalBool,
+        }
+        const QUANTITATIVE: CheckboxType = {
+            label: 'Quantitative Feedback',
+            initial: false,
+            editMethod: changeQuantitativeBool,
+        }
+        const CHECKBOXES: CheckboxType[] = [VERBAL, QUANTITATIVE]
         return (
-            <div>Error</div>
+            < section id='sidebar' className={section_className} >
+                <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
+                    {CHECKBOXES.map((checkbox) => {
+                        return (<Checkbox
+                            key={nanoid()}
+                            checkbox={checkbox}
+                        />)
+                    })}
+                </div>
+                <div className='relative grid grid-cols-1 gap-1 bg-paper-yellow p-5 m-3 rounded-lg opacity-95'>
+                    <ImgAddress
+                        key={nanoid()}
+                        edit={editImgAddress}
+                        imgAddress={''} />
+                    <EditButton
+                        editMethod={() => ImgAddressSwitch()} />
+                </div>
+                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
+                    <NoteTitle
+                        key={nanoid()}
+                        edit={editNoteTitle}
+                        title={'Title'} />
+                </div>
+                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
+                    <NoteBody
+                        key={nanoid()}
+                        edit={editNoteBody}
+                        body={''}
+                    />
+                </div>
+            </section >
         )
     }
     const VERBAL: CheckboxType = {
         label: 'Verbal Feedback',
-        initial: data.hexagons[0].allow_verbal_feedback,
+        initial: data.allow_verbal_feedback,
         editMethod: changeVerbalBool,
     }
     const QUANTITATIVE: CheckboxType = {
         label: 'Quantitative Feedback',
-        initial: data.hexagons[0].allow_quantitative_feedback,
+        initial: data.allow_quantitative_feedback,
         editMethod: changeQuantitativeBool,
     }
     const CHECKBOXES: CheckboxType[] = [VERBAL, QUANTITATIVE]
@@ -92,7 +134,7 @@ const SideBar = () => {
                 <ImgAddress
                     key={nanoid()}
                     edit={editImgAddress}
-                    imgAddress={data.hexagons[0].image_address} />
+                    imgAddress={data.image_address} />
                 <EditButton
                     editMethod={() => ImgAddressSwitch()} />
             </div>
@@ -100,13 +142,13 @@ const SideBar = () => {
                 <NoteTitle
                     key={nanoid()}
                     edit={editNoteTitle}
-                    title={data.hexagons[0].title} />
+                    title={data.title} />
             </div>
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
                 <NoteBody
                     key={nanoid()}
                     edit={editNoteBody}
-                    body={data.hexagons[0].note}
+                    body={data.note}
                 />
             </div>
         </section >
@@ -114,5 +156,3 @@ const SideBar = () => {
 }
 
 export default SideBar
-/*<NoteTitle key={nanoid()} title={NOTE_TITLE} />*/
-//<NoteTitle />

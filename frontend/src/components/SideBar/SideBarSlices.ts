@@ -7,7 +7,7 @@ const SideBarSlice = createSlice({
         quantitative: true,
         editImgAddress: false,
         editNoteTitle: false,
-        editNoteBody: false
+        editNoteBody: false,
     },
     reducers: {
         changeVerbalBool: state => {

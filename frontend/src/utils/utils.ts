@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { HEXAGON_FOCUSED } from "../StaticVariables";
 import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
@@ -72,13 +71,21 @@ function any(iterable) {
     }
     return false;
 }
-
+/*
 function InitialHexagonFocused() {
-    const hex_id: string | null = localStorage.getItem(HEXAGON_FOCUSED)
-    if (hex_id === null) return 0
-    return parseInt(hex_id)
+    try {
+        const hex_id: string | null = localStorage.getItem(HEXAGON_FOCUSED)
+        if (hex_id === null) return ({ hexagonFocused: 0 })
+        return {
+            onlyLocalStorage: {
+                hexagonFocused: parseInt(hex_id)
+            }
+        }
+    } catch (e) {
+        console.warn(e)
+    }
 }
-
+*/
 export {
     CustomRectHexGridGenerator,
     CustomRectHexGrid,
@@ -86,5 +93,5 @@ export {
     useFocusInput,
     useFocusTextArea,
     any,
-    InitialHexagonFocused,
+    // InitialHexagonFocused,
 }

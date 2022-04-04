@@ -209,6 +209,7 @@ It feels like I'll need to extend the Hexagon component.
 I need to save the last hexagon focused to localStorage.
 https://dev.to/link2twenty/react-redux-and-localstorage-2lih
 https://redux.js.org/api/createstore/
+If I were to create a localStorage, it would need to save and define ALL states, not just one state.
 
 
 Write an article about:
@@ -216,13 +217,11 @@ Write an article about:
 - modern redux tool kit development
 - figure out how to safely delete a table in Django (do this on an example different project)
 
-- make it so that clicking on a hexagon loads that hexagon's sidebar data
-    - last hexagon focused should be saved in localStorage
-
-
-- Make it so that clicking on a hexagon and adding data to it, posts data to a new hexagon with a specific skill_tree_id
++ make it so that clicking on a hexagon loads that hexagon's sidebar data
+    x last hexagon focused should be saved in localStorage
+        Do this later and save this to user data instead on the backend instead of localStorage
+- mutate hexagons with sidebar
 - use RTK Query to update the hexagon that you're on
-
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that
 - search function
@@ -240,7 +239,7 @@ Write an article about:
     - The first custom theme must be skyrim skill tree
 
 Accounts
+- last hexagon focused should be saved in User data. Will likely need to use a custom user instead like last time
 - account set-up form
 - account email verification
 - send email with skill tree link to a list of students on a form separated by a new-line
-

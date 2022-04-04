@@ -19,9 +19,9 @@ const PanModeSlice = createSlice({
     initialState: {
         tool: TOOL_NONE,
         loading: IDLE,
+        hexagonFocused: 0,
         hexagons: CustomRectHexGridGenerator(16, 16),
         paths: [],
-        hexagonFocused: 0,
     },
     reducers: {
         changeToDragMode: state => {
