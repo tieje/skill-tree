@@ -228,13 +228,40 @@ I'll need to return the new hex_id from the API every time a POST method is used
 I'll need to return the new hex_id from the API every time a POST method is used for skilltreehexagons.
 https://www.django-rest-framework.org/tutorial/2-requests-and-responses/
 https://www.django-rest-framework.org/api-guide/responses/
+https://redux-toolkit.js.org/rtk-query/usage/mutations
+It's better if I invalidate the query and grab again instead of generating a custom response.
+https://redux.js.org/tutorials/essentials/part-8-rtk-query-advanced#invalidating-specific-items
+Let's experiment with updating since. If I can figure out how update and invalidations work, maybe I can figure out how to reload for hexagon focused.
+I'll perform the update with checkboxes.
+https://restfulapi.net/rest-put-vs-post/
+I did not understand PUT operation well at all. Supposedly, this operation does what I already need it to do.
+If something already exist, then it will update it.
+If something does not already exist, then it will create it...
+I set up some basic logging in Django.
+It turns out the problem with my mutations is that I needed to add a slash to my URL... REALLY?
+PATCH is successful, and I'll probably use the PUT method later.
+I'll need to rethink my architecture though.
+The big question was should I use a GET hook for every piece of the sidebar component?
+Or just call it once?
+The GET hook should be fine since it's just going to grab it from the cache.
+What I'm doing right now is small experiments for seeing what works and what does not.
+PATCH method is working as intended.
+It looks like every component that re-renders state, WILL need to have their own GET hook.
+
+4/6/2022
+
+Get the PUT method working for checkboxes.
+    This will make it so that:
+        If the hexagon is entirely new, clicking on the hexagon and changing the checkmark will create that hexagon.
+        The checkbox will re-render, however, the SVG for that only that specific hexagon will re-render as well.
+
 
 Write an article about:
-
 - 
 
-- mutate hexagons with sidebar
-    - I'll 
+- mutate hexagons data with sidebar
+    + checkbox PATCH working
+
 - use RTK Query to update the hexagon that you're on
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that

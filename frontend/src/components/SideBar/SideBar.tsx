@@ -20,8 +20,8 @@ import { INVISIBLE } from '../../StaticVariables'
 
 const SideBar = () => {
     // variables
-    const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
+    // const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
+    // const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const dispatch = useReduxDispatch()
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
@@ -58,6 +58,7 @@ const SideBar = () => {
                 setSection(base_section_class + ' visible');
         }
     }, [tool])
+    /*
     if (isLoading) {
         return (
             <div>Loading</div>
@@ -111,14 +112,13 @@ const SideBar = () => {
             </section >
         )
     }
+    */
     const VERBAL: CheckboxType = {
         label: 'Verbal Feedback',
-        initial: data.allow_verbal_feedback,
         editMethod: changeVerbalBool,
     }
     const QUANTITATIVE: CheckboxType = {
         label: 'Quantitative Feedback',
-        initial: data.allow_quantitative_feedback,
         editMethod: changeQuantitativeBool,
     }
     const CHECKBOXES: CheckboxType[] = [VERBAL, QUANTITATIVE]
@@ -136,7 +136,8 @@ const SideBar = () => {
                 <ImgAddress
                     key={nanoid()}
                     edit={editImgAddress}
-                    imgAddress={data.image_address} />
+                    // imgAddress={data.image_address}
+                />
                 <EditButton
                     editMethod={() => ImgAddressSwitch()} />
             </div>
@@ -144,13 +145,14 @@ const SideBar = () => {
                 <NoteTitle
                     key={nanoid()}
                     edit={editNoteTitle}
-                    title={data.title} />
+                    // title={data.title}
+                />
             </div>
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
                 <NoteBody
                     key={nanoid()}
                     edit={editNoteBody}
-                    body={data.note}
+                    // body={data.note}
                 />
             </div>
         </section >

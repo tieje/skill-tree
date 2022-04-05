@@ -7,7 +7,7 @@ import {
   Hex,
   Path,
 } from 'react-hexgrid';
-import {
+import React, {
   useRef,
   useEffect,
   useState
@@ -27,7 +27,7 @@ import { nanoid } from 'nanoid';
 import { changeToPointerMode, changeToDragMode, fetchSkillTreeThree, changeHexagonFocus } from './PanModeSlices';
 import { PENDING } from './states';
 import { PathType } from '../../types/Types';
-import { any } from '../../utils/utils';
+import { any, ToHexString } from '../../utils/utils';
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 
 const PanZoomHexGrid = () => {
@@ -107,18 +107,21 @@ const PanZoomHexGrid = () => {
             if (value.pattern) {
               pid = 'p' + key
             }
+            const id: string = ToHexString(value.q, value.r, value.s)
             return (
               <>
                 <Hexagon
                   key={nanoid()}
+                  id={id}
                   className={key}
                   q={value.q}
                   r={value.r}
                   s={value.s}
                   fill={pid}
-                  onClick={() => {
+                  onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
                     dispatch(changeHexagonFocus({
                       hex_id: value.id,
+                      hex_string: id,
                       hex_q: value.q,
                       hex_r: value.r,
                       hex_s: value.s,

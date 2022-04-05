@@ -5,7 +5,7 @@ import EditButton from "./EditButton";
 import { NoteTitleSwitch } from "./SideBarSlices";
 import { useReduxDispatch } from "../../redux/hooks";
 
-const NoteTitle = ({ title, edit }: { title: string, edit: boolean }) => {
+const NoteTitle = ({ title, edit }: { title?: string, edit: boolean }) => {
     const [newTitle, setNewTitle] = useState(title)
     const noteEditId = nanoid()
     const inputRef = useFocusInput()

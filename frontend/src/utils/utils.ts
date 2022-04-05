@@ -71,6 +71,25 @@ function any(iterable) {
     }
     return false;
 }
+
+const mouseClickEvents = ['mousedown', 'click', 'mouseup'];
+function simulateMouseClick(element) {
+    mouseClickEvents.forEach(mouseEventType =>
+        element.dispatchEvent(
+            new MouseEvent(mouseEventType, {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                buttons: 1
+            })
+        )
+    );
+}
+
+function ToHexString(q: number, r: number, s: number): string {
+    return (String(q) + ',' + String(r) + ',' + String(s))
+}
+
 /*
 function InitialHexagonFocused() {
     try {
@@ -93,5 +112,7 @@ export {
     useFocusInput,
     useFocusTextArea,
     any,
+    simulateMouseClick,
+    ToHexString,
     // InitialHexagonFocused,
 }
