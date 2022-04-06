@@ -26,6 +26,7 @@ const PanModeSlice = createSlice({
             hex_q: 0,
             hex_r: 0,
             hex_s: 0,
+            hex_created: false,
         },
         paths: [],
     },

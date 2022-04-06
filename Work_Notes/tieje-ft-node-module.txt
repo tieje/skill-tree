@@ -251,17 +251,47 @@ It looks like every component that re-renders state, WILL need to have their own
 4/6/2022
 
 Get the PUT method working for checkboxes.
-    This will make it so that:
-        If the hexagon is entirely new, clicking on the hexagon and changing the checkmark will create that hexagon.
-        The checkbox will re-render, however, the SVG for that only that specific hexagon will re-render as well.
+If the hexagon is entirely new, clicking on the hexagon and changing the checkmark will create that hexagon.
+The checkbox will re-render, however, the entire SVG element will re-render as well.
+I can probably force a re-render by using useEffect to listen to hexagonFocused.
+This is becoming needlessly complex.
+I think I'll use a separate method of generating hexagons in the backend.
+With this, I can have an ID ready instead of needing to create hexagons on the fly.
+The initial load might be a lot, but ultimately it will be easier to work with.
+Probably the most important thing will be that I can finally use a proper useQuery Hook to update the hex grid.
+The useQuery hook will allow for the dynamic creation and update of Paths in the hex grid.
+This will work.
+The updated skill tree table will have a 256 new rows each labeled with their corresponding hex string.
+The input of each row will an unique hex ID for that specific column.
+This means that updating with the same hex ID will not be a problem.
+Instead of deleting the additional info, I'll just create another skill tree.
 
++ Update the backend such that each skill tree has 256 unique hexagons the ID will be the appropriate hex string
+    + Do NOT delete the Hexagon table
+    Form of:
+    h_0_1_m1
+    where m means "minus sign"
+
+4/7/2022
+
+
+
+Job App Commonly Asked
+Full Stack Developer Student
+Holberton New Haven (2 year dev bootcamp)
+https://thomasjameslibianofrancis.gatsbyjs.io/
 
 Write an article about:
+
+- Your next update
 - 
+
+Tasks:
+
+- Update the frontend such that the hexgrid is generated from each field
 
 - mutate hexagons data with sidebar
     + checkbox PATCH working
-
 - use RTK Query to update the hexagon that you're on
 - custom initial zoom on the node that was last interacted-with
     - add this to localstorage or something like that

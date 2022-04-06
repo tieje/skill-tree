@@ -38,6 +38,7 @@ const PanZoomHexGrid = () => {
   // useReduxSelector
   const tool = useReduxSelector(state => state.panMode.tool)
   const hexagons = useReduxSelector(state => state.panMode.hexagons)
+  const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
   const paths = useReduxSelector(state => state.panMode.paths)
   const loading = useReduxSelector(state => state.panMode.loading)
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
@@ -72,16 +73,27 @@ const PanZoomHexGrid = () => {
   useEffect(() => {
     setHexes(hexagons)
   }, [hexagons])
+
   useEffect(() => {
     setPathObjectList(paths)
   }, [paths])
+
+  useEffect(() => {
+    dispatch(fetchSkillTreeThree());
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log('Hexagon focused made it to panzoomhexgrid')
+    if (hexagonFocused.hex_created) {
+      console.log('changed hexagonFocused from panzoomhexgrid')
+      dispatch(changeHexagonFocus({ hex_created: false }))
+    }
+  }, [hexagonFocused, dispatch])
+  // single use useEffects
   useEffect(() => {
     hexElement.current.fitToViewer()
     hexElement.current.zoom(75, 75, 16)
   }, [])
-  useEffect(() => {
-    dispatch(fetchSkillTreeThree());
-  }, [dispatch])
   // variables
   if (loading === PENDING) {
     console.log('Loading')
