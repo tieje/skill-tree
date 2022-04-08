@@ -79,6 +79,14 @@ type EditButtonPropsType = {
     editMethod(): { payload: undefined; type: string; }
 }
 
+type HexId = {
+    id: number
+}
+
+type HexEntry = {
+    [key: string]: HexId
+}
+
 export type {
     CheckboxType,
     undefinedPayloadType,
@@ -89,4 +97,5 @@ export type {
     GenHexObjectType,
     IncomingData,
     EditButtonPropsType,
+    HexEntry,
 }

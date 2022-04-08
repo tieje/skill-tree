@@ -274,8 +274,6 @@ Instead of deleting the additional info, I'll just create another skill tree.
 
 4/7/2022
 
-
-
 Job App Commonly Asked
 Full Stack Developer Student
 Holberton New Haven (2 year dev bootcamp)
@@ -288,7 +286,7 @@ Write an article about:
 
 Tasks:
 
-- Update the frontend such that the hexgrid is generated from each field
+- Update the frontend such that the hexgrid is generated from each db column
 
 - mutate hexagons data with sidebar
     + checkbox PATCH working

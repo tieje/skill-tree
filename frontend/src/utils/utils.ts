@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
+import { GenHexObjectType, GenHexType, HexagonType, HexEntry, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
     const hexagons = {}
@@ -105,6 +105,12 @@ function InitialHexagonFocused() {
     }
 }
 */
+
+function HexEntryNameToNumbers(entry: string): GenHexType {
+    const replaceM = entry.replace(/m/g, '-')
+    const entries = replaceM.split(',')
+    return ({ q: parseInt(entries[0]), r: parseInt(entries[1]), s: parseInt(entries[2]) })
+}
 export {
     CustomRectHexGridGenerator,
     CustomRectHexGrid,
@@ -115,4 +121,5 @@ export {
     simulateMouseClick,
     ToHexString,
     // InitialHexagonFocused,
+    HexEntryNameToNumbers,
 }
