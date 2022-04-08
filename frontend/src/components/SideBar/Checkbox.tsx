@@ -20,7 +20,7 @@ const Checkbox = ({ checkbox }: { checkbox: CheckboxType; }) => {
     const label_id: string = label.replace(/ /g, '-').toLowerCase()
     useEffect(() => {
         if (label === VERBAL) {
-            console.log(hexagonFocused.hex_id)
+            // console.log(hexagonFocused.hex_id)
         }
     }, [hexagonFocused, label])
     if (isLoading) {
@@ -28,10 +28,10 @@ const Checkbox = ({ checkbox }: { checkbox: CheckboxType; }) => {
             <div>Loading</div>
         )
     }
-    console.log(hexagonFocused.hex_id)
-    console.log(error)
+    // console.log(hexagonFocused.hex_id)
+    // console.log(error)
     if (error) {
-        console.log('re-rendered sidebar to error')
+        // console.log('re-rendered sidebar to error')
         const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             let createHexObject;
             switch (label) {

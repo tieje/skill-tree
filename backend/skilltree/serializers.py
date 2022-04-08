@@ -23,12 +23,12 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         model = SkillTrees
         fields = ('__all__')
     paths = serializers.SerializerMethodField()
+
     def get_paths(self, obj: SkillTrees) -> QuerySet:
         '''Get all hex ids that have the skill_tree_id'''
         paths: QuerySet = SkillTreePaths.objects.filter(
             skill_tree_id=obj.skill_tree_id).values()
         return paths
-    """
     hexagons = serializers.SerializerMethodField()
     hex_string_list = serializers.SerializerMethodField()
 
@@ -42,10 +42,8 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
             skill_tree_id=obj.skill_tree_id).values()
         return hexagons
 
-
     def get_hex_string_list(self, obj: SkillTrees) -> QuerySet:
         '''Collect all hex string ids'''
         hex_string_ids_obj: QuerySet = SkillTreeHexagons.objects.filter(
             skill_tree_id=obj.skill_tree_id).values_list('hex_string')
         return hex_string_ids_obj
-    """

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GenHexObjectType, GenHexType, HexagonType, HexEntry, PathType } from "../types/Types";
+import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
     const hexagons = {}
@@ -90,27 +90,20 @@ function ToHexString(q: number, r: number, s: number): string {
     return (String(q) + ',' + String(r) + ',' + String(s))
 }
 
-/*
-function InitialHexagonFocused() {
-    try {
-        const hex_id: string | null = localStorage.getItem(HEXAGON_FOCUSED)
-        if (hex_id === null) return ({ hexagonFocused: 0 })
-        return {
-            onlyLocalStorage: {
-                hexagonFocused: parseInt(hex_id)
-            }
-        }
-    } catch (e) {
-        console.warn(e)
-    }
+function HexEntryNameToNumbers(entry: string): Partial<HexagonType> {
+    const replaceM = entry.substring(2).replace(/m/g, '-')
+    const entries = replaceM.split('_')
+    return ({ hex_q: parseInt(entries[0]), hex_r: parseInt(entries[1]), hex_s: parseInt(entries[2]) })
 }
-*/
 
-function HexEntryNameToNumbers(entry: string): GenHexType {
-    const replaceM = entry.replace(/m/g, '-')
-    const entries = replaceM.split(',')
-    return ({ q: parseInt(entries[0]), r: parseInt(entries[1]), s: parseInt(entries[2]) })
+function UnZipStringList(arr: string[][]): string[] {
+    const newArray = []
+    arr.forEach((list: string[]) => {
+        newArray.push(list[0])
+    })
+    return newArray
 }
+
 export {
     CustomRectHexGridGenerator,
     CustomRectHexGrid,
@@ -120,6 +113,6 @@ export {
     any,
     simulateMouseClick,
     ToHexString,
-    // InitialHexagonFocused,
     HexEntryNameToNumbers,
+    UnZipStringList,
 }

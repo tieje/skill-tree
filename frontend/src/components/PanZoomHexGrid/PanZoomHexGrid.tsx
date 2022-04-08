@@ -13,42 +13,40 @@ import React, {
   useState
 } from 'react';
 import {
-  // UncontrolledReactSVGPanZoom,
   TOOL_PAN,
   TOOL_NONE,
   ReactSVGPanZoom,
-  //ALIGN_CENTER,
   INITIAL_VALUE
 } from 'react-svg-pan-zoom'
 import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
 import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
 import { nanoid } from 'nanoid';
-import { changeToPointerMode, changeToDragMode, fetchSkillTreeThree, changeHexagonFocus } from './PanModeSlices';
-import { PENDING } from './states';
-import { PathType } from '../../types/Types';
-import { any, ToHexString } from '../../utils/utils';
+import {
+  changeToPointerMode, changeToDragMode,
+  changeHexagonFocus
+} from './PanModeSlices';
+import { PathType, HexagonType } from '../../types/Types';
+import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
+import { useGetTreeByIdQuery } from '../../redux/api';
 
 const PanZoomHexGrid = () => {
+  // Queryies
+  const { data, isLoading, error } = useGetTreeByIdQuery('3')
+  const [currentData, SetCurrentData] = useState(data)
   // variables
   const dispatch = useReduxDispatch()
   // useRef
   const hexElement = useRef(null)
   // useReduxSelector
   const tool = useReduxSelector(state => state.panMode.tool)
-  const hexagons = useReduxSelector(state => state.panMode.hexagons)
-  const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-  const paths = useReduxSelector(state => state.panMode.paths)
-  const loading = useReduxSelector(state => state.panMode.loading)
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   // useState
-  const [hexes, setHexes] = useState(hexagons)
   const [aTool, setATool] = useState(tool)
   const [value, setValue] = useState(INITIAL_VALUE)
-  const [pathObjectList, setPathObjectList] = useState(paths)
   const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
@@ -68,40 +66,66 @@ const PanZoomHexGrid = () => {
       }
     }
   }
+  const handleHexagonFocus = (hex: Partial<HexagonType>) => {
+    dispatch(changeHexagonFocus({
+      hex_id: hex.hex_id,
+      hex_string: hex.hex_string,
+    }))
+  }
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
   // useEffects
   useEffect(() => {
-    setHexes(hexagons)
-  }, [hexagons])
-
-  useEffect(() => {
-    setPathObjectList(paths)
-  }, [paths])
-
-  useEffect(() => {
-    dispatch(fetchSkillTreeThree());
-  }, [dispatch])
-
-  useEffect(() => {
-    console.log('Hexagon focused made it to panzoomhexgrid')
-    if (hexagonFocused.hex_created) {
-      console.log('changed hexagonFocused from panzoomhexgrid')
-      dispatch(changeHexagonFocus({ hex_created: false }))
+    if (data) {
+      console.log('rendering currentData')
+      SetCurrentData(data)
     }
-  }, [hexagonFocused, dispatch])
+  }, [data])
+  /*
+    useEffect(() => {
+      console.log('Hexagon focused made it to panzoomhexgrid')
+      if (hexagonFocused.hex_created) {
+        console.log('changed hexagonFocused from panzoomhexgrid')
+        dispatch(changeHexagonFocus({ hex_created: false }))
+      }
+    }, [hexagonFocused, dispatch])
+    */
   // single use useEffects
   useEffect(() => {
     hexElement.current.fitToViewer()
     hexElement.current.zoom(75, 75, 16)
   }, [])
   // variables
-  if (loading === PENDING) {
-    console.log('Loading')
-    return (<div>Loading</div>)
-  }
   // calls. It's implied that data has been defined at this point.
   //hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
   //hexElement.current.zoom(65, 55, 16)
+  if (isLoading) {
+    console.log('Loading')
+    return (
+      <ReactSVGPanZoom
+        ref={hexElement}
+        width={width}
+        height={height}
+        tool={aTool}
+        onChangeTool={setATool}
+        value={value}
+        onChangeValue={setValue}
+      >
+        <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
+          <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
+          </Layout>
+        </HexGrid>
+      </ReactSVGPanZoom>
+    )
+  }
+  if (error) {
+    return (
+      <div>Error</div>
+    )
+  }
+  let hex_string_list: string[];
+  if (currentData) {
+    hex_string_list = UnZipStringList(currentData.hex_string_list)
+  }
   return (
     <ReactSVGPanZoom
       ref={hexElement}
@@ -114,40 +138,47 @@ const PanZoomHexGrid = () => {
     >
       <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-          {Object.entries(hexes).map(([key, value]) => {
+          {/*Put all hexagons with data first*/}
+          {currentData?.hexagons.map((hex: HexagonType) => {
             let pid: string;
-            if (value.pattern) {
-              pid = 'p' + key
+            if (hex.image_address) {
+              pid = 'p' + hex.hex_string
             }
-            const id: string = ToHexString(value.q, value.r, value.s)
             return (
-              <>
-                <Hexagon
-                  key={nanoid()}
-                  id={id}
-                  className={key}
-                  q={value.q}
-                  r={value.r}
-                  s={value.s}
-                  fill={pid}
-                  onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
-                    dispatch(changeHexagonFocus({
-                      hex_id: value.id,
-                      hex_string: id,
-                      hex_q: value.q,
-                      hex_r: value.r,
-                      hex_s: value.s,
-                    }))
-                  }}
-                >
-                  <Text>
-                    {key}
-                  </Text>
-                </Hexagon>
-              </>
+              <Hexagon
+                key={nanoid()}
+                id={hex.hex_string}
+                q={hex.hex_q}
+                r={hex.hex_r}
+                s={hex.hex_s}
+                fill={pid}
+                onClick={handleHexagonFocus(hex)}
+              />
             )
           })}
-          {pathObjectList.map((path: PathType) => {
+          {currentData ? Object.entries(currentData).map(([key, value]) => {
+            if (key[0] === 'h' && key[1] === '_') {
+              if (!hex_string_list.includes(key)) {
+                let hex = HexEntryNameToNumbers(key)
+                return (
+                  <Hexagon
+                    key={nanoid()}
+                    id={key}
+                    q={hex.hex_q}
+                    r={hex.hex_r}
+                    s={hex.hex_s}
+                    //onClick={handleHexagonFocus(hex)}
+                    onClick={() => { console.log(key) }}
+                  >
+                    <Text>
+                      {hex.hex_q},{hex.hex_r},{hex.hex_s}
+                    </Text>
+                  </Hexagon>
+                )
+              }
+            }
+          }) : null}
+          {currentData?.paths.map((path: PathType) => {
             return (
               <Path
                 key={path.path_id}
@@ -158,13 +189,17 @@ const PanZoomHexGrid = () => {
             )
           })}
         </Layout>
-        {Object.entries(hexes).map(([key, value]) => {
+        {currentData?.hexagons.map((hex: HexagonType) => {
           let pid: string;
-          if (value.pattern) {
-            pid = 'p' + key
+          if (hex.image_address) {
+            pid = 'p' + hex.hex_string
           }
           return (
-            <Pattern key={nanoid()} id={pid} link={value.pattern} />
+            <Pattern
+              key={nanoid()}
+              id={pid}
+              link={hex.image_address}
+            />
           )
         })}
       </HexGrid>

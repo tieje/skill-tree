@@ -20,6 +20,7 @@ from typing import List, Tuple
 
 print(argv[1])
 
+
 class GetModels:
     def __init__(self, file_path):
         self.file_path = file_path
@@ -31,7 +32,8 @@ class GetModels:
 
     def print_models(self, models_obj: List[str]):
         for i in models_obj:
-            new_i = '    h_' + i.replace('-', 'm').replace(',', '_') + ": IntegerField = IntegerField(null=True)"
+            new_i = '    h_' + i.replace('-', 'm').replace(',', '_') + \
+                ": IntegerField = IntegerField(null=True, blank=True)"
             print(new_i)
 
 

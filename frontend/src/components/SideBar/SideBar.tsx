@@ -19,6 +19,7 @@ import { INVISIBLE } from '../../StaticVariables'
 
 
 const SideBar = () => {
+    console.log('rendering sidebar')
     // variables
     // const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     // const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
@@ -51,9 +52,6 @@ const SideBar = () => {
             case TOOL_PAN:
                 setSection(INVISIBLE);
                 break
-            /*case TOOL_NONE:
-            section_class = base_section_class + 'invisible';
-            break*/
             default:
                 setSection(base_section_class + ' visible');
         }
