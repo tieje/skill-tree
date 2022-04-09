@@ -8,6 +8,7 @@ const treeApi = createApi({
     endpoints: (build) => ({
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
+            providesTags: ['Hexagon'],
         }),
         getHexagonById: build.query<HexagonType, string>({
             query: (id) => `skilltreehexagons/${id}`,

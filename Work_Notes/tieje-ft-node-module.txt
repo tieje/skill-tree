@@ -274,26 +274,25 @@ Instead of deleting the additional info, I'll just create another skill tree.
 
 4/8/2022
 
++ Update the frontend such that the hexgrid is generated from each db column
 
-Job App Commonly Asked
-Full Stack Developer Student
-Holberton New Haven (2 year dev bootcamp)
-https://thomasjameslibianofrancis.gatsbyjs.io/
+4/9/2022
+
+You'll need to do two things:
+1. Create the new hexagon without invalidating queries.
+2. Update the Skill Tree hex string column and then invalidating the skill tree query.
 
 Write an article about:
 
 - Your next update
-- 
+-
 
 Tasks:
-
-+ Update the frontend such that the hexgrid is generated from each db column
 
 - mutate hexagons data with sidebar
     + checkbox PATCH working
 - use RTK Query to update the hexagon that you're on
 - custom initial zoom on the node that was last interacted-with
-    - add this to localstorage or something like that
 - search function
 - search for node by title for the node - use regex
 - Path module - press k button
@@ -309,6 +308,7 @@ Tasks:
     - The first custom theme must be skyrim skill tree
 
 Accounts
+
 - last hexagon focused should be saved in User data. Will likely need to use a custom user instead like last time
 - account set-up form
 - account email verification

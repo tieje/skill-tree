@@ -9,12 +9,11 @@ const PanModeSlice = createSlice({
     initialState: {
         tool: TOOL_NONE,
         hexagonFocused: {
-            hex_id: 0,
-            hex_string: '0,0,0',
-            hex_q: 0,
-            hex_r: 0,
-            hex_s: 0,
-            hex_created: false,
+            hex_id: undefined,
+            hex_string: 'h_8_1_m9',
+            hex_q: 8,
+            hex_r: 1,
+            hex_s: -9,
         },
     },
     reducers: {

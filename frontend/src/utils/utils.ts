@@ -93,7 +93,13 @@ function ToHexString(q: number, r: number, s: number): string {
 function HexEntryNameToNumbers(entry: string): Partial<HexagonType> {
     const replaceM = entry.substring(2).replace(/m/g, '-')
     const entries = replaceM.split('_')
-    return ({ hex_q: parseInt(entries[0]), hex_r: parseInt(entries[1]), hex_s: parseInt(entries[2]) })
+    return ({
+        hex_id: undefined,
+        hex_string: entry,
+        hex_q: parseInt(entries[0]),
+        hex_r: parseInt(entries[1]),
+        hex_s: parseInt(entries[2])
+    })
 }
 
 function UnZipStringList(arr: string[][]): string[] {

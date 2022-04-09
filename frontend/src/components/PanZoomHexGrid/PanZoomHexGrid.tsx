@@ -51,11 +51,13 @@ const PanZoomHexGrid = () => {
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
     if (!any([editImgAddress, editNoteBody, editNoteTitle])) {
+      // pointer mode
       switch (event.key) {
         case 'v':
           dispatch(changeToPointerMode())
           setATool(TOOL_NONE)
           break
+        // close all forms before making sidebar invisible and changing to drag mode
         case 'h':
           dispatch(changeToDragMode())
           if (editImgAddress) dispatch(ImgAddressSwitch)
@@ -66,12 +68,6 @@ const PanZoomHexGrid = () => {
       }
     }
   }
-  const handleHexagonFocus = (hex: Partial<HexagonType>) => {
-    dispatch(changeHexagonFocus({
-      hex_id: hex.hex_id,
-      hex_string: hex.hex_string,
-    }))
-  }
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
   // useEffects
   useEffect(() => {
@@ -80,24 +76,12 @@ const PanZoomHexGrid = () => {
       SetCurrentData(data)
     }
   }, [data])
-  /*
-    useEffect(() => {
-      console.log('Hexagon focused made it to panzoomhexgrid')
-      if (hexagonFocused.hex_created) {
-        console.log('changed hexagonFocused from panzoomhexgrid')
-        dispatch(changeHexagonFocus({ hex_created: false }))
-      }
-    }, [hexagonFocused, dispatch])
-    */
   // single use useEffects
   useEffect(() => {
     hexElement.current.fitToViewer()
     hexElement.current.zoom(75, 75, 16)
   }, [])
-  // variables
-  // calls. It's implied that data has been defined at this point.
-  //hexElement.current.fitToViewer(ALIGN_CENTER, ALIGN_CENTER)
-  //hexElement.current.zoom(65, 55, 16)
+  // isLoading handler creates the initial DOM that will be updated later.
   if (isLoading) {
     console.log('Loading')
     return (
@@ -117,6 +101,7 @@ const PanZoomHexGrid = () => {
       </ReactSVGPanZoom>
     )
   }
+  // Error handler
   if (error) {
     return (
       <div>Error</div>
@@ -152,7 +137,7 @@ const PanZoomHexGrid = () => {
                 r={hex.hex_r}
                 s={hex.hex_s}
                 fill={pid}
-                onClick={handleHexagonFocus(hex)}
+                onClick={() => dispatch(changeHexagonFocus(hex))}
               />
             )
           })}
@@ -167,8 +152,7 @@ const PanZoomHexGrid = () => {
                     q={hex.hex_q}
                     r={hex.hex_r}
                     s={hex.hex_s}
-                    //onClick={handleHexagonFocus(hex)}
-                    onClick={() => { console.log(key) }}
+                    onClick={() => dispatch(changeHexagonFocus(hex))}
                   >
                     <Text>
                       {hex.hex_q},{hex.hex_r},{hex.hex_s}

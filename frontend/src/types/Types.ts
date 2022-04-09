@@ -18,7 +18,7 @@ type undefinedPayloadType = {
 type CheckboxType = {
     label: string;
     initial?: boolean;
-    editMethod(): { payload: undefined; type: string; };
+    editMethod?(): { payload: undefined; type: string; };
 }
 
 type PathType = {
