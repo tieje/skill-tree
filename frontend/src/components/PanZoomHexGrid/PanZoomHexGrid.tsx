@@ -34,12 +34,13 @@ import { useGetTreeByIdQuery } from '../../redux/api';
 const PanZoomHexGrid = () => {
   // Queryies
   const { data, isLoading, error } = useGetTreeByIdQuery('3')
-  const [currentData, SetCurrentData] = useState(data)
+  const [currentData, setCurrentData] = useState(data)
   // variables
   const dispatch = useReduxDispatch()
   // useRef
   const hexElement = useRef(null)
   // useReduxSelector
+  const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
   const tool = useReduxSelector(state => state.panMode.tool)
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
@@ -73,7 +74,7 @@ const PanZoomHexGrid = () => {
   useEffect(() => {
     if (data) {
       console.log('rendering currentData')
-      SetCurrentData(data)
+      setCurrentData(data)
     }
   }, [data])
   // single use useEffects
@@ -128,6 +129,9 @@ const PanZoomHexGrid = () => {
             let pid: string;
             if (hex.image_address) {
               pid = 'p' + hex.hex_string
+            }
+            if (hexagonFocused.hex_string === hex.hex_string) {
+              dispatch(changeHexagonFocus(hex))
             }
             return (
               <Hexagon

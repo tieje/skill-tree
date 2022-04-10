@@ -4,11 +4,19 @@ import { HexagonType, SkillTreeType } from '../types/Types'
 const treeApi = createApi({
     reducerPath: 'treeApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/v1/' }),
-    tagTypes: ['Hexagon'],
+    tagTypes: ['Hexagon', 'SkillTree'],
     endpoints: (build) => ({
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
-            providesTags: ['Hexagon'],
+            providesTags: ['SkillTree'],
+        }),
+        updateTreeById: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
+            query: (info) => ({
+                url: `skilltrees/${info.skill_tree_id}/`,
+                method: `POST`,
+                body: info,
+            }),
+            invalidatesTags: ['SkillTree']
         }),
         getHexagonById: build.query<HexagonType, string>({
             query: (id) => `skilltreehexagons/${id}`,
@@ -20,7 +28,7 @@ const treeApi = createApi({
                 method: `POST`,
                 body: info,
             }),
-            invalidatesTags: ['Hexagon']
+            invalidatesTags: ['SkillTree']
         }),
         updateHex: build.mutation<HexagonType, Partial<HexagonType>>({
             query: (info) => ({
@@ -28,7 +36,7 @@ const treeApi = createApi({
                 method: `PATCH`,
                 body: info,
             }),
-            invalidatesTags: ['Hexagon']
+            invalidatesTags: ['Hexagon', 'SkillTree']
         })
     }),
 })
@@ -38,6 +46,7 @@ export const {
     useGetHexagonByIdQuery,
     useCreateHexMutation,
     useUpdateHexMutation,
+    useUpdateTreeByIdMutation,
 } = treeApi
 
 export { treeApi }

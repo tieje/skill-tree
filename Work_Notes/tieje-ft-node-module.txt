@@ -280,23 +280,45 @@ Instead of deleting the additional info, I'll just create another skill tree.
 
 You'll need to do two things:
 1. Create the new hexagon without invalidating queries.
-2. Update the Skill Tree hex string column and then invalidating the skill tree query.
+2. Update the Skill Tree hex string column and then invalidate the skill tree query.
+This doesn't work because I don't know what ID to use to update the skill tree.
+Instead, I'll need to update the skill tree after query invalidation.
+
+1. Create New Hexagon
+2. Skill Tree Query invalidates
+3. Skill Tree hexagons are grabbed and processed.
+4. If the Hexagon's hex_string matches hexagonFocused.hex_string, update hexagonFocused to be that Hexagon's properties.
+    This would include the hex_id.
+x Problem: Any hex_id would match the hex_string.
+x Solved: useState to set the original hex_strings. If the new hex_string is not in the original hex_strings then change hexagonFocus to that and set new useState.
+
+I don't actually need to update the skill tree.
+Only the Hexagons need to be updated... Then invalidate the skill tree.
+Later, I can optimize the API by creating a separate table for the base skill tree and then add that to the API with a serializer. Even better, I could preload the data into state if needed.
+Either way, it's very important that state comes from one place.
+
+1. Create New Hexagon
+2. Skill Tree Query invalidates
+3. Skill Tree hexagons are grabbed and processed.
+    hexagonFocus does not need to be updated because I can just go by the hex_string
+    If the hex_string for hexagonFocus matches the hex_string for an existing Hexagon, then assign hexagonFocus to that hex_id.
+
++ mutate hexagons data with sidebar
+
+4/11/2022
 
 Write an article about:
 
 - Your next update
+    - give an example of how the <pre> tag gets what you want, though without styling and an overly long horizontal scroll wheel
 -
 
 Tasks:
 
-- mutate hexagons data with sidebar
-    + checkbox PATCH working
-- use RTK Query to update the hexagon that you're on
 - custom initial zoom on the node that was last interacted-with
 - search function
 - search for node by title for the node - use regex
 - Path module - press k button
-- CRUD functionality
 - Enter mode for drawing paths
 - option to change the color of the path being created
 - click on one node and then another node to draw a path

@@ -2,3 +2,4 @@
 Do Later
 - fix centering button to be the actual center
 - turn off drifting for the svg
+- I can optimize the API by creating a separate table for the base skill tree and then add that to the API with a serializer. Even better, I could preload the data into state if needed.

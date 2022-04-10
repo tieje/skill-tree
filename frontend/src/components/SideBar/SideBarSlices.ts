@@ -8,6 +8,9 @@ const SideBarSlice = createSlice({
         editImgAddress: false,
         editNoteTitle: false,
         editNoteBody: false,
+        imgAddress: '',
+        noteTitle: '',
+        noteBody: '',
     },
     reducers: {
         changeVerbalBool: state => {
@@ -39,6 +42,9 @@ const SideBarSlice = createSlice({
                     state.editNoteBody = false
             }
         },
+        ChangeImgAddress: (state, action) => {
+            state.imgAddress = action.payload
+        },
         NoteTitleSwitch: state => {
             switch (state.editNoteTitle) {
                 case true:
@@ -49,6 +55,9 @@ const SideBarSlice = createSlice({
                     state.editImgAddress = false
                     state.editNoteBody = false
             }
+        },
+        ChangeNoteTitle: (state, action) => {
+            state.noteTitle = action.payload
         },
         NoteBodySwitch: state => {
             switch (state.editNoteBody) {
@@ -61,6 +70,9 @@ const SideBarSlice = createSlice({
                     state.editImgAddress = false
             }
         },
+        ChangeNoteBody: (state, action) => {
+            state.noteBody = action.payload
+        },
     }
 })
 
@@ -70,5 +82,8 @@ export const {
     ImgAddressSwitch,
     NoteTitleSwitch,
     NoteBodySwitch,
+    ChangeImgAddress,
+    ChangeNoteTitle,
+    ChangeNoteBody,
 } = SideBarSlice.actions
 export default SideBarSlice.reducer
