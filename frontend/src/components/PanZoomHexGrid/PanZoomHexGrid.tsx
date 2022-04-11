@@ -24,12 +24,15 @@ import { useReduxSelector, useReduxDispatch } from '../../redux/hooks';
 import { nanoid } from 'nanoid';
 import {
   changeToPointerMode, changeToDragMode,
-  changeHexagonFocus
+  changeHexagonFocus,
+  changePathEditModeToOn,
+  changePathEditModeToOff
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 import { useGetTreeByIdQuery } from '../../redux/api';
+import { PATH_EDIT_ON } from '../../StaticVariables';
 
 const PanZoomHexGrid = () => {
   // Queryies
@@ -45,6 +48,9 @@ const PanZoomHexGrid = () => {
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
+  const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
+  const startingPathHexagon = useReduxSelector(state => state.panMode.startingPathHexagon)
+  const endingPathHexagon = useReduxSelector(state => state.panMode.endingPathHexagon)
   // useState
   const [aTool, setATool] = useState(tool)
   const [value, setValue] = useState(INITIAL_VALUE)
@@ -65,6 +71,16 @@ const PanZoomHexGrid = () => {
           if (editNoteTitle) dispatch(NoteTitleSwitch)
           if (editNoteBody) dispatch(NoteBodySwitch)
           setATool(TOOL_PAN)
+          break
+        case 'k':
+          dispatch(changePathEditModeToOn())
+          break
+      }
+    }
+    if (pathEditMode === PATH_EDIT_ON) {
+      switch (event.key) {
+        case 'q':
+          dispatch(changePathEditModeToOff())
           break
       }
     }

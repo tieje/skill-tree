@@ -307,8 +307,36 @@ Either way, it's very important that state comes from one place.
 
 4/11/2022
 
+Paths can only be created and deleted but not edited. This is to simplify the process.
+k and an on-screen button will be used for Path Edit mode
+    In path edit mode, the left sidebar will be invisible.
+    Creation
+    Instead of the sidebar, there will be a red sign with a transparent gray background that says "Path Edit Mode"
+    Clicking on the first hexagon will highlight that hexagon.
+        In the gray area, there will be button called DESELECT.
+        Alternatively, the shortcut ctrl + Z will Deselect it as well.
+    Clicking on the second hexagon will draw the path.
+    Deletion    
+    To delete a path, click on any path and either press the DELETE button in the sidebar or the backspace button.
+    The gray background will be slightly transparent with red text of PATH EDIT MODE.
+    Below path edit mode label, buttons will be listed below and will be disabled until they are needed or possible.
+    Shortcuts signs will appear next to the buttons.
+The states that will be needed:
+    startingPathHexagon
+        State will be cleared if deselect function is used
+    endingPathHexagon
+    pathEditMode
+        Can only be turned on if the edit modes for other states are false.
+        Button and shortcuts will appear at the top
+        This will actually be a string with preset options.
+            ON
+            OFF
+            INITIAL_CHOSEN
+
+
 + greyed out shortcut signs between the labels and the output
 BRANCH ft-node-module IS COMPLETE
++ merge ft-node-module into staging and begin working on a new branch called ft-path-module
 
 Write an article about:
 
@@ -326,20 +354,36 @@ def markify(a: str) -> str:
 
 Tasks:
 
-- merge ft-node-module into staging and begin working on a new branch called Path Module
-- Path module - press k button
-- Enter mode for drawing paths
-- option to change the color of the path being created
-- click on one node and then another node to draw a path
++ POST path api hook
++ DELETE path api hook
++ create static variables:
+    + ON
+    + OFF
+    + initial chosen
+- pressing the k button when all other edit states are false, changes the sidebar to Path Edit Mode
+- Path Edit mode will have a gray transparent background with a title of PATH EDIT MODE in red text
+- underneath path the edit mode label, there will be three buttons: deselect, delete, and exit path edit mode
+    - deselect - shortcut ctrl + z
+    - delete - shortcut backspace
+    - exit - shortcut q - this button will always be active
+- buttons will be disabled until they are needed or possible
+- clicking on one node and then another node draws a path
+- when an initial node is selected, it changes appearance and the Deselect button is enabled as well as its shortcut
+- if deselect button is pressed or shortcut used, the initial node will be deselected and the appearance will revert
+- if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
+- if the exit button or its shortcut is used at any time during the process, the pathFocused state will reset and the normal sidebar will return
+
+
+
+
+Accounts
+
+- account set-up form
+- account email verification
+- send email with skill tree link to a list of students on a form separated by a new-line
+
 - create student interface
     - quantitative feedback form
     - verbal feedback form
 - create custom themes
     - The first custom theme must be skyrim skill tree
-
-Accounts
-
-- last hexagon focused should be saved in User data. Will likely need to use a custom user instead like last time
-- account set-up form
-- account email verification
-- send email with skill tree link to a list of students on a form separated by a new-line

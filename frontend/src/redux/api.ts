@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { HexagonType, SkillTreeType } from '../types/Types'
+import { HexagonType, PathType, SkillTreeType } from '../types/Types'
 
 const treeApi = createApi({
     reducerPath: 'treeApi',
@@ -37,6 +37,22 @@ const treeApi = createApi({
                 body: info,
             }),
             invalidatesTags: ['Hexagon', 'SkillTree']
+        }),
+        createPath: build.mutation<PathType, Partial<PathType>>({
+            query: (info) => ({
+                url: `skilltreepaths/`,
+                method: `POST`,
+                body: info,
+            }),
+            invalidatesTags: ['SkillTree']
+        }),
+        deletePath: build.mutation<PathType, Partial<PathType>>({
+            query: (info) => ({
+                url: `skilltreepaths/${info.path_id}`,
+                method: `DELETE`,
+                body: info
+            }),
+            invalidatesTags: ['SkillTree']
         })
     }),
 })
@@ -47,6 +63,8 @@ export const {
     useCreateHexMutation,
     useUpdateHexMutation,
     useUpdateTreeByIdMutation,
+    useCreatePathMutation,
+    useDeletePathMutation,
 } = treeApi
 
 export { treeApi }

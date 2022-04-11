@@ -3,6 +3,7 @@ import {
     TOOL_PAN
 } from 'react-svg-pan-zoom'
 import { createSlice } from '@reduxjs/toolkit';
+import { PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
 
 const PanModeSlice = createSlice({
     name: 'PanMode',
@@ -15,6 +16,10 @@ const PanModeSlice = createSlice({
             hex_r: 1,
             hex_s: -9,
         },
+        pathFocused: {},
+        startingPathHexagon: {},
+        endingPathHexagon: {},
+        pathEditMode: PATH_EDIT_OFF,
     },
     reducers: {
         changeToDragMode: state => {
@@ -26,6 +31,15 @@ const PanModeSlice = createSlice({
         changeHexagonFocus: (state, action) => {
             state.hexagonFocused = action.payload
         },
+        changePathEditModeToOn: state => {
+            state.pathEditMode = PATH_EDIT_ON
+        },
+        changePathEditModeToOff: state => {
+            state.pathEditMode = PATH_EDIT_OFF
+        },
+        changePathEditModeToChosen: state => {
+            state.pathEditMode = PATH_EDIT_CHOSEN
+        },
     },
 })
 
@@ -33,5 +47,8 @@ export const {
     changeToDragMode,
     changeToPointerMode,
     changeHexagonFocus,
+    changePathEditModeToChosen,
+    changePathEditModeToOff,
+    changePathEditModeToOn,
 } = PanModeSlice.actions
 export default PanModeSlice.reducer

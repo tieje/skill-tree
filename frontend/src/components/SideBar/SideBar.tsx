@@ -5,13 +5,12 @@ import ImgAddress from './ImgAddress'
 import NoteTitle from './NoteTitle'
 import NoteBody from './NoteBody'
 import { useReduxDispatch, useReduxSelector } from '../../redux/hooks'
-import {
-    TOOL_PAN,
-} from 'react-svg-pan-zoom'
+import { TOOL_PAN } from 'react-svg-pan-zoom'
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
-import { INVISIBLE, CHECKBOXES } from '../../StaticVariables'
+import { INVISIBLE, CHECKBOXES, PATH_EDIT_ON, PATH_EDIT_CHOSEN } from '../../StaticVariables'
+import { changePathEditModeToOff, changePathEditModeToOn } from '../PanZoomHexGrid/PanModeSlices'
 
 
 const SideBar = () => {
@@ -20,6 +19,7 @@ const SideBar = () => {
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
     const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
+    const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
     const dispatch = useReduxDispatch()
     // useState
     const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full'
@@ -48,11 +48,35 @@ const SideBar = () => {
                 setSection(INVISIBLE);
                 break
             default:
-                setSection(base_section_class + ' visible');
+                setSection(base_section_class);
         }
     }, [tool])
+    if (pathEditMode === PATH_EDIT_ON || pathEditMode === PATH_EDIT_CHOSEN) {
+        return (
+            <section id='pathedit' className='md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-gray-yellow top-3/4 absolute w-full opacity-90'>
+                Path Edit Mode
+                <button
+                    className='bg-gray-orange rounded-lg'
+                    onClick={() => dispatch(changePathEditModeToOff())}
+                >
+                    EXIT
+                </button>
+            </section>
+        )
+    }
     return (
-        <section id='sidebar' className={section_className} >
+        <section id='sidebar' className={section_className}>
+            <div className='grid grid-cols-1 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
+                <span className='opacity-50 text-lg text-center'>
+                    shortcut: k key
+                </span>
+                <button
+                    className='bg-orange opacity-95 rounded-full'
+                    onClick={() => dispatch(changePathEditModeToOn())}
+                >
+                    Edit Paths
+                </button>
+            </div>
             <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
                 {CHECKBOXES.map((checkbox) => {
                     return (<Checkbox
