@@ -307,22 +307,30 @@ Either way, it's very important that state comes from one place.
 
 4/11/2022
 
++ greyed out shortcut signs between the labels and the output
+BRANCH ft-node-module IS COMPLETE
+
 Write an article about:
 
 - Your next update
     - give an example of how the <pre> tag gets what you want, though without styling and an overly long horizontal scroll wheel
--
+    - update on your work schedule - how you choose Weekend wednesdays
+- Create your own version of how to get a url for pictures based on this wikihow:
+    https://www.wikihow.com/Get-the-URL-for-Pictures
+    I don't want users to get slowed down or annoyed by ads.
+    I believe this can be an ad-free experience.
+
+def markify(a: str) -> str:
+    return(a.lower().replace(' ', '-'))
+
 
 Tasks:
 
-- custom initial zoom on the node that was last interacted-with
-- search function
-- search for node by title for the node - use regex
+- merge ft-node-module into staging and begin working on a new branch called Path Module
 - Path module - press k button
 - Enter mode for drawing paths
 - option to change the color of the path being created
 - click on one node and then another node to draw a path
-- Path-viewing function
 - create student interface
     - quantitative feedback form
     - verbal feedback form

@@ -56,6 +56,9 @@ const ImgAddress = () => {
                         (what's this?)
                     </a>
                 </label>
+                <span className='opacity-50 text-lg text-center pb-2'>
+                    submit: Enter key
+                </span>
                 <input
                     ref={inputRef}
                     className='w-full rounded-md p-2'
@@ -80,6 +83,9 @@ const ImgAddress = () => {
                         (what's this?)
                     </a>
                 </label>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: s key
+                </span>
                 <EditButton
                     editMethod={() => ImgAddressSwitch()}
                 />
@@ -96,12 +102,15 @@ const ImgAddress = () => {
                     (what's this?)
                 </a>
             </label>
+            <span className='opacity-50 text-lg text-center'>
+                edit shortcut: s key
+            </span>
             <a
                 href={imgAddress}
                 id={img_tag_id}
                 className='text-ellipsis'
             >
-                {imgAddress === null || imgAddress === '' ? 'no image provided': imgAddress}
+                {imgAddress === null || imgAddress === '' ? 'no image provided' : imgAddress}
             </a>
             <EditButton
                 editMethod={() => ImgAddressSwitch()}

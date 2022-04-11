@@ -52,6 +52,9 @@ const NoteTitle = () => {
                 <label className='text-left text-2xl' htmlFor={noteEditId}>
                     Title
                 </label>
+                <span className='pb-2 opacity-50 text-lg text-center'>
+                    submit: Enter key
+                </span>
                 <input
                     ref={inputRef}
                     className='w-full rounded-md p-2 text-center'
@@ -68,15 +71,24 @@ const NoteTitle = () => {
     if (isLoading || error) {
         return (
             <>
-                <h1 className='text-2xl text-center'>
+                <h1 className='text-2xl text-left'>
                     Title
                 </h1>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: d key
+                </span>
                 <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
             </>
         )
     }
     return (
         <>
+            <h1 className='text-2xl text-left'>
+                Title
+            </h1>
+            <span className='opacity-50 text-lg text-center'>
+                edit shortcut: d key
+            </span>
             <h1 className='text-2xl text-center'>
                 {noteTitle === null || noteTitle === '' ? 'Title' : noteTitle}
             </h1>

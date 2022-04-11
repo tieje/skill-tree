@@ -47,6 +47,9 @@ const NoteBody = () => {
                 <label className='p-2 text-2xl' htmlFor={label_id}>
                     Notes
                 </label>
+                <span className='opacity-50 text-lg text-center pb-2'>
+                    submit: shift + Enter key
+                </span>
                 <textarea
                     ref={textAreaRef}
                     id={label_id}
@@ -70,9 +73,9 @@ const NoteBody = () => {
                 <label className='p-2 text-2xl' htmlFor={label_id}>
                     Notes
                 </label>
-                <p className='p-2 overflow-y-scroll rounded-lg h-60'>
-                    notes
-                </p>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: f key
+                </span>
                 <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
             </>
         )
@@ -82,6 +85,9 @@ const NoteBody = () => {
             <label className='p-2 text-2xl' htmlFor={label_id}>
                 Notes
             </label>
+            <span className='opacity-50 text-lg text-center'>
+                edit shortcut: f key
+            </span>
             <p className='p-2 overflow-y-scroll rounded-lg h-60'>
                 {noteBody === null || noteBody === '' ? 'notes' : noteBody}
             </p>
