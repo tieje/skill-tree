@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pa^(u!e!c@u9dl$f*apuix1oe3^_0j3t$rp8kt_-umh4l%w6t2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # Allowed hosts is only effective when debug is False. Django app will only serve in a domain or subdomain specified on the list
-ALLOWED_HOSTS: List[bool] = []
+ALLOWED_HOSTS: List[str] = ['*']
 
 
 # Application definition

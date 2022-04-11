@@ -26,13 +26,19 @@ import {
   changeToPointerMode, changeToDragMode,
   changeHexagonFocus,
   changePathEditModeToOn,
-  changePathEditModeToOff
+  changePathEditModeToOff,
+  changeStartingPathHexagon,
+  changePathEditModeToChosen,
+  pathDeselectDisableSwitch,
+  clearStartingPathHexagon,
+  pathDeleteDisableSwitch,
+  changePathFocused
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
-import { useGetTreeByIdQuery } from '../../redux/api';
-import { PATH_EDIT_ON } from '../../StaticVariables';
+import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
+import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
 
 const PanZoomHexGrid = () => {
   // Queryies
@@ -50,14 +56,38 @@ const PanZoomHexGrid = () => {
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
   const startingPathHexagon = useReduxSelector(state => state.panMode.startingPathHexagon)
-  const endingPathHexagon = useReduxSelector(state => state.panMode.endingPathHexagon)
+  const pathFocused = useReduxSelector(state => state.panMode.pathFocused)
+  const [createPath] = useCreatePathMutation()
+  const [deletePath] = useDeletePathMutation()
   // useState
   const [aTool, setATool] = useState(tool)
   const [value, setValue] = useState(INITIAL_VALUE)
   const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
-    if (!any([editImgAddress, editNoteBody, editNoteTitle])) {
+    if (pathEditMode === PATH_EDIT_ON || pathEditMode === PATH_EDIT_CHOSEN) {
+      switch (event.key) {
+        case 'q':
+          dispatch(changePathEditModeToOff())
+          dispatch(clearStartingPathHexagon())
+          dispatch(pathDeselectDisableSwitch(true))
+          dispatch(pathDeleteDisableSwitch(true))
+          break
+        case 'z':
+          dispatch(clearStartingPathHexagon())
+          dispatch(pathDeselectDisableSwitch(true))
+          dispatch(changePathEditModeToOn())
+          break
+      }
+    } else if (pathEditMode === PATH_EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE) {
+      switch (event.key) {
+        case 'Backspace':
+          dispatch(pathDeleteDisableSwitch(true))
+          deletePath({ path_id: pathFocused.path_id })
+          break
+      }
+    }
+    if (!any([editImgAddress, editNoteBody, editNoteTitle] && pathEditMode === PATH_EDIT_OFF)) {
       // pointer mode
       switch (event.key) {
         case 'v':
@@ -77,12 +107,36 @@ const PanZoomHexGrid = () => {
           break
       }
     }
-    if (pathEditMode === PATH_EDIT_ON) {
-      switch (event.key) {
-        case 'q':
-          dispatch(changePathEditModeToOff())
-          break
-      }
+  }
+  const handleHexagonClick = (hex: Partial<HexagonType>) => {
+    dispatch(changeHexagonFocus(hex))
+    switch (pathEditMode) {
+      case PATH_EDIT_CHOSEN:
+        dispatch(changePathEditModeToOn())
+        dispatch(pathDeselectDisableSwitch(true))
+        createPath({
+          starting_hex_q: startingPathHexagon.hex_q,
+          starting_hex_r: startingPathHexagon.hex_r,
+          starting_hex_s: startingPathHexagon.hex_s,
+          ending_hex_q: hex.hex_q,
+          ending_hex_r: hex.hex_r,
+          ending_hex_s: hex.hex_s,
+          skill_tree: 3
+        })
+        break
+      case PATH_EDIT_ON:
+        dispatch(changeStartingPathHexagon(hex))
+        dispatch(changePathEditModeToChosen())
+        dispatch(pathDeselectDisableSwitch(false))
+        break
+    }
+  }
+  const handlePathClick = (path: Partial<PathType>) => {
+    console.log('path clicked')
+    switch (pathEditMode) {
+      case PATH_EDIT_ON:
+        dispatch(changePathFocused(path))
+        dispatch(pathDeleteDisableSwitch(false))
     }
   }
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
@@ -157,7 +211,7 @@ const PanZoomHexGrid = () => {
                 r={hex.hex_r}
                 s={hex.hex_s}
                 fill={pid}
-                onClick={() => dispatch(changeHexagonFocus(hex))}
+                onClick={() => handleHexagonClick(hex)}
               />
             )
           })}
@@ -172,7 +226,7 @@ const PanZoomHexGrid = () => {
                     q={hex.hex_q}
                     r={hex.hex_r}
                     s={hex.hex_s}
-                    onClick={() => dispatch(changeHexagonFocus(hex))}
+                    onClick={() => handleHexagonClick(hex)}
                   >
                     <Text>
                       {hex.hex_q},{hex.hex_r},{hex.hex_s}
@@ -189,6 +243,7 @@ const PanZoomHexGrid = () => {
                 id={path.path_id}
                 start={new Hex(path.starting_hex_q, path.starting_hex_r, path.starting_hex_s)}
                 end={new Hex(path.ending_hex_q, path.ending_hex_r, path.ending_hex_s)}
+                onClick={() => handlePathClick(path)}
               />
             )
           })}

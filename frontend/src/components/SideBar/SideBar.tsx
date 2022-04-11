@@ -10,7 +10,8 @@ import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlic
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
 import { INVISIBLE, CHECKBOXES, PATH_EDIT_ON, PATH_EDIT_CHOSEN } from '../../StaticVariables'
-import { changePathEditModeToOff, changePathEditModeToOn } from '../PanZoomHexGrid/PanModeSlices'
+import { changePathEditModeToOn } from '../PanZoomHexGrid/PanModeSlices'
+import PathEdit from './PathEdit'
 
 
 const SideBar = () => {
@@ -53,15 +54,7 @@ const SideBar = () => {
     }, [tool])
     if (pathEditMode === PATH_EDIT_ON || pathEditMode === PATH_EDIT_CHOSEN) {
         return (
-            <section id='pathedit' className='md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-gray-yellow top-3/4 absolute w-full opacity-90'>
-                Path Edit Mode
-                <button
-                    className='bg-gray-orange rounded-lg'
-                    onClick={() => dispatch(changePathEditModeToOff())}
-                >
-                    EXIT
-                </button>
-            </section>
+            <PathEdit key={nanoid()} />
         )
     }
     return (

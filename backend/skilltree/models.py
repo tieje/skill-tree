@@ -281,7 +281,7 @@ class SkillTreeHexagons(Model):
     title: CharField = CharField(
         max_length=title_length, blank=True, null=True)
 
-    hex_string: CharField = CharField(null=False, max_length=11, blank=True)
+    hex_string: CharField = CharField(null=True, max_length=11, blank=True)
 
     def save(self, *args, **kwargs):
         self.hex_string = 'h_' + '_'.join([
@@ -303,9 +303,9 @@ class SkillTreePaths(Model):
     ending_hex_s: IntegerField = IntegerField(null=False)
 
     starting_hex_string: CharField = CharField(
-        null=False, max_length=11, blank=True)
+        null=True, max_length=11, blank=True)
     ending_hex_string: CharField = CharField(
-        null=False, max_length=11, blank=True)
+        null=True, max_length=11, blank=True)
 
     def save(self, *args, **kwargs):
         self.starting_hex_string = ','.join([

@@ -337,6 +337,25 @@ The states that will be needed:
 + greyed out shortcut signs between the labels and the output
 BRANCH ft-node-module IS COMPLETE
 + merge ft-node-module into staging and begin working on a new branch called ft-path-module
++ POST path api hook
++ DELETE path api hook
++ create static variables:
+    + ON
+    + OFF
+    + initial chosen
++ pressing the k button when all other edit states are false, changes the sidebar to Path Edit Mode
+~ Path Edit mode will have a gray transparent background with a title of PATH EDIT MODE in red text
+    the normal yellow is fine
++ underneath path the edit mode label, there will be three buttons: deselect, delete, and exit path edit mode
+    + deselect - shortcut z key
+    + delete - shortcut backspace
+    + exit - shortcut q - this button will always be active
++ clicking on one node and then another node draws a path
++ when an initial node is selected, it changes appearance and the Deselect button is enabled as well as its shortcut
++ if deselect button is pressed or shortcut used, the initial node will be deselected and the appearance will revert
++ buttons will be disabled until they are needed or possible
++ if the exit button or its shortcut is used at any time during the process, the pathFocused state will reset and the normal sidebar will return
+
 
 Write an article about:
 
@@ -354,26 +373,8 @@ def markify(a: str) -> str:
 
 Tasks:
 
-+ POST path api hook
-+ DELETE path api hook
-+ create static variables:
-    + ON
-    + OFF
-    + initial chosen
-- pressing the k button when all other edit states are false, changes the sidebar to Path Edit Mode
-- Path Edit mode will have a gray transparent background with a title of PATH EDIT MODE in red text
-- underneath path the edit mode label, there will be three buttons: deselect, delete, and exit path edit mode
-    - deselect - shortcut ctrl + z
-    - delete - shortcut backspace
-    - exit - shortcut q - this button will always be active
-- buttons will be disabled until they are needed or possible
-- clicking on one node and then another node draws a path
-- when an initial node is selected, it changes appearance and the Deselect button is enabled as well as its shortcut
-- if deselect button is pressed or shortcut used, the initial node will be deselected and the appearance will revert
 - if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
-- if the exit button or its shortcut is used at any time during the process, the pathFocused state will reset and the normal sidebar will return
-
-
+    - add onClick functionality to path by rewriting the Path to something custom
 
 
 Accounts
