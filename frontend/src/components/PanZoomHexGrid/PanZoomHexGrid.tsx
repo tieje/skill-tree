@@ -5,7 +5,6 @@ import {
   Text,
   Pattern,
   Hex,
-  Path,
 } from 'react-hexgrid';
 import React, {
   useRef,
@@ -32,13 +31,15 @@ import {
   pathDeselectDisableSwitch,
   clearStartingPathHexagon,
   pathDeleteDisableSwitch,
-  changePathFocused
+  changePathFocused,
+  clearPathFocused
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
 import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
+import CustomPath from './CustomPath';
 
 const PanZoomHexGrid = () => {
   // Queryies
@@ -70,20 +71,19 @@ const PanZoomHexGrid = () => {
         case 'q':
           dispatch(changePathEditModeToOff())
           dispatch(clearStartingPathHexagon())
+          dispatch(clearPathFocused())
           dispatch(pathDeselectDisableSwitch(true))
           dispatch(pathDeleteDisableSwitch(true))
+          break
+        case 'a':
+          dispatch(pathDeleteDisableSwitch(true))
+          dispatch(clearPathFocused())
+          deletePath({ path_id: pathFocused.path_id })
           break
         case 'z':
           dispatch(clearStartingPathHexagon())
           dispatch(pathDeselectDisableSwitch(true))
           dispatch(changePathEditModeToOn())
-          break
-      }
-    } else if (pathEditMode === PATH_EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE) {
-      switch (event.key) {
-        case 'Backspace':
-          dispatch(pathDeleteDisableSwitch(true))
-          deletePath({ path_id: pathFocused.path_id })
           break
       }
     }
@@ -132,7 +132,6 @@ const PanZoomHexGrid = () => {
     }
   }
   const handlePathClick = (path: Partial<PathType>) => {
-    console.log('path clicked')
     switch (pathEditMode) {
       case PATH_EDIT_ON:
         dispatch(changePathFocused(path))
@@ -236,9 +235,18 @@ const PanZoomHexGrid = () => {
               }
             }
           }) : null}
+          {pathEditMode === PATH_EDIT_CHOSEN && hexagonFocused ?
+            <Hexagon
+              key={nanoid()}
+              q={hexagonFocused.hex_q}
+              r={hexagonFocused.hex_r}
+              s={hexagonFocused.hex_s}
+              cellStyle={{ fill: '#fd9420' }}
+            />
+            : null}
           {currentData?.paths.map((path: PathType) => {
             return (
-              <Path
+              <CustomPath
                 key={path.path_id}
                 id={path.path_id}
                 start={new Hex(path.starting_hex_q, path.starting_hex_r, path.starting_hex_s)}
@@ -247,6 +255,23 @@ const PanZoomHexGrid = () => {
               />
             )
           })}
+          {pathEditMode === PATH_EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
+            <CustomPath
+              key={nanoid()}
+              start={new Hex(
+                pathFocused.starting_hex_q,
+                pathFocused.starting_hex_r,
+                pathFocused.starting_hex_s,
+              )}
+              end={new Hex(
+                pathFocused.ending_hex_q,
+                pathFocused.ending_hex_r,
+                pathFocused.ending_hex_s
+              )}
+              onClick={() => handlePathClick(pathFocused)}
+              pathStyle={{ stroke: '#fd9420' }}
+            />
+            : null}
         </Layout>
         {currentData?.hexagons.map((hex: HexagonType) => {
           let pid: string;

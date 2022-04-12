@@ -55,6 +55,9 @@ const PanModeSlice = createSlice({
         },
         changePathFocused: (state, action) => {
             state.pathFocused = action.payload
+        },
+        clearPathFocused: state => {
+            state.pathFocused = INITIAL_PATH_HEX_STATE
         }
     },
 })
@@ -71,5 +74,6 @@ export const {
     pathDeleteDisableSwitch,
     pathDeselectDisableSwitch,
     changePathFocused,
+    clearPathFocused,
 } = PanModeSlice.actions
 export default PanModeSlice.reducer

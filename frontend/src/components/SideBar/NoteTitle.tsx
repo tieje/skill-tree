@@ -64,6 +64,7 @@ const NoteTitle = () => {
                     value={noteTitle}
                     onChange={(e) => dispatch(ChangeNoteTitle(e.target.value))}
                     onKeyDown={handleAddText}
+                    maxLength={70}
                 />
             </>
         )

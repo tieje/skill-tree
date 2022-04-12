@@ -54,13 +54,14 @@ const NoteBody = () => {
                     ref={textAreaRef}
                     id={label_id}
                     name={label_id}
-                    rows={7}
+                    rows={25}
                     cols={25}
-                    className='p-2 overflow-y-scroll rounded-lg'
+                    className='p-2 overflow-y-auto rounded-lg'
                     placeholder='Instructional text and links for students'
                     value={noteBody}
                     onChange={(e) => dispatch(ChangeNoteBody(e.target.value))}
                     onKeyDown={handleAddText}
+                    maxLength={10000}
                 >
                 </textarea>
                 <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
@@ -88,7 +89,9 @@ const NoteBody = () => {
             <span className='opacity-50 text-lg text-center'>
                 edit shortcut: f key
             </span>
-            <p className='p-2 overflow-y-scroll rounded-lg h-60'>
+            <p
+                className='p-2 overflow-y-auto rounded-lg h-full whitespace-pre-wrap'
+            >
                 {noteBody === null || noteBody === '' ? 'notes' : noteBody}
             </p>
             <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />

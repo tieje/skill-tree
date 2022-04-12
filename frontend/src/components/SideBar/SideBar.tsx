@@ -23,7 +23,7 @@ const SideBar = () => {
     const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
     const dispatch = useReduxDispatch()
     // useState
-    const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full'
+    const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full overflow-y-auto'
     const [section_className, setSection] = useState(base_section_class)
     // functions
     const handleShortcuts = (event: KeyboardEvent) => {
@@ -64,7 +64,7 @@ const SideBar = () => {
                     shortcut: k key
                 </span>
                 <button
-                    className='bg-orange opacity-95 rounded-full'
+                    className='bg-orange opacity-95 rounded-full shadow-lg hover:bg-dark-orange'
                     onClick={() => dispatch(changePathEditModeToOn())}
                 >
                     Edit Paths

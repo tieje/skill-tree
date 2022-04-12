@@ -361,6 +361,21 @@ BRANCH ft-node-module IS COMPLETE
 
 4/12/2022
 
+I'm not sure how I'm going to change styling.
+I did it by rendering an additional hexagon from data in the hexagonFocused state. Well that was easy.
+
++ add padding to path edit mode sidebar
++ if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
+    + add onClick functionality to path by rewriting the Path to something custom
++ make it so that clicking on a hexagon in pathEdit mode, changes it's fill color
++ make it so that clicking on a path in pathEdith mode, changes it's stroke color
++ make buttons functional
+BRANCH ft-path-module COMPLETE
++ make the sidebar y-scrollable
++ interpret newlines, tabs, and more
++ add shadow and hover effects to buttons related to path Edit mode
++ add text size limit title and note body. Title limit is 70. Body limit is 10,000
+
 Write an article about:
 
 - Create your own version of how to get a url for pictures based on this wikihow:
@@ -370,13 +385,7 @@ Write an article about:
 
 Tasks:
 
-- if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
-    - add onClick functionality to path by rewriting the Path to something custom
-- make the sidebar y-scrollable
-- add padding to path edit mode sidebar
-
-Accounts
-
+- merge ft-path-module to staging and create a new branch called ft-accounts
 - account set-up form
 - account email verification
 - send email with skill tree link to a list of students on a form separated by a new-line
@@ -385,4 +394,7 @@ Accounts
     - quantitative feedback form
     - verbal feedback form
 - create custom themes
-    - The first custom theme must be skyrim skill tree
+    - The first custom theme must be a skyrim skill tree
+- create skill tree page to pick which skill tree to use
+    you'll probably need to use a search bar for this
+
