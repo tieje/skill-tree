@@ -355,27 +355,25 @@ BRANCH ft-node-module IS COMPLETE
 + if deselect button is pressed or shortcut used, the initial node will be deselected and the appearance will revert
 + buttons will be disabled until they are needed or possible
 + if the exit button or its shortcut is used at any time during the process, the pathFocused state will reset and the normal sidebar will return
++ Your next update
+    x give an example of how the <pre> tag gets what you want, though without styling and an overly long horizontal scroll wheel
+    + update on your work schedule - how you choose Weekend wednesdays
 
+4/12/2022
 
 Write an article about:
 
-- Your next update
-    - give an example of how the <pre> tag gets what you want, though without styling and an overly long horizontal scroll wheel
-    - update on your work schedule - how you choose Weekend wednesdays
 - Create your own version of how to get a url for pictures based on this wikihow:
     https://www.wikihow.com/Get-the-URL-for-Pictures
     I don't want users to get slowed down or annoyed by ads.
     I believe this can be an ad-free experience.
 
-def markify(a: str) -> str:
-    return(a.lower().replace(' ', '-'))
-
-
 Tasks:
 
 - if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
     - add onClick functionality to path by rewriting the Path to something custom
-
+- make the sidebar y-scrollable
+- add padding to path edit mode sidebar
 
 Accounts
 
