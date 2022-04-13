@@ -82,4 +82,5 @@ svg path {
 }
 svg path:hover {
   stroke-opacity: 1;
+  stroke: #FFEC96;
 }

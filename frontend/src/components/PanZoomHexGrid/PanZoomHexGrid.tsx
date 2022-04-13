@@ -87,7 +87,7 @@ const PanZoomHexGrid = () => {
           break
       }
     }
-    if (!any([editImgAddress, editNoteBody, editNoteTitle] && pathEditMode === PATH_EDIT_OFF)) {
+    if (!any([editImgAddress, editNoteBody, editNoteTitle]) && pathEditMode === PATH_EDIT_OFF) {
       // pointer mode
       switch (event.key) {
         case 'v':

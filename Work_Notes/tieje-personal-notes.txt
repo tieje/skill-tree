@@ -148,3 +148,9 @@ Helpful markdown functions:
 
 def markify(a: str) -> str:
     return(a.lower().replace(' ', '-'))
+
+username
+testuser
+
+password
+z^0V7m6TRqtwm*97vv

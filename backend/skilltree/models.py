@@ -1,5 +1,6 @@
-from ast import Mod
 from django.db.models import Model, AutoField, CharField, ForeignKey, BooleanField, TextField, CASCADE, IntegerField
+from django.conf import settings
+from django.db import models
 
 title_length: int = 70
 
@@ -8,6 +9,7 @@ class SkillTrees(Model):
     skill_tree_id: AutoField = AutoField(primary_key=True)
     name: CharField = CharField(max_length=title_length)
     theme: CharField = CharField(max_length=20)
+    owner: ForeignKey = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
     # owner_id will be added later when the Accounts model is created
     # owner_id: ForeignKey = ForeignKey(Accounts, on_delete=CASCADE)
     # 256 hexagons

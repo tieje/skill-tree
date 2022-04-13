@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'skilltree.apps.SkilltreeConfig',
-
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +146,8 @@ GRAPHENE = {
 }
 '''
 
+# Turn this on for debugging
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -164,3 +166,13 @@ LOGGING = {
         },
     },
 }
+'''
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
