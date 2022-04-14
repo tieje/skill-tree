@@ -394,6 +394,25 @@ BRANCH ft-path-module COMPLETE
 + add text size limit title and note body. Title limit is 70. Body limit is 10,000
 + merge ft-path-module to staging and create a new branch called ft-account-module
 
+4/14/2022
+
+I'm going to put off creating the home page until core functionality is done.
+I'll create a simple login, logout, and account creation feature for the application.
+This will lead into creating a tree-viewing page. I should probably organize the tree-viewing page with up to four tags.
+I'll start with Final Form. I'll need react-final-form as well.
+I'll need to study React Router later.
+https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/installation#basic-installation
+For now, I'll focus on creating the Endpoints.
+
+
++ page 107 - set up owner
++ makemigrations
++ migrate
++ page 142 - login, logout, verification, authentication
++ page 131 - set up View Level Permissions so that only owners can read and update their skill tree
++ backend endpoints for account creation, verification
++ backend permissions so that only the owner can edit
+
 Write an article about:
 
 - Create your own version of how to get a url for pictures based on this wikihow:
@@ -403,19 +422,15 @@ Write an article about:
 
 Tasks:
 
-- get the music from The Hundred-Foot Journey and put it on the playlist
-+ page 107 - set up owner
-+ makemigrations
-+ migrate
-- page 142 - login, logout, verification, authentication
-    - left off on page 146
-- page 131 - set up View Level Permissions so that only owners and admins can only read and update their skill tree
++ install final-form
++ install react-final-form
+- Comment out other components in App.tsx and simply do 
+- create a login page
+- create logout page
 
+- 
 
-- account set-up form
-- account email verification
-- send email with skill tree link to a list of students on a form separated by a new-line
-
+- page 162 - I'll need to capture and store the token either in localStorage or as a cookie
 - create student interface
     - quantitative feedback form
     - verbal feedback form
@@ -423,3 +438,13 @@ Tasks:
     - The first custom theme must be a skyrim skill tree
 - create skill tree page to pick which skill tree to use
     you'll probably need to use a search bar for this
+- make it so that there is an option for a user to save a copy of a skill tree as their own
+- use parallax affect for a stylish home page
+
+Production
+
+- page 185 in Django for REST APIs
+- page 142 django for professionals - account email verification with sendgrid
+- send email with skill tree link to a list of students on a textarea form separated by a new-line
+    I only do this because domain emails cost money in Google
+

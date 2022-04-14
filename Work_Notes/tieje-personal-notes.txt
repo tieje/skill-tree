@@ -149,8 +149,14 @@ Helpful markdown functions:
 def markify(a: str) -> str:
     return(a.lower().replace(' ', '-'))
 
-username
-testuser
+Test Users
+=========
 
-password
+testuser
 z^0V7m6TRqtwm*97vv
+
+testuser2
+4uLGC7s^Zm%jIkaseu
+
+testuser3
+I0W47G2NO9W#h8!QyD

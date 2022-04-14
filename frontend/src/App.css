@@ -84,3 +84,6 @@ svg path:hover {
   stroke-opacity: 1;
   stroke: #FFEC96;
 }
+input:focus {
+  outline: none;
+}

@@ -19,6 +19,7 @@ drf-yasg = "*"
 gunicorn = "*"
 sendgrid = "*"
 djangorestframework-queryfields = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 mypy = "*"

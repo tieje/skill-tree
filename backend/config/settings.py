@@ -38,12 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Needed for django-allauth
+    'django.contrib.sites',
 
     # 3rd Party
     'rest_framework',
     'drf_yasg',
     'corsheaders',
-    # 'graphene_django',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    # Needed for django-allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
+    # api documentation
+    'drf_spectacular',
 
     # Local Apps
     'skilltree.apps.SkilltreeConfig',
@@ -77,10 +87,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -180,7 +195,14 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthenticated",
+        "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Skill Tree',
+    'DESCRIPTION': 'Create and share skill trees to help gamify education.',
+    'VERSION': '1.0.0',
 }

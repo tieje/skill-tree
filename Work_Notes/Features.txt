@@ -2,7 +2,6 @@ Important Features to Implement
 
 - Color Blind Mode
 - custom initial zoom on the node that was last interacted-with
-- page 131 - set up View Level Permissions so that only owners and admins can only read and update their skill tree
 
 Features to Implement
 
@@ -11,3 +10,4 @@ Features to Implement
 - search for node by title for the node - use regex
     It might not be a great idea because the struggle of finding the right node will lead to better memory.
 - option to change the color of the path being created
+- add "original_owners" later so a list of owners can receive credit for their work?

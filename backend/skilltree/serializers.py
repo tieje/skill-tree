@@ -2,7 +2,13 @@ from django.db.models import QuerySet
 from rest_framework import serializers
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths
 from drf_queryfields import QueryFieldsMixin
+from django.contrib.auth import get_user_model
 
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('__all__')
 
 class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     # hexList = serializers.SerializerMethodField()

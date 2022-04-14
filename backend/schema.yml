@@ -1,0 +1,2941 @@
+openapi: 3.0.3
+info:
+  title: Skill Tree
+  version: 1.0.0
+  description: Create and share skill trees to help gamify education.
+paths:
+  /api/v1/dj-rest-auth/login/:
+    post:
+      operationId: dj_rest_auth_login_create
+      description: |-
+        Check the credentials and return the REST Token
+        if the credentials are valid and authenticated.
+        Calls Django Auth login method to register User ID
+        in Django session framework
+
+        Accept the following POST parameters: username, password
+        Return the REST Framework Token Object's key.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+          description: ''
+  /api/v1/dj-rest-auth/logout/:
+    post:
+      operationId: dj_rest_auth_logout_create
+      description: |-
+        Calls Django logout method and delete the Token object
+        assigned to the current User object.
+
+        Accepts/Returns nothing.
+      tags:
+      - dj-rest-auth
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/password/change/:
+    post:
+      operationId: dj_rest_auth_password_change_create
+      description: |-
+        Calls Django Auth SetPasswordForm save method.
+
+        Accepts the following POST parameters: new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/password/reset/:
+    post:
+      operationId: dj_rest_auth_password_reset_create
+      description: |-
+        Calls Django Auth PasswordResetForm save method.
+
+        Accepts the following POST parameters: email
+        Returns the success/fail message.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/password/reset/confirm/:
+    post:
+      operationId: dj_rest_auth_password_reset_confirm_create
+      description: |-
+        Password reset e-mail link is confirmed, therefore
+        this resets the user's password.
+
+        Accepts the following POST parameters: token, uid,
+            new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/registration/:
+    post:
+      operationId: dj_rest_auth_registration_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+          description: ''
+  /api/v1/dj-rest-auth/registration/resend-email/:
+    post:
+      operationId: dj_rest_auth_registration_resend_email_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/registration/verify-email/:
+    post:
+      operationId: dj_rest_auth_registration_verify_email_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/v1/dj-rest-auth/user/:
+    get:
+      operationId: dj_rest_auth_user_retrieve
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - dj-rest-auth
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    put:
+      operationId: dj_rest_auth_user_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    patch:
+      operationId: dj_rest_auth_user_partial_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+  /api/v1/skilltreehexagons/:
+    get:
+      operationId: skilltreehexagons_list
+      tags:
+      - skilltreehexagons
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SkillTreeHexagons'
+          description: ''
+    post:
+      operationId: skilltreehexagons_create
+      tags:
+      - skilltreehexagons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreeHexagons'
+          description: ''
+  /api/v1/skilltreehexagons/{hex_id}/:
+    get:
+      operationId: skilltreehexagons_retrieve
+      parameters:
+      - in: path
+        name: hex_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree hexagons.
+        required: true
+      tags:
+      - skilltreehexagons
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreeHexagons'
+          description: ''
+    put:
+      operationId: skilltreehexagons_update
+      parameters:
+      - in: path
+        name: hex_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree hexagons.
+        required: true
+      tags:
+      - skilltreehexagons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTreeHexagons'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreeHexagons'
+          description: ''
+    patch:
+      operationId: skilltreehexagons_partial_update
+      parameters:
+      - in: path
+        name: hex_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree hexagons.
+        required: true
+      tags:
+      - skilltreehexagons
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreeHexagons'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreeHexagons'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreeHexagons'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreeHexagons'
+          description: ''
+    delete:
+      operationId: skilltreehexagons_destroy
+      parameters:
+      - in: path
+        name: hex_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree hexagons.
+        required: true
+      tags:
+      - skilltreehexagons
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/skilltreepaths/:
+    get:
+      operationId: skilltreepaths_list
+      tags:
+      - skilltreepaths
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SkillTreePaths'
+          description: ''
+    post:
+      operationId: skilltreepaths_create
+      tags:
+      - skilltreepaths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreePaths'
+          description: ''
+  /api/v1/skilltreepaths/{path_id}/:
+    get:
+      operationId: skilltreepaths_retrieve
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree paths.
+        required: true
+      tags:
+      - skilltreepaths
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreePaths'
+          description: ''
+    put:
+      operationId: skilltreepaths_update
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree paths.
+        required: true
+      tags:
+      - skilltreepaths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTreePaths'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreePaths'
+          description: ''
+    patch:
+      operationId: skilltreepaths_partial_update
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree paths.
+        required: true
+      tags:
+      - skilltreepaths
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreePaths'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreePaths'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTreePaths'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTreePaths'
+          description: ''
+    delete:
+      operationId: skilltreepaths_destroy
+      parameters:
+      - in: path
+        name: path_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill tree paths.
+        required: true
+      tags:
+      - skilltreepaths
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/skilltrees/:
+    get:
+      operationId: skilltrees_list
+      tags:
+      - skilltrees
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SkillTrees'
+          description: ''
+    post:
+      operationId: skilltrees_create
+      tags:
+      - skilltrees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTrees'
+          description: ''
+  /api/v1/skilltrees/{skill_tree_id}/:
+    get:
+      operationId: skilltrees_retrieve
+      parameters:
+      - in: path
+        name: skill_tree_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill trees.
+        required: true
+      tags:
+      - skilltrees
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTrees'
+          description: ''
+    put:
+      operationId: skilltrees_update
+      parameters:
+      - in: path
+        name: skill_tree_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill trees.
+        required: true
+      tags:
+      - skilltrees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SkillTrees'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTrees'
+          description: ''
+    patch:
+      operationId: skilltrees_partial_update
+      parameters:
+      - in: path
+        name: skill_tree_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill trees.
+        required: true
+      tags:
+      - skilltrees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTrees'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTrees'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSkillTrees'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTrees'
+          description: ''
+    delete:
+      operationId: skilltrees_destroy
+      parameters:
+      - in: path
+        name: skill_tree_id
+        schema:
+          type: integer
+        description: A unique integer value identifying this skill trees.
+        required: true
+      tags:
+      - skilltrees
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/:
+    get:
+      operationId: users_list
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: users_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/v1/users/{id}/:
+    get:
+      operationId: users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - password
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
+    PasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      description: Serializer for confirming a password reset attempt.
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - new_password1
+      - new_password2
+      - token
+      - uid
+    PatchedSkillTreeHexagons:
+      type: object
+      properties:
+        hex_id:
+          type: integer
+          readOnly: true
+        note:
+          type: string
+          nullable: true
+        hex_q:
+          type: integer
+        hex_r:
+          type: integer
+        hex_s:
+          type: integer
+        allow_verbal_feedback:
+          type: boolean
+        allow_quantitative_feedback:
+          type: boolean
+        image_address:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 70
+        hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        skill_tree:
+          type: integer
+    PatchedSkillTreePaths:
+      type: object
+      properties:
+        path_id:
+          type: integer
+          readOnly: true
+        starting_hex_q:
+          type: integer
+        starting_hex_r:
+          type: integer
+        starting_hex_s:
+          type: integer
+        ending_hex_q:
+          type: integer
+        ending_hex_r:
+          type: integer
+        ending_hex_s:
+          type: integer
+        starting_hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        ending_hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        skill_tree:
+          type: integer
+    PatchedSkillTrees:
+      type: object
+      properties:
+        skill_tree_id:
+          type: integer
+          readOnly: true
+        paths:
+          type: string
+          readOnly: true
+        hexagons:
+          type: string
+          readOnly: true
+        hex_string_list:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 70
+        theme:
+          type: string
+          maxLength: 20
+        h_0_0_0:
+          type: integer
+          nullable: true
+        h_0_1_m1:
+          type: integer
+          nullable: true
+        h_0_2_m2:
+          type: integer
+          nullable: true
+        h_0_3_m3:
+          type: integer
+          nullable: true
+        h_0_4_m4:
+          type: integer
+          nullable: true
+        h_0_5_m5:
+          type: integer
+          nullable: true
+        h_0_6_m6:
+          type: integer
+          nullable: true
+        h_0_7_m7:
+          type: integer
+          nullable: true
+        h_0_8_m8:
+          type: integer
+          nullable: true
+        h_0_9_m9:
+          type: integer
+          nullable: true
+        h_0_10_m10:
+          type: integer
+          nullable: true
+        h_0_11_m11:
+          type: integer
+          nullable: true
+        h_0_12_m12:
+          type: integer
+          nullable: true
+        h_0_13_m13:
+          type: integer
+          nullable: true
+        h_0_14_m14:
+          type: integer
+          nullable: true
+        h_0_15_m15:
+          type: integer
+          nullable: true
+        h_1_0_m1:
+          type: integer
+          nullable: true
+        h_1_1_m2:
+          type: integer
+          nullable: true
+        h_1_2_m3:
+          type: integer
+          nullable: true
+        h_1_3_m4:
+          type: integer
+          nullable: true
+        h_1_4_m5:
+          type: integer
+          nullable: true
+        h_1_5_m6:
+          type: integer
+          nullable: true
+        h_1_6_m7:
+          type: integer
+          nullable: true
+        h_1_7_m8:
+          type: integer
+          nullable: true
+        h_1_8_m9:
+          type: integer
+          nullable: true
+        h_1_9_m10:
+          type: integer
+          nullable: true
+        h_1_10_m11:
+          type: integer
+          nullable: true
+        h_1_11_m12:
+          type: integer
+          nullable: true
+        h_1_12_m13:
+          type: integer
+          nullable: true
+        h_1_13_m14:
+          type: integer
+          nullable: true
+        h_1_14_m15:
+          type: integer
+          nullable: true
+        h_1_15_m16:
+          type: integer
+          nullable: true
+        h_2_m1_m1:
+          type: integer
+          nullable: true
+        h_2_0_m2:
+          type: integer
+          nullable: true
+        h_2_1_m3:
+          type: integer
+          nullable: true
+        h_2_2_m4:
+          type: integer
+          nullable: true
+        h_2_3_m5:
+          type: integer
+          nullable: true
+        h_2_4_m6:
+          type: integer
+          nullable: true
+        h_2_5_m7:
+          type: integer
+          nullable: true
+        h_2_6_m8:
+          type: integer
+          nullable: true
+        h_2_7_m9:
+          type: integer
+          nullable: true
+        h_2_8_m10:
+          type: integer
+          nullable: true
+        h_2_9_m11:
+          type: integer
+          nullable: true
+        h_2_10_m12:
+          type: integer
+          nullable: true
+        h_2_11_m13:
+          type: integer
+          nullable: true
+        h_2_12_m14:
+          type: integer
+          nullable: true
+        h_2_13_m15:
+          type: integer
+          nullable: true
+        h_2_14_m16:
+          type: integer
+          nullable: true
+        h_3_m1_m2:
+          type: integer
+          nullable: true
+        h_3_0_m3:
+          type: integer
+          nullable: true
+        h_3_1_m4:
+          type: integer
+          nullable: true
+        h_3_2_m5:
+          type: integer
+          nullable: true
+        h_3_3_m6:
+          type: integer
+          nullable: true
+        h_3_4_m7:
+          type: integer
+          nullable: true
+        h_3_5_m8:
+          type: integer
+          nullable: true
+        h_3_6_m9:
+          type: integer
+          nullable: true
+        h_3_7_m10:
+          type: integer
+          nullable: true
+        h_3_8_m11:
+          type: integer
+          nullable: true
+        h_3_9_m12:
+          type: integer
+          nullable: true
+        h_3_10_m13:
+          type: integer
+          nullable: true
+        h_3_11_m14:
+          type: integer
+          nullable: true
+        h_3_12_m15:
+          type: integer
+          nullable: true
+        h_3_13_m16:
+          type: integer
+          nullable: true
+        h_3_14_m17:
+          type: integer
+          nullable: true
+        h_4_m2_m2:
+          type: integer
+          nullable: true
+        h_4_m1_m3:
+          type: integer
+          nullable: true
+        h_4_0_m4:
+          type: integer
+          nullable: true
+        h_4_1_m5:
+          type: integer
+          nullable: true
+        h_4_2_m6:
+          type: integer
+          nullable: true
+        h_4_3_m7:
+          type: integer
+          nullable: true
+        h_4_4_m8:
+          type: integer
+          nullable: true
+        h_4_5_m9:
+          type: integer
+          nullable: true
+        h_4_6_m10:
+          type: integer
+          nullable: true
+        h_4_7_m11:
+          type: integer
+          nullable: true
+        h_4_8_m12:
+          type: integer
+          nullable: true
+        h_4_9_m13:
+          type: integer
+          nullable: true
+        h_4_10_m14:
+          type: integer
+          nullable: true
+        h_4_11_m15:
+          type: integer
+          nullable: true
+        h_4_12_m16:
+          type: integer
+          nullable: true
+        h_4_13_m17:
+          type: integer
+          nullable: true
+        h_5_m2_m3:
+          type: integer
+          nullable: true
+        h_5_m1_m4:
+          type: integer
+          nullable: true
+        h_5_0_m5:
+          type: integer
+          nullable: true
+        h_5_1_m6:
+          type: integer
+          nullable: true
+        h_5_2_m7:
+          type: integer
+          nullable: true
+        h_5_3_m8:
+          type: integer
+          nullable: true
+        h_5_4_m9:
+          type: integer
+          nullable: true
+        h_5_5_m10:
+          type: integer
+          nullable: true
+        h_5_6_m11:
+          type: integer
+          nullable: true
+        h_5_7_m12:
+          type: integer
+          nullable: true
+        h_5_8_m13:
+          type: integer
+          nullable: true
+        h_5_9_m14:
+          type: integer
+          nullable: true
+        h_5_10_m15:
+          type: integer
+          nullable: true
+        h_5_11_m16:
+          type: integer
+          nullable: true
+        h_5_12_m17:
+          type: integer
+          nullable: true
+        h_5_13_m18:
+          type: integer
+          nullable: true
+        h_6_m3_m3:
+          type: integer
+          nullable: true
+        h_6_m2_m4:
+          type: integer
+          nullable: true
+        h_6_m1_m5:
+          type: integer
+          nullable: true
+        h_6_0_m6:
+          type: integer
+          nullable: true
+        h_6_1_m7:
+          type: integer
+          nullable: true
+        h_6_2_m8:
+          type: integer
+          nullable: true
+        h_6_3_m9:
+          type: integer
+          nullable: true
+        h_6_4_m10:
+          type: integer
+          nullable: true
+        h_6_5_m11:
+          type: integer
+          nullable: true
+        h_6_6_m12:
+          type: integer
+          nullable: true
+        h_6_7_m13:
+          type: integer
+          nullable: true
+        h_6_8_m14:
+          type: integer
+          nullable: true
+        h_6_9_m15:
+          type: integer
+          nullable: true
+        h_6_10_m16:
+          type: integer
+          nullable: true
+        h_6_11_m17:
+          type: integer
+          nullable: true
+        h_6_12_m18:
+          type: integer
+          nullable: true
+        h_7_m3_m4:
+          type: integer
+          nullable: true
+        h_7_m2_m5:
+          type: integer
+          nullable: true
+        h_7_m1_m6:
+          type: integer
+          nullable: true
+        h_7_0_m7:
+          type: integer
+          nullable: true
+        h_7_1_m8:
+          type: integer
+          nullable: true
+        h_7_2_m9:
+          type: integer
+          nullable: true
+        h_7_3_m10:
+          type: integer
+          nullable: true
+        h_7_4_m11:
+          type: integer
+          nullable: true
+        h_7_5_m12:
+          type: integer
+          nullable: true
+        h_7_6_m13:
+          type: integer
+          nullable: true
+        h_7_7_m14:
+          type: integer
+          nullable: true
+        h_7_8_m15:
+          type: integer
+          nullable: true
+        h_7_9_m16:
+          type: integer
+          nullable: true
+        h_7_10_m17:
+          type: integer
+          nullable: true
+        h_7_11_m18:
+          type: integer
+          nullable: true
+        h_7_12_m19:
+          type: integer
+          nullable: true
+        h_8_m4_m4:
+          type: integer
+          nullable: true
+        h_8_m3_m5:
+          type: integer
+          nullable: true
+        h_8_m2_m6:
+          type: integer
+          nullable: true
+        h_8_m1_m7:
+          type: integer
+          nullable: true
+        h_8_0_m8:
+          type: integer
+          nullable: true
+        h_8_1_m9:
+          type: integer
+          nullable: true
+        h_8_2_m10:
+          type: integer
+          nullable: true
+        h_8_3_m11:
+          type: integer
+          nullable: true
+        h_8_4_m12:
+          type: integer
+          nullable: true
+        h_8_5_m13:
+          type: integer
+          nullable: true
+        h_8_6_m14:
+          type: integer
+          nullable: true
+        h_8_7_m15:
+          type: integer
+          nullable: true
+        h_8_8_m16:
+          type: integer
+          nullable: true
+        h_8_9_m17:
+          type: integer
+          nullable: true
+        h_8_10_m18:
+          type: integer
+          nullable: true
+        h_8_11_m19:
+          type: integer
+          nullable: true
+        h_9_m4_m5:
+          type: integer
+          nullable: true
+        h_9_m3_m6:
+          type: integer
+          nullable: true
+        h_9_m2_m7:
+          type: integer
+          nullable: true
+        h_9_m1_m8:
+          type: integer
+          nullable: true
+        h_9_0_m9:
+          type: integer
+          nullable: true
+        h_9_1_m10:
+          type: integer
+          nullable: true
+        h_9_2_m11:
+          type: integer
+          nullable: true
+        h_9_3_m12:
+          type: integer
+          nullable: true
+        h_9_4_m13:
+          type: integer
+          nullable: true
+        h_9_5_m14:
+          type: integer
+          nullable: true
+        h_9_6_m15:
+          type: integer
+          nullable: true
+        h_9_7_m16:
+          type: integer
+          nullable: true
+        h_9_8_m17:
+          type: integer
+          nullable: true
+        h_9_9_m18:
+          type: integer
+          nullable: true
+        h_9_10_m19:
+          type: integer
+          nullable: true
+        h_9_11_m20:
+          type: integer
+          nullable: true
+        h_10_m5_m5:
+          type: integer
+          nullable: true
+        h_10_m4_m6:
+          type: integer
+          nullable: true
+        h_10_m3_m7:
+          type: integer
+          nullable: true
+        h_10_m2_m8:
+          type: integer
+          nullable: true
+        h_10_m1_m9:
+          type: integer
+          nullable: true
+        h_10_0_m10:
+          type: integer
+          nullable: true
+        h_10_1_m11:
+          type: integer
+          nullable: true
+        h_10_2_m12:
+          type: integer
+          nullable: true
+        h_10_3_m13:
+          type: integer
+          nullable: true
+        h_10_4_m14:
+          type: integer
+          nullable: true
+        h_10_5_m15:
+          type: integer
+          nullable: true
+        h_10_6_m16:
+          type: integer
+          nullable: true
+        h_10_7_m17:
+          type: integer
+          nullable: true
+        h_10_8_m18:
+          type: integer
+          nullable: true
+        h_10_9_m19:
+          type: integer
+          nullable: true
+        h_10_10_m20:
+          type: integer
+          nullable: true
+        h_11_m5_m6:
+          type: integer
+          nullable: true
+        h_11_m4_m7:
+          type: integer
+          nullable: true
+        h_11_m3_m8:
+          type: integer
+          nullable: true
+        h_11_m2_m9:
+          type: integer
+          nullable: true
+        h_11_m1_m10:
+          type: integer
+          nullable: true
+        h_11_0_m11:
+          type: integer
+          nullable: true
+        h_11_1_m12:
+          type: integer
+          nullable: true
+        h_11_2_m13:
+          type: integer
+          nullable: true
+        h_11_3_m14:
+          type: integer
+          nullable: true
+        h_11_4_m15:
+          type: integer
+          nullable: true
+        h_11_5_m16:
+          type: integer
+          nullable: true
+        h_11_6_m17:
+          type: integer
+          nullable: true
+        h_11_7_m18:
+          type: integer
+          nullable: true
+        h_11_8_m19:
+          type: integer
+          nullable: true
+        h_11_9_m20:
+          type: integer
+          nullable: true
+        h_11_10_m21:
+          type: integer
+          nullable: true
+        h_12_m6_m6:
+          type: integer
+          nullable: true
+        h_12_m5_m7:
+          type: integer
+          nullable: true
+        h_12_m4_m8:
+          type: integer
+          nullable: true
+        h_12_m3_m9:
+          type: integer
+          nullable: true
+        h_12_m2_m10:
+          type: integer
+          nullable: true
+        h_12_m1_m11:
+          type: integer
+          nullable: true
+        h_12_0_m12:
+          type: integer
+          nullable: true
+        h_12_1_m13:
+          type: integer
+          nullable: true
+        h_12_2_m14:
+          type: integer
+          nullable: true
+        h_12_3_m15:
+          type: integer
+          nullable: true
+        h_12_4_m16:
+          type: integer
+          nullable: true
+        h_12_5_m17:
+          type: integer
+          nullable: true
+        h_12_6_m18:
+          type: integer
+          nullable: true
+        h_12_7_m19:
+          type: integer
+          nullable: true
+        h_12_8_m20:
+          type: integer
+          nullable: true
+        h_12_9_m21:
+          type: integer
+          nullable: true
+        h_13_m6_m7:
+          type: integer
+          nullable: true
+        h_13_m5_m8:
+          type: integer
+          nullable: true
+        h_13_m4_m9:
+          type: integer
+          nullable: true
+        h_13_m3_m10:
+          type: integer
+          nullable: true
+        h_13_m2_m11:
+          type: integer
+          nullable: true
+        h_13_m1_m12:
+          type: integer
+          nullable: true
+        h_13_0_m13:
+          type: integer
+          nullable: true
+        h_13_1_m14:
+          type: integer
+          nullable: true
+        h_13_2_m15:
+          type: integer
+          nullable: true
+        h_13_3_m16:
+          type: integer
+          nullable: true
+        h_13_4_m17:
+          type: integer
+          nullable: true
+        h_13_5_m18:
+          type: integer
+          nullable: true
+        h_13_6_m19:
+          type: integer
+          nullable: true
+        h_13_7_m20:
+          type: integer
+          nullable: true
+        h_13_8_m21:
+          type: integer
+          nullable: true
+        h_13_9_m22:
+          type: integer
+          nullable: true
+        h_14_m7_m7:
+          type: integer
+          nullable: true
+        h_14_m6_m8:
+          type: integer
+          nullable: true
+        h_14_m5_m9:
+          type: integer
+          nullable: true
+        h_14_m4_m10:
+          type: integer
+          nullable: true
+        h_14_m3_m11:
+          type: integer
+          nullable: true
+        h_14_m2_m12:
+          type: integer
+          nullable: true
+        h_14_m1_m13:
+          type: integer
+          nullable: true
+        h_14_0_m14:
+          type: integer
+          nullable: true
+        h_14_1_m15:
+          type: integer
+          nullable: true
+        h_14_2_m16:
+          type: integer
+          nullable: true
+        h_14_3_m17:
+          type: integer
+          nullable: true
+        h_14_4_m18:
+          type: integer
+          nullable: true
+        h_14_5_m19:
+          type: integer
+          nullable: true
+        h_14_6_m20:
+          type: integer
+          nullable: true
+        h_14_7_m21:
+          type: integer
+          nullable: true
+        h_14_8_m22:
+          type: integer
+          nullable: true
+        h_15_m7_m8:
+          type: integer
+          nullable: true
+        h_15_m6_m9:
+          type: integer
+          nullable: true
+        h_15_m5_m10:
+          type: integer
+          nullable: true
+        h_15_m4_m11:
+          type: integer
+          nullable: true
+        h_15_m3_m12:
+          type: integer
+          nullable: true
+        h_15_m2_m13:
+          type: integer
+          nullable: true
+        h_15_m1_m14:
+          type: integer
+          nullable: true
+        h_15_0_m15:
+          type: integer
+          nullable: true
+        h_15_1_m16:
+          type: integer
+          nullable: true
+        h_15_2_m17:
+          type: integer
+          nullable: true
+        h_15_3_m18:
+          type: integer
+          nullable: true
+        h_15_4_m19:
+          type: integer
+          nullable: true
+        h_15_5_m20:
+          type: integer
+          nullable: true
+        h_15_6_m21:
+          type: integer
+          nullable: true
+        h_15_7_m22:
+          type: integer
+          nullable: true
+        h_15_8_m23:
+          type: integer
+          nullable: true
+        owner:
+          type: integer
+          nullable: true
+    PatchedUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+    PatchedUserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: Id
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 150
+          minLength: 1
+        email:
+          type: string
+          format: email
+        password1:
+          type: string
+          writeOnly: true
+        password2:
+          type: string
+          writeOnly: true
+      required:
+      - password1
+      - password2
+      - username
+    ResendEmailVerification:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    RestAuthDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
+    SkillTreeHexagons:
+      type: object
+      properties:
+        hex_id:
+          type: integer
+          readOnly: true
+        note:
+          type: string
+          nullable: true
+        hex_q:
+          type: integer
+        hex_r:
+          type: integer
+        hex_s:
+          type: integer
+        allow_verbal_feedback:
+          type: boolean
+        allow_quantitative_feedback:
+          type: boolean
+        image_address:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+          maxLength: 70
+        hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        skill_tree:
+          type: integer
+      required:
+      - hex_id
+      - hex_q
+      - hex_r
+      - hex_s
+      - skill_tree
+    SkillTreePaths:
+      type: object
+      properties:
+        path_id:
+          type: integer
+          readOnly: true
+        starting_hex_q:
+          type: integer
+        starting_hex_r:
+          type: integer
+        starting_hex_s:
+          type: integer
+        ending_hex_q:
+          type: integer
+        ending_hex_r:
+          type: integer
+        ending_hex_s:
+          type: integer
+        starting_hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        ending_hex_string:
+          type: string
+          nullable: true
+          maxLength: 11
+        skill_tree:
+          type: integer
+      required:
+      - ending_hex_q
+      - ending_hex_r
+      - ending_hex_s
+      - path_id
+      - skill_tree
+      - starting_hex_q
+      - starting_hex_r
+      - starting_hex_s
+    SkillTrees:
+      type: object
+      properties:
+        skill_tree_id:
+          type: integer
+          readOnly: true
+        paths:
+          type: string
+          readOnly: true
+        hexagons:
+          type: string
+          readOnly: true
+        hex_string_list:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 70
+        theme:
+          type: string
+          maxLength: 20
+        h_0_0_0:
+          type: integer
+          nullable: true
+        h_0_1_m1:
+          type: integer
+          nullable: true
+        h_0_2_m2:
+          type: integer
+          nullable: true
+        h_0_3_m3:
+          type: integer
+          nullable: true
+        h_0_4_m4:
+          type: integer
+          nullable: true
+        h_0_5_m5:
+          type: integer
+          nullable: true
+        h_0_6_m6:
+          type: integer
+          nullable: true
+        h_0_7_m7:
+          type: integer
+          nullable: true
+        h_0_8_m8:
+          type: integer
+          nullable: true
+        h_0_9_m9:
+          type: integer
+          nullable: true
+        h_0_10_m10:
+          type: integer
+          nullable: true
+        h_0_11_m11:
+          type: integer
+          nullable: true
+        h_0_12_m12:
+          type: integer
+          nullable: true
+        h_0_13_m13:
+          type: integer
+          nullable: true
+        h_0_14_m14:
+          type: integer
+          nullable: true
+        h_0_15_m15:
+          type: integer
+          nullable: true
+        h_1_0_m1:
+          type: integer
+          nullable: true
+        h_1_1_m2:
+          type: integer
+          nullable: true
+        h_1_2_m3:
+          type: integer
+          nullable: true
+        h_1_3_m4:
+          type: integer
+          nullable: true
+        h_1_4_m5:
+          type: integer
+          nullable: true
+        h_1_5_m6:
+          type: integer
+          nullable: true
+        h_1_6_m7:
+          type: integer
+          nullable: true
+        h_1_7_m8:
+          type: integer
+          nullable: true
+        h_1_8_m9:
+          type: integer
+          nullable: true
+        h_1_9_m10:
+          type: integer
+          nullable: true
+        h_1_10_m11:
+          type: integer
+          nullable: true
+        h_1_11_m12:
+          type: integer
+          nullable: true
+        h_1_12_m13:
+          type: integer
+          nullable: true
+        h_1_13_m14:
+          type: integer
+          nullable: true
+        h_1_14_m15:
+          type: integer
+          nullable: true
+        h_1_15_m16:
+          type: integer
+          nullable: true
+        h_2_m1_m1:
+          type: integer
+          nullable: true
+        h_2_0_m2:
+          type: integer
+          nullable: true
+        h_2_1_m3:
+          type: integer
+          nullable: true
+        h_2_2_m4:
+          type: integer
+          nullable: true
+        h_2_3_m5:
+          type: integer
+          nullable: true
+        h_2_4_m6:
+          type: integer
+          nullable: true
+        h_2_5_m7:
+          type: integer
+          nullable: true
+        h_2_6_m8:
+          type: integer
+          nullable: true
+        h_2_7_m9:
+          type: integer
+          nullable: true
+        h_2_8_m10:
+          type: integer
+          nullable: true
+        h_2_9_m11:
+          type: integer
+          nullable: true
+        h_2_10_m12:
+          type: integer
+          nullable: true
+        h_2_11_m13:
+          type: integer
+          nullable: true
+        h_2_12_m14:
+          type: integer
+          nullable: true
+        h_2_13_m15:
+          type: integer
+          nullable: true
+        h_2_14_m16:
+          type: integer
+          nullable: true
+        h_3_m1_m2:
+          type: integer
+          nullable: true
+        h_3_0_m3:
+          type: integer
+          nullable: true
+        h_3_1_m4:
+          type: integer
+          nullable: true
+        h_3_2_m5:
+          type: integer
+          nullable: true
+        h_3_3_m6:
+          type: integer
+          nullable: true
+        h_3_4_m7:
+          type: integer
+          nullable: true
+        h_3_5_m8:
+          type: integer
+          nullable: true
+        h_3_6_m9:
+          type: integer
+          nullable: true
+        h_3_7_m10:
+          type: integer
+          nullable: true
+        h_3_8_m11:
+          type: integer
+          nullable: true
+        h_3_9_m12:
+          type: integer
+          nullable: true
+        h_3_10_m13:
+          type: integer
+          nullable: true
+        h_3_11_m14:
+          type: integer
+          nullable: true
+        h_3_12_m15:
+          type: integer
+          nullable: true
+        h_3_13_m16:
+          type: integer
+          nullable: true
+        h_3_14_m17:
+          type: integer
+          nullable: true
+        h_4_m2_m2:
+          type: integer
+          nullable: true
+        h_4_m1_m3:
+          type: integer
+          nullable: true
+        h_4_0_m4:
+          type: integer
+          nullable: true
+        h_4_1_m5:
+          type: integer
+          nullable: true
+        h_4_2_m6:
+          type: integer
+          nullable: true
+        h_4_3_m7:
+          type: integer
+          nullable: true
+        h_4_4_m8:
+          type: integer
+          nullable: true
+        h_4_5_m9:
+          type: integer
+          nullable: true
+        h_4_6_m10:
+          type: integer
+          nullable: true
+        h_4_7_m11:
+          type: integer
+          nullable: true
+        h_4_8_m12:
+          type: integer
+          nullable: true
+        h_4_9_m13:
+          type: integer
+          nullable: true
+        h_4_10_m14:
+          type: integer
+          nullable: true
+        h_4_11_m15:
+          type: integer
+          nullable: true
+        h_4_12_m16:
+          type: integer
+          nullable: true
+        h_4_13_m17:
+          type: integer
+          nullable: true
+        h_5_m2_m3:
+          type: integer
+          nullable: true
+        h_5_m1_m4:
+          type: integer
+          nullable: true
+        h_5_0_m5:
+          type: integer
+          nullable: true
+        h_5_1_m6:
+          type: integer
+          nullable: true
+        h_5_2_m7:
+          type: integer
+          nullable: true
+        h_5_3_m8:
+          type: integer
+          nullable: true
+        h_5_4_m9:
+          type: integer
+          nullable: true
+        h_5_5_m10:
+          type: integer
+          nullable: true
+        h_5_6_m11:
+          type: integer
+          nullable: true
+        h_5_7_m12:
+          type: integer
+          nullable: true
+        h_5_8_m13:
+          type: integer
+          nullable: true
+        h_5_9_m14:
+          type: integer
+          nullable: true
+        h_5_10_m15:
+          type: integer
+          nullable: true
+        h_5_11_m16:
+          type: integer
+          nullable: true
+        h_5_12_m17:
+          type: integer
+          nullable: true
+        h_5_13_m18:
+          type: integer
+          nullable: true
+        h_6_m3_m3:
+          type: integer
+          nullable: true
+        h_6_m2_m4:
+          type: integer
+          nullable: true
+        h_6_m1_m5:
+          type: integer
+          nullable: true
+        h_6_0_m6:
+          type: integer
+          nullable: true
+        h_6_1_m7:
+          type: integer
+          nullable: true
+        h_6_2_m8:
+          type: integer
+          nullable: true
+        h_6_3_m9:
+          type: integer
+          nullable: true
+        h_6_4_m10:
+          type: integer
+          nullable: true
+        h_6_5_m11:
+          type: integer
+          nullable: true
+        h_6_6_m12:
+          type: integer
+          nullable: true
+        h_6_7_m13:
+          type: integer
+          nullable: true
+        h_6_8_m14:
+          type: integer
+          nullable: true
+        h_6_9_m15:
+          type: integer
+          nullable: true
+        h_6_10_m16:
+          type: integer
+          nullable: true
+        h_6_11_m17:
+          type: integer
+          nullable: true
+        h_6_12_m18:
+          type: integer
+          nullable: true
+        h_7_m3_m4:
+          type: integer
+          nullable: true
+        h_7_m2_m5:
+          type: integer
+          nullable: true
+        h_7_m1_m6:
+          type: integer
+          nullable: true
+        h_7_0_m7:
+          type: integer
+          nullable: true
+        h_7_1_m8:
+          type: integer
+          nullable: true
+        h_7_2_m9:
+          type: integer
+          nullable: true
+        h_7_3_m10:
+          type: integer
+          nullable: true
+        h_7_4_m11:
+          type: integer
+          nullable: true
+        h_7_5_m12:
+          type: integer
+          nullable: true
+        h_7_6_m13:
+          type: integer
+          nullable: true
+        h_7_7_m14:
+          type: integer
+          nullable: true
+        h_7_8_m15:
+          type: integer
+          nullable: true
+        h_7_9_m16:
+          type: integer
+          nullable: true
+        h_7_10_m17:
+          type: integer
+          nullable: true
+        h_7_11_m18:
+          type: integer
+          nullable: true
+        h_7_12_m19:
+          type: integer
+          nullable: true
+        h_8_m4_m4:
+          type: integer
+          nullable: true
+        h_8_m3_m5:
+          type: integer
+          nullable: true
+        h_8_m2_m6:
+          type: integer
+          nullable: true
+        h_8_m1_m7:
+          type: integer
+          nullable: true
+        h_8_0_m8:
+          type: integer
+          nullable: true
+        h_8_1_m9:
+          type: integer
+          nullable: true
+        h_8_2_m10:
+          type: integer
+          nullable: true
+        h_8_3_m11:
+          type: integer
+          nullable: true
+        h_8_4_m12:
+          type: integer
+          nullable: true
+        h_8_5_m13:
+          type: integer
+          nullable: true
+        h_8_6_m14:
+          type: integer
+          nullable: true
+        h_8_7_m15:
+          type: integer
+          nullable: true
+        h_8_8_m16:
+          type: integer
+          nullable: true
+        h_8_9_m17:
+          type: integer
+          nullable: true
+        h_8_10_m18:
+          type: integer
+          nullable: true
+        h_8_11_m19:
+          type: integer
+          nullable: true
+        h_9_m4_m5:
+          type: integer
+          nullable: true
+        h_9_m3_m6:
+          type: integer
+          nullable: true
+        h_9_m2_m7:
+          type: integer
+          nullable: true
+        h_9_m1_m8:
+          type: integer
+          nullable: true
+        h_9_0_m9:
+          type: integer
+          nullable: true
+        h_9_1_m10:
+          type: integer
+          nullable: true
+        h_9_2_m11:
+          type: integer
+          nullable: true
+        h_9_3_m12:
+          type: integer
+          nullable: true
+        h_9_4_m13:
+          type: integer
+          nullable: true
+        h_9_5_m14:
+          type: integer
+          nullable: true
+        h_9_6_m15:
+          type: integer
+          nullable: true
+        h_9_7_m16:
+          type: integer
+          nullable: true
+        h_9_8_m17:
+          type: integer
+          nullable: true
+        h_9_9_m18:
+          type: integer
+          nullable: true
+        h_9_10_m19:
+          type: integer
+          nullable: true
+        h_9_11_m20:
+          type: integer
+          nullable: true
+        h_10_m5_m5:
+          type: integer
+          nullable: true
+        h_10_m4_m6:
+          type: integer
+          nullable: true
+        h_10_m3_m7:
+          type: integer
+          nullable: true
+        h_10_m2_m8:
+          type: integer
+          nullable: true
+        h_10_m1_m9:
+          type: integer
+          nullable: true
+        h_10_0_m10:
+          type: integer
+          nullable: true
+        h_10_1_m11:
+          type: integer
+          nullable: true
+        h_10_2_m12:
+          type: integer
+          nullable: true
+        h_10_3_m13:
+          type: integer
+          nullable: true
+        h_10_4_m14:
+          type: integer
+          nullable: true
+        h_10_5_m15:
+          type: integer
+          nullable: true
+        h_10_6_m16:
+          type: integer
+          nullable: true
+        h_10_7_m17:
+          type: integer
+          nullable: true
+        h_10_8_m18:
+          type: integer
+          nullable: true
+        h_10_9_m19:
+          type: integer
+          nullable: true
+        h_10_10_m20:
+          type: integer
+          nullable: true
+        h_11_m5_m6:
+          type: integer
+          nullable: true
+        h_11_m4_m7:
+          type: integer
+          nullable: true
+        h_11_m3_m8:
+          type: integer
+          nullable: true
+        h_11_m2_m9:
+          type: integer
+          nullable: true
+        h_11_m1_m10:
+          type: integer
+          nullable: true
+        h_11_0_m11:
+          type: integer
+          nullable: true
+        h_11_1_m12:
+          type: integer
+          nullable: true
+        h_11_2_m13:
+          type: integer
+          nullable: true
+        h_11_3_m14:
+          type: integer
+          nullable: true
+        h_11_4_m15:
+          type: integer
+          nullable: true
+        h_11_5_m16:
+          type: integer
+          nullable: true
+        h_11_6_m17:
+          type: integer
+          nullable: true
+        h_11_7_m18:
+          type: integer
+          nullable: true
+        h_11_8_m19:
+          type: integer
+          nullable: true
+        h_11_9_m20:
+          type: integer
+          nullable: true
+        h_11_10_m21:
+          type: integer
+          nullable: true
+        h_12_m6_m6:
+          type: integer
+          nullable: true
+        h_12_m5_m7:
+          type: integer
+          nullable: true
+        h_12_m4_m8:
+          type: integer
+          nullable: true
+        h_12_m3_m9:
+          type: integer
+          nullable: true
+        h_12_m2_m10:
+          type: integer
+          nullable: true
+        h_12_m1_m11:
+          type: integer
+          nullable: true
+        h_12_0_m12:
+          type: integer
+          nullable: true
+        h_12_1_m13:
+          type: integer
+          nullable: true
+        h_12_2_m14:
+          type: integer
+          nullable: true
+        h_12_3_m15:
+          type: integer
+          nullable: true
+        h_12_4_m16:
+          type: integer
+          nullable: true
+        h_12_5_m17:
+          type: integer
+          nullable: true
+        h_12_6_m18:
+          type: integer
+          nullable: true
+        h_12_7_m19:
+          type: integer
+          nullable: true
+        h_12_8_m20:
+          type: integer
+          nullable: true
+        h_12_9_m21:
+          type: integer
+          nullable: true
+        h_13_m6_m7:
+          type: integer
+          nullable: true
+        h_13_m5_m8:
+          type: integer
+          nullable: true
+        h_13_m4_m9:
+          type: integer
+          nullable: true
+        h_13_m3_m10:
+          type: integer
+          nullable: true
+        h_13_m2_m11:
+          type: integer
+          nullable: true
+        h_13_m1_m12:
+          type: integer
+          nullable: true
+        h_13_0_m13:
+          type: integer
+          nullable: true
+        h_13_1_m14:
+          type: integer
+          nullable: true
+        h_13_2_m15:
+          type: integer
+          nullable: true
+        h_13_3_m16:
+          type: integer
+          nullable: true
+        h_13_4_m17:
+          type: integer
+          nullable: true
+        h_13_5_m18:
+          type: integer
+          nullable: true
+        h_13_6_m19:
+          type: integer
+          nullable: true
+        h_13_7_m20:
+          type: integer
+          nullable: true
+        h_13_8_m21:
+          type: integer
+          nullable: true
+        h_13_9_m22:
+          type: integer
+          nullable: true
+        h_14_m7_m7:
+          type: integer
+          nullable: true
+        h_14_m6_m8:
+          type: integer
+          nullable: true
+        h_14_m5_m9:
+          type: integer
+          nullable: true
+        h_14_m4_m10:
+          type: integer
+          nullable: true
+        h_14_m3_m11:
+          type: integer
+          nullable: true
+        h_14_m2_m12:
+          type: integer
+          nullable: true
+        h_14_m1_m13:
+          type: integer
+          nullable: true
+        h_14_0_m14:
+          type: integer
+          nullable: true
+        h_14_1_m15:
+          type: integer
+          nullable: true
+        h_14_2_m16:
+          type: integer
+          nullable: true
+        h_14_3_m17:
+          type: integer
+          nullable: true
+        h_14_4_m18:
+          type: integer
+          nullable: true
+        h_14_5_m19:
+          type: integer
+          nullable: true
+        h_14_6_m20:
+          type: integer
+          nullable: true
+        h_14_7_m21:
+          type: integer
+          nullable: true
+        h_14_8_m22:
+          type: integer
+          nullable: true
+        h_15_m7_m8:
+          type: integer
+          nullable: true
+        h_15_m6_m9:
+          type: integer
+          nullable: true
+        h_15_m5_m10:
+          type: integer
+          nullable: true
+        h_15_m4_m11:
+          type: integer
+          nullable: true
+        h_15_m3_m12:
+          type: integer
+          nullable: true
+        h_15_m2_m13:
+          type: integer
+          nullable: true
+        h_15_m1_m14:
+          type: integer
+          nullable: true
+        h_15_0_m15:
+          type: integer
+          nullable: true
+        h_15_1_m16:
+          type: integer
+          nullable: true
+        h_15_2_m17:
+          type: integer
+          nullable: true
+        h_15_3_m18:
+          type: integer
+          nullable: true
+        h_15_4_m19:
+          type: integer
+          nullable: true
+        h_15_5_m20:
+          type: integer
+          nullable: true
+        h_15_6_m21:
+          type: integer
+          nullable: true
+        h_15_7_m22:
+          type: integer
+          nullable: true
+        h_15_8_m23:
+          type: integer
+          nullable: true
+        owner:
+          type: integer
+          nullable: true
+      required:
+      - hex_string_list
+      - hexagons
+      - name
+      - paths
+      - skill_tree_id
+      - theme
+    Token:
+      type: object
+      description: Serializer for Token model.
+      properties:
+        key:
+          type: string
+          maxLength: 40
+      required:
+      - key
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - id
+      - password
+      - username
+    UserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: Id
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - email
+      - pk
+      - username
+    VerifyEmail:
+      type: object
+      properties:
+        key:
+          type: string
+      required:
+      - key
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
