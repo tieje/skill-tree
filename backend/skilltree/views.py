@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths
 from .serializers import SkillTreesSerializer, SkillTreeHexagonsSerializer, SkillTreePathsSerializer

@@ -9,9 +9,8 @@ class SkillTrees(Model):
     skill_tree_id: AutoField = AutoField(primary_key=True)
     name: CharField = CharField(max_length=title_length)
     theme: CharField = CharField(max_length=20)
-    owner: ForeignKey = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
-    # owner_id will be added later when the Accounts model is created
-    # owner_id: ForeignKey = ForeignKey(Accounts, on_delete=CASCADE)
+    owner: ForeignKey = ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True)
     # 256 hexagons
     h_0_0_0: IntegerField = IntegerField(null=True, blank=True)
     h_0_1_m1: IntegerField = IntegerField(null=True, blank=True)
@@ -269,6 +268,7 @@ class SkillTrees(Model):
     h_15_6_m21: IntegerField = IntegerField(null=True, blank=True)
     h_15_7_m22: IntegerField = IntegerField(null=True, blank=True)
     h_15_8_m23: IntegerField = IntegerField(null=True, blank=True)
+
 
 class SkillTreeHexagons(Model):
     hex_id: AutoField = AutoField(primary_key=True)

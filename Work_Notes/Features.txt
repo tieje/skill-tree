@@ -2,6 +2,7 @@ Important Features to Implement
 
 - Color Blind Mode
 - custom initial zoom on the node that was last interacted-with
+- page 131 - set up View Level Permissions so that only owners and admins can only read and update their skill tree
 
 Features to Implement
 

@@ -404,10 +404,13 @@ Write an article about:
 Tasks:
 
 - get the music from The Hundred-Foot Journey and put it on the playlist
-- page 107 - set up owner
-- makemigrations
-- migrate
-- page 123 - set up View Level Permissions so that only owners and admins can only read and update their skill tree
++ page 107 - set up owner
++ makemigrations
++ migrate
+- page 142 - login, logout, verification, authentication
+    - left off on page 146
+- page 131 - set up View Level Permissions so that only owners and admins can only read and update their skill tree
+
 
 - account set-up form
 - account email verification
