@@ -1,3 +1,7 @@
+Important
+
+- Deployment with React Router will likely fail unless the following is done:
+    https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
 
 Do Later
 - fix centering button to be the actual center
@@ -10,3 +14,4 @@ Warning #1: Fixed: registered extensions SimpleJWTCookieScheme for "dj_rest_auth
 Warning #2: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_paths". Consider using a type hint or @extend_schema_field. Defaulting to string.
 Warning #3: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_hexagons". Consider using a type hint or @extend_schema_field. Defaulting to string.
 Warning #4: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_hex_string_list". Consider using a type hint or @extend_schema_field. Defaulting to string.
+

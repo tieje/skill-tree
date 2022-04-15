@@ -11,3 +11,5 @@ Features to Implement
     It might not be a great idea because the struggle of finding the right node will lead to better memory.
 - option to change the color of the path being created
 - add "original_owners" later so a list of owners can receive credit for their work?
+- create logout page
+    originally, I just wanted to redirect users to login page. It's still possible to do that.

@@ -400,10 +400,9 @@ I'm going to put off creating the home page until core functionality is done.
 I'll create a simple login, logout, and account creation feature for the application.
 This will lead into creating a tree-viewing page. I should probably organize the tree-viewing page with up to four tags.
 I'll start with Final Form. I'll need react-final-form as well.
-I'll need to study React Router later.
-https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/installation#basic-installation
 For now, I'll focus on creating the Endpoints.
-
+I'll need to study React Router tonight.
+https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/installation#basic-installation
 
 + page 107 - set up owner
 + makemigrations
@@ -412,23 +411,39 @@ For now, I'll focus on creating the Endpoints.
 + page 131 - set up View Level Permissions so that only owners can read and update their skill tree
 + backend endpoints for account creation, verification
 + backend permissions so that only the owner can edit
-
-Write an article about:
-
-- Create your own version of how to get a url for pictures based on this wikihow:
++ install final-form
++ install react-final-form
++ Comment out other components in App.tsx
++ create a login page
++ Create your own version of how to get a url for pictures based on this wikihow:
     https://www.wikihow.com/Get-the-URL-for-Pictures
     I don't want users to get slowed down or annoyed by ads.
     I believe this can be an ad-free experience.
 
+4/15/2022
+
+Routes specify attributes "path" and "element".
+Link specify attribute "to" which goes to the path specified in "/about". This is pretty simple actually.
+Routes can be a wrapper for multiple Route
+Fortunately, my clientside routing is not that complex.
+There is a specific use-case where I'll need to fetch data when component renders
+https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/overview
+It looks simple.
+For now, it will look like:
+/ > /login > /app
+Honestly, this is getting harder and harder. I wonder if this will take me two weeks.
+
+
+Write an article about:
+
+
 Tasks:
 
-+ install final-form
-+ install react-final-form
-- Comment out other components in App.tsx and simply do 
-- create a login page
-- create logout page
+- import BrowserRouter and wrap it around the App
+- use React router to go to the main application once credentials are confirmed
+- Navbar at the top
+- Create Logout button in the upper left corner
 
-- 
 
 - page 162 - I'll need to capture and store the token either in localStorage or as a cookie
 - create student interface
