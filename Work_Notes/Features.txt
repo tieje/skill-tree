@@ -2,6 +2,8 @@ Important Features to Implement
 
 - Color Blind Mode
 - custom initial zoom on the node that was last interacted-with
+- optimistic updates
+    https://redux-toolkit.js.org/rtk-query/usage/examples#react-optimistic-updates
 
 Features to Implement
 

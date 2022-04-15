@@ -1,11 +1,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { HexagonType, PathType, SkillTreeType } from '../types/Types'
+import { HexagonType, LoginRequest, PathType, SkillTreeType, UserResponse } from '../types/Types'
+import { RootState } from './store'
 
 const treeApi = createApi({
     reducerPath: 'treeApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/v1/' }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://127.0.0.1:8000/api/v1/',
+        prepareHeaders: (headers, { getState }) => {
+            const token = (getState() as RootState).auth.token
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`)
+            }
+            return headers
+        },
+    }),
     tagTypes: ['Hexagon', 'SkillTree'],
     endpoints: (build) => ({
+        login: build.mutation<UserResponse, LoginRequest>({
+            query: (credentials) => ({
+                url: 'dj-rest-auth/login/',
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
             providesTags: ['SkillTree'],
@@ -65,6 +82,7 @@ export const {
     useUpdateTreeByIdMutation,
     useCreatePathMutation,
     useDeletePathMutation,
+    useLoginMutation,
 } = treeApi
 
 export { treeApi }

@@ -82,6 +82,44 @@ type HexEntry = {
     [key: string]: HexId
 }
 
+type User = {
+    username: string
+}
+
+type AuthState = {
+    user: User | null;
+    token: string | null;
+}
+
+type UserResponse = {
+    key: string
+}
+
+type LoginRequest = {
+    username: string;
+    password: string;
+}
+
+type LocationPathFrom = {
+    hash: string
+    key: string
+    pathname: string
+    search: string
+    state: string | null
+ }
+
+type LocationPathState = {
+    from: LocationPathFrom
+}
+
+type LocationPathData = {
+    hash: string
+    key: string
+    pathname: string
+    search: string
+    state: LocationPathState
+}
+
 export type {
     undefinedPayloadType,
     SkillTreeType,
@@ -92,4 +130,9 @@ export type {
     IncomingData,
     EditButtonPropsType,
     HexEntry,
+    User,
+    AuthState,
+    UserResponse,
+    LoginRequest,
+    LocationPathData,
 }

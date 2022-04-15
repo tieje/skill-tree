@@ -432,17 +432,52 @@ It looks simple.
 For now, it will look like:
 / > /login > /app
 Honestly, this is getting harder and harder. I wonder if this will take me two weeks.
+For now, it will look like:
+/ > send login mutation to the backend > receive Token from REST API > store token in RTK state > automatically use token whenever query is made
+backend login entry point:
+http://127.0.0.1:8000/api/v1/dj-rest-auth/login/
+I'll need to send something in the form of:
+{
+    "username": "",
+    "email": "",
+    "password": ""
+}
+React Router what to do after authentication:
+https://stackblitz.com/github/remix-run/react-router/tree/main/examples/auth?file=src/App.tsx
+I might need to redo the architecture on the frontend.
+It's possible to get a response from a POST. The response that I would like to get is the Hexagon Data of the new Hexagon.
+This would simplify and decrease chances of bugs when getting the new Hexagon.
+I probably won't do the above yet just because it's working and the new solution may not be significantly better than the old.
+I'll need to figure out the Forbidden Error eventually.
+I'll study this error tonight. In the meantime...
+I'll focus on creating various required pages.
 
++ import BrowserRouter and wrap it around the App
+~ use React router to go to the main application once credentials are confirmed
+~ Navbar at the top
 
 Write an article about:
 
-
 Tasks:
 
-- import BrowserRouter and wrap it around the App
-- use React router to go to the main application once credentials are confirmed
-- Navbar at the top
-- Create Logout button in the upper left corner
+- study Django and permissions on why you're getting 403 forbidden error
+- map out the URLs needed
+- design the home page with the parallax effect on Figma
+    - desktop
+    - mobile
+- design the tree picking page on Figma
+    - desktop
+    - mobile
+- design the "send to students" page on Figma
+    - desktop
+    - mobile
+- design the profile page on Figma
+    - desktop
+    - mobile
+- design the 404 page
+    - desktop
+    - mobile
+
 
 
 - page 162 - I'll need to capture and store the token either in localStorage or as a cookie

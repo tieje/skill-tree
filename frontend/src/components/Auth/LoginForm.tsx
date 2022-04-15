@@ -1,16 +1,36 @@
 import { Field, Form } from "react-final-form"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useLoginMutation } from "../../redux/api"
+import {
+    useReduxDispatch,
+    //useReduxSelector,
+} from "../../redux/hooks"
+import {
+    //LocationPathData,
+    LoginRequest
+} from "../../types/Types"
 import { useFocusInput } from "../../utils/utils"
+import { setCredentials } from "./AuthSlice"
 
 
 const LoginForm = () => {
-    const onSubmit = () => {
-        console.log('data submit')
+    const navigate = useNavigate()
+    const location = useLocation()
+    // The problem below is with .from?, it seems there are not types for it yet
+    // @ts-ignore
+    let from = location.state?.from?.pathname || '/'
+    const dispatch = useReduxDispatch()
+    const [Login] = useLoginMutation()
+    const onSubmit = async (values: LoginRequest) => {
+        const payload = await Login(values).unwrap()
+        dispatch(setCredentials(payload))
+        navigate(from, { replace: true })
     }
     const inputRef = useFocusInput()
     return (
         <section className="grid place-content-center h-screen w-screen bg-white">
             <div className='border border-solid'>
-                <Form onSubmit={onSubmit}>
+                <Form onSubmit={(values: LoginRequest) => onSubmit(values)}>
                     {props => (
                         <form className="grid grid-cols-1 gap-4 m-5 w-96" onSubmit={props.handleSubmit}>
                             <div>

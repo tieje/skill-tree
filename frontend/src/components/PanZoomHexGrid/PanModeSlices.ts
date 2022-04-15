@@ -10,7 +10,7 @@ const PanModeSlice = createSlice({
     initialState: {
         tool: TOOL_NONE,
         hexagonFocused: {
-            hex_id: undefined,
+            hex_id: 1,
             hex_string: 'h_8_1_m9',
             hex_q: 8,
             hex_r: 1,
