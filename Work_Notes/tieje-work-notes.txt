@@ -456,11 +456,45 @@ I'll focus on creating various required pages.
 ~ use React router to go to the main application once credentials are confirmed
 ~ Navbar at the top
 
+4/16/2022
+
+4/17/2022
+
+Study Django and permissions on why you're getting 403 forbidden error
+Permissions in Django
+https://testdriven.io/blog/django-permissions/?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_123
+Saving an authentication token to localstorage in Redux
+https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
+
+
++ work on permissions so that testuser3 can grab the skill tree
+    https://www.django-rest-framework.org/api-guide/authentication/
+    It was not permissions. Authentication was done with keyword "Token" instead of "Bearer" in the authorization header.
++ save the token in some long term storage
++ make it so that clicking on a different hexagon closes forms and resets the state of the hexagons.
+    It works but the intended affect was to close and reset the editing field.
+    The state resets but the sidebar needs to re-render to reflect these changes.
++ create a functioning logout button
+
 Write an article about:
 
 Tasks:
 
-- study Django and permissions on why you're getting 403 forbidden error
+- reset all states, including tool state, upon logout.
+
+- page 162 - I'll need to capture and store the token either in localStorage or as a cookie
+- create student interface
+    - quantitative feedback form
+    - verbal feedback form
+- create custom themes
+    - The first custom theme must be a skyrim skill tree
+- create skill tree page to pick which skill tree to use
+    you'll probably need to use a search bar for this
+- make it so that there is an option for a user to save a copy of a skill tree as their own
+- use parallax affect for a stylish home page
+
+Designing everything else:
+
 - map out the URLs needed
 - design the home page with the parallax effect on Figma
     - desktop
@@ -478,18 +512,6 @@ Tasks:
     - desktop
     - mobile
 
-
-
-- page 162 - I'll need to capture and store the token either in localStorage or as a cookie
-- create student interface
-    - quantitative feedback form
-    - verbal feedback form
-- create custom themes
-    - The first custom theme must be a skyrim skill tree
-- create skill tree page to pick which skill tree to use
-    you'll probably need to use a search bar for this
-- make it so that there is an option for a user to save a copy of a skill tree as their own
-- use parallax affect for a stylish home page
 
 Production
 

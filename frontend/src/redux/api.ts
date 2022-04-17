@@ -8,8 +8,8 @@ const treeApi = createApi({
         baseUrl: 'http://127.0.0.1:8000/api/v1/',
         prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.token
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`)
+            if (token !== 'null' && token !== null) {
+                headers.set('authorization', `Token ${token}`)
             }
             return headers
         },
@@ -22,6 +22,12 @@ const treeApi = createApi({
                 method: 'POST',
                 body: credentials,
             }),
+        }),
+        logout: build.mutation({
+            query: () => ({
+                url: 'dj-rest-auth/logout/',
+                method: 'POST',
+            })
         }),
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
@@ -83,6 +89,7 @@ export const {
     useCreatePathMutation,
     useDeletePathMutation,
     useLoginMutation,
+    useLogoutMutation,
 } = treeApi
 
 export { treeApi }

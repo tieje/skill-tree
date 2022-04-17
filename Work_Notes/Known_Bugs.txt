@@ -4,6 +4,8 @@ Important
     https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
 
 Do Later
+
+- The state resets but the sidebar needs to re-render to reflect these changes.
 - fix centering button to be the actual center
 - turn off drifting for the svg
 - I can optimize the API by creating a separate table for the base skill tree and then add that to the API with a serializer. Even better, I could preload the data into state if needed.

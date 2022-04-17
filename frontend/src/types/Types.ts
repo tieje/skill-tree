@@ -91,6 +91,27 @@ type AuthState = {
     token: string | null;
 }
 
+type PanState = {
+    tool?: string
+    hexagonFocused: Partial<HexagonType>
+    pathFocused: Partial<PathType>
+    startingPathHexagon: Partial<HexagonType>
+    pathEditMode: string
+    pathDeselectDisable: boolean
+    pathDeleteDisable: boolean
+}
+
+type SidebarState = {
+    verbal: boolean
+    quantitative: boolean
+    editImgAddress: boolean
+    editNoteTitle: boolean
+    editNoteBody: boolean
+    imgAddress: string
+    noteTitle: string
+    noteBody: string
+}
+
 type UserResponse = {
     key: string
 }
@@ -98,26 +119,6 @@ type UserResponse = {
 type LoginRequest = {
     username: string;
     password: string;
-}
-
-type LocationPathFrom = {
-    hash: string
-    key: string
-    pathname: string
-    search: string
-    state: string | null
- }
-
-type LocationPathState = {
-    from: LocationPathFrom
-}
-
-type LocationPathData = {
-    hash: string
-    key: string
-    pathname: string
-    search: string
-    state: LocationPathState
 }
 
 export type {
@@ -134,5 +135,6 @@ export type {
     AuthState,
     UserResponse,
     LoginRequest,
-    LocationPathData,
+    PanState,
+    SidebarState,
 }

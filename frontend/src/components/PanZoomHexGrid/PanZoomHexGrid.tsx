@@ -36,7 +36,7 @@ import {
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
-import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
+import { CloseAndClearAllForms, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
 import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
 import CustomPath from './CustomPath';
@@ -109,6 +109,7 @@ const PanZoomHexGrid = () => {
     }
   }
   const handleHexagonClick = (hex: Partial<HexagonType>) => {
+    dispatch(CloseAndClearAllForms())
     dispatch(changeHexagonFocus(hex))
     switch (pathEditMode) {
       case PATH_EDIT_CHOSEN:
