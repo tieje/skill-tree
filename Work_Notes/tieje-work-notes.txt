@@ -465,6 +465,24 @@ Permissions in Django
 https://testdriven.io/blog/django-permissions/?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_123
 Saving an authentication token to localstorage in Redux
 https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
+The account module is complete.
+home page
+    > account registration
+        > email confirmation needed page (email confirmation optional during development)
+    > login
+        > skill tree picker page sorted by most recently viewed by default
+            - Each skill tree is going to need a unique profile picture and owner picture to more easily identify the skill tree.
+            - add other sort methods later - such as by subject/tags or by name
+            - There needs to be a way to add students for multiple users
+        > User Settings page
+            - notifications?
+                I don't want to notify teachers at all. This is just a tool for optional feedback.
+            - appearance
+                - colorblind mode
+                - dark mode
+                - light mode
+
+
 
 + work on permissions so that testuser3 can grab the skill tree
     https://www.django-rest-framework.org/api-guide/authentication/
@@ -480,6 +498,7 @@ https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
     I cannot re-render if it's invisible. I can, though, reset the state by reloading the window...
     The re-render was achieved by reloading the window upon logout.
 BRANCH ft-account-module IS COMPLETE
++ merge ft-account-module into staging and switch to ft-create-pages
 
 Write an article about:
 
@@ -487,6 +506,7 @@ Write an article about:
 
 Tasks:
 
+- sign for shortcut for pointer mode and drag mode
 - map out the URLs needed
 - design the home page with the parallax effect on Figma
     - desktop
