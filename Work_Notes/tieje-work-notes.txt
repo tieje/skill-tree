@@ -466,23 +466,6 @@ https://testdriven.io/blog/django-permissions/?utm_campaign=Django%2BNewsletter&
 Saving an authentication token to localstorage in Redux
 https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
 The account module is complete.
-home page
-    > account registration
-        > email confirmation needed page (email confirmation optional during development)
-    > login
-        > skill tree picker page sorted by most recently viewed by default
-            - Each skill tree is going to need a unique profile picture and owner picture to more easily identify the skill tree.
-            - add other sort methods later - such as by subject/tags or by name
-            - There needs to be a way to add students for multiple users
-        > User Settings page
-            - notifications?
-                I don't want to notify teachers at all. This is just a tool for optional feedback.
-            - appearance
-                - colorblind mode
-                - dark mode
-                - light mode
-
-
 
 + work on permissions so that testuser3 can grab the skill tree
     https://www.django-rest-framework.org/api-guide/authentication/
@@ -500,27 +483,162 @@ home page
 BRANCH ft-account-module IS COMPLETE
 + merge ft-account-module into staging and switch to ft-create-pages
 
+4/18/2022
+
+home page
+    > account registration
+        > email confirmation needed page (email confirmation optional during development)
+    > login
+        > skill tree picker page sorted by most recently viewed by default
+            - tabs for skill trees that you're the owner of, skill trees that you're a student of, and search for public skill trees.
+            - Each skill tree is going to need a unique profile picture and owner picture to more easily identify the skill tree.
+            - add other sort methods later - such as by subject/tags or by name
+            - There needs to be a way to invite students to skill trees. Simple email is a good idea.
+                Students can only be invited to a private skill tree by email.
+                    - For private skill trees, feedback will be automatically reset every year unless opted out or dates changed.
+                        - There will be no way to download this data to protect the privacy of students and teachers.
+                        - Feedback is for teacher's eyes only
+                Anyone can use and copy public skill trees.
+                    - there is no feedback for public skill trees other how many people chose to copy this skill tree and number of thumbs up and down
+                    - public skill trees can be found in the search for public skill trees tab
+                    - search is organized by tags
+                Public skill trees will be a must because creating skill trees from scratch can be rather tedious work.
+            
+            Teachers will need to be able to create classes that will be pointed to skill trees.
+                In this way, theoretically only one teacher needs to organize this.
+                Accounts created will be signaled by a checkmark next to them, grouped by checkmarks at the bottom
+        > User Settings page
+            - notifications?
+                I don't want to notify teachers at all. This is just a tool for optional feedback.
+            - appearance
+                - colorblind mode
+                - dark mode
+                - light mode
+            > Actual skill tree page
+
+I'm going to need drag and drop functionality for hexagons...
+Teacher > creates account > browses public skill trees for a template > Forks template > Edits template >
+wants to share skill tree with students > class creation page > gives list of emails > (optionally can create another class with a name)
+Drag and drop classes on the left side into the left container AND drag and drop skill trees on the right side into the right container. >
+Create Cohort and Send Emails. > Directed to My Cohorts Page organized by Dissolution Date >
+At the Dissolution Date 
+Skill trees need to be shared privately with a URL... This will be feature for later.
+These are all features that I can create later if a school district would like to adopt the system.
+It's possible to be made in a way that suits all needs but these are features that I don't need to create for an MVP.
+
+MVP
+- all trees
+    - are public
+    - have up to four tags
+    - Option to Make a copy and edit as a teacher
+    - to use tree as a student
+- instead of sending an email to students, students can search for the skill tree
+    Should I do a URL?, an ID?. Perhaps both.
+    - Teacher can share a URL made specifically for Students by sending it in an email to students.
+    - Can search for public skill trees by the ID number
+        I need two methods so that there can be confirmation.
+- Skill tree
+    ID
+        - Just the ID for it
+    settings
+        - Delete and reset feedback on these dates
+        - Theme
+        - Skill tree name
+        - tags
+        - profile picture
+    statistics
+        - Students's Average feeling of comprehension of topics in Skill tree (Quantitative)
+        - Forked
+        - Thumbs Up
+        - Thumbs Down
+        - download statistics as CSV button (feature for later if desired)
+Making skill trees public means that anyone can give feedback and that anyone can theoretically take the class.
+This is fine because it's an MVP.
+
+Main hub page
+    I would like for the initial state to be three boxes in a minimalistic style.
+    - search for skill trees
+        - copy and edit as teacher
+        - Copy link for students
+        - use as a student
+    - Teacher Skill trees - list of skill trees that you can edit, sorted by date last edited (recency)
+        - copy link for students
+        - Edit skill tree
+    - Student Skill Trees - Skill trees that you're using as a student will be listed, sorted by date last used (recency)
+        - Copy link for students
+        - Use skill tree as student
+
+Top navbar Middle to Right
+Logo (home page)
+User Settings
+
+Possible design layouts
+    - sidebar list on the left and Skill Tree specifics on the right
+        - I wish I knew how to do a mini screenshot just as a preview...
+        - I'll need to learn how to do a mini screenshot to serve as a preview
+        - search bar in the middle top
+        - underneath are tabs: Student | Teacher | Discover
+        - underneath tabs is a description of what the tab is for:
+            - Student
+                - Skill Trees that you are studying
+            - Teacher
+                - Skill Trees that you own
+            - Discover
+                - All skill trees. These trees can be copied or you can be a student of it
+        - list of skill trees
+            - profile picture - won't be needed if I can get a visual preview...
+            - label
+            - thumbs up
+            - thumbs down
+            - times copied
+        - clicking on the skill tree shows an expanded button list of options?
+
+honestly...
+Make all skill trees private. It's just too much work to make them public.
+Invite to a skill tree by link only.
+Share by screenshot.
+
+Tabs
+    Learn
+        List of Skill Trees that you're learning from
+    Teach
+        List of Skill Trees that you're teaching
+Lists are ordered by recently viewed.
+Copy Figma for design in creating a new skill tree around the top.
+
+I've given this a lot of thought. I have good idea of what I'm going to do now.
+Now, I will focus on actually designing and building it.
+
+4/19/2022
+
+With information above, turn this into a mastapiece.
+https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
+
 Write an article about:
 
 - the next skill tree update
 
 Tasks:
 
-- sign for shortcut for pointer mode and drag mode
-- map out the URLs needed
-- design the home page with the parallax effect on Figma
-    - desktop
-    - mobile
 - design the tree picking page on Figma
     - desktop
     - mobile
-- design the "send to students" page on Figma
-    - desktop
-    - mobile
-- design the profile page on Figma
-    - desktop
-    - mobile
-- design the 404 page
+
+Sidebar
+
+- button for editing global skill tree settings (g button)
+- sign for shortcut for pointer mode and drag mode
+- view as Student button: Student View Button
+- Teacher View button
+
+PanAndZoom
+
+- drag and drop functionality for hexagons
+
+Figma
+
+- map out the URLs needed
+- design the home page with the parallax effect on Figma
     - desktop
     - mobile
 
