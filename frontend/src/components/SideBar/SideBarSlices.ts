@@ -1,18 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SidebarState } from "../../types/Types";
+import { INITIAL_SIDEBAR_STATE } from "../../StaticVariables";
 
 const SideBarSlice = createSlice({
     name: 'sidebar',
-    initialState: {
-        verbal: true,
-        quantitative: true,
-        editImgAddress: false,
-        editNoteTitle: false,
-        editNoteBody: false,
-        imgAddress: '',
-        noteTitle: '',
-        noteBody: '',
-    } as SidebarState,
+    initialState: INITIAL_SIDEBAR_STATE,
     reducers: {
         changeVerbalBool: state => {
             switch (state.verbal) {
@@ -74,17 +65,8 @@ const SideBarSlice = createSlice({
         ChangeNoteBody: (state, action) => {
             state.noteBody = action.payload
         },
-        CloseAndClearAllForms: state => {
-            state = {
-                verbal: true,
-                quantitative: true,
-                editImgAddress: false,
-                editNoteTitle: false,
-                editNoteBody: false,
-                imgAddress: '',
-                noteTitle: '',
-                noteBody: '',
-            }
+        ResetSidebarState: state => {
+            state = INITIAL_SIDEBAR_STATE
         },
     }
 })
@@ -98,6 +80,6 @@ export const {
     ChangeImgAddress,
     ChangeNoteTitle,
     ChangeNoteBody,
-    CloseAndClearAllForms,
+    ResetSidebarState,
 } = SideBarSlice.actions
 export default SideBarSlice.reducer

@@ -3,14 +3,11 @@ import {
     PayloadAction
 } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
-import { AuthState } from "../../types/Types";
+import { INITIAL_AUTH_STATE } from "../../StaticVariables";
 
 const AuthSlice = createSlice({
     name: 'auth',
-    initialState: {
-        user: null,
-        token: null
-    } as AuthState,
+    initialState: INITIAL_AUTH_STATE,
     reducers: {
         setCredentials: (
             state,
@@ -19,7 +16,7 @@ const AuthSlice = createSlice({
         },
         RemoveCredentials: state => {
             state.token = null
-        }
+        },
     },
 })
 

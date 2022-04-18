@@ -466,7 +466,6 @@ https://testdriven.io/blog/django-permissions/?utm_campaign=Django%2BNewsletter&
 Saving an authentication token to localstorage in Redux
 https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
 
-
 + work on permissions so that testuser3 can grab the skill tree
     https://www.django-rest-framework.org/api-guide/authentication/
     It was not permissions. Authentication was done with keyword "Token" instead of "Bearer" in the authorization header.
@@ -475,25 +474,18 @@ https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
     It works but the intended affect was to close and reset the editing field.
     The state resets but the sidebar needs to re-render to reflect these changes.
 + create a functioning logout button
++ add owner field to hexagon table due to permissions
++ reset all states, including tool state, upon logout
+    Perhaps I can't re-render it if it's invisible...
+    I cannot re-render if it's invisible. I can, though, reset the state by reloading the window...
+    The re-render was achieved by reloading the window upon logout.
+BRANCH ft-account-module IS COMPLETE
 
 Write an article about:
 
+- the next skill tree update
+
 Tasks:
-
-- reset all states, including tool state, upon logout.
-
-- page 162 - I'll need to capture and store the token either in localStorage or as a cookie
-- create student interface
-    - quantitative feedback form
-    - verbal feedback form
-- create custom themes
-    - The first custom theme must be a skyrim skill tree
-- create skill tree page to pick which skill tree to use
-    you'll probably need to use a search bar for this
-- make it so that there is an option for a user to save a copy of a skill tree as their own
-- use parallax affect for a stylish home page
-
-Designing everything else:
 
 - map out the URLs needed
 - design the home page with the parallax effect on Figma
@@ -512,6 +504,15 @@ Designing everything else:
     - desktop
     - mobile
 
+- create student interface
+    - quantitative feedback form
+    - verbal feedback form
+- create custom themes
+    - The first custom theme must be a skyrim skill tree
+- create skill tree page to pick which skill tree to use
+    you'll probably need to use a search bar for this
+- make it so that there is an option for a user to save a copy of a skill tree as their own
+- use parallax affect for a stylish home page
 
 Production
 

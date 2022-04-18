@@ -277,6 +277,8 @@ class SkillTreeHexagons(Model):
     hex_r: IntegerField = IntegerField(null=False)
     hex_s: IntegerField = IntegerField(null=False)
     skill_tree: ForeignKey = ForeignKey(SkillTrees, on_delete=CASCADE)
+    owner: ForeignKey = ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True)
     allow_verbal_feedback: BooleanField = BooleanField(default=True)
     allow_quantitative_feedback: BooleanField = BooleanField(default=True)
     image_address: TextField = TextField(blank=True, null=True)

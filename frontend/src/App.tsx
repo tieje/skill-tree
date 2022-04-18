@@ -6,6 +6,8 @@ import MainApp from './components/MainApp'
 import { useReduxDispatch, useReduxSelector } from './redux/hooks'
 import { useLogoutMutation } from './redux/api'
 import { RemoveCredentials } from './components/Auth/AuthSlice'
+import { changeToPointerMode, ResetPanModeState } from './components/PanZoomHexGrid/PanModeSlices'
+import { ResetSidebarState } from './components/SideBar/SideBarSlices'
 // <LoggedIn />
 // <MainApp />
 
@@ -36,12 +38,14 @@ const Navbar = () => {
   const [logout] = useLogoutMutation()
   const handleLogout = () => {
     dispatch(RemoveCredentials())
+    dispatch(ResetPanModeState())
+    dispatch(ResetSidebarState())
     logout('none')
+    window.location.reload()
   }
-  console.log(token)
   return (
     <section className=''>
-      <ul>
+      <ul className='bg-green grid justify-end'>
         <li>
           <Link to='/'>Home Page</Link>
         </li>

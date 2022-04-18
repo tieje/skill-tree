@@ -1,4 +1,5 @@
-import { HexagonType, PathType } from "./types/Types"
+import { AuthState, HexagonType, PanState, PathType, SidebarState } from "./types/Types"
+import { TOOL_NONE } from 'react-svg-pan-zoom'
 
 const VERBAL: string = 'Verbal Feedback'
 const QUANTITATIVE: string = 'Quantitative Feedback'
@@ -27,6 +28,36 @@ const INITIAL_HEX_STATE: Partial<HexagonType> = {
     hex_string: undefined,
     hex_id: undefined,
 }
+const INITIAL_SIDEBAR_STATE: SidebarState = {
+    verbal: true,
+    quantitative: true,
+    editImgAddress: false,
+    editNoteTitle: false,
+    editNoteBody: false,
+    imgAddress: '',
+    noteTitle: '',
+    noteBody: '',
+}
+const INITIAL_PAN_MODE_STATE: PanState = {
+    tool: TOOL_NONE,
+    hexagonFocused: {
+        hex_id: 1,
+        hex_string: 'h_8_1_m9',
+        hex_q: 8,
+        hex_r: 1,
+        hex_s: -9,
+    },
+    pathFocused: INITIAL_PATH_HEX_STATE,
+    startingPathHexagon: INITIAL_HEX_STATE,
+    pathEditMode: PATH_EDIT_OFF,
+    pathDeselectDisable: true,
+    pathDeleteDisable: true,
+}
+const INITIAL_AUTH_STATE: AuthState = {
+    user: null,
+    token: null
+
+}
 
 export {
     VERBAL,
@@ -42,4 +73,7 @@ export {
     PATH_EDIT_CHOSEN,
     INITIAL_PATH_HEX_STATE,
     INITIAL_HEX_STATE,
+    INITIAL_SIDEBAR_STATE,
+    INITIAL_PAN_MODE_STATE,
+    INITIAL_AUTH_STATE,
 }
