@@ -14,6 +14,8 @@ import { ResetSidebarState } from './components/SideBar/SideBarSlices'
 const App = () => {
   return (
     <main>
+
+      {/*
       <Routes>
         <Route element={<Navbar />}>
           <Route path='/' element={<HomePage />} />

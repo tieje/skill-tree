@@ -614,15 +614,39 @@ Now, I will focus on actually designing and building it.
 With information above, turn this into a mastapiece.
 https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
 
++ design the tree picking page on Figma
+    + desktop
+    ~ mobile
+        I'm not going to do this since it's pretty simple to translate it to mobile
++ design the home page
+    + desktop
+        I made a very rough... thing.
+    ~ mobile
+
+4/21/2022
+
+
+
 Write an article about:
 
 - the next skill tree update
+    Tree Picker Page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
+    https://i.ibb.co/t3c96Q2/Screen-Shot-2022-04-19-at-10-30-27-AM.png
+    Home page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
+    Your repo is now public
 
 Tasks:
 
-- design the tree picking page on Figma
-    - desktop
-    - mobile
+- 
+
+- build a static version of the tree picking page
+- build the static form page
+- build the awaiting for email confirmation page
+- build the 404 page
+
+- build the static version of the home page after you have built the skyrim theme
 
 Sidebar
 
@@ -634,13 +658,10 @@ Sidebar
 PanAndZoom
 
 - drag and drop functionality for hexagons
+- Global Settings for the skill tree on the right side
+- Feature for owners to download their data in a JSON File
 
 Figma
-
-- map out the URLs needed
-- design the home page with the parallax effect on Figma
-    - desktop
-    - mobile
 
 - create student interface
     - quantitative feedback form
