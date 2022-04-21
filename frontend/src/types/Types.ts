@@ -121,6 +121,17 @@ type LoginRequest = {
     password: string;
 }
 
+type NavButtonPropsType = {
+    label: string
+    to: string
+}
+
+type SkillTreeItemPropsType = {
+    title?: string
+    url?: string
+    recency?: string
+}
+
 export type {
     undefinedPayloadType,
     SkillTreeType,
@@ -137,4 +148,6 @@ export type {
     LoginRequest,
     PanState,
     SidebarState,
+    NavButtonPropsType,
+    SkillTreeItemPropsType,
 }

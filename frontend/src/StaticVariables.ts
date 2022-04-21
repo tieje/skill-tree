@@ -1,4 +1,4 @@
-import { AuthState, HexagonType, PanState, PathType, SidebarState } from "./types/Types"
+import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState, SkillTreeItemPropsType } from "./types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
 
 const VERBAL: string = 'Verbal Feedback'
@@ -58,6 +58,69 @@ const INITIAL_AUTH_STATE: AuthState = {
     token: null
 
 }
+const SIGN_UP: NavButtonPropsType = {
+    label: 'Sign Up',
+    to: '/registration'
+}
+
+const LOGIN: NavButtonPropsType = {
+    label: 'Login',
+    to: '/treepicker',
+}
+
+const LOGOUT: NavButtonPropsType = {
+    label: 'Logout',
+    to: '/',
+}
+
+const SETTINGS: NavButtonPropsType = {
+    label: 'Settings',
+    to: '/user-settings',
+}
+
+const SAMPLE_TREE1: SkillTreeItemPropsType = {
+    title: 'U.S. History I',
+    url: 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555283220/shape/mentalfloss/thomas_paine_rev1.jpg',
+    recency: '4 minutes ago'
+}
+const SAMPLE_TREE2: SkillTreeItemPropsType = {
+    title: 'U.S. History II',
+    url: 'https://www.ibtimes.com/sites/www.ibtimes.com/files/2017/04/13/gettyimages-803398.jpg',
+    recency: '7 minutes ago'
+}
+const SAMPLE_TREE3: SkillTreeItemPropsType = {
+    title: 'Keeanu Reeves',
+    url: 'https://img.apmcdn.org/ebacb565e6ca1f8dd8bbd97d24e89dfb5c5c9b48/normal/5e48cc-20190327-keanu-reeves.jpg',
+    recency: '1 year go'
+}
+const LONG_TREE: SkillTreeItemPropsType = {
+    title: 'foawnafaowe;nva;nwdva;nvo;anv;joanfd;jafoaiwegrahaeihu',
+    url: '#',
+    recency: 'foawnafaowe;nva;nwdva;nvo;anv;joanfd;jafoaiwegrahaeihu',
+}
+
+const EMPTY_TREE: SkillTreeItemPropsType = {
+    title: '',
+    url: '#',
+    recency: '',
+}
+
+const SAMPLE_TREES: SkillTreeItemPropsType[] = [
+    SAMPLE_TREE1,
+    SAMPLE_TREE2,
+    SAMPLE_TREE3,
+    LONG_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+    EMPTY_TREE,
+]
 
 export {
     VERBAL,
@@ -76,4 +139,9 @@ export {
     INITIAL_SIDEBAR_STATE,
     INITIAL_PAN_MODE_STATE,
     INITIAL_AUTH_STATE,
+    LOGOUT,
+    LOGIN,
+    SIGN_UP,
+    SETTINGS,
+    SAMPLE_TREES,
 }

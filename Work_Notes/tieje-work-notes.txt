@@ -625,7 +625,11 @@ https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
 
 4/21/2022
 
+I'll have a logo, but it's not going to be in the nav bar because this is a productivity tool where you don't want to
+be redirected to the frontpage, not even accidentally.
 
++ build the static navbar
++ build a static version of the tree picking page
 
 Write an article about:
 
@@ -639,9 +643,8 @@ Write an article about:
 
 Tasks:
 
-- 
-
-- build a static version of the tree picking page
+- build the stateful treepicker
+    - An underline and a purple color should only appear for the chosen filter between Learn and Teach
 - build the static form page
 - build the awaiting for email confirmation page
 - build the 404 page
@@ -675,6 +678,8 @@ Figma
 
 Production
 
+- for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page
+- get down image uploading and usage so that you don't need to rely on external images
 - page 185 in Django for REST APIs
 - page 142 django for professionals - account email verification with sendgrid
 - send email with skill tree link to a list of students on a textarea form separated by a new-line
