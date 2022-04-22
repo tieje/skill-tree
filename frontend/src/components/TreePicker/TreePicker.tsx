@@ -1,9 +1,11 @@
 import { nanoid } from "nanoid"
-import { SAMPLE_TREES } from "../../StaticVariables"
+import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
+import { LEARN, SAMPLE_TREES, TEACH } from "../../Variables/StaticVariables"
 import { SkillTreeItemPropsType } from "../../types/Types"
+import { TreeFilterToLearn, TreeFilterToTeach } from "./TreePickerSlice"
 
 const TreePicker = () => {
-    const labels = ['Learn', 'Teach']
+    const labels = [LEARN, TEACH]
     return (
         <section>
             <div className='md:px-40'>
@@ -31,9 +33,33 @@ const TreePicker = () => {
 }
 
 const TreeFilter = ({ label }: { label: string }) => {
+    const treeFilter = useReduxSelector(state => state.treePicker.treeFilter)
+    const dispatch = useReduxDispatch()
+    const styling: string = 'grid place-content-center text-2xl hover:underline hover:underline-offset-8'
+    const underline = ' underline underline-offset-8'
+    const coloring = ' text-russian-blue'
+    const handleClick = () => {
+        switch (label) {
+            case LEARN:
+                dispatch(TreeFilterToLearn())
+                break
+            case TEACH:
+                dispatch(TreeFilterToTeach())
+                break
+        }
+    }
+    if (treeFilter === label) {
+        return (
+            <li className={styling + underline + coloring}>
+                <button onClick={handleClick}>
+                    {label}
+                </button>
+            </li>
+        )
+    }
     return (
-        <li className='grid place-content-center text-2xl underline underline-offset-8'>
-            <button>
+        <li className={styling}>
+            <button onClick={handleClick}>
                 {label}
             </button>
         </li>
@@ -50,7 +76,7 @@ const CreateSkillTree = () => {
 
 const SkillTreeItem = ({ props }: { props: SkillTreeItemPropsType }) => {
     return (
-        <div className='relative rounded-lg grid border-2 border-gray h-72 '>
+        <div className='relative rounded-lg grid border-2 border-gray h-72 hover:border-russian-blue'>
             <div className='grid justify-center'>
                 <img
                     src={props.url}

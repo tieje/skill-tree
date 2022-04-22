@@ -37,7 +37,10 @@ const treeApi = createApi({
             query: (info) => ({
                 url: `skilltrees/${info.skill_tree_id}/`,
                 method: `POST`,
-                body: info,
+                body: {
+                    ...info,
+                    last_edit_timestamp: Date.now(),
+                },
             }),
             invalidatesTags: ['SkillTree']
         }),

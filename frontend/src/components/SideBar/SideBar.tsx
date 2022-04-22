@@ -9,7 +9,7 @@ import { TOOL_PAN } from 'react-svg-pan-zoom'
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
-import { INVISIBLE, CHECKBOXES, PATH_EDIT_ON, PATH_EDIT_CHOSEN } from '../../StaticVariables'
+import { INVISIBLE, CHECKBOXES, PATH_EDIT_ON, PATH_EDIT_CHOSEN } from '../../Variables/StaticVariables'
 import { changePathEditModeToOn } from '../PanZoomHexGrid/PanModeSlices'
 import PathEdit from './PathEdit'
 

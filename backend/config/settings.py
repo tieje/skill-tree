@@ -201,6 +201,10 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer'
+}
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Skill Tree',
     'DESCRIPTION': 'Create and share skill trees to help gamify education.',

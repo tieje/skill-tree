@@ -8,15 +8,20 @@ import { RemoveCredentials } from './components/Auth/AuthSlice'
 import { ResetPanModeState } from './components/PanZoomHexGrid/PanModeSlices'
 import { ResetSidebarState } from './components/SideBar/SideBarSlices'
 import { NavButtonPropsType } from './types/Types'
-import { LOGIN, LOGOUT, SETTINGS, SIGN_UP } from './StaticVariables'
+import { LOGIN, LOGOUT, SETTINGS, SIGN_UP } from './Variables/StaticVariables'
 import TreePicker from './components/TreePicker/TreePicker'
 
 const App = () => {
+  const token = useReduxSelector(state => state.auth.token)
   return (
     <main className=''>
       <Routes>
         <Route element={<Navbar />}>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/'
+            element={token === null || token === 'null' ? <HomePage />
+              : <RequireAuth>
+                <TreePicker />
+              </RequireAuth>} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/treepicker' element={
             <RequireAuth>

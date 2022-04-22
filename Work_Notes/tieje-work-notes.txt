@@ -631,6 +631,41 @@ be redirected to the frontpage, not even accidentally.
 + build the static navbar
 + build a static version of the tree picking page
 
+4/22/2022
+
+I don't need to redo security because even if they get into the main application,
+they can't even use it because you cannot access the data from the api. This is fine.
+Today is the day that I do an overhaul of Pan Zoom.
+1. Preload state with data in the form of:
+0,1,1: {
+    hex_q,
+    hex_r,
+    hex_s,
+}
+Returning user id with key
+https://stackoverflow.com/questions/44965908/django-rest-auth-registration-how-to-return-user-id-with-the-key-when-using-tok
+I didn't make the treepicker stateful, but I did make much-needed updates on the backend.
+
++ An underline and a blue text color should only appear for the chosen filter between Learn and Teach
++ update backend to include
+    + skill tree table
+        + tree picture
+        + last_edit_timestamp skill on every update or creation
+    + accounts table
+        Skill trees already have an owner so it's enough to grab them by owner.
+        I would need to create and another serializer for it though. But I'm building this anyways.
+        + build another table of user id and skill trees being learned
+            + id
+            + user id
+            + skill tree id
+        + in the serializer, you'll want to get a list of skill tree IDs and grab the info for all of them for each kind of relationship
+        + grab all skill trees being learned in the user serializer
+        serialize the following to get which skill trees are you the owner of
+                + grab all skill trees being taught in the user serializer
++ return user ID with Token
++ update the store to grab user_id in preloaded state
++ do an overhaul on the panzoom data. Make sure that the state is preloaded and build on top of that original state.
+
 Write an article about:
 
 - the next skill tree update
@@ -641,10 +676,16 @@ Write an article about:
     https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
     Your repo is now public
 
+Github Contributions
+- contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
+
 Tasks:
 
+- copy the hover state of the create button on figma
+- copy the double-click functionality and blue highlight from figma
 - build the stateful treepicker
-    - An underline and a purple color should only appear for the chosen filter between Learn and Teach
+- fix permissions so that only the user can grab what they're learning and what they're teaching
+- Options in the lower right underneath the picture - dropdown for removing skill tree
 - build the static form page
 - build the awaiting for email confirmation page
 - build the 404 page

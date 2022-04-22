@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 from rest_framework import serializers
-from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths
+from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeBeingLearnedByUser
 from drf_queryfields import QueryFieldsMixin
 from django.contrib.auth import get_user_model
 
@@ -9,6 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('__all__')
+
 
 class SkillTreeHexagonsSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     # hexList = serializers.SerializerMethodField()
@@ -51,5 +52,36 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     def get_hex_string_list(self, obj: SkillTrees) -> QuerySet:
         '''Collect all hex string ids'''
         hex_string_ids_obj: QuerySet = SkillTreeHexagons.objects.filter(
-            skill_tree_id=obj.skill_tree_id).values_list('hex_string')
+            skill_tree_id=obj.skill_tree_id).values_list('hex_string', flat=True)
         return hex_string_ids_obj
+
+
+class SkillTreesBeingTaughtByUserSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['id', 'teaching']
+    teaching = serializers.SerializerMethodField()
+
+    def get_teaching(self, obj) -> QuerySet:
+        '''Get all the skill trees that the user is an owner (changed to "user") of'''
+        skill_trees: QuerySet = SkillTrees.objects.filter(
+            user=obj.id
+        ).values()
+        return skill_trees
+
+
+class SkillTreesBeingLearnedByUserSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['id', 'learning']
+    learning = serializers.SerializerMethodField()
+
+    def get_learning(self, obj) -> QuerySet:
+        '''Get all the skill trees that the user is currently trying to learn'''
+        ids: QuerySet = SkillTreeBeingLearnedByUser.objects.filter(
+            user=obj.id
+        ).values_list('user', flat=True)
+        skill_trees_learned: QuerySet = SkillTrees.objects.filter(
+            skill_tree_id__in=ids
+        ).values()
+        return skill_trees_learned

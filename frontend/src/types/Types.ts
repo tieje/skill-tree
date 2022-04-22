@@ -48,7 +48,7 @@ type SkillTreeType = {
     hexagons?: HexagonType[];
     name: string;
     theme?: string;
-    hex_string_list?: Array<Array<string>>
+    hex_string_list?: string[]
 }
 
 type GenHexType = {
@@ -74,12 +74,8 @@ type EditButtonPropsType = {
     editMethod(): { payload: undefined; type: string; }
 }
 
-type HexId = {
-    id: number
-}
-
 type HexEntry = {
-    [key: string]: HexId
+    [key: string]: Partial<HexagonType>
 }
 
 type User = {
@@ -87,7 +83,7 @@ type User = {
 }
 
 type AuthState = {
-    user: User | null;
+    user_id: number | null;
     token: string | null;
 }
 
@@ -99,6 +95,7 @@ type PanState = {
     pathEditMode: string
     pathDeselectDisable: boolean
     pathDeleteDisable: boolean
+    hexFiller: HexEntry
 }
 
 type SidebarState = {
@@ -113,7 +110,8 @@ type SidebarState = {
 }
 
 type UserResponse = {
-    key: string
+    key: string,
+    user_id: number,
 }
 
 type LoginRequest = {

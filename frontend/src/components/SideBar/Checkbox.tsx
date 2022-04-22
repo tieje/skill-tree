@@ -1,6 +1,6 @@
 import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from '../../redux/api';
 import { useReduxSelector } from '../../redux/hooks';
-import { QUANTITATIVE, VERBAL } from '../../StaticVariables';
+import { QUANTITATIVE, VERBAL } from '../../Variables/StaticVariables';
 import { HexagonType } from '../../types/Types';
 
 const Checkbox = ({ checkbox }: { checkbox: string }) => {

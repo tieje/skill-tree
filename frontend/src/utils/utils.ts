@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GenHexObjectType, GenHexType, HexagonType, PathType } from "../types/Types";
+import { GenHexObjectType, HexagonType, PathType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
     const hexagons = {}
@@ -8,11 +8,10 @@ function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexe
         for (let r = -offset; r < mapHeight - offset; r++) {
             let s: number = -q - r
             let id: string = String(q) + ',' + String(r) + ',' + String(s)
-            let hex: GenHexType = {
-                q: q,
-                r: r,
-                s: s,
-                pattern: undefined,
+            let hex: Partial<HexagonType> = {
+                hex_q: q,
+                hex_r: r,
+                hex_s: s,
             }
             hexagons[id] = hex
         }

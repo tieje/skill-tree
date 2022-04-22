@@ -3,13 +3,15 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import AuthReducer from '../components/Auth/AuthSlice';
 import PanModeSliceReducer from '../components/PanZoomHexGrid/PanModeSlices'
 import SideBarReducer from '../components/SideBar/SideBarSlices';
+import TreePickerSliceReducer from '../components/TreePicker/TreePickerSlice';
+import { AuthState } from '../types/Types';
 import { treeApi } from './api';
 
 const initialState = {
     auth: {
-        user: null,
         token: localStorage.getItem('TOKEN'),
-    }
+        user_id: parseInt(localStorage.getItem('USER_ID'))
+    } as AuthState,
 }
 
 export const store = configureStore({
@@ -17,6 +19,7 @@ export const store = configureStore({
         panMode: PanModeSliceReducer,
         sideBar: SideBarReducer,
         auth: AuthReducer,
+        treePicker: TreePickerSliceReducer,
         [treeApi.reducerPath]: treeApi.reducer,
     },
     devTools: true,

@@ -3,7 +3,7 @@ import {
     TOOL_PAN
 } from 'react-svg-pan-zoom'
 import { createSlice } from '@reduxjs/toolkit';
-import { INITIAL_HEX_STATE, INITIAL_PAN_MODE_STATE, INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
+import { INITIAL_HEX_STATE, INITIAL_PAN_MODE_STATE, INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../Variables/StaticVariables';
 
 const PanModeSlice = createSlice({
     name: 'PanMode',

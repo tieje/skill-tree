@@ -1,5 +1,6 @@
-import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState, SkillTreeItemPropsType } from "./types/Types"
+import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState, SkillTreeItemPropsType } from "../types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
+import { hexagonFiller } from "./HexFiller"
 
 const VERBAL: string = 'Verbal Feedback'
 const QUANTITATIVE: string = 'Quantitative Feedback'
@@ -42,7 +43,7 @@ const INITIAL_PAN_MODE_STATE: PanState = {
     tool: TOOL_NONE,
     hexagonFocused: {
         hex_id: 1,
-        hex_string: 'h_8_1_m9',
+        hex_string: '8,1,-9',
         hex_q: 8,
         hex_r: 1,
         hex_s: -9,
@@ -52,11 +53,11 @@ const INITIAL_PAN_MODE_STATE: PanState = {
     pathEditMode: PATH_EDIT_OFF,
     pathDeselectDisable: true,
     pathDeleteDisable: true,
+    hexFiller: hexagonFiller,
 }
 const INITIAL_AUTH_STATE: AuthState = {
-    user: null,
+    user_id: null,
     token: null
-
 }
 const SIGN_UP: NavButtonPropsType = {
     label: 'Sign Up',
@@ -77,6 +78,9 @@ const SETTINGS: NavButtonPropsType = {
     label: 'Settings',
     to: '/user-settings',
 }
+
+const LEARN: string = 'Learn'
+const TEACH: string = 'Teach'
 
 const SAMPLE_TREE1: SkillTreeItemPropsType = {
     title: 'U.S. History I',
@@ -143,5 +147,7 @@ export {
     LOGIN,
     SIGN_UP,
     SETTINGS,
+    LEARN,
+    TEACH,
     SAMPLE_TREES,
 }

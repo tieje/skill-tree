@@ -35,10 +35,10 @@ import {
   clearPathFocused
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
-import { any, HexEntryNameToNumbers, UnZipStringList, } from '../../utils/utils';
+import { any } from '../../utils/utils';
 import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
-import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../StaticVariables';
+import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
 
 const PanZoomHexGrid = () => {
@@ -50,6 +50,7 @@ const PanZoomHexGrid = () => {
   // useRef
   const hexElement = useRef(null)
   // useReduxSelector
+  const hexFiller = useReduxSelector(state => state.panMode.hexFiller)
   const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
   const tool = useReduxSelector(state => state.panMode.tool)
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
@@ -177,10 +178,6 @@ const PanZoomHexGrid = () => {
       <div>Error</div>
     )
   }
-  let hex_string_list: string[];
-  if (currentData) {
-    hex_string_list = UnZipStringList(currentData.hex_string_list)
-  }
   return (
     <ReactSVGPanZoom
       ref={hexElement}
@@ -214,27 +211,25 @@ const PanZoomHexGrid = () => {
               />
             )
           })}
-          {currentData ? Object.entries(currentData).map(([key, value]) => {
-            if (key[0] === 'h' && key[1] === '_') {
-              if (!hex_string_list.includes(key)) {
-                let hex = HexEntryNameToNumbers(key)
-                return (
-                  <Hexagon
-                    key={nanoid()}
-                    id={key}
-                    q={hex.hex_q}
-                    r={hex.hex_r}
-                    s={hex.hex_s}
-                    onClick={() => handleHexagonClick(hex)}
-                  >
-                    <Text>
-                      {hex.hex_q},{hex.hex_r},{hex.hex_s}
-                    </Text>
-                  </Hexagon>
-                )
-              }
+          {Object.entries(hexFiller).map(([key, value]) => {
+            if (!currentData.hex_string_list.includes(key)) {
+              return (
+                <Hexagon
+                  key={nanoid()}
+                  id={key}
+                  q={value.hex_q}
+                  r={value.hex_r}
+                  s={value.hex_s}
+                  onClick={() => handleHexagonClick(value)}
+                >
+                  <Text>
+                    {value.hex_q},{value.hex_r},{value.hex_s}
+                  </Text>
+                </Hexagon>
+              )
             }
-          }) : null}
+            return null
+          })}
           {pathEditMode === PATH_EDIT_CHOSEN && hexagonFocused ?
             <Hexagon
               key={nanoid()}

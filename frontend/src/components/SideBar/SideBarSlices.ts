@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { INITIAL_SIDEBAR_STATE } from "../../StaticVariables";
+import { INITIAL_SIDEBAR_STATE } from "../../Variables/StaticVariables";
 
 const SideBarSlice = createSlice({
     name: 'sidebar',
