@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { HexagonType, LoginRequest, PathType, SkillTreeType, UserResponse } from '../types/Types'
+import { HexagonType, LoginRequest, PathType, SkillTreePickerByUserIdType, SkillTreeType, UserResponse } from '../types/Types'
 import { RootState } from './store'
 
 const treeApi = createApi({
@@ -14,8 +14,12 @@ const treeApi = createApi({
             return headers
         },
     }),
-    tagTypes: ['Hexagon', 'SkillTree'],
+    tagTypes: ['Hexagon', 'SkillTree', 'SkillTreePicker'],
     endpoints: (build) => ({
+        getSkillTreePickerDataByUserId: build.query<Partial<SkillTreePickerByUserIdType>, string>({
+            query: (id) => `skilltreepicker/${id}`,
+            providesTags: ['SkillTreePicker']
+        }),
         login: build.mutation<UserResponse, LoginRequest>({
             query: (credentials) => ({
                 url: 'dj-rest-auth/login/',
@@ -84,6 +88,7 @@ const treeApi = createApi({
 })
 
 export const {
+    useGetSkillTreePickerDataByUserIdQuery,
     useGetTreeByIdQuery,
     useGetHexagonByIdQuery,
     useCreateHexMutation,

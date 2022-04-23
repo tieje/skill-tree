@@ -56,25 +56,12 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         return hex_string_ids_obj
 
 
-class SkillTreesBeingTaughtByUserSerializer(QueryFieldsMixin, serializers.ModelSerializer):
+class SkillTreePickerSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ['id', 'teaching']
-    teaching = serializers.SerializerMethodField()
-
-    def get_teaching(self, obj) -> QuerySet:
-        '''Get all the skill trees that the user is an owner (changed to "user") of'''
-        skill_trees: QuerySet = SkillTrees.objects.filter(
-            user=obj.id
-        ).values()
-        return skill_trees
-
-
-class SkillTreesBeingLearnedByUserSerializer(QueryFieldsMixin, serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = ['id', 'learning']
+        fields = ['id', 'learning', 'teaching']
     learning = serializers.SerializerMethodField()
+    teaching = serializers.SerializerMethodField()
 
     def get_learning(self, obj) -> QuerySet:
         '''Get all the skill trees that the user is currently trying to learn'''
@@ -85,3 +72,10 @@ class SkillTreesBeingLearnedByUserSerializer(QueryFieldsMixin, serializers.Model
             skill_tree_id__in=ids
         ).values()
         return skill_trees_learned
+
+    def get_teaching(self, obj) -> QuerySet:
+        '''Get all the skill trees that the user is an owner (changed to "user") of'''
+        skill_trees: QuerySet = SkillTrees.objects.filter(
+            user=obj.id
+        ).values()
+        return skill_trees

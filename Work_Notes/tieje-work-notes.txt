@@ -666,6 +666,12 @@ I didn't make the treepicker stateful, but I did make much-needed updates on the
 + update the store to grab user_id in preloaded state
 + do an overhaul on the panzoom data. Make sure that the state is preloaded and build on top of that original state.
 
+4/23/2022
+
++ copy the gray hover state of the create button on figma
++ combine learning and teaching serialization in the backend
++ make Learn and Teach buttons stateful and working as intended
+
 Write an article about:
 
 - the next skill tree update
@@ -681,9 +687,7 @@ Github Contributions
 
 Tasks:
 
-- copy the hover state of the create button on figma
-- copy the double-click functionality and blue highlight from figma
-- build the stateful treepicker
+- make clicking on the skill tree go to the actual skill tree
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 - Options in the lower right underneath the picture - dropdown for removing skill tree
 - build the static form page

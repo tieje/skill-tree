@@ -1,4 +1,4 @@
-import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState, SkillTreeItemPropsType } from "../types/Types"
+import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState } from "../types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
 import { hexagonFiller } from "./HexFiller"
 
@@ -81,7 +81,7 @@ const SETTINGS: NavButtonPropsType = {
 
 const LEARN: string = 'Learn'
 const TEACH: string = 'Teach'
-
+/*
 const SAMPLE_TREE1: SkillTreeItemPropsType = {
     title: 'U.S. History I',
     url: 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555283220/shape/mentalfloss/thomas_paine_rev1.jpg',
@@ -125,7 +125,7 @@ const SAMPLE_TREES: SkillTreeItemPropsType[] = [
     EMPTY_TREE,
     EMPTY_TREE,
 ]
-
+*/
 export {
     VERBAL,
     QUANTITATIVE,
@@ -149,5 +149,5 @@ export {
     SETTINGS,
     LEARN,
     TEACH,
-    SAMPLE_TREES,
+    //SAMPLE_TREES,
 }

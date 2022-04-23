@@ -15,3 +15,4 @@ Features to Implement
 - add "original_owners" later so a list of owners can receive credit for their work?
 - create logout page
     originally, I just wanted to redirect users to login page. It's still possible to do that.
+- copy the double-click functionality and blue highlight from figma

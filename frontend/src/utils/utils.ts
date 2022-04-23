@@ -19,9 +19,9 @@ function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexe
     if (addHexes) {
         addHexes.forEach((hex: HexagonType): void => {
             hexagons[hex.hex_string] = {
-                q: hex.hex_q,
-                r: hex.hex_r,
-                s: hex.hex_s,
+                hex_q: hex.hex_q,
+                hex_r: hex.hex_r,
+                hex_s: hex.hex_s,
                 pattern: hex.image_address,
             }
         });

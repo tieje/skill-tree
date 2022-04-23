@@ -83,7 +83,7 @@ type User = {
 }
 
 type AuthState = {
-    user_id: number | null;
+    user_id: string | null;
     token: string | null;
 }
 
@@ -124,10 +124,18 @@ type NavButtonPropsType = {
     to: string
 }
 
-type SkillTreeItemPropsType = {
-    title?: string
-    url?: string
-    recency?: string
+type SkillTreePickerTreeType = {
+    skill_tree_id: number
+    name: string,
+    user_id: number,
+    image_address: string,
+    last_edit_timestamp: number
+}
+
+type SkillTreePickerByUserIdType = {
+    id: number
+    learning: SkillTreePickerTreeType[]
+    teaching: SkillTreePickerTreeType[]
 }
 
 export type {
@@ -147,5 +155,6 @@ export type {
     PanState,
     SidebarState,
     NavButtonPropsType,
-    SkillTreeItemPropsType,
+    SkillTreePickerTreeType,
+    SkillTreePickerByUserIdType,
 }

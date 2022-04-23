@@ -10,7 +10,7 @@ import { treeApi } from './api';
 const initialState = {
     auth: {
         token: localStorage.getItem('TOKEN'),
-        user_id: parseInt(localStorage.getItem('USER_ID'))
+        user_id: localStorage.getItem('USER_ID')
     } as AuthState,
 }
 
@@ -30,8 +30,10 @@ export const store = configureStore({
 })
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 setupListeners(store.dispatch)
+
 store.subscribe(() => {
     localStorage.setItem('TOKEN', store.getState().auth.token)
+    localStorage.setItem('USER_ID', store.getState().auth.user_id)
 })
 
 export type AppDispatch = typeof store.dispatch;

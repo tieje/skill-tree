@@ -74,7 +74,7 @@ const NavButton = ({ props }: { props: NavButtonPropsType }) => {
   return (
     <li className='grid place-content-center'>
       <Link
-        className='border border-white bg-white rounded-lg p-2 shadow-lg hover:border-russian-blue'
+        className='border border-white bg-white rounded-lg p-2 shadow-lg hover:border-russian-blue hover:bg-gray'
         to={props.to}
       >
         {props.label}

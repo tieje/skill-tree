@@ -1,4 +1,4 @@
-from .views import SkillTreesViewSet, SkillTreeHexagonsViewSet, SkillTreePathsViewSet, UserViewSet, SkillTreeBeingLearnedByUserViewSet, SkillTreesBeingTaughtByUserViewSet
+from .views import SkillTreesViewSet, SkillTreeHexagonsViewSet, SkillTreePathsViewSet, UserViewSet, SkillTreePickerViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -8,6 +8,5 @@ router.register('skilltreehexagons', SkillTreeHexagonsViewSet,
 router.register('skilltreepaths', SkillTreePathsViewSet,
                 basename='skilltreepaths')
 router.register('users', UserViewSet, basename='users')
-router.register('learning', SkillTreeBeingLearnedByUserViewSet, basename='learning')
-router.register('teaching', SkillTreesBeingTaughtByUserViewSet, basename='teaching')
+router.register('skilltreepicker', SkillTreePickerViewSet, basename='skilltreepicker')
 urlpatterns = router.urls

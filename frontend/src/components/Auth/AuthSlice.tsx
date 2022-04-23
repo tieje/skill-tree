@@ -13,7 +13,7 @@ const AuthSlice = createSlice({
             state,
             { payload: { key, user_id } }: PayloadAction<{ key: string, user_id: number }>) => {
             state.token = key
-            state.user_id = user_id
+            state.user_id = user_id.toString()
         },
         RemoveCredentials: state => {
             state.token = null
