@@ -1,6 +1,8 @@
 import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState } from "../types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
 import { hexagonFiller } from "./HexFiller"
+import { INITIAL_VALUE } from 'react-svg-pan-zoom'
+
 
 const VERBAL: string = 'Verbal Feedback'
 const QUANTITATIVE: string = 'Quantitative Feedback'
@@ -54,6 +56,7 @@ const INITIAL_PAN_MODE_STATE: PanState = {
     pathDeselectDisable: true,
     pathDeleteDisable: true,
     hexFiller: hexagonFiller,
+    reactSVGPanZoomValue: INITIAL_VALUE,
 }
 const INITIAL_AUTH_STATE: AuthState = {
     user_id: null,

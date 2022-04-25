@@ -20,6 +20,8 @@ module.exports = {
       'dark-gray': '#c0c0c0',
       'black': '#000000',
       'gray-tint': '#fcfcfc',
+      'red': '#ff0000',
+      'red-purple': '#cb0053',
     },
     extend: {
       backgroundImage: {

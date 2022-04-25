@@ -97,6 +97,7 @@ type PanState = {
     pathDeselectDisable: boolean
     pathDeleteDisable: boolean
     hexFiller: HexEntry
+    reactSVGPanZoomValue: any
 }
 
 type SidebarState = {

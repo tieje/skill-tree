@@ -684,6 +684,11 @@ I didn't make the treepicker stateful, but I did make much-needed updates on the
 + in App.tsx make it so that the home page navigates to the intended skilltreepicker page
 + make it so that it's possible to create and edit skill trees on different pages
 + test path creation in other skill tree
++ replace useState hooks with Redux in PanZoomHexGrid
++ delete hexagon button at the very bottom
+x button for editing global skill tree settings (g button)
++ sign for shortcut for pointer mode and drag mode
+
 
 Write an article about:
 
@@ -700,17 +705,15 @@ Github Contributions
 
 Tasks:
 
-Sidebar
-
-x button for editing global skill tree settings (g button)
-- sign for shortcut for pointer mode and drag mode
-- view as Student button: Student View Button
-- Teacher View button
-
 PanAndZoom
 
 - drag and drop functionality for hexagons
 - Global Settings for the skill tree on the right side
+    - view as Student button: Student View Button
+    - Teacher View button
+    - skill tree profile picture
+    - theme
+    - statistics
 - Feature for owners to download their data in a JSON File
 
 - get the "Create Skill Tree" Button working

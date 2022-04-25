@@ -68,6 +68,14 @@ const treeApi = createApi({
             }),
             invalidatesTags: ['Hexagon', 'SkillTree']
         }),
+        deleteHex: build.mutation<HexagonType, Partial<HexagonType>>({
+            query: (info) => ({
+                url: `skilltreehexagons/${info.hex_id}`,
+                method: `DELETE`,
+                body: info,
+            }),
+            invalidatesTags: ['SkillTree', 'Hexagon']
+        }),
         createPath: build.mutation<PathType, Partial<PathType>>({
             query: (info) => ({
                 url: `skilltreepaths/`,
@@ -83,7 +91,7 @@ const treeApi = createApi({
                 body: info
             }),
             invalidatesTags: ['SkillTree']
-        })
+        }),
     }),
 })
 
@@ -93,6 +101,7 @@ export const {
     useGetHexagonByIdQuery,
     useCreateHexMutation,
     useUpdateHexMutation,
+    useDeleteHexMutation,
     useUpdateTreeByIdMutation,
     useCreatePathMutation,
     useDeletePathMutation,

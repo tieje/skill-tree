@@ -9,6 +9,9 @@ const PanModeSlice = createSlice({
     name: 'PanMode',
     initialState: INITIAL_PAN_MODE_STATE,
     reducers: {
+        changeReactSVGPanZoomValue: (state, payload) => {
+            state.reactSVGPanZoomValue = payload
+        },
         changeToDragMode: state => {
             state.tool = TOOL_PAN
         },
@@ -65,5 +68,6 @@ export const {
     changePathFocused,
     clearPathFocused,
     ResetPanModeState,
+    changeReactSVGPanZoomValue,
 } = PanModeSlice.actions
 export default PanModeSlice.reducer

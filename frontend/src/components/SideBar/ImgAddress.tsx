@@ -120,7 +120,7 @@ const ImgAddress = () => {
             <a
                 href={imgAddress}
                 id={img_tag_id}
-                className='text-ellipsis'
+                className='truncate'
             >
                 {imgAddress === null || imgAddress === '' ? 'no image provided' : imgAddress}
             </a>

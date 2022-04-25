@@ -9,13 +9,9 @@ import {
 import React, {
   useRef,
   useEffect,
-  useState
 } from 'react';
 import {
-  TOOL_PAN,
-  TOOL_NONE,
   ReactSVGPanZoom,
-  INITIAL_VALUE
 } from 'react-svg-pan-zoom'
 import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
@@ -32,7 +28,8 @@ import {
   clearStartingPathHexagon,
   pathDeleteDisableSwitch,
   changePathFocused,
-  clearPathFocused
+  clearPathFocused,
+  changeReactSVGPanZoomValue
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any } from '../../utils/utils';
@@ -60,11 +57,10 @@ const PanZoomHexGrid = () => {
   const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
   const startingPathHexagon = useReduxSelector(state => state.panMode.startingPathHexagon)
   const pathFocused = useReduxSelector(state => state.panMode.pathFocused)
+  const reactSVGPanZoomValue = useReduxSelector(state => state.panMode.reactSVGPanZoomValue)
   const [createPath] = useCreatePathMutation()
   const [deletePath] = useDeletePathMutation()
   // useState
-  const [aTool, setATool] = useState(tool)
-  const [value, setValue] = useState(INITIAL_VALUE)
   const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
@@ -94,7 +90,6 @@ const PanZoomHexGrid = () => {
       switch (event.key) {
         case 'v':
           dispatch(changeToPointerMode())
-          setATool(TOOL_NONE)
           break
         // close all forms before making sidebar invisible and changing to drag mode
         case 'h':
@@ -102,7 +97,6 @@ const PanZoomHexGrid = () => {
           if (editImgAddress) dispatch(ImgAddressSwitch)
           if (editNoteTitle) dispatch(NoteTitleSwitch)
           if (editNoteBody) dispatch(NoteBodySwitch)
-          setATool(TOOL_PAN)
           break
         case 'k':
           dispatch(changePathEditModeToOn())
@@ -156,10 +150,10 @@ const PanZoomHexGrid = () => {
         ref={hexElement}
         width={width}
         height={height - 64}
-        tool={aTool}
-        onChangeTool={setATool}
-        value={value}
-        onChangeValue={setValue}
+        tool={tool}
+        onChangeTool={tool}
+        value={reactSVGPanZoomValue}
+        onChangeValue={(value) => dispatch(changeReactSVGPanZoomValue(value))}
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
@@ -179,10 +173,12 @@ const PanZoomHexGrid = () => {
       ref={hexElement}
       width={width}
       height={height - 64}
-      tool={aTool}
-      onChangeTool={setATool}
-      value={value}
-      onChangeValue={setValue}
+      tool={tool}
+      onChangeTool={tool}
+      value={reactSVGPanZoomValue.payload}
+      onChangeValue={(value) => {
+        dispatch(changeReactSVGPanZoomValue(value))}
+      }
     >
       <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
