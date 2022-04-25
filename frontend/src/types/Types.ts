@@ -40,6 +40,7 @@ type HexagonType = {
     title?: string;
     note?: string;
     hex_string?: string
+    user?: string
 }
 
 type SkillTreeType = {

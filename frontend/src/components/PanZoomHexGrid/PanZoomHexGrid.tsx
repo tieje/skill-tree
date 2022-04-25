@@ -40,11 +40,12 @@ import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } 
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
 import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
+import { useParams } from 'react-router-dom';
 
 const PanZoomHexGrid = () => {
   // Queryies
-  const { data, isLoading, error } = useGetTreeByIdQuery('3')
-  const [currentData, setCurrentData] = useState(data)
+  const { treeId } = useParams()
+  const { data, isLoading, error } = useGetTreeByIdQuery(treeId)
   // variables
   const dispatch = useReduxDispatch()
   // useRef
@@ -123,7 +124,7 @@ const PanZoomHexGrid = () => {
           ending_hex_q: hex.hex_q,
           ending_hex_r: hex.hex_r,
           ending_hex_s: hex.hex_s,
-          skill_tree: 3
+          skill_tree: parseInt(treeId)
         })
         break
       case PATH_EDIT_ON:
@@ -142,12 +143,6 @@ const PanZoomHexGrid = () => {
   }
   useEventListener('keypress', handlePanZoomModeSwitch, undefined, { passive: false })
   // useEffects
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-      setCurrentData(data)
-    }
-  }, [data])
   // single use useEffects
   useEffect(() => {
     hexElement.current.fitToViewer()
@@ -160,7 +155,7 @@ const PanZoomHexGrid = () => {
       <ReactSVGPanZoom
         ref={hexElement}
         width={width}
-        height={height}
+        height={height - 64}
         tool={aTool}
         onChangeTool={setATool}
         value={value}
@@ -183,7 +178,7 @@ const PanZoomHexGrid = () => {
     <ReactSVGPanZoom
       ref={hexElement}
       width={width}
-      height={height}
+      height={height - 64}
       tool={aTool}
       onChangeTool={setATool}
       value={value}
@@ -192,7 +187,7 @@ const PanZoomHexGrid = () => {
       <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {/*Put all hexagons with data first*/}
-          {currentData?.hexagons.map((hex: HexagonType) => {
+          {data?.hexagons.map((hex: HexagonType) => {
             let pid: string;
             if (hex.image_address) {
               pid = 'p' + hex.hex_string
@@ -212,8 +207,8 @@ const PanZoomHexGrid = () => {
               />
             )
           })}
-          {currentData ? Object.entries(hexFiller).map(([key, value]) => {
-            if (!currentData.hex_string_list.includes(key)) {
+          {data ? Object.entries(hexFiller).map(([key, value]) => {
+            if (!data.hex_string_list.includes(key)) {
               return (
                 <Hexagon
                   key={nanoid()}
@@ -240,7 +235,7 @@ const PanZoomHexGrid = () => {
               cellStyle={{ fill: '#fd9420' }}
             />
             : null}
-          {currentData?.paths.map((path: PathType) => {
+          {data?.paths.map((path: PathType) => {
             return (
               <CustomPath
                 key={path.path_id}
@@ -269,7 +264,7 @@ const PanZoomHexGrid = () => {
             />
             : null}
         </Layout>
-        {currentData?.hexagons.map((hex: HexagonType) => {
+        {data?.hexagons.map((hex: HexagonType) => {
           let pid: string;
           if (hex.image_address) {
             pid = 'p' + hex.hex_string

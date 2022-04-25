@@ -5,6 +5,9 @@ import EditButton from "./EditButton";
 import { ChangeNoteTitle, NoteTitleSwitch } from "./SideBarSlices";
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
 import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from "../../redux/api";
+import { HexagonType } from "../../types/Types";
+import { changeHexagonFocus } from "../PanZoomHexGrid/PanModeSlices";
+import { useParams } from "react-router-dom";
 
 const NoteTitle = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
@@ -13,12 +16,14 @@ const NoteTitle = () => {
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
     const noteEditId = nanoid()
     const inputRef = useFocusInput()
+    const userId = useReduxSelector(state => state.auth.user_id)
     const dispatch = useReduxDispatch()
+    const { treeId } = useParams()
     // mutations
     const [updateHex] = useUpdateHexMutation()
     const [createHex] = useCreateHexMutation()
     // functions
-    const handleAddText = (
+    const handleAddText = async (
         event: React.KeyboardEvent<HTMLInputElement>) => {
         switch (event.key) {
             case 'Enter':
@@ -27,16 +32,23 @@ const NoteTitle = () => {
                 if (hexagonFocused.hex_id) {
                     updateHex({
                         hex_id: hexagonFocused.hex_id,
-                        title: noteTitle
+                        title: noteTitle,
+                        user: userId,
                     })
                 } else {
-                    createHex({
-                        title: noteTitle,
-                        hex_q: hexagonFocused.hex_q,
-                        hex_r: hexagonFocused.hex_r,
-                        hex_s: hexagonFocused.hex_s,
-                        skill_tree: 3,
-                    })
+                    try {
+                        const payload: HexagonType = await createHex({
+                            title: noteTitle,
+                            hex_q: hexagonFocused.hex_q,
+                            hex_r: hexagonFocused.hex_r,
+                            hex_s: hexagonFocused.hex_s,
+                            skill_tree: parseInt(treeId),
+                            user: userId,
+                        }).unwrap()
+                        dispatch(changeHexagonFocus(payload))
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }
                 break
         }

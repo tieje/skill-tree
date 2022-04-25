@@ -42,7 +42,7 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
 const INITIAL_PAN_MODE_STATE: PanState = {
     tool: TOOL_NONE,
     hexagonFocused: {
-        hex_id: 1,
+        hex_id: undefined,
         hex_string: '8,1,-9',
         hex_q: 8,
         hex_r: 1,
@@ -66,7 +66,7 @@ const SIGN_UP: NavButtonPropsType = {
 
 const LOGIN: NavButtonPropsType = {
     label: 'Login',
-    to: '/skill-trees',
+    to: '/trees',
 }
 
 const LOGOUT: NavButtonPropsType = {
@@ -79,53 +79,14 @@ const SETTINGS: NavButtonPropsType = {
     to: '/user-settings',
 }
 
+const TREES: NavButtonPropsType = {
+    label: 'Skill Trees',
+    to: '/trees',
+}
+
 const LEARN: string = 'Learn'
 const TEACH: string = 'Teach'
-/*
-const SAMPLE_TREE1: SkillTreeItemPropsType = {
-    title: 'U.S. History I',
-    url: 'https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555283220/shape/mentalfloss/thomas_paine_rev1.jpg',
-    recency: '4 minutes ago'
-}
-const SAMPLE_TREE2: SkillTreeItemPropsType = {
-    title: 'U.S. History II',
-    url: 'https://www.ibtimes.com/sites/www.ibtimes.com/files/2017/04/13/gettyimages-803398.jpg',
-    recency: '7 minutes ago'
-}
-const SAMPLE_TREE3: SkillTreeItemPropsType = {
-    title: 'Keeanu Reeves',
-    url: 'https://img.apmcdn.org/ebacb565e6ca1f8dd8bbd97d24e89dfb5c5c9b48/normal/5e48cc-20190327-keanu-reeves.jpg',
-    recency: '1 year go'
-}
-const LONG_TREE: SkillTreeItemPropsType = {
-    title: 'foawnafaowe;nva;nwdva;nvo;anv;joanfd;jafoaiwegrahaeihu',
-    url: '#',
-    recency: 'foawnafaowe;nva;nwdva;nvo;anv;joanfd;jafoaiwegrahaeihu',
-}
 
-const EMPTY_TREE: SkillTreeItemPropsType = {
-    title: '',
-    url: '#',
-    recency: '',
-}
-
-const SAMPLE_TREES: SkillTreeItemPropsType[] = [
-    SAMPLE_TREE1,
-    SAMPLE_TREE2,
-    SAMPLE_TREE3,
-    LONG_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-    EMPTY_TREE,
-]
-*/
 export {
     VERBAL,
     QUANTITATIVE,
@@ -149,5 +110,5 @@ export {
     SETTINGS,
     LEARN,
     TEACH,
-    //SAMPLE_TREES,
+    TREES,
 }

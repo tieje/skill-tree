@@ -8,31 +8,31 @@ import { RemoveCredentials } from './components/Auth/AuthSlice'
 import { ResetPanModeState } from './components/PanZoomHexGrid/PanModeSlices'
 import { ResetSidebarState } from './components/SideBar/SideBarSlices'
 import { NavButtonPropsType } from './types/Types'
-import { LOGIN, LOGOUT, SETTINGS, SIGN_UP } from './Variables/StaticVariables'
+import { LOGIN, LOGOUT, SETTINGS, SIGN_UP, TREES } from './Variables/StaticVariables'
 import TreePicker from './components/TreePicker/TreePicker'
 import MainApp from './components/MainApp'
 
 const App = () => {
-  const token = useReduxSelector(state => state.auth.token)
   return (
     <main className='bg-gray-tint h-screen'>
       <Routes>
         <Route element={<Navbar />}>
           <Route path='/'
-            element={token === null || token === 'null' ? <HomePage />
-              : <RequireAuth>
-                <TreePicker />
-              </RequireAuth>} />
+            element={<HomePage />} />
           <Route path='login' element={<LoginForm />} />
-          <Route path='skill-trees' element={
+          <Route path='trees' element={
             <RequireAuth>
               <TreePicker />
             </RequireAuth>
           }>
           </Route>
-          <Route path='app/*' element={
-            <MainApp />
-          } />
+          <Route path='app'>
+            <Route path=':treeId' element={
+              <RequireAuth>
+                <MainApp />
+              </RequireAuth>
+            } />
+          </Route>
         </Route>
       </Routes>
     </main >
@@ -53,7 +53,7 @@ const Navbar = () => {
   return (
     <section>
       <nav className='flex flex-row bg-paper-yellow justify-end md:h-16'>
-        <ul className='grid grid-cols-2 justify-end gap-4 pr-10'>
+        <ul className='flex justify-end gap-4 pr-5'>
           {token === null || token === 'null' ?
             <>
               <NavButton props={SIGN_UP} />
@@ -61,6 +61,7 @@ const Navbar = () => {
             </>
             :
             <>
+              <NavButton props={TREES} />
               <NavButton props={SETTINGS} />
               <button onClick={handleLogout}>
                 <NavButton props={LOGOUT} />

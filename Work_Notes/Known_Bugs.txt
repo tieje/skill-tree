@@ -1,10 +1,12 @@
 Important
 
+- Not particularly safe. If you're authenticated and you know a user ID, you can just update any hexagon or path
 - Deployment with React Router will likely fail unless the following is done:
     https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
 
 Do Later
 
+- Fix the width and height in ReactSVGPanZoom
 - The state resets but the sidebar needs to re-render to reflect these changes.
 - fix centering button to be the actual center
 - turn off drifting for the svg

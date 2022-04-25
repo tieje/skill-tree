@@ -58,7 +58,7 @@ const treeApi = createApi({
                 method: `POST`,
                 body: info,
             }),
-            invalidatesTags: ['SkillTree']
+            invalidatesTags: ['Hexagon', 'SkillTree']
         }),
         updateHex: build.mutation<HexagonType, Partial<HexagonType>>({
             query: (info) => ({

@@ -676,6 +676,15 @@ I didn't make the treepicker stateful, but I did make much-needed updates on the
 
 + clicking on any skill tree, navigates to the test skill tree
 
+4/25/2022
+
++ make clicking on the skill tree go to the actual skill tree
++ Skill Trees to trees button for navigation
++ Fix width and height... for now... for ReactSVGPanZoom
++ in App.tsx make it so that the home page navigates to the intended skilltreepicker page
++ make it so that it's possible to create and edit skill trees on different pages
++ test path creation in other skill tree
+
 Write an article about:
 
 - the next skill tree update
@@ -691,16 +700,6 @@ Github Contributions
 
 Tasks:
 
-- in App.tsx make it so that the home page navigates to the intended skilltreepicker page
-- make clicking on the skill tree go to the actual skill tree
-- fix permissions so that only the user can grab what they're learning and what they're teaching
-- Options in the lower right underneath the picture - dropdown for removing skill tree
-- build the static form page
-- build the awaiting for email confirmation page
-- build the 404 page
-
-- build the static version of the home page after you have built the skyrim theme
-
 Sidebar
 
 x button for editing global skill tree settings (g button)
@@ -714,6 +713,14 @@ PanAndZoom
 - Global Settings for the skill tree on the right side
 - Feature for owners to download their data in a JSON File
 
+- get the "Create Skill Tree" Button working
+- fix permissions so that only the user can grab what they're learning and what they're teaching
+- Options in the lower right underneath the picture - dropdown for removing skill tree
+- build the static form page
+- build the awaiting for email confirmation page
+- build the 404 page
+- build the static version of the home page after you have built the skyrim theme
+
 Figma
 
 - create student interface
@@ -725,6 +732,10 @@ Figma
     you'll probably need to use a search bar for this
 - make it so that there is an option for a user to save a copy of a skill tree as their own
 - use parallax affect for a stylish home page
+
+Auth
+
+- make it so that code 400 logging in says that the password is wrong
 
 Production
 

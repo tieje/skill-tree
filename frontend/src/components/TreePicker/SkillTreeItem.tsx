@@ -1,12 +1,20 @@
 import { SkillTreePickerTreeType } from "../../types/Types"
 import ReactTimeago from "react-timeago"
 import { useNavigate } from "react-router-dom"
+import { ResetSidebarState } from "../SideBar/SideBarSlices"
+import { useReduxDispatch } from "../../redux/hooks"
 
 const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
     const navigate = useNavigate()
+    const dispatch = useReduxDispatch()
+    // functions
+    const handleNavigation = () => {
+        dispatch(ResetSidebarState())
+        navigate(`/app/${props.skill_tree_id.toString()}`)
+    }
     return (
         <button
-            onClick={() => navigate(`/app/${props.skill_tree_id.toString()}`)}
+            onClick={handleNavigation}
             className='relative rounded-lg grid border-2 border-gray h-72 hover:border-russian-blue hover:bg-gray'
         >
             <div className='grid justify-center'>

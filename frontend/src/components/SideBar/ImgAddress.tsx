@@ -5,6 +5,9 @@ import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
 import { ChangeImgAddress, ImgAddressSwitch } from "./SideBarSlices"
 import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from "../../redux/api"
 import EditButton from "./EditButton"
+import { HexagonType } from "../../types/Types"
+import { changeHexagonFocus } from "../PanZoomHexGrid/PanModeSlices"
+import { useParams } from "react-router-dom"
 
 const ImgAddress = () => {
     // Query
@@ -14,11 +17,13 @@ const ImgAddress = () => {
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
     const inputRef = useFocusInput()
     const img_tag_id: string = nanoid()
+    const userId = useReduxSelector(state => state.auth.user_id)
     const dispatch = useReduxDispatch()
+    const { treeId } = useParams()
     const [updateHex] = useUpdateHexMutation()
     const [createHex] = useCreateHexMutation()
     // functions
-    const handleAddText = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleAddText = async (event: React.KeyboardEvent<HTMLInputElement>) => {
         switch (event.key) {
             case 'Enter':
                 dispatch(ImgAddressSwitch())
@@ -26,16 +31,23 @@ const ImgAddress = () => {
                 if (hexagonFocused.hex_id) {
                     updateHex({
                         hex_id: hexagonFocused.hex_id,
-                        image_address: imgAddress
+                        image_address: imgAddress,
+                        user: userId,
                     })
                 } else {
-                    createHex({
-                        image_address: imgAddress,
-                        hex_q: hexagonFocused.hex_q,
-                        hex_r: hexagonFocused.hex_r,
-                        hex_s: hexagonFocused.hex_s,
-                        skill_tree: 3,
-                    })
+                    try {
+                        const payload: HexagonType = await createHex({
+                            image_address: imgAddress,
+                            hex_q: hexagonFocused.hex_q,
+                            hex_r: hexagonFocused.hex_r,
+                            hex_s: hexagonFocused.hex_s,
+                            skill_tree: parseInt(treeId),
+                            user: userId,
+                        }).unwrap()
+                        dispatch(changeHexagonFocus(payload))
+                    } catch (error) {
+                        console.log(error)
+                    }
                 }
                 break
         }
