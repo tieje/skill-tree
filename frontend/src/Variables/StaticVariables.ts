@@ -66,7 +66,7 @@ const SIGN_UP: NavButtonPropsType = {
 
 const LOGIN: NavButtonPropsType = {
     label: 'Login',
-    to: '/treepicker',
+    to: '/skill-trees',
 }
 
 const LOGOUT: NavButtonPropsType = {

@@ -144,6 +144,7 @@ const PanZoomHexGrid = () => {
   // useEffects
   useEffect(() => {
     if (data) {
+      console.log(data)
       setCurrentData(data)
     }
   }, [data])
@@ -211,7 +212,7 @@ const PanZoomHexGrid = () => {
               />
             )
           })}
-          {Object.entries(hexFiller).map(([key, value]) => {
+          {currentData ? Object.entries(hexFiller).map(([key, value]) => {
             if (!currentData.hex_string_list.includes(key)) {
               return (
                 <Hexagon
@@ -229,7 +230,7 @@ const PanZoomHexGrid = () => {
               )
             }
             return null
-          })}
+          }) : null}
           {pathEditMode === PATH_EDIT_CHOSEN && hexagonFocused ?
             <Hexagon
               key={nanoid()}

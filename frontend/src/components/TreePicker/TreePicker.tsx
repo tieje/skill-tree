@@ -33,33 +33,33 @@ const TreePicker = () => {
         )
     }
     return (
-        <section>
-            <div className='md:px-40'>
-                <ul className='md:py-5 grid grid-flow-col gap-10 justify-start'>
-                    {labels.map((label) => {
-                        return (
-                            <TreeFilter key={nanoid()} label={label} />
-                        )
-                    })}
-                </ul>
-                <h1 className='text-sm opacity-60'>
-                    Recently Viewed
-                </h1>
-                <CreateSkillTree />
-                <div className='grid grid-cols-5 gap-5'>
-                    {treeFilter === LEARN ? data.learning.map((item) => {
-                        return (
-                            <SkillTreeItem key={nanoid()} props={item} />
-                        )
-                    }) : treeFilter === TEACH ? data.teaching.map((item) => {
-                        return (
-                            <SkillTreeItem key={nanoid()} props={item} />
-                        )
-                    })
-                        : null}
+            <section>
+                <div className='md:px-40'>
+                    <ul className='md:py-5 grid grid-flow-col gap-10 justify-start'>
+                        {labels.map((label) => {
+                            return (
+                                <TreeFilter key={nanoid()} label={label} />
+                            )
+                        })}
+                    </ul>
+                    <h1 className='text-sm opacity-60'>
+                        Recently Viewed
+                    </h1>
+                    <CreateSkillTree />
+                    <div className='grid grid-cols-5 gap-5'>
+                        {treeFilter === LEARN ? data.learning.map((item) => {
+                            return (
+                                <SkillTreeItem key={nanoid()} props={item} />
+                            )
+                        }) : treeFilter === TEACH ? data.teaching.map((item) => {
+                            return (
+                                <SkillTreeItem key={nanoid()} props={item} />
+                            )
+                        })
+                            : null}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
     )
 }
 

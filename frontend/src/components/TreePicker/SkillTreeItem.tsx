@@ -1,9 +1,14 @@
 import { SkillTreePickerTreeType } from "../../types/Types"
 import ReactTimeago from "react-timeago"
+import { useNavigate } from "react-router-dom"
 
 const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
+    const navigate = useNavigate()
     return (
-        <div className='relative rounded-lg grid border-2 border-gray h-72 hover:border-russian-blue hover:bg-gray'>
+        <button
+            onClick={() => navigate(`/app/${props.skill_tree_id.toString()}`)}
+            className='relative rounded-lg grid border-2 border-gray h-72 hover:border-russian-blue hover:bg-gray'
+        >
             <div className='grid justify-center'>
                 <img
                     src={props.image_address}
@@ -19,7 +24,7 @@ const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
                     Viewed <ReactTimeago date={props.last_edit_timestamp} />
                 </h2>
             </div>
-        </div >
+        </button >
     )
 }
 export default SkillTreeItem

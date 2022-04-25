@@ -10,11 +10,12 @@ import { ResetSidebarState } from './components/SideBar/SideBarSlices'
 import { NavButtonPropsType } from './types/Types'
 import { LOGIN, LOGOUT, SETTINGS, SIGN_UP } from './Variables/StaticVariables'
 import TreePicker from './components/TreePicker/TreePicker'
+import MainApp from './components/MainApp'
 
 const App = () => {
   const token = useReduxSelector(state => state.auth.token)
   return (
-    <main className=''>
+    <main className='bg-gray-tint h-screen'>
       <Routes>
         <Route element={<Navbar />}>
           <Route path='/'
@@ -22,13 +23,16 @@ const App = () => {
               : <RequireAuth>
                 <TreePicker />
               </RequireAuth>} />
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='/treepicker' element={
+          <Route path='login' element={<LoginForm />} />
+          <Route path='skill-trees' element={
             <RequireAuth>
               <TreePicker />
             </RequireAuth>
-          }
-          />
+          }>
+          </Route>
+          <Route path='app/*' element={
+            <MainApp />
+          } />
         </Route>
       </Routes>
     </main >
@@ -91,5 +95,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }) => {
   }
   return children
 }
-
+export {
+  RequireAuth
+}
 export default App

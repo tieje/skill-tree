@@ -672,6 +672,10 @@ I didn't make the treepicker stateful, but I did make much-needed updates on the
 + combine learning and teaching serialization in the backend
 + make Learn and Teach buttons stateful and working as intended
 
+4/24/2022
+
++ clicking on any skill tree, navigates to the test skill tree
+
 Write an article about:
 
 - the next skill tree update
@@ -687,6 +691,7 @@ Github Contributions
 
 Tasks:
 
+- in App.tsx make it so that the home page navigates to the intended skilltreepicker page
 - make clicking on the skill tree go to the actual skill tree
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 - Options in the lower right underneath the picture - dropdown for removing skill tree
@@ -698,7 +703,7 @@ Tasks:
 
 Sidebar
 
-- button for editing global skill tree settings (g button)
+x button for editing global skill tree settings (g button)
 - sign for shortcut for pointer mode and drag mode
 - view as Student button: Student View Button
 - Teacher View button
