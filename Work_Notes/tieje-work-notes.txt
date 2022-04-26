@@ -322,7 +322,7 @@ k and an on-screen button will be used for Path Edit mode
     Below path edit mode label, buttons will be listed below and will be disabled until they are needed or possible.
     Shortcuts signs will appear next to the buttons.
 The states that will be needed:
-    startingPathHexagon
+    startingHexagon
         State will be cleared if deselect function is used
     endingPathHexagon
     pathEditMode
@@ -678,24 +678,6 @@ I didn't make the treepicker stateful, but I did make much-needed updates on the
 
 4/25/2022
 
-Drag and drop is some major functionality that I'll need to think of...
-It's going to need it's own variable...
-I might want to create a page state variable since there are essentially three or four page states:
-It might not be important to manage page state, if the sidebar disappears while moving a hexagon.
-onDragStart
-    Have hexagonFocused be this hexagon.
-onDragOver
-    Prevent moving hexagons from overwriting one another.
-    https://github.com/Hellenic/react-hexgrid/blob/master/examples/drag-and-drop/src/GameLayout.js
-    Line 48
-    but I'll want to look into React TypeScript Chapter 1 for a way for the user to see a preview.
-    file:///Users/thomasfrancis/Desktop/fullstack-react-with-typescript-book-r11-basic.pdf
-    Page 107
-onDrop
-    Assign hexagonFocused's data to the hexagon dropped on
-onDragEnd
-    Clear the data of the source hexagon
-
 + make clicking on the skill tree go to the actual skill tree
 + Skill Trees to trees button for navigation
 + Fix width and height... for now... for ReactSVGPanZoom
@@ -706,6 +688,35 @@ onDragEnd
 + delete hexagon button at the very bottom
 x button for editing global skill tree settings (g button)
 + sign for shortcut for pointer mode and drag mode
+
+4/26/2022
+
+Drag and drop is some major functionality that I'll need to think of...
+It's going to need it's own variable...
+I might want to create a page state variable since there are essentially three or four page states:
+It might not be important to manage page state, if the sidebar disappears while moving a hexagon.
+onDragStart
+    Have hexagonFocused be this hexagon.
+    if the target has a hexagon ID, disallow drag
+onDragOver
+    Prevent moving hexagons from overwriting one another.
+    If the hexagon already has a hex ID, do not allow drop
+    https://github.com/Hellenic/react-hexgrid/blob/master/examples/drag-and-drop/src/GameLayout.js
+    Line 48
+    but I'll want to look into React TypeScript Chapter 1 for a way for the user to see a preview.
+    file:///Users/thomasfrancis/Desktop/fullstack-react-with-typescript-book-r11-basic.pdf
+    Page 107
+onDrop
+    Assign hexagonFocused's data to the hexagon dropped on.
+    Mutate the hex ID's hex coordinates in the backend
+onDragEnd
+    Clear the data of the source hexagon
+    I don't actually need to do this since onDrop would be enough.
+
+x drag and drop functionality for hexagons
+    Drag and drop cannot work because these states are already being used by ReactSVGPanZoom...
+    I can't do Drag and drop, but I can move hexagons by clicking.
++ Click Move node functionality for hexagons
 
 Write an article about:
 
@@ -722,9 +733,7 @@ Github Contributions
 
 Tasks:
 
-PanAndZoom
-
-- drag and drop functionality for hexagons
+- in the sidebar components make it so that clicking on a hexagon where hex_id is undefined, does not grab data for it
 - Global Settings for the skill tree on the right side
     - view as Student button: Student View Button
     - Teacher View button

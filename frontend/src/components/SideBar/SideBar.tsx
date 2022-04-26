@@ -9,10 +9,11 @@ import { TOOL_PAN } from 'react-svg-pan-zoom'
 import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
-import { INVISIBLE, CHECKBOXES, PATH_EDIT_ON, PATH_EDIT_CHOSEN } from '../../Variables/StaticVariables'
-import { changePathEditModeToOn, changeToDragMode, changeToPointerMode } from '../PanZoomHexGrid/PanModeSlices'
+import { INVISIBLE, CHECKBOXES, EDIT_ON, EDIT_CHOSEN } from '../../Variables/StaticVariables'
+import { changeHexMoveEditModeToOn, changePathEditModeToOn, changeToDragMode, changeToPointerMode } from '../PanZoomHexGrid/PanModeSlices'
 import PathEdit from './PathEdit'
 import { useDeleteHexMutation } from '../../redux/api'
+import HexMoveEdit from './HexMoveEdit'
 
 
 const SideBar = () => {
@@ -23,6 +24,7 @@ const SideBar = () => {
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
     const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
     const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
+    const hexMoveEditMode = useReduxSelector(state => state.panMode.hexMoveEditMode)
     const [deleteHex] = useDeleteHexMutation()
     const dispatch = useReduxDispatch()
     // useState
@@ -55,9 +57,14 @@ const SideBar = () => {
                 setSection(base_section_class);
         }
     }, [tool])
-    if (pathEditMode === PATH_EDIT_ON || pathEditMode === PATH_EDIT_CHOSEN) {
+    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
         return (
             <PathEdit key={nanoid()} />
+        )
+    }
+    if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
+        return (
+            <HexMoveEdit key={nanoid()} />
         )
     }
     if (tool === TOOL_PAN) {
@@ -87,7 +94,18 @@ const SideBar = () => {
                     className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
                     onClick={() => dispatch(changeToDragMode())}
                 >
-                    Drag Mode
+                    Pan Mode
+                </button>
+            </div>
+            <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
+                <span className='opacity-50 text-lg text-center'>
+                    shortcut: m key
+                </span>
+                <button
+                    className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
+                    onClick={() => dispatch(changeHexMoveEditModeToOn())}
+                >
+                    Move Nodes
                 </button>
             </div>
             <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>

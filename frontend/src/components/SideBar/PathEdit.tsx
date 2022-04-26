@@ -1,6 +1,6 @@
 import { useDeletePathMutation } from "../../redux/api"
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
-import { changePathEditModeToOff, changePathEditModeToOn, clearPathFocused, clearStartingPathHexagon, pathDeleteDisableSwitch, pathDeselectDisableSwitch } from "../PanZoomHexGrid/PanModeSlices"
+import { changePathEditModeToOff, changePathEditModeToOn, clearPathFocused, clearStartingHexagon, pathDeleteDisableSwitch, pathDeselectDisableSwitch } from "../PanZoomHexGrid/PanModeSlices"
 
 const PathEdit = () => {
     const pathDeselectDisable = useReduxSelector(state => state.panMode.pathDeselectDisable)
@@ -19,7 +19,7 @@ const PathEdit = () => {
                 className='bg-orange rounded-full p-1 px-2 shadow-lg hover:bg-dark-orange'
                 onClick={() => {
                     dispatch(changePathEditModeToOff())
-                    dispatch(clearStartingPathHexagon())
+                    dispatch(clearStartingHexagon())
                     dispatch(clearPathFocused())
                     dispatch(pathDeselectDisableSwitch(true))
                     dispatch(pathDeleteDisableSwitch(true))
@@ -48,7 +48,7 @@ const PathEdit = () => {
                 className='bg-orange rounded-full p-1 px-2 disabled:opacity-50 shadow-lg hover:bg-dark-orange'
                 disabled={pathDeselectDisable}
                 onClick={() => {
-                    dispatch(clearStartingPathHexagon())
+                    dispatch(clearStartingHexagon())
                     dispatch(pathDeselectDisableSwitch(true))
                     dispatch(changePathEditModeToOn())
                 }}

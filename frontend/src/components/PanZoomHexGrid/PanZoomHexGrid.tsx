@@ -22,20 +22,24 @@ import {
   changeHexagonFocus,
   changePathEditModeToOn,
   changePathEditModeToOff,
-  changeStartingPathHexagon,
+  changeStartingHexagon,
   changePathEditModeToChosen,
   pathDeselectDisableSwitch,
-  clearStartingPathHexagon,
+  clearStartingHexagon,
   pathDeleteDisableSwitch,
   changePathFocused,
   clearPathFocused,
-  changeReactSVGPanZoomValue
+  changeReactSVGPanZoomValue,
+  changeHexMoveEditModeToOff,
+  hexMoveDeselectDisableSwitch,
+  changeHexMoveEditModeToOn,
+  changeHexMoveEditModeToChosen,
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any } from '../../utils/utils';
 import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
-import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery } from '../../redux/api';
-import { INITIAL_PATH_HEX_STATE, PATH_EDIT_CHOSEN, PATH_EDIT_OFF, PATH_EDIT_ON } from '../../Variables/StaticVariables';
+import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery, useUpdateHexMutation } from '../../redux/api';
+import { INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE } from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
 import { useParams } from 'react-router-dom';
 
@@ -55,20 +59,22 @@ const PanZoomHexGrid = () => {
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
-  const startingPathHexagon = useReduxSelector(state => state.panMode.startingPathHexagon)
+  const startingHexagon = useReduxSelector(state => state.panMode.startingHexagon)
   const pathFocused = useReduxSelector(state => state.panMode.pathFocused)
   const reactSVGPanZoomValue = useReduxSelector(state => state.panMode.reactSVGPanZoomValue)
+  const hexMoveEditMode = useReduxSelector(state => state.panMode.hexMoveEditMode)
   const [createPath] = useCreatePathMutation()
   const [deletePath] = useDeletePathMutation()
+  const [updateHex] = useUpdateHexMutation()
   // useState
   const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
-    if (pathEditMode === PATH_EDIT_ON || pathEditMode === PATH_EDIT_CHOSEN) {
+    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
       switch (event.key) {
         case 'q':
           dispatch(changePathEditModeToOff())
-          dispatch(clearStartingPathHexagon())
+          dispatch(clearStartingHexagon())
           dispatch(clearPathFocused())
           dispatch(pathDeselectDisableSwitch(true))
           dispatch(pathDeleteDisableSwitch(true))
@@ -79,13 +85,26 @@ const PanZoomHexGrid = () => {
           deletePath({ path_id: pathFocused.path_id })
           break
         case 'z':
-          dispatch(clearStartingPathHexagon())
+          dispatch(clearStartingHexagon())
           dispatch(pathDeselectDisableSwitch(true))
           dispatch(changePathEditModeToOn())
           break
       }
     }
-    if (!any([editImgAddress, editNoteBody, editNoteTitle]) && pathEditMode === PATH_EDIT_OFF) {
+    if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
+      switch (event.key) {
+        case 'q':
+          dispatch(changeHexMoveEditModeToOff())
+          dispatch(hexMoveDeselectDisableSwitch(true))
+          break
+        case 'z':
+          dispatch(changeHexagonFocus(INITIAL_HEX_STATE))
+          dispatch(hexMoveDeselectDisableSwitch(true))
+          dispatch(changeHexMoveEditModeToOn())
+          break
+      }
+    }
+    if (!any([editImgAddress, editNoteBody, editNoteTitle]) && pathEditMode === EDIT_OFF && hexMoveEditMode === EDIT_OFF) {
       // pointer mode
       switch (event.key) {
         case 'v':
@@ -101,36 +120,68 @@ const PanZoomHexGrid = () => {
         case 'k':
           dispatch(changePathEditModeToOn())
           break
+        case 'm':
+          dispatch(changeHexMoveEditModeToOn())
+          break
       }
     }
   }
   const handleHexagonClick = (hex: Partial<HexagonType>) => {
     dispatch(ResetSidebarState())
     dispatch(changeHexagonFocus(hex))
-    switch (pathEditMode) {
-      case PATH_EDIT_CHOSEN:
-        dispatch(changePathEditModeToOn())
-        dispatch(pathDeselectDisableSwitch(true))
-        createPath({
-          starting_hex_q: startingPathHexagon.hex_q,
-          starting_hex_r: startingPathHexagon.hex_r,
-          starting_hex_s: startingPathHexagon.hex_s,
-          ending_hex_q: hex.hex_q,
-          ending_hex_r: hex.hex_r,
-          ending_hex_s: hex.hex_s,
-          skill_tree: parseInt(treeId)
-        })
-        break
-      case PATH_EDIT_ON:
-        dispatch(changeStartingPathHexagon(hex))
-        dispatch(changePathEditModeToChosen())
-        dispatch(pathDeselectDisableSwitch(false))
-        break
+    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
+      switch (pathEditMode) {
+        case EDIT_CHOSEN:
+          dispatch(changePathEditModeToOn())
+          dispatch(pathDeselectDisableSwitch(true))
+          createPath({
+            starting_hex_q: startingHexagon.hex_q,
+            starting_hex_r: startingHexagon.hex_r,
+            starting_hex_s: startingHexagon.hex_s,
+            ending_hex_q: hex.hex_q,
+            ending_hex_r: hex.hex_r,
+            ending_hex_s: hex.hex_s,
+            skill_tree: parseInt(treeId)
+          })
+          break
+        case EDIT_ON:
+          dispatch(changeStartingHexagon(hex))
+          dispatch(changePathEditModeToChosen())
+          dispatch(pathDeselectDisableSwitch(false))
+          break
+      }
+    } else if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
+      switch (hexMoveEditMode) {
+        case EDIT_CHOSEN:
+          if (hex.hex_id === undefined) {
+            dispatch(changeHexMoveEditModeToOn())
+            dispatch(hexMoveDeselectDisableSwitch(true))
+            const newHex = {
+              ...startingHexagon,
+              hex_q: hex.hex_q,
+              hex_r: hex.hex_r,
+              hex_s: hex.hex_s
+            }
+            updateHex(newHex)
+          } else if (hex.hex_id !== undefined) {
+            dispatch(changeStartingHexagon(hex))
+            dispatch(changeHexMoveEditModeToChosen())
+            dispatch(hexMoveDeselectDisableSwitch(false))
+          }
+          break
+        case EDIT_ON:
+          if (hex.hex_id !== undefined) {
+            dispatch(changeStartingHexagon(hex))
+            dispatch(changeHexMoveEditModeToChosen())
+            dispatch(hexMoveDeselectDisableSwitch(false))
+          }
+          break
+      }
     }
   }
   const handlePathClick = (path: Partial<PathType>) => {
     switch (pathEditMode) {
-      case PATH_EDIT_ON:
+      case EDIT_ON:
         dispatch(changePathFocused(path))
         dispatch(pathDeleteDisableSwitch(false))
     }
@@ -177,7 +228,8 @@ const PanZoomHexGrid = () => {
       onChangeTool={tool}
       value={reactSVGPanZoomValue.payload}
       onChangeValue={(value) => {
-        dispatch(changeReactSVGPanZoomValue(value))}
+        dispatch(changeReactSVGPanZoomValue(value))
+      }
       }
     >
       <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
@@ -193,6 +245,7 @@ const PanZoomHexGrid = () => {
             }
             return (
               <Hexagon
+                draggable="true"
                 key={nanoid()}
                 id={hex.hex_string}
                 q={hex.hex_q}
@@ -222,7 +275,7 @@ const PanZoomHexGrid = () => {
             }
             return null
           }) : null}
-          {pathEditMode === PATH_EDIT_CHOSEN && hexagonFocused ?
+          {(pathEditMode === EDIT_CHOSEN && hexagonFocused) || (hexMoveEditMode === EDIT_CHOSEN && hexagonFocused) ?
             <Hexagon
               key={nanoid()}
               q={hexagonFocused.hex_q}
@@ -242,7 +295,7 @@ const PanZoomHexGrid = () => {
               />
             )
           })}
-          {pathEditMode === PATH_EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
+          {pathEditMode === EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
             <CustomPath
               key={nanoid()}
               start={new Hex(

@@ -92,12 +92,14 @@ type PanState = {
     tool?: string
     hexagonFocused: Partial<HexagonType>
     pathFocused: Partial<PathType>
-    startingPathHexagon: Partial<HexagonType>
+    startingHexagon: Partial<HexagonType>
     pathEditMode: string
     pathDeselectDisable: boolean
     pathDeleteDisable: boolean
     hexFiller: HexEntry
     reactSVGPanZoomValue: any
+    hexMoveEditMode: string
+    hexMoveDeselectDisable: boolean
 }
 
 type SidebarState = {

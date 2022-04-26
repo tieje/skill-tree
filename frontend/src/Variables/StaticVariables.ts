@@ -12,9 +12,9 @@ const CHECKBOXES: string[] = [VERBAL, QUANTITATIVE]
 const IMG_ADDRESS: string = 'image address'
 const TITLE: string = 'title'
 const NOTES: string = 'notes'
-const PATH_EDIT_ON: string = 'on'
-const PATH_EDIT_OFF: string = 'off'
-const PATH_EDIT_CHOSEN: string = 'chosen'
+const EDIT_ON: string = 'on'
+const EDIT_OFF: string = 'off'
+const EDIT_CHOSEN: string = 'chosen'
 const INITIAL_PATH_HEX_STATE: Partial<PathType> = {
     starting_hex_q: undefined,
     starting_hex_r: undefined,
@@ -41,6 +41,7 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
     noteTitle: '',
     noteBody: '',
 }
+
 const INITIAL_PAN_MODE_STATE: PanState = {
     tool: TOOL_NONE,
     hexagonFocused: {
@@ -51,13 +52,17 @@ const INITIAL_PAN_MODE_STATE: PanState = {
         hex_s: -9,
     },
     pathFocused: INITIAL_PATH_HEX_STATE,
-    startingPathHexagon: INITIAL_HEX_STATE,
-    pathEditMode: PATH_EDIT_OFF,
+    startingHexagon: INITIAL_HEX_STATE,
+    pathEditMode: EDIT_OFF,
     pathDeselectDisable: true,
     pathDeleteDisable: true,
     hexFiller: hexagonFiller,
     reactSVGPanZoomValue: INITIAL_VALUE,
+    hexMoveEditMode: EDIT_OFF,
+    hexMoveDeselectDisable: true,
 }
+
+
 const INITIAL_AUTH_STATE: AuthState = {
     user_id: null,
     token: null
@@ -99,9 +104,9 @@ export {
     IMG_ADDRESS,
     TITLE,
     NOTES,
-    PATH_EDIT_ON,
-    PATH_EDIT_OFF,
-    PATH_EDIT_CHOSEN,
+    EDIT_ON,
+    EDIT_OFF,
+    EDIT_CHOSEN,
     INITIAL_PATH_HEX_STATE,
     INITIAL_HEX_STATE,
     INITIAL_SIDEBAR_STATE,
