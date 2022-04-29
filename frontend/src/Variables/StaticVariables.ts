@@ -15,6 +15,8 @@ const NOTES: string = 'notes'
 const EDIT_ON: string = 'on'
 const EDIT_OFF: string = 'off'
 const EDIT_CHOSEN: string = 'chosen'
+const TEACHER = 'teacher'
+const STUDENT = 'student'
 const INITIAL_PATH_HEX_STATE: Partial<PathType> = {
     starting_hex_q: undefined,
     starting_hex_r: undefined,
@@ -40,6 +42,7 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
     imgAddress: '',
     noteTitle: '',
     noteBody: '',
+    viewer: STUDENT,
 }
 
 const INITIAL_PAN_MODE_STATE: PanState = {
@@ -119,4 +122,6 @@ export {
     LEARN,
     TEACH,
     TREES,
+    STUDENT,
+    TEACHER,
 }

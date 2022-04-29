@@ -50,6 +50,7 @@ type SkillTreeType = {
     name: string;
     theme?: string;
     hex_string_list?: string[]
+    user?: number,
 }
 
 type GenHexType = {
@@ -111,6 +112,7 @@ type SidebarState = {
     imgAddress: string
     noteTitle: string
     noteBody: string
+    viewer: string
 }
 
 type UserResponse = {

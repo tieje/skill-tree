@@ -12,6 +12,7 @@ const PanModeSlice = createSlice({
         changeReactSVGPanZoomValue: (state, payload) => { state.reactSVGPanZoomValue = payload },
         changeToDragMode: state => { state.tool = TOOL_PAN },
         changeToPointerMode: state => { state.tool = TOOL_NONE },
+        changeTool: (state, payload) => { state.tool = payload.payload },
         changeHexagonFocus: (state, action) => { state.hexagonFocused = action.payload },
         // Path Edit
         changePathEditModeToOn: state => { state.pathEditMode = EDIT_ON },
@@ -36,6 +37,7 @@ const PanModeSlice = createSlice({
 export const {
     changeToDragMode,
     changeToPointerMode,
+    changeTool,
     changeHexagonFocus,
     changePathEditModeToChosen,
     changePathEditModeToOff,

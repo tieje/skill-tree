@@ -12,12 +12,19 @@ import { any } from '../../utils/utils'
 import { INVISIBLE, CHECKBOXES, EDIT_ON, EDIT_CHOSEN } from '../../Variables/StaticVariables'
 import { changeHexMoveEditModeToOn, changePathEditModeToOn, changeToDragMode, changeToPointerMode } from '../PanZoomHexGrid/PanModeSlices'
 import PathEdit from './PathEdit'
-import { useDeleteHexMutation } from '../../redux/api'
+import { useDeleteHexMutation, useGetTreeByIdQuery } from '../../redux/api'
 import HexMoveEdit from './HexMoveEdit'
+import { useParams } from 'react-router-dom'
+import StudentTitle from './StudentTitle'
+import StudentNoteBody from './StudentNoteBody'
 
 
 const SideBar = () => {
+    // queries
+    const { treeId } = useParams()
+    const { data, isLoading, error } = useGetTreeByIdQuery(treeId)
     // useReduxSelector
+    const user_id = useReduxSelector(state => state.auth.user_id)
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     const tool: string = useReduxSelector(state => state.panMode.tool)
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
@@ -84,63 +91,83 @@ const SideBar = () => {
             </section>
         )
     }
+    if (isLoading || error) {
+        return (
+            <section id='sidebar' className={section_className}>
+                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
+                </div>
+            </section >
+        )
+    }
+    if (data.user.toString() === user_id) {
+        return (
+            <section id='sidebar' className={section_className}>
+                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
+                    <span className='opacity-50 text-lg text-center'>
+                        shortcut: h key
+                    </span>
+                    <button
+                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
+                        onClick={() => dispatch(changeToDragMode())}
+                    >
+                        Pan Mode
+                    </button>
+                </div>
+                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
+                    <span className='opacity-50 text-lg text-center'>
+                        shortcut: m key
+                    </span>
+                    <button
+                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
+                        onClick={() => dispatch(changeHexMoveEditModeToOn())}
+                    >
+                        Move Nodes
+                    </button>
+                </div>
+                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
+                    <span className='opacity-50 text-lg text-center'>
+                        shortcut: k key
+                    </span>
+                    <button
+                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
+                        onClick={() => dispatch(changePathEditModeToOn())}
+                    >
+                        Edit Paths
+                    </button>
+                </div>
+                <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
+                    {CHECKBOXES.map((checkbox) => {
+                        return (<Checkbox
+                            key={nanoid()}
+                            checkbox={checkbox}
+                        />)
+                    })}
+                </div>
+                <ImgAddress key={nanoid()} />
+                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
+                    <NoteTitle key={nanoid()} />
+                </div>
+                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
+                    <NoteBody key={nanoid()} />
+                </div>
+                {hexagonFocused.hex_id ? <div className='grid place-content-center'>
+                    <button
+                        className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple mb-5'
+                        onClick={() => deleteHex(hexagonFocused)}
+                    >
+                        Clear Node
+                    </button>
+                </div> : null}
+            </section >
+        )
+    }
     return (
         <section id='sidebar' className={section_className}>
-            <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                <span className='opacity-50 text-lg text-center'>
-                    shortcut: h key
-                </span>
-                <button
-                    className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                    onClick={() => dispatch(changeToDragMode())}
-                >
-                    Pan Mode
-                </button>
-            </div>
-            <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                <span className='opacity-50 text-lg text-center'>
-                    shortcut: m key
-                </span>
-                <button
-                    className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                    onClick={() => dispatch(changeHexMoveEditModeToOn())}
-                >
-                    Move Nodes
-                </button>
-            </div>
-            <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                <span className='opacity-50 text-lg text-center'>
-                    shortcut: k key
-                </span>
-                <button
-                    className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                    onClick={() => dispatch(changePathEditModeToOn())}
-                >
-                    Edit Paths
-                </button>
-            </div>
-            <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
-                {CHECKBOXES.map((checkbox) => {
-                    return (<Checkbox
-                        key={nanoid()}
-                        checkbox={checkbox}
-                    />)
-                })}
-            </div>
-            <ImgAddress key={nanoid()} />
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
-                <NoteTitle key={nanoid()} />
+                <StudentTitle key={nanoid()} />
             </div>
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
-                <NoteBody key={nanoid()} />
-            </div>
-            <div className='grid place-content-center'>
-                <button
-                    className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple'
-                    onClick={() => deleteHex(hexagonFocused)}
-                >
-                    Delete
-                </button>
+                <StudentNoteBody key={nanoid()} />
             </div>
         </section >
     )

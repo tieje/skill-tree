@@ -12,6 +12,7 @@ import React, {
 } from 'react';
 import {
   ReactSVGPanZoom,
+  POSITION_NONE
 } from 'react-svg-pan-zoom'
 import { useWindowSize } from '@react-hook/window-size';
 import useEventListener from '@use-it/event-listener'
@@ -202,9 +203,13 @@ const PanZoomHexGrid = () => {
         width={width}
         height={height - 64}
         tool={tool}
-        onChangeTool={tool}
+        //onChangeTool={tool}
         value={reactSVGPanZoomValue}
         onChangeValue={(value) => dispatch(changeReactSVGPanZoomValue(value))}
+        detectAutoPan={false}
+        toolbarProps={{
+          position: POSITION_NONE
+        }}
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
@@ -220,114 +225,119 @@ const PanZoomHexGrid = () => {
     )
   }
   return (
-    <ReactSVGPanZoom
-      ref={hexElement}
-      width={width}
-      height={height - 64}
-      tool={tool}
-      onChangeTool={tool}
-      value={reactSVGPanZoomValue.payload}
-      onChangeValue={(value) => {
-        dispatch(changeReactSVGPanZoomValue(value))
-      }
-      }
-    >
-      <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
-        <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-          {/*Put all hexagons with data first*/}
+    <>
+      <ReactSVGPanZoom
+        ref={hexElement}
+        width={width}
+        height={height - 64}
+        tool={tool}
+        // onChangeTool={(val) => changeTool(val)}
+        value={reactSVGPanZoomValue.payload}
+        onChangeValue={(value) => {
+          dispatch(changeReactSVGPanZoomValue(value))
+        }
+        }
+        detectAutoPan={false}
+        toolbarProps={{
+          position: POSITION_NONE
+        }}
+      >
+        <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
+          <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
+            {/*Put all hexagons with data first*/}
+            {data?.hexagons.map((hex: HexagonType) => {
+              let pid: string;
+              if (hex.image_address) {
+                pid = 'p' + hex.hex_string
+              }
+              if (hexagonFocused.hex_string === hex.hex_string) {
+                dispatch(changeHexagonFocus(hex))
+              }
+              return (
+                <Hexagon
+                  key={nanoid()}
+                  id={hex.hex_string}
+                  q={hex.hex_q}
+                  r={hex.hex_r}
+                  s={hex.hex_s}
+                  fill={pid}
+                  onClick={() => handleHexagonClick(hex)}
+                />
+              )
+            })}
+            {data ? Object.entries(hexFiller).map(([key, value]) => {
+              if (!data.hex_string_list.includes(key)) {
+                return (
+                  <Hexagon
+                    key={nanoid()}
+                    id={key}
+                    q={value.hex_q}
+                    r={value.hex_r}
+                    s={value.hex_s}
+                    onClick={() => handleHexagonClick(value)}
+                  >
+                    <Text>
+                      {value.hex_q},{value.hex_r},{value.hex_s}
+                    </Text>
+                  </Hexagon>
+                )
+              }
+              return null
+            }) : null}
+            {(pathEditMode === EDIT_CHOSEN && hexagonFocused) || (hexMoveEditMode === EDIT_CHOSEN && hexagonFocused) ?
+              <Hexagon
+                key={nanoid()}
+                q={hexagonFocused.hex_q}
+                r={hexagonFocused.hex_r}
+                s={hexagonFocused.hex_s}
+                cellStyle={{ fill: '#fd9420' }}
+              />
+              : null}
+            {data?.paths.map((path: PathType) => {
+              return (
+                <CustomPath
+                  key={path.path_id}
+                  id={path.path_id}
+                  start={new Hex(path.starting_hex_q, path.starting_hex_r, path.starting_hex_s)}
+                  end={new Hex(path.ending_hex_q, path.ending_hex_r, path.ending_hex_s)}
+                  onClick={() => handlePathClick(path)}
+                />
+              )
+            })}
+            {pathEditMode === EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
+              <CustomPath
+                key={nanoid()}
+                start={new Hex(
+                  pathFocused.starting_hex_q,
+                  pathFocused.starting_hex_r,
+                  pathFocused.starting_hex_s,
+                )}
+                end={new Hex(
+                  pathFocused.ending_hex_q,
+                  pathFocused.ending_hex_r,
+                  pathFocused.ending_hex_s
+                )}
+                onClick={() => handlePathClick(pathFocused)}
+                pathStyle={{ stroke: '#fd9420' }}
+              />
+              : null}
+          </Layout>
           {data?.hexagons.map((hex: HexagonType) => {
             let pid: string;
             if (hex.image_address) {
               pid = 'p' + hex.hex_string
             }
-            if (hexagonFocused.hex_string === hex.hex_string) {
-              dispatch(changeHexagonFocus(hex))
-            }
             return (
-              <Hexagon
-                draggable="true"
+              <Pattern
                 key={nanoid()}
-                id={hex.hex_string}
-                q={hex.hex_q}
-                r={hex.hex_r}
-                s={hex.hex_s}
-                fill={pid}
-                onClick={() => handleHexagonClick(hex)}
+                id={pid}
+                link={hex.image_address}
               />
             )
           })}
-          {data ? Object.entries(hexFiller).map(([key, value]) => {
-            if (!data.hex_string_list.includes(key)) {
-              return (
-                <Hexagon
-                  key={nanoid()}
-                  id={key}
-                  q={value.hex_q}
-                  r={value.hex_r}
-                  s={value.hex_s}
-                  onClick={() => handleHexagonClick(value)}
-                >
-                  <Text>
-                    {value.hex_q},{value.hex_r},{value.hex_s}
-                  </Text>
-                </Hexagon>
-              )
-            }
-            return null
-          }) : null}
-          {(pathEditMode === EDIT_CHOSEN && hexagonFocused) || (hexMoveEditMode === EDIT_CHOSEN && hexagonFocused) ?
-            <Hexagon
-              key={nanoid()}
-              q={hexagonFocused.hex_q}
-              r={hexagonFocused.hex_r}
-              s={hexagonFocused.hex_s}
-              cellStyle={{ fill: '#fd9420' }}
-            />
-            : null}
-          {data?.paths.map((path: PathType) => {
-            return (
-              <CustomPath
-                key={path.path_id}
-                id={path.path_id}
-                start={new Hex(path.starting_hex_q, path.starting_hex_r, path.starting_hex_s)}
-                end={new Hex(path.ending_hex_q, path.ending_hex_r, path.ending_hex_s)}
-                onClick={() => handlePathClick(path)}
-              />
-            )
-          })}
-          {pathEditMode === EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
-            <CustomPath
-              key={nanoid()}
-              start={new Hex(
-                pathFocused.starting_hex_q,
-                pathFocused.starting_hex_r,
-                pathFocused.starting_hex_s,
-              )}
-              end={new Hex(
-                pathFocused.ending_hex_q,
-                pathFocused.ending_hex_r,
-                pathFocused.ending_hex_s
-              )}
-              onClick={() => handlePathClick(pathFocused)}
-              pathStyle={{ stroke: '#fd9420' }}
-            />
-            : null}
-        </Layout>
-        {data?.hexagons.map((hex: HexagonType) => {
-          let pid: string;
-          if (hex.image_address) {
-            pid = 'p' + hex.hex_string
-          }
-          return (
-            <Pattern
-              key={nanoid()}
-              id={pid}
-              link={hex.image_address}
-            />
-          )
-        })}
-      </HexGrid>
-    </ReactSVGPanZoom>
+        </HexGrid>
+      </ReactSVGPanZoom>
+    </>
   )
 }
 

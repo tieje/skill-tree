@@ -717,6 +717,35 @@ x drag and drop functionality for hexagons
     Drag and drop cannot work because these states are already being used by ReactSVGPanZoom...
     I can't do Drag and drop, but I can move hexagons by clicking.
 + Click Move node functionality for hexagons
+x in the sidebar components make it so that clicking on a hexagon where hex_id is undefined, does not grab data for it
+    It's not a big deal because the query will be cached
+
+4/27/2022
+
+Make the right column under the navbar...
+It might be a better idea to have global settings underneath hex information.
+
+I received a quiz from Deskpass. Let's do this.
+
+4/28/2022
+
++ completed the deskpass test
+
+4/29/2022
+
+For a teacher and student view, I'm going to need state...
+Viewer > The default viewstate should be student.
+When Viewer is the owner then it renders.
+This means that I don't need viewer state.
+All I need to do is to check if the user_id and the user of the skill tree match.
+I'll need to create another URL storage for the skill tree profile picture.
+
+
++ make it so that dragging on the side does not occur
+    It was just one value change sheesh.
++ remove the toolbar since it is no longer useful
++ Delete Node button only shows up only existing hexagons
++ create student 
 
 Write an article about:
 
@@ -733,14 +762,18 @@ Github Contributions
 
 Tasks:
 
-- in the sidebar components make it so that clicking on a hexagon where hex_id is undefined, does not grab data for it
-- Global Settings for the skill tree on the right side
+- Global Settings for the skill tree on the bottom of the left side
     - view as Student button: Student View Button
-    - Teacher View button
+        - Teacher View button
+        - if the user_id matches the user of the skill_tree then teacher mode is displayed
+        - There must be "Viewer" state to control the viewer mode.
+        - turn off all other shortcuts in student view except for drag and pointer mode
     - skill tree profile picture
+        - add field to backend for profile picture
     - theme
-    - statistics
-- Feature for owners to download their data in a JSON File
+        - add state for theme based on available checkboxes
+    - Feature for owners to download their data in a JSON File
+- Add statistics at the top of the left sidebar
 
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching

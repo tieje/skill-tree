@@ -51,7 +51,7 @@ const Navbar = () => {
     window.location.reload()
   }
   return (
-    <section>
+    <section className='relative'>
       <nav className='flex flex-row bg-paper-yellow justify-end md:h-16'>
         <ul className='flex justify-end gap-4 pr-5'>
           {token === null || token === 'null' ?
