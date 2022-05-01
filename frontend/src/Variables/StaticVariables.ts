@@ -1,12 +1,12 @@
-import { AuthState, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState } from "../types/Types"
+import { AuthState, FunctionalButtonPropsType, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState } from "../types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
 import { hexagonFiller } from "./HexFiller"
 import { INITIAL_VALUE } from 'react-svg-pan-zoom'
 
-
 const VERBAL: string = 'Verbal Feedback'
 const QUANTITATIVE: string = 'Quantitative Feedback'
 const INVISIBLE: string = 'invisible'
+const BASE_SECTION_CLASS = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full overflow-y-auto'
 const HEXAGON_FOCUSED: string = 'hexagonFocused'
 const CHECKBOXES: string[] = [VERBAL, QUANTITATIVE]
 const IMG_ADDRESS: string = 'image address'
@@ -42,7 +42,11 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
     imgAddress: '',
     noteTitle: '',
     noteBody: '',
-    viewer: STUDENT,
+    viewer: TEACHER,
+    editShortcuts: EDIT_ON,
+    sidebarBaseClass: BASE_SECTION_CLASS,
+    textareaCursorLocation: 0,
+    textareaLastKeyPress: 'a',
 }
 
 const INITIAL_PAN_MODE_STATE: PanState = {
@@ -97,11 +101,44 @@ const TREES: NavButtonPropsType = {
 
 const LEARN: string = 'Learn'
 const TEACH: string = 'Teach'
-
+const PAN_MODE: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: h key',
+    label: 'Pan Mode',
+}
+const POINTER_MODE: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: v key',
+    label: 'Pointer Mode',
+}
+const MOVE_NODES_MODE: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: m key',
+    label: 'Move Nodes',
+}
+const EDIT_PATHS_MODE: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: k key',
+    label: 'Edit Paths',
+}
+const STUDENT_VIEW: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: r key',
+    label: 'Student View',
+}
+const TEACHER_VIEW: FunctionalButtonPropsType = {
+    shortcut: 'shortcut: t key',
+    label: 'Teacher View',
+}
+const TOP_SIDEBAR_BUTTONS: FunctionalButtonPropsType[] = [
+    PAN_MODE,
+    MOVE_NODES_MODE,
+    EDIT_PATHS_MODE,
+]
+const BOTTOM_SIDEBAR_BUTTONS: FunctionalButtonPropsType[] = [
+    TEACHER_VIEW,
+    STUDENT_VIEW,
+]
 export {
     VERBAL,
     QUANTITATIVE,
     INVISIBLE,
+    BASE_SECTION_CLASS,
     HEXAGON_FOCUSED,
     CHECKBOXES,
     IMG_ADDRESS,
@@ -124,4 +161,12 @@ export {
     TREES,
     STUDENT,
     TEACHER,
+    POINTER_MODE,
+    EDIT_PATHS_MODE,
+    PAN_MODE,
+    MOVE_NODES_MODE,
+    TEACHER_VIEW,
+    STUDENT_VIEW,
+    TOP_SIDEBAR_BUTTONS,
+    BOTTOM_SIDEBAR_BUTTONS,
 }

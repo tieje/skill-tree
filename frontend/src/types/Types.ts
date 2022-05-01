@@ -76,6 +76,11 @@ type EditButtonPropsType = {
     editMethod(): { payload: undefined; type: string; }
 }
 
+type FunctionalButtonPropsType = {
+    shortcut?: string
+    label?: string
+}
+
 type HexEntry = {
     [key: string]: Partial<HexagonType>
 }
@@ -113,6 +118,10 @@ type SidebarState = {
     noteTitle: string
     noteBody: string
     viewer: string
+    editShortcuts: string
+    sidebarBaseClass: string
+    textareaCursorLocation: number
+    textareaLastKeyPress: string
 }
 
 type UserResponse = {
@@ -163,4 +172,5 @@ export type {
     NavButtonPropsType,
     SkillTreePickerTreeType,
     SkillTreePickerByUserIdType,
+    FunctionalButtonPropsType,
 }

@@ -1,17 +1,16 @@
 import { nanoid } from "nanoid";
 import React, { useEffect } from "react";
-import { useFocusInput } from "../../utils/utils";
+import { useFocusInput } from "../../../utils/utils";
 import EditButton from "./EditButton";
-import { ChangeNoteTitle, NoteTitleSwitch } from "./SideBarSlices";
-import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
-import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from "../../redux/api";
-import { HexagonType } from "../../types/Types";
-import { changeHexagonFocus } from "../PanZoomHexGrid/PanModeSlices";
+import { ChangeNoteTitle, NoteTitleSwitch } from "../SideBarSlices";
+import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks";
+import { useCreateHexMutation, useUpdateHexMutation } from "../../../redux/api";
+import { HexagonType } from "../../../types/Types";
+import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices";
 import { useParams } from "react-router-dom";
 
-const NoteTitle = () => {
+const NoteTitle = ({ props }: { props: HexagonType }) => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const noteTitle = useReduxSelector(state => state.sideBar.noteTitle)
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
     const noteEditId = nanoid()
@@ -53,11 +52,23 @@ const NoteTitle = () => {
                 break
         }
     }
+    /*
+    if (isLoading || error) {
+        return (
+            <>
+                <h1 className='text-2xl text-left'>
+                    Title
+                </h1>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: d key
+                </span>
+                <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
+            </>
+        )
+    }*/
     useEffect(() => {
-        if (data) {
-            dispatch(ChangeNoteTitle(data.title))
-        }
-    }, [data, dispatch])
+        dispatch(ChangeNoteTitle(props.title))
+    }, [dispatch, props.title])
     if (editNoteTitle) {
         return (
             <>
@@ -81,19 +92,6 @@ const NoteTitle = () => {
             </>
         )
     }
-    if (isLoading || error) {
-        return (
-            <>
-                <h1 className='text-2xl text-left'>
-                    Title
-                </h1>
-                <span className='opacity-50 text-lg text-center'>
-                    edit shortcut: d key
-                </span>
-                <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
-            </>
-        )
-    }
     return (
         <>
             <h1 className='text-2xl text-left'>
@@ -103,7 +101,7 @@ const NoteTitle = () => {
                 edit shortcut: d key
             </span>
             <h1 className='text-2xl text-center'>
-                {noteTitle === null || noteTitle === '' ? 'Title' : noteTitle}
+                {props.title === null || props.title === '' ? 'Title' : props.title}
             </h1>
             <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
         </>

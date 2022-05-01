@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { INITIAL_SIDEBAR_STATE } from "../../Variables/StaticVariables";
+import { BASE_SECTION_CLASS, EDIT_OFF, EDIT_ON, INITIAL_SIDEBAR_STATE, INVISIBLE, STUDENT, TEACHER } from "../../Variables/StaticVariables";
 
 const SideBarSlice = createSlice({
     name: 'sidebar',
@@ -68,6 +68,24 @@ const SideBarSlice = createSlice({
         ResetSidebarState: state => {
             state = INITIAL_SIDEBAR_STATE
         },
+        ViewerToStudent: state => {
+            state.viewer = STUDENT
+        },
+        ViewerToTeacher: state => {
+            state.viewer = TEACHER
+        },
+        ToggleEditShortcutsOn: state => {
+            state.editShortcuts = EDIT_ON
+        },
+        ToggleEditShortcutsOff: state => {
+            state.editShortcuts = EDIT_OFF
+        },
+        ToggleSidebarVisibilityOff: state => {
+            state.sidebarBaseClass = INVISIBLE
+        },
+        ToggleSidebarVisibilityOn: state => {
+            state.sidebarBaseClass = BASE_SECTION_CLASS
+        },
     }
 })
 
@@ -81,5 +99,11 @@ export const {
     ChangeNoteTitle,
     ChangeNoteBody,
     ResetSidebarState,
+    ViewerToStudent,
+    ViewerToTeacher,
+    ToggleEditShortcutsOff,
+    ToggleEditShortcutsOn,
+    ToggleSidebarVisibilityOff,
+    ToggleSidebarVisibilityOn,
 } = SideBarSlice.actions
 export default SideBarSlice.reducer

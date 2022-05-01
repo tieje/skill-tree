@@ -740,12 +740,29 @@ This means that I don't need viewer state.
 All I need to do is to check if the user_id and the user of the skill tree match.
 I'll need to create another URL storage for the skill tree profile picture.
 
-
 + make it so that dragging on the side does not occur
     It was just one value change sheesh.
 + remove the toolbar since it is no longer useful
 + Delete Node button only shows up only existing hexagons
 + create student 
+
+
+4/30/2022
+
+I guess development has been slowed down because I'm paying off my tech debt in the process.
+It looks like I'll need to use the useQuery once in the main sidebar so that the text input does not re-render twice.
+Got a lot done today.
+
++ Global Settings for the skill tree on the bottom of the left side
++ view as Student button: Student View Button
++ turn off edit shortcuts in Student view
++ have text only appear in Student View
++ Teacher View button
++ if the user_id matches the user of the skill_tree then teacher mode is displayed
++ There must be "Viewer" state to control the viewer mode.
++ turn off all other shortcuts in student view except for drag and pointer mode
++ test the useQuery in TeacherView - It works. Functionality isn't perfect, but it's good enough for my purposes.
++ get the text input and textarea working properly again
 
 Write an article about:
 
@@ -762,17 +779,13 @@ Github Contributions
 
 Tasks:
 
-- Global Settings for the skill tree on the bottom of the left side
-    - view as Student button: Student View Button
-        - Teacher View button
-        - if the user_id matches the user of the skill_tree then teacher mode is displayed
-        - There must be "Viewer" state to control the viewer mode.
-        - turn off all other shortcuts in student view except for drag and pointer mode
-    - skill tree profile picture
-        - add field to backend for profile picture
-    - theme
-        - add state for theme based on available checkboxes
-    - Feature for owners to download their data in a JSON File
+- replace loading or error in TeacherView with empty version
+    Do it properly this time. Too much tech debt.
+- skill tree profile picture
+- add field to backend for profile picture
+- theme field in the backend
+- add state for theme based on available multiple choice
+- Feature for owners to download their data in a JSON File
 - Add statistics at the top of the left sidebar
 
 - get the "Create Skill Tree" Button working

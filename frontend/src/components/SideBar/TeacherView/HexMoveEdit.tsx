@@ -1,5 +1,5 @@
-import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
-import { changeHexMoveEditModeToOff, changeHexMoveEditModeToOn, clearStartingHexagon, hexMoveDeselectDisableSwitch } from "../PanZoomHexGrid/PanModeSlices"
+import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
+import { changeHexMoveEditModeToOff, changeHexMoveEditModeToOn, clearStartingHexagon, hexMoveDeselectDisableSwitch } from "../../PanZoomHexGrid/PanModeSlices"
 
 const HexMoveEdit = () => {
     const hexMoveDeselectDisable = useReduxSelector(state => state.panMode.hexMoveDeselectDisable)

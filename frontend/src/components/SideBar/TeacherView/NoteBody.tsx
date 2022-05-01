@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
 import { nanoid } from "nanoid";
 import EditButton from "./EditButton";
-import { ChangeNoteBody, NoteBodySwitch } from "./SideBarSlices";
-import { useFocusTextArea } from "../../utils/utils";
-import { useReduxDispatch, useReduxSelector } from "../../redux/hooks";
-import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from "../../redux/api";
-import { HexagonType } from "../../types/Types";
-import { changeHexagonFocus } from "../PanZoomHexGrid/PanModeSlices";
+import { ChangeNoteBody, NoteBodySwitch } from "../SideBarSlices";
+import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks";
+import { useCreateHexMutation, useUpdateHexMutation } from "../../../redux/api";
+import { HexagonType } from "../../../types/Types";
+import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices";
 import { useParams } from "react-router-dom";
+import { useFocusTextArea } from "../../../utils/utils";
 
-const NoteBody = () => {
+const NoteBody = ({ props }: { props: HexagonType }) => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
     const noteBody = useReduxSelector(state => state.sideBar.noteBody)
     const label_id: string = nanoid()
-    const textAreaRef = useFocusTextArea()
+    const textareaRef = useFocusTextArea()
     const dispatch = useReduxDispatch()
     const userId = useReduxSelector(state => state.auth.user_id)
     const { treeId } = useParams()
@@ -49,10 +48,8 @@ const NoteBody = () => {
         }
     }
     useEffect(() => {
-        if (data) {
-            dispatch(ChangeNoteBody(data.note))
-        }
-    }, [data, dispatch])
+        dispatch(ChangeNoteBody(props.note))
+    }, [dispatch, props.note])
     if (editNoteBody) {
         return (
             <>
@@ -63,7 +60,7 @@ const NoteBody = () => {
                     submit: shift + Enter key
                 </span>
                 <textarea
-                    ref={textAreaRef}
+                    ref={textareaRef}
                     id={label_id}
                     name={label_id}
                     rows={25}
@@ -74,21 +71,7 @@ const NoteBody = () => {
                     onChange={(e) => dispatch(ChangeNoteBody(e.target.value))}
                     onKeyDown={handleAddText}
                     maxLength={10000}
-                >
-                </textarea>
-                <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
-            </>
-        )
-    }
-    if (isLoading || error) {
-        return (
-            <>
-                <label className='p-2 text-2xl' htmlFor={label_id}>
-                    Notes
-                </label>
-                <span className='opacity-50 text-lg text-center'>
-                    edit shortcut: f key
-                </span>
+                ></textarea>
                 <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
             </>
         )
@@ -104,7 +87,7 @@ const NoteBody = () => {
             <p
                 className='p-2 overflow-y-auto rounded-lg h-full whitespace-pre-wrap'
             >
-                {noteBody === null || noteBody === '' ? 'notes' : noteBody}
+                {props.note === null || props.note === '' ? 'notes' : props.note}
             </p>
             <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
         </>

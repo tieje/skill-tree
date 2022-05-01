@@ -1,5 +1,5 @@
-import { useReduxDispatch } from "../../redux/hooks"
-import { EditButtonPropsType } from "../../types/Types"
+import { useReduxDispatch } from "../../../redux/hooks"
+import { EditButtonPropsType } from "../../../types/Types"
 
 const EditButton = ({ editMethod }: EditButtonPropsType) => {
     const dispatch = useReduxDispatch()

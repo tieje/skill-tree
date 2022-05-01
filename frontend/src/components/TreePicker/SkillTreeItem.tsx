@@ -3,6 +3,7 @@ import ReactTimeago from "react-timeago"
 import { useNavigate } from "react-router-dom"
 import { ResetSidebarState } from "../SideBar/SideBarSlices"
 import { useReduxDispatch } from "../../redux/hooks"
+import { ResetPanModeState } from "../PanZoomHexGrid/PanModeSlices"
 
 const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
     const navigate = useNavigate()
@@ -10,6 +11,7 @@ const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
     // functions
     const handleNavigation = () => {
         dispatch(ResetSidebarState())
+        dispatch(ResetPanModeState())
         navigate(`/app/${props.skill_tree_id.toString()}`)
     }
     return (

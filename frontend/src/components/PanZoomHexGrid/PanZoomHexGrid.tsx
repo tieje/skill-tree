@@ -38,7 +38,7 @@ import {
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any } from '../../utils/utils';
-import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from '../SideBar/SideBarSlices';
+import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleSidebarVisibilityOn, ToggleSidebarVisibilityOff } from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery, useUpdateHexMutation } from '../../redux/api';
 import { INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE } from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
@@ -53,17 +53,14 @@ const PanZoomHexGrid = () => {
   // useRef
   const hexElement = useRef(null)
   // useReduxSelector
-  const hexFiller = useReduxSelector(state => state.panMode.hexFiller)
-  const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-  const tool = useReduxSelector(state => state.panMode.tool)
+  // sidebar selectors
   const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
-  const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
-  const startingHexagon = useReduxSelector(state => state.panMode.startingHexagon)
-  const pathFocused = useReduxSelector(state => state.panMode.pathFocused)
-  const reactSVGPanZoomValue = useReduxSelector(state => state.panMode.reactSVGPanZoomValue)
-  const hexMoveEditMode = useReduxSelector(state => state.panMode.hexMoveEditMode)
+  const editShortcuts = useReduxSelector(state => state.sideBar.editShortcuts)
+  // panMode selectors
+  const pm = useReduxSelector(state => state.panMode)
+  // Mutations
   const [createPath] = useCreatePathMutation()
   const [deletePath] = useDeletePathMutation()
   const [updateHex] = useUpdateHexMutation()
@@ -71,7 +68,8 @@ const PanZoomHexGrid = () => {
   const [width, height] = useWindowSize()
   // functions
   const handlePanZoomModeSwitch = (event: KeyboardEvent) => {
-    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
+    if ((pm.pathEditMode === EDIT_ON || pm.pathEditMode === EDIT_CHOSEN) &&
+      editShortcuts === EDIT_ON) {
       switch (event.key) {
         case 'q':
           dispatch(changePathEditModeToOff())
@@ -83,7 +81,7 @@ const PanZoomHexGrid = () => {
         case 'a':
           dispatch(pathDeleteDisableSwitch(true))
           dispatch(clearPathFocused())
-          deletePath({ path_id: pathFocused.path_id })
+          deletePath({ path_id: pm.pathFocused.path_id })
           break
         case 'z':
           dispatch(clearStartingHexagon())
@@ -92,7 +90,8 @@ const PanZoomHexGrid = () => {
           break
       }
     }
-    if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
+    if ((pm.hexMoveEditMode === EDIT_ON || pm.hexMoveEditMode === EDIT_CHOSEN) &&
+      editShortcuts === EDIT_ON) {
       switch (event.key) {
         case 'q':
           dispatch(changeHexMoveEditModeToOff())
@@ -105,18 +104,23 @@ const PanZoomHexGrid = () => {
           break
       }
     }
-    if (!any([editImgAddress, editNoteBody, editNoteTitle]) && pathEditMode === EDIT_OFF && hexMoveEditMode === EDIT_OFF) {
+    if (!any([editImgAddress, editNoteBody, editNoteTitle]) &&
+      pm.pathEditMode === EDIT_OFF &&
+      pm.hexMoveEditMode === EDIT_OFF &&
+      editShortcuts === EDIT_ON) {
       // pointer mode
       switch (event.key) {
         case 'v':
           dispatch(changeToPointerMode())
+          dispatch(ToggleSidebarVisibilityOn())
           break
         // close all forms before making sidebar invisible and changing to drag mode
         case 'h':
           dispatch(changeToDragMode())
-          if (editImgAddress) dispatch(ImgAddressSwitch)
-          if (editNoteTitle) dispatch(NoteTitleSwitch)
-          if (editNoteBody) dispatch(NoteBodySwitch)
+          dispatch(ToggleSidebarVisibilityOff())
+          if (editImgAddress) dispatch(ImgAddressSwitch())
+          if (editNoteTitle) dispatch(NoteTitleSwitch())
+          if (editNoteBody) dispatch(NoteBodySwitch())
           break
         case 'k':
           dispatch(changePathEditModeToOn())
@@ -130,15 +134,15 @@ const PanZoomHexGrid = () => {
   const handleHexagonClick = (hex: Partial<HexagonType>) => {
     dispatch(ResetSidebarState())
     dispatch(changeHexagonFocus(hex))
-    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
-      switch (pathEditMode) {
+    if (pm.pathEditMode === EDIT_ON || pm.pathEditMode === EDIT_CHOSEN) {
+      switch (pm.pathEditMode) {
         case EDIT_CHOSEN:
           dispatch(changePathEditModeToOn())
           dispatch(pathDeselectDisableSwitch(true))
           createPath({
-            starting_hex_q: startingHexagon.hex_q,
-            starting_hex_r: startingHexagon.hex_r,
-            starting_hex_s: startingHexagon.hex_s,
+            starting_hex_q: pm.startingHexagon.hex_q,
+            starting_hex_r: pm.startingHexagon.hex_r,
+            starting_hex_s: pm.startingHexagon.hex_s,
             ending_hex_q: hex.hex_q,
             ending_hex_r: hex.hex_r,
             ending_hex_s: hex.hex_s,
@@ -151,14 +155,14 @@ const PanZoomHexGrid = () => {
           dispatch(pathDeselectDisableSwitch(false))
           break
       }
-    } else if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
-      switch (hexMoveEditMode) {
+    } else if (pm.hexMoveEditMode === EDIT_ON || pm.hexMoveEditMode === EDIT_CHOSEN) {
+      switch (pm.hexMoveEditMode) {
         case EDIT_CHOSEN:
           if (hex.hex_id === undefined) {
             dispatch(changeHexMoveEditModeToOn())
             dispatch(hexMoveDeselectDisableSwitch(true))
             const newHex = {
-              ...startingHexagon,
+              ...pm.startingHexagon,
               hex_q: hex.hex_q,
               hex_r: hex.hex_r,
               hex_s: hex.hex_s
@@ -181,7 +185,7 @@ const PanZoomHexGrid = () => {
     }
   }
   const handlePathClick = (path: Partial<PathType>) => {
-    switch (pathEditMode) {
+    switch (pm.pathEditMode) {
       case EDIT_ON:
         dispatch(changePathFocused(path))
         dispatch(pathDeleteDisableSwitch(false))
@@ -196,15 +200,14 @@ const PanZoomHexGrid = () => {
   }, [])
   // isLoading handler creates the initial DOM that will be updated later.
   if (isLoading) {
-    console.log('Loading')
     return (
       <ReactSVGPanZoom
         ref={hexElement}
         width={width}
         height={height - 64}
-        tool={tool}
-        //onChangeTool={tool}
-        value={reactSVGPanZoomValue}
+        tool={pm.tool}
+        value={pm.reactSVGPanZoomValue}
+        onChangeTool={() => { }}
         onChangeValue={(value) => dispatch(changeReactSVGPanZoomValue(value))}
         detectAutoPan={false}
         toolbarProps={{
@@ -213,46 +216,34 @@ const PanZoomHexGrid = () => {
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
+            <Hexagon q={8} r={1} s={-9} />
           </Layout>
         </HexGrid>
       </ReactSVGPanZoom>
     )
   }
   // Error handler
-  if (error) {
-    return (
-      <div>Error</div>
-    )
-  }
+  if (error) return (<div>Error</div>)
   return (
     <>
       <ReactSVGPanZoom
         ref={hexElement}
         width={width}
         height={height - 64}
-        tool={tool}
-        // onChangeTool={(val) => changeTool(val)}
-        value={reactSVGPanZoomValue.payload}
-        onChangeValue={(value) => {
-          dispatch(changeReactSVGPanZoomValue(value))
-        }
-        }
+        tool={pm.tool}
+        value={pm.reactSVGPanZoomValue.payload}
+        onChangeTool={() => { }}
+        onChangeValue={(value) => { dispatch(changeReactSVGPanZoomValue(value)) }}
         detectAutoPan={false}
-        toolbarProps={{
-          position: POSITION_NONE
-        }}
+        toolbarProps={{ position: POSITION_NONE }}
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
             {/*Put all hexagons with data first*/}
             {data?.hexagons.map((hex: HexagonType) => {
               let pid: string;
-              if (hex.image_address) {
-                pid = 'p' + hex.hex_string
-              }
-              if (hexagonFocused.hex_string === hex.hex_string) {
-                dispatch(changeHexagonFocus(hex))
-              }
+              if (hex.image_address) { pid = 'p' + hex.hex_string }
+              if (pm.hexagonFocused.hex_string === hex.hex_string) { dispatch(changeHexagonFocus(hex)) }
               return (
                 <Hexagon
                   key={nanoid()}
@@ -265,7 +256,7 @@ const PanZoomHexGrid = () => {
                 />
               )
             })}
-            {data ? Object.entries(hexFiller).map(([key, value]) => {
+            {data ? Object.entries(pm.hexFiller).map(([key, value]) => {
               if (!data.hex_string_list.includes(key)) {
                 return (
                   <Hexagon
@@ -276,20 +267,20 @@ const PanZoomHexGrid = () => {
                     s={value.hex_s}
                     onClick={() => handleHexagonClick(value)}
                   >
-                    <Text>
-                      {value.hex_q},{value.hex_r},{value.hex_s}
+                    <Text key={nanoid()}>
+                      {[value.hex_q, value.hex_r, value.hex_s].join(',')}
                     </Text>
                   </Hexagon>
                 )
               }
               return null
             }) : null}
-            {(pathEditMode === EDIT_CHOSEN && hexagonFocused) || (hexMoveEditMode === EDIT_CHOSEN && hexagonFocused) ?
+            {(pm.pathEditMode === EDIT_CHOSEN && pm.hexagonFocused) || (pm.hexMoveEditMode === EDIT_CHOSEN && pm.hexagonFocused) ?
               <Hexagon
                 key={nanoid()}
-                q={hexagonFocused.hex_q}
-                r={hexagonFocused.hex_r}
-                s={hexagonFocused.hex_s}
+                q={pm.hexagonFocused.hex_q}
+                r={pm.hexagonFocused.hex_r}
+                s={pm.hexagonFocused.hex_s}
                 cellStyle={{ fill: '#fd9420' }}
               />
               : null}
@@ -304,20 +295,20 @@ const PanZoomHexGrid = () => {
                 />
               )
             })}
-            {pathEditMode === EDIT_ON && pathFocused !== INITIAL_PATH_HEX_STATE ?
+            {pm.pathEditMode === EDIT_ON && pm.pathFocused !== INITIAL_PATH_HEX_STATE ?
               <CustomPath
                 key={nanoid()}
                 start={new Hex(
-                  pathFocused.starting_hex_q,
-                  pathFocused.starting_hex_r,
-                  pathFocused.starting_hex_s,
+                  pm.pathFocused.starting_hex_q,
+                  pm.pathFocused.starting_hex_r,
+                  pm.pathFocused.starting_hex_s,
                 )}
                 end={new Hex(
-                  pathFocused.ending_hex_q,
-                  pathFocused.ending_hex_r,
-                  pathFocused.ending_hex_s
+                  pm.pathFocused.ending_hex_q,
+                  pm.pathFocused.ending_hex_r,
+                  pm.pathFocused.ending_hex_s
                 )}
-                onClick={() => handlePathClick(pathFocused)}
+                onClick={() => handlePathClick(pm.pathFocused)}
                 pathStyle={{ stroke: '#fd9420' }}
               />
               : null}
@@ -326,14 +317,15 @@ const PanZoomHexGrid = () => {
             let pid: string;
             if (hex.image_address) {
               pid = 'p' + hex.hex_string
+              return (
+                <Pattern
+                  key={nanoid()}
+                  id={pid}
+                  link={hex.image_address}
+                />)
+            } else {
+              return (null)
             }
-            return (
-              <Pattern
-                key={nanoid()}
-                id={pid}
-                link={hex.image_address}
-              />
-            )
           })}
         </HexGrid>
       </ReactSVGPanZoom>

@@ -52,7 +52,7 @@ const useFocusInput = () => {
     const ref = useRef<HTMLInputElement>(null)
     useEffect(() => {
         ref.current?.focus()
-    }, [])
+    })
     return ref
 }
 
@@ -60,7 +60,7 @@ const useFocusTextArea = () => {
     const ref = useRef<HTMLTextAreaElement>(null)
     useEffect(() => {
         ref.current?.focus()
-    }, [])
+    })
     return ref
 }
 

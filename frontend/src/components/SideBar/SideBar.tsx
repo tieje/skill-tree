@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
-import Checkbox from './Checkbox'
-import ImgAddress from './ImgAddress'
-import NoteTitle from './NoteTitle'
-import NoteBody from './NoteBody'
 import { useReduxDispatch, useReduxSelector } from '../../redux/hooks'
 import { TOOL_PAN } from 'react-svg-pan-zoom'
-import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch } from './SideBarSlices'
+import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleEditShortcutsOff, ToggleEditShortcutsOn, ToggleSidebarVisibilityOff, ToggleSidebarVisibilityOn, ViewerToStudent, ViewerToTeacher } from './SideBarSlices'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
-import { INVISIBLE, CHECKBOXES, EDIT_ON, EDIT_CHOSEN } from '../../Variables/StaticVariables'
-import { changeHexMoveEditModeToOn, changePathEditModeToOn, changeToDragMode, changeToPointerMode } from '../PanZoomHexGrid/PanModeSlices'
-import PathEdit from './PathEdit'
-import { useDeleteHexMutation, useGetTreeByIdQuery } from '../../redux/api'
-import HexMoveEdit from './HexMoveEdit'
+import { INVISIBLE, EDIT_ON, EDIT_CHOSEN, POINTER_MODE, TEACHER, STUDENT, EDIT_OFF } from '../../Variables/StaticVariables'
+import PathEdit from './TeacherView/PathEdit'
+import { useGetTreeByIdQuery } from '../../redux/api'
+import HexMoveEdit from './TeacherView/HexMoveEdit'
 import { useParams } from 'react-router-dom'
-import StudentTitle from './StudentTitle'
-import StudentNoteBody from './StudentNoteBody'
-
+import FunctionalButton from './TeacherView/FunctionalButton'
+import TeacherView from './TeacherView/TeacherView'
+import StudentView from './StudentView/StudentView'
+import StudentViewByTeacher from './StudentView/StudentViewByTeacher'
+import { changeToDragMode, changeToPointerMode } from '../PanZoomHexGrid/PanModeSlices'
 
 const SideBar = () => {
     // queries
@@ -25,21 +21,16 @@ const SideBar = () => {
     const { data, isLoading, error } = useGetTreeByIdQuery(treeId)
     // useReduxSelector
     const user_id = useReduxSelector(state => state.auth.user_id)
-    const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const tool: string = useReduxSelector(state => state.panMode.tool)
-    const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
-    const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
-    const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
     const pathEditMode = useReduxSelector(state => state.panMode.pathEditMode)
     const hexMoveEditMode = useReduxSelector(state => state.panMode.hexMoveEditMode)
-    const [deleteHex] = useDeleteHexMutation()
+    const tool: string = useReduxSelector(state => state.panMode.tool)
+    const sb = useReduxSelector(state => state.sideBar)
     const dispatch = useReduxDispatch()
-    // useState
-    const base_section_class = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full overflow-y-auto'
-    const [section_className, setSection] = useState(base_section_class)
     // functions
     const handleShortcuts = (event: KeyboardEvent) => {
-        if (section_className !== INVISIBLE && !any([editImgAddress, editNoteBody, editNoteTitle])) {
+        if (sb.sidebarBaseClass !== INVISIBLE &&
+            !any([sb.editImgAddress, sb.editNoteBody, sb.editNoteTitle]) &&
+            sb.editShortcuts === EDIT_ON) {
             switch (event.key) {
                 case 's':
                     dispatch(ImgAddressSwitch())
@@ -50,127 +41,40 @@ const SideBar = () => {
                 case 'f':
                     dispatch(NoteBodySwitch())
                     break
+                case 'r':
+                    dispatch(ViewerToStudent())
+                    break
+            }
+        }
+        // student viewer shortcuts
+        if (sb.editShortcuts === EDIT_OFF) {
+            switch (event.key) {
+                case 't':
+                    if (data.user.toString() === user_id) dispatch(ViewerToTeacher())
+                    break
+                case 'v':
+                    dispatch(changeToPointerMode())
+                    dispatch(ToggleSidebarVisibilityOn())
+                    break
+                case 'h':
+                    dispatch(changeToDragMode())
+                    dispatch(ToggleSidebarVisibilityOff())
+                    break
             }
         }
     }
     useEventListener('keypress', handleShortcuts)
-    // useEffects
-    useEffect(() => {
-        switch (tool) {
-            case TOOL_PAN:
-                setSection(INVISIBLE);
-                break
-            default:
-                setSection(base_section_class);
-        }
-    }, [tool])
-    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) {
-        return (
-            <PathEdit key={nanoid()} />
-        )
+    if (pathEditMode === EDIT_ON || pathEditMode === EDIT_CHOSEN) return (<PathEdit key={nanoid()} />)
+    if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) return (<HexMoveEdit key={nanoid()} />)
+    if (tool === TOOL_PAN) return (<section id='sidebar' className={sb.sidebarBaseClass}><FunctionalButton props={POINTER_MODE} /></section>)
+    if (isLoading || error) return (<section id='sidebar' className={sb.sidebarBaseClass}></section>)
+    if (data.user.toString() === user_id && sb.viewer === TEACHER) {
+        if (sb.editShortcuts === EDIT_OFF) dispatch(ToggleEditShortcutsOn())
+        return (<TeacherView />)
     }
-    if (hexMoveEditMode === EDIT_ON || hexMoveEditMode === EDIT_CHOSEN) {
-        return (
-            <HexMoveEdit key={nanoid()} />
-        )
-    }
-    if (tool === TOOL_PAN) {
-        return (
-            <section id='sidebar' className={base_section_class}>
-                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                    <span className='opacity-50 text-lg text-center'>
-                        shortcut: v key
-                    </span>
-                    <button
-                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                        onClick={() => dispatch(changeToPointerMode())}
-                    >
-                        Pointer Mode
-                    </button>
-                </div>
-            </section>
-        )
-    }
-    if (isLoading || error) {
-        return (
-            <section id='sidebar' className={section_className}>
-                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
-                </div>
-            </section >
-        )
-    }
-    if (data.user.toString() === user_id) {
-        return (
-            <section id='sidebar' className={section_className}>
-                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                    <span className='opacity-50 text-lg text-center'>
-                        shortcut: h key
-                    </span>
-                    <button
-                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                        onClick={() => dispatch(changeToDragMode())}
-                    >
-                        Pan Mode
-                    </button>
-                </div>
-                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                    <span className='opacity-50 text-lg text-center'>
-                        shortcut: m key
-                    </span>
-                    <button
-                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                        onClick={() => dispatch(changeHexMoveEditModeToOn())}
-                    >
-                        Move Nodes
-                    </button>
-                </div>
-                <div className='grid grid-cols-2 gap-3 p-5 m-3 place-content-center rounded-lg bg-paper-yellow opacity-95'>
-                    <span className='opacity-50 text-lg text-center'>
-                        shortcut: k key
-                    </span>
-                    <button
-                        className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
-                        onClick={() => dispatch(changePathEditModeToOn())}
-                    >
-                        Edit Paths
-                    </button>
-                </div>
-                <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
-                    {CHECKBOXES.map((checkbox) => {
-                        return (<Checkbox
-                            key={nanoid()}
-                            checkbox={checkbox}
-                        />)
-                    })}
-                </div>
-                <ImgAddress key={nanoid()} />
-                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
-                    <NoteTitle key={nanoid()} />
-                </div>
-                <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
-                    <NoteBody key={nanoid()} />
-                </div>
-                {hexagonFocused.hex_id ? <div className='grid place-content-center'>
-                    <button
-                        className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple mb-5'
-                        onClick={() => deleteHex(hexagonFocused)}
-                    >
-                        Clear Node
-                    </button>
-                </div> : null}
-            </section >
-        )
-    }
-    return (
-        <section id='sidebar' className={section_className}>
-            <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
-                <StudentTitle key={nanoid()} />
-            </div>
-            <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
-                <StudentNoteBody key={nanoid()} />
-            </div>
-        </section >
-    )
+    if (sb.editShortcuts === EDIT_ON) dispatch(ToggleEditShortcutsOff())
+    if (data.user.toString() === user_id && sb.viewer === STUDENT) return (<StudentViewByTeacher />)
+    return (<StudentView />)
 }
 
 export default SideBar

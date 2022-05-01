@@ -1,5 +1,5 @@
-import { useReduxSelector } from "../../redux/hooks";
-import { useGetHexagonByIdQuery } from "../../redux/api";
+import { useReduxSelector } from "../../../redux/hooks";
+import { useGetHexagonByIdQuery } from "../../../redux/api";
 
 const StudentTitle = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)

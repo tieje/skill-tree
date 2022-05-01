@@ -1,8 +1,8 @@
-import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from '../../redux/api';
-import { useReduxDispatch, useReduxSelector } from '../../redux/hooks';
-import { QUANTITATIVE, VERBAL } from '../../Variables/StaticVariables';
-import { HexagonType } from '../../types/Types';
-import { changeHexagonFocus } from '../PanZoomHexGrid/PanModeSlices';
+import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from '../../../redux/api';
+import { useReduxDispatch, useReduxSelector } from '../../../redux/hooks';
+import { QUANTITATIVE, VERBAL } from '../../../Variables/StaticVariables';
+import { HexagonType } from '../../../types/Types';
+import { changeHexagonFocus } from '../../PanZoomHexGrid/PanModeSlices';
 import { useParams } from 'react-router-dom';
 
 const Checkbox = ({ checkbox }: { checkbox: string }) => {

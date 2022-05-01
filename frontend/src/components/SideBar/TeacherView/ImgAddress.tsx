@@ -1,18 +1,17 @@
 import React, { useEffect } from "react"
 import { nanoid } from "nanoid"
-import { useFocusInput } from "../../utils/utils"
-import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
-import { ChangeImgAddress, ImgAddressSwitch } from "./SideBarSlices"
-import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from "../../redux/api"
+import { useFocusInput } from "../../../utils/utils"
+import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
+import { ChangeImgAddress, ImgAddressSwitch } from "../SideBarSlices"
+import { useCreateHexMutation, useUpdateHexMutation } from "../../../redux/api"
 import EditButton from "./EditButton"
-import { HexagonType } from "../../types/Types"
-import { changeHexagonFocus } from "../PanZoomHexGrid/PanModeSlices"
+import { HexagonType } from "../../../types/Types"
+import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices"
 import { useParams } from "react-router-dom"
 
-const ImgAddress = () => {
+const ImgAddress = ({ props }: { props: HexagonType }) => {
     // Query
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const imgAddress = useReduxSelector(state => state.sideBar.imgAddress)
     const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
     const inputRef = useFocusInput()
@@ -53,10 +52,8 @@ const ImgAddress = () => {
         }
     }
     useEffect(() => {
-        if (data) {
-            dispatch(ChangeImgAddress(data.image_address))
-        }
-    }, [data, dispatch])
+        dispatch(ChangeImgAddress(props.image_address))
+    }, [dispatch, props.image_address])
     if (editImgAddress) {
         return (
             <div
@@ -83,7 +80,7 @@ const ImgAddress = () => {
                 />
             </div>
         )
-    }
+    }/*
     if (isLoading || error) {
         return (
             <div
@@ -103,7 +100,7 @@ const ImgAddress = () => {
                 />
             </div>
         )
-    }
+    }*/
     return (
         <div
             className='relative grid grid-cols-1 gap-1 bg-paper-yellow p-5 m-3 rounded-lg opacity-95'
@@ -122,7 +119,7 @@ const ImgAddress = () => {
                 id={img_tag_id}
                 className='truncate'
             >
-                {imgAddress === null || imgAddress === '' ? 'no image provided' : imgAddress}
+                {props.image_address === null || props.image_address === '' ? 'no image provided' : props.image_address}
             </a>
             <EditButton
                 editMethod={() => ImgAddressSwitch()}
