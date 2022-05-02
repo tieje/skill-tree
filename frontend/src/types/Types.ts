@@ -153,6 +153,11 @@ type SkillTreePickerByUserIdType = {
     teaching: SkillTreePickerTreeType[]
 }
 
+type TreePickerStateType = {
+    treeFilter: string
+    treeFocused: Partial<SkillTreePickerTreeType>,
+}
+
 export type {
     undefinedPayloadType,
     SkillTreeType,
@@ -173,4 +178,5 @@ export type {
     SkillTreePickerTreeType,
     SkillTreePickerByUserIdType,
     FunctionalButtonPropsType,
+    TreePickerStateType,
 }

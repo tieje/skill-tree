@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import { useDeleteHexMutation, useGetHexagonByIdQuery } from "../../../redux/api"
 import { useReduxSelector } from "../../../redux/hooks"
-import { CHECKBOXES, STUDENT_VIEW, TOP_SIDEBAR_BUTTONS } from "../../../Variables/StaticVariables"
+import { QUANTITATIVE, STUDENT_VIEW, TOP_SIDEBAR_BUTTONS, VERBAL } from "../../../Variables/StaticVariables"
 import Checkbox from "./Checkbox"
 import FunctionalButton from "./FunctionalButton"
 import ImgAddress from "./ImgAddress"
@@ -13,19 +13,20 @@ const TeacherView = () => {
     const { data, isLoading, error } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
     const sidebarBaseClass = useReduxSelector(state => state.sideBar.sidebarBaseClass)
     const [deleteHex] = useDeleteHexMutation()
-    if (isLoading || error) { return (<div>Loading or Error</div>) }
     return (
         <section id='sidebar' className={sidebarBaseClass}>
+            <FunctionalButton props={STUDENT_VIEW} />
             {TOP_SIDEBAR_BUTTONS.map((button) => { return (<FunctionalButton key={nanoid()} props={button} />) })}
             <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
-                {CHECKBOXES.map((checkbox) => { return (<Checkbox key={nanoid()} checkbox={checkbox} />) })}
+                <Checkbox props={{ label: VERBAL, data: data, isLoading: isLoading, error: error }} />
+                <Checkbox props={{ label: QUANTITATIVE, data: data, isLoading: isLoading, error: error }} />
             </div>
-            <ImgAddress props={data} />
+            <ImgAddress props={{ data: data, isLoading: isLoading, error: error }} />
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
-                <NoteTitle props={data} />
+                <NoteTitle props={{ data: data, isLoading: isLoading, error: error }} />
             </div>
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
-                <NoteBody props={data} />
+                <NoteBody props={{ data: data, isLoading: isLoading, error: error }} />
             </div>
             {hexagonFocused.hex_id ? <div className='grid place-content-center'>
                 <button
@@ -35,12 +36,6 @@ const TeacherView = () => {
                     Clear Node
                 </button>
             </div> : null}
-            <div className='relative bg-paper-yellow p-5 mx-3 mb-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
-                <h1 className='text-2xl grid place-content-center'>
-                    Global Skill Tree Settings
-                </h1>
-            </div>
-            <FunctionalButton props={STUDENT_VIEW} />
         </section>
     )
 }

@@ -4,20 +4,28 @@ import { useNavigate } from "react-router-dom"
 import { ResetSidebarState } from "../SideBar/SideBarSlices"
 import { useReduxDispatch } from "../../redux/hooks"
 import { ResetPanModeState } from "../PanZoomHexGrid/PanModeSlices"
+import { changeTreePickerTreeFocused } from "./TreePickerSlice"
 
 const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
     const navigate = useNavigate()
     const dispatch = useReduxDispatch()
     // functions
-    const handleNavigation = () => {
-        dispatch(ResetSidebarState())
-        dispatch(ResetPanModeState())
-        navigate(`/app/${props.skill_tree_id.toString()}`)
+    const handleNavigation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        switch (e.detail) {
+            case 1:
+                dispatch(changeTreePickerTreeFocused(props))
+                break;
+            case 2:
+                dispatch(ResetSidebarState())
+                dispatch(ResetPanModeState())
+                navigate(`/app/${props.skill_tree_id.toString()}`)
+                break
+        }
     }
     return (
         <button
-            onClick={handleNavigation}
-            className='relative rounded-lg grid border-2 border-gray h-72 hover:border-russian-blue hover:bg-gray'
+            onClick={(e) => handleNavigation(e)}
+            className='relative rounded-lg grid border-2 border-gray h-72 focus:border-russian-blue focus:bg-gray'
         >
             <div className='grid justify-center'>
                 <img

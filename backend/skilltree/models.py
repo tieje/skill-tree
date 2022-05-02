@@ -1,18 +1,29 @@
-from django.db.models import Model, AutoField, CharField, ForeignKey, BooleanField, TextField, CASCADE, IntegerField, BigIntegerField
+from django.db.models import Model, AutoField, CharField, ForeignKey, BooleanField, TextField, CASCADE, SET_NULL, IntegerField, BigIntegerField
 from django.conf import settings
-from django.db import models
 
 title_length: int = 70
+
+
+class SkillTreeThemes(Model):
+    id: AutoField = AutoField(primary_key=True)
+    theme: CharField = CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return (self.theme)
 
 
 class SkillTrees(Model):
     skill_tree_id: AutoField = AutoField(primary_key=True)
     name: CharField = CharField(max_length=title_length)
-    theme: CharField = CharField(max_length=20)
+    theme: CharField = ForeignKey(
+        SkillTreeThemes, on_delete=SET_NULL, to_field='theme', null=True)
     user: ForeignKey = ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True)
     image_address: TextField = TextField(blank=True, null=True)
     last_edit_timestamp: BigIntegerField = BigIntegerField(null=False)
+
+    def __str__(self):
+        return (self.name)
 
 
 class SkillTreeHexagons(Model):
@@ -39,6 +50,9 @@ class SkillTreeHexagons(Model):
             str(self.hex_s)
         ])
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return(self.title)
 
 
 class SkillTreePaths(Model):

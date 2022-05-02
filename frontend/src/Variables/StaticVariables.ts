@@ -1,4 +1,4 @@
-import { AuthState, FunctionalButtonPropsType, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState } from "../types/Types"
+import { AuthState, FunctionalButtonPropsType, HexagonType, NavButtonPropsType, PanState, PathType, SidebarState, SkillTreePickerTreeType, TreePickerStateType } from "../types/Types"
 import { TOOL_NONE } from 'react-svg-pan-zoom'
 import { hexagonFiller } from "./HexFiller"
 import { INITIAL_VALUE } from 'react-svg-pan-zoom'
@@ -8,7 +8,6 @@ const QUANTITATIVE: string = 'Quantitative Feedback'
 const INVISIBLE: string = 'invisible'
 const BASE_SECTION_CLASS = 'md:fixed md:w-3/12 md:left-0 md:top-0 md:h-screen z-10 bg-stationary-pattern top-3/4 absolute w-full overflow-y-auto'
 const HEXAGON_FOCUSED: string = 'hexagonFocused'
-const CHECKBOXES: string[] = [VERBAL, QUANTITATIVE]
 const IMG_ADDRESS: string = 'image address'
 const TITLE: string = 'title'
 const NOTES: string = 'notes'
@@ -134,13 +133,23 @@ const BOTTOM_SIDEBAR_BUTTONS: FunctionalButtonPropsType[] = [
     TEACHER_VIEW,
     STUDENT_VIEW,
 ]
+const INITIAL_TREEPICKER_TREE_FOCUSED: Partial<SkillTreePickerTreeType> = {
+    skill_tree_id: undefined,
+    name: undefined,
+    user_id: undefined,
+    image_address: undefined,
+    last_edit_timestamp: undefined,
+}
+const INITIAL_TREE_PICKER_STATE: Partial<TreePickerStateType> = {
+    treeFilter: LEARN,
+    treeFocused: INITIAL_TREEPICKER_TREE_FOCUSED,
+}
 export {
     VERBAL,
     QUANTITATIVE,
     INVISIBLE,
     BASE_SECTION_CLASS,
     HEXAGON_FOCUSED,
-    CHECKBOXES,
     IMG_ADDRESS,
     TITLE,
     NOTES,
@@ -169,4 +178,5 @@ export {
     STUDENT_VIEW,
     TOP_SIDEBAR_BUTTONS,
     BOTTOM_SIDEBAR_BUTTONS,
+    INITIAL_TREE_PICKER_STATE,
 }

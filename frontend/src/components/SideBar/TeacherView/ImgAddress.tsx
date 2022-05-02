@@ -8,8 +8,16 @@ import EditButton from "./EditButton"
 import { HexagonType } from "../../../types/Types"
 import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices"
 import { useParams } from "react-router-dom"
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
-const ImgAddress = ({ props }: { props: HexagonType }) => {
+type ImgAddressPropsType = {
+    data?: HexagonType
+    isLoading: boolean
+    error: FetchBaseQueryError | SerializedError
+}
+
+const ImgAddress = ({ props }: { props: ImgAddressPropsType }) => {
     // Query
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     const imgAddress = useReduxSelector(state => state.sideBar.imgAddress)
@@ -52,8 +60,8 @@ const ImgAddress = ({ props }: { props: HexagonType }) => {
         }
     }
     useEffect(() => {
-        dispatch(ChangeImgAddress(props.image_address))
-    }, [dispatch, props.image_address])
+        if (props.data) dispatch(ChangeImgAddress(props.data.image_address))
+    }, [dispatch, props.data])
     if (editImgAddress) {
         return (
             <div
@@ -80,8 +88,9 @@ const ImgAddress = ({ props }: { props: HexagonType }) => {
                 />
             </div>
         )
-    }/*
-    if (isLoading || error) {
+    }
+    if (props.isLoading || props.error) {
+        if (props.error) dispatch(ChangeImgAddress(''))
         return (
             <div
                 className='relative grid grid-cols-1 gap-1 bg-paper-yellow p-5 m-3 rounded-lg opacity-95'
@@ -100,7 +109,7 @@ const ImgAddress = ({ props }: { props: HexagonType }) => {
                 />
             </div>
         )
-    }*/
+    }
     return (
         <div
             className='relative grid grid-cols-1 gap-1 bg-paper-yellow p-5 m-3 rounded-lg opacity-95'
@@ -119,7 +128,7 @@ const ImgAddress = ({ props }: { props: HexagonType }) => {
                 id={img_tag_id}
                 className='truncate'
             >
-                {props.image_address === null || props.image_address === '' ? 'no image provided' : props.image_address}
+                {props.data.image_address === null || props.data.image_address === '' ? 'no image provided' : props.data.image_address}
             </a>
             <EditButton
                 editMethod={() => ImgAddressSwitch()}

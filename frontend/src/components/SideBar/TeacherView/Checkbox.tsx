@@ -1,20 +1,27 @@
-import { useCreateHexMutation, useGetHexagonByIdQuery, useUpdateHexMutation } from '../../../redux/api';
+import { useCreateHexMutation, useUpdateHexMutation } from '../../../redux/api';
 import { useReduxDispatch, useReduxSelector } from '../../../redux/hooks';
 import { QUANTITATIVE, VERBAL } from '../../../Variables/StaticVariables';
 import { HexagonType } from '../../../types/Types';
 import { changeHexagonFocus } from '../../PanZoomHexGrid/PanModeSlices';
 import { useParams } from 'react-router-dom';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
-const Checkbox = ({ checkbox }: { checkbox: string }) => {
-    // Query
-    const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
+type CheckboxPropsType = {
+    label: string
+    data?: HexagonType
+    isLoading: boolean
+    error: FetchBaseQueryError | SerializedError
+}
+
+const Checkbox = ({ props }: { props: CheckboxPropsType }) => {
     // variables
+    const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     const userId = useReduxSelector(state => state.auth.user_id)
     const dispatch = useReduxDispatch()
     const [updateCheckbox] = useUpdateHexMutation()
     const [createHex] = useCreateHexMutation()
-    const label_id: string = checkbox.replace(/ /g, '-').toLowerCase()
+    const label_id: string = props.label.replace(/ /g, '-').toLowerCase()
     const { treeId } = useParams()
     // function
     const handleCreate = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +33,7 @@ const Checkbox = ({ checkbox }: { checkbox: string }) => {
             skill_tree: parseInt(treeId),
             user: userId,
         }
-        switch (checkbox) {
+        switch (props.label) {
             case VERBAL:
                 try {
                     const payload: HexagonType = await createHex({
@@ -52,7 +59,7 @@ const Checkbox = ({ checkbox }: { checkbox: string }) => {
         }
     }
     const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
-        switch (checkbox) {
+        switch (props.label) {
             case VERBAL:
                 updateCheckbox({
                     hex_id: hexagonFocused.hex_id,
@@ -67,12 +74,11 @@ const Checkbox = ({ checkbox }: { checkbox: string }) => {
                 break
         }
     }
-    // useEffects
-    if (isLoading || error) {
+    if (props.isLoading || props.error) {
         return (
             <div className='text-xl'>
                 <label className='pr-2' htmlFor={label_id}>
-                    {checkbox}
+                    {props.label}
                 </label>
                 <input
                     type="checkbox"
@@ -85,18 +91,18 @@ const Checkbox = ({ checkbox }: { checkbox: string }) => {
         )
     }
     let checked: boolean;
-    switch (checkbox) {
+    switch (props.label) {
         case VERBAL:
-            checked = data.allow_verbal_feedback
+            checked = props.data.allow_verbal_feedback
             break
         case QUANTITATIVE:
-            checked = data.allow_quantitative_feedback
+            checked = props.data.allow_quantitative_feedback
             break
     }
     return (
         <div className='text-xl'>
             <label className='pr-2' htmlFor={label_id}>
-                {checkbox}
+                {props.label}
             </label>
             <input
                 type="checkbox"

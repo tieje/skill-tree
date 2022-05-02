@@ -8,8 +8,18 @@ import { useCreateHexMutation, useUpdateHexMutation } from "../../../redux/api";
 import { HexagonType } from "../../../types/Types";
 import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices";
 import { useParams } from "react-router-dom";
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
-const NoteTitle = ({ props }: { props: HexagonType }) => {
+
+type NoteTitlePropsType = {
+    data: HexagonType
+    isLoading: boolean
+    error: FetchBaseQueryError | SerializedError
+}
+
+
+const NoteTitle = ({ props }: { props: NoteTitlePropsType }) => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     const noteTitle = useReduxSelector(state => state.sideBar.noteTitle)
     const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
@@ -52,23 +62,9 @@ const NoteTitle = ({ props }: { props: HexagonType }) => {
                 break
         }
     }
-    /*
-    if (isLoading || error) {
-        return (
-            <>
-                <h1 className='text-2xl text-left'>
-                    Title
-                </h1>
-                <span className='opacity-50 text-lg text-center'>
-                    edit shortcut: d key
-                </span>
-                <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
-            </>
-        )
-    }*/
     useEffect(() => {
-        dispatch(ChangeNoteTitle(props.title))
-    }, [dispatch, props.title])
+        if (props.data) dispatch(ChangeNoteTitle(props.data.title))
+    }, [dispatch, props.data])
     if (editNoteTitle) {
         return (
             <>
@@ -92,6 +88,20 @@ const NoteTitle = ({ props }: { props: HexagonType }) => {
             </>
         )
     }
+    if (props.isLoading || props.error) {
+        if (props.error) dispatch(ChangeNoteTitle(''))
+        return (
+            <>
+                <h1 className='text-2xl text-left'>
+                    Title
+                </h1>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: d key
+                </span>
+                <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
+            </>
+        )
+    }
     return (
         <>
             <h1 className='text-2xl text-left'>
@@ -101,7 +111,7 @@ const NoteTitle = ({ props }: { props: HexagonType }) => {
                 edit shortcut: d key
             </span>
             <h1 className='text-2xl text-center'>
-                {props.title === null || props.title === '' ? 'Title' : props.title}
+                {props.data.title === null || props.data.title === '' ? 'Title' : props.data.title}
             </h1>
             <EditButton key={nanoid()} editMethod={() => NoteTitleSwitch()} />
         </>

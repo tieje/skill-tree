@@ -8,8 +8,17 @@ import { HexagonType } from "../../../types/Types";
 import { changeHexagonFocus } from "../../PanZoomHexGrid/PanModeSlices";
 import { useParams } from "react-router-dom";
 import { useFocusTextArea } from "../../../utils/utils";
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
-const NoteBody = ({ props }: { props: HexagonType }) => {
+
+type NoteBodyPropsType = {
+    data: HexagonType
+    isLoading: boolean
+    error: FetchBaseQueryError | SerializedError
+}
+
+const NoteBody = ({ props }: { props: NoteBodyPropsType }) => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
     const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
     const noteBody = useReduxSelector(state => state.sideBar.noteBody)
@@ -48,8 +57,8 @@ const NoteBody = ({ props }: { props: HexagonType }) => {
         }
     }
     useEffect(() => {
-        dispatch(ChangeNoteBody(props.note))
-    }, [dispatch, props.note])
+        if (props.data) dispatch(ChangeNoteBody(props.data.note))
+    }, [dispatch, props.data])
     if (editNoteBody) {
         return (
             <>
@@ -76,6 +85,20 @@ const NoteBody = ({ props }: { props: HexagonType }) => {
             </>
         )
     }
+    if (props.isLoading || props.error) {
+        if (props.error) dispatch(ChangeNoteBody(''))
+        return (
+            <>
+                <label className='p-2 text-2xl' htmlFor={label_id}>
+                    Notes
+                </label>
+                <span className='opacity-50 text-lg text-center'>
+                    edit shortcut: f key
+                </span>
+                <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
+            </>
+        )
+    }
     return (
         <>
             <label className='p-2 text-2xl' htmlFor={label_id}>
@@ -87,7 +110,7 @@ const NoteBody = ({ props }: { props: HexagonType }) => {
             <p
                 className='p-2 overflow-y-auto rounded-lg h-full whitespace-pre-wrap'
             >
-                {props.note === null || props.note === '' ? 'notes' : props.note}
+                {props.data.note === null || props.data.note === '' ? 'notes' : props.data.note}
             </p>
             <EditButton key={nanoid()} editMethod={() => NoteBodySwitch()} />
         </>

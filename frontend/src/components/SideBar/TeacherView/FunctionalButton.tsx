@@ -1,10 +1,15 @@
-import { useReduxDispatch } from "../../../redux/hooks"
+import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
 import { FunctionalButtonPropsType } from "../../../types/Types"
+import { any } from "../../../utils/utils"
 import { EDIT_PATHS_MODE, MOVE_NODES_MODE, PAN_MODE, POINTER_MODE, STUDENT_VIEW, TEACHER_VIEW } from "../../../Variables/StaticVariables"
 import { changeHexMoveEditModeToOn, changePathEditModeToOn, changeToDragMode, changeToPointerMode } from "../../PanZoomHexGrid/PanModeSlices"
 import { ViewerToStudent, ViewerToTeacher } from "../SideBarSlices"
 
 const FunctionalButton = ({ props }: { props: FunctionalButtonPropsType }) => {
+    const editImgAddress = useReduxSelector(state => state.sideBar.editImgAddress)
+    const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
+    const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
+    const buttonDisabled = any([editImgAddress, editNoteBody, editNoteTitle])
     const dispatch = useReduxDispatch()
     const handleClick = () => {
         switch (props.label) {
@@ -34,7 +39,8 @@ const FunctionalButton = ({ props }: { props: FunctionalButtonPropsType }) => {
                 {props.shortcut}
             </span>
             <button
-                className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white'
+                disabled={buttonDisabled}
+                className='bg-orange opacity-95 rounded-lg shadow-lg hover:bg-dark-orange border border-black hover:border-white disabled:bg-dark-orange'
                 onClick={handleClick}
             >
                 {props.label}

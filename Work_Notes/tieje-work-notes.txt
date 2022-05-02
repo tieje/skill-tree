@@ -764,6 +764,13 @@ Got a lot done today.
 + test the useQuery in TeacherView - It works. Functionality isn't perfect, but it's good enough for my purposes.
 + get the text input and textarea working properly again
 
+5/2/2022
+
+
+
++ replace loading or error in TeacherView with empty version
++ disable buttons while editing
+
 Write an article about:
 
 - the next skill tree update
@@ -779,14 +786,14 @@ Github Contributions
 
 Tasks:
 
-- replace loading or error in TeacherView with empty version
-    Do it properly this time. Too much tech debt.
-- skill tree profile picture
-- add field to backend for profile picture
-- theme field in the backend
+- design the left column of the tree picker page
+- build the static version of the left column of the tree picker page
+- build the stateful version of the tree picker page
+- left side column for tree data on tree picker page
+- theme field in the backend for tree picker page
+- Feature for owners to download their data in a JSON File from tree picker page
+- edit skill tree profile picture on skill tree picker page
 - add state for theme based on available multiple choice
-- Feature for owners to download their data in a JSON File
-- Add statistics at the top of the left sidebar
 
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
@@ -795,6 +802,7 @@ Tasks:
 - build the awaiting for email confirmation page
 - build the 404 page
 - build the static version of the home page after you have built the skyrim theme
+- Add statistics at the top of the left sidebar
 
 Figma
 

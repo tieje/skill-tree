@@ -132,55 +132,57 @@ const PanZoomHexGrid = () => {
     }
   }
   const handleHexagonClick = (hex: Partial<HexagonType>) => {
-    dispatch(ResetSidebarState())
-    dispatch(changeHexagonFocus(hex))
-    if (pm.pathEditMode === EDIT_ON || pm.pathEditMode === EDIT_CHOSEN) {
-      switch (pm.pathEditMode) {
-        case EDIT_CHOSEN:
-          dispatch(changePathEditModeToOn())
-          dispatch(pathDeselectDisableSwitch(true))
-          createPath({
-            starting_hex_q: pm.startingHexagon.hex_q,
-            starting_hex_r: pm.startingHexagon.hex_r,
-            starting_hex_s: pm.startingHexagon.hex_s,
-            ending_hex_q: hex.hex_q,
-            ending_hex_r: hex.hex_r,
-            ending_hex_s: hex.hex_s,
-            skill_tree: parseInt(treeId)
-          })
-          break
-        case EDIT_ON:
-          dispatch(changeStartingHexagon(hex))
-          dispatch(changePathEditModeToChosen())
-          dispatch(pathDeselectDisableSwitch(false))
-          break
-      }
-    } else if (pm.hexMoveEditMode === EDIT_ON || pm.hexMoveEditMode === EDIT_CHOSEN) {
-      switch (pm.hexMoveEditMode) {
-        case EDIT_CHOSEN:
-          if (hex.hex_id === undefined) {
-            dispatch(changeHexMoveEditModeToOn())
-            dispatch(hexMoveDeselectDisableSwitch(true))
-            const newHex = {
-              ...pm.startingHexagon,
-              hex_q: hex.hex_q,
-              hex_r: hex.hex_r,
-              hex_s: hex.hex_s
+    if (!any([editImgAddress, editNoteBody, editNoteTitle])) {
+      dispatch(ResetSidebarState())
+      dispatch(changeHexagonFocus(hex))
+      if (pm.pathEditMode === EDIT_ON || pm.pathEditMode === EDIT_CHOSEN) {
+        switch (pm.pathEditMode) {
+          case EDIT_CHOSEN:
+            dispatch(changePathEditModeToOn())
+            dispatch(pathDeselectDisableSwitch(true))
+            createPath({
+              starting_hex_q: pm.startingHexagon.hex_q,
+              starting_hex_r: pm.startingHexagon.hex_r,
+              starting_hex_s: pm.startingHexagon.hex_s,
+              ending_hex_q: hex.hex_q,
+              ending_hex_r: hex.hex_r,
+              ending_hex_s: hex.hex_s,
+              skill_tree: parseInt(treeId)
+            })
+            break
+          case EDIT_ON:
+            dispatch(changeStartingHexagon(hex))
+            dispatch(changePathEditModeToChosen())
+            dispatch(pathDeselectDisableSwitch(false))
+            break
+        }
+      } else if (pm.hexMoveEditMode === EDIT_ON || pm.hexMoveEditMode === EDIT_CHOSEN) {
+        switch (pm.hexMoveEditMode) {
+          case EDIT_CHOSEN:
+            if (hex.hex_id === undefined) {
+              dispatch(changeHexMoveEditModeToOn())
+              dispatch(hexMoveDeselectDisableSwitch(true))
+              const newHex = {
+                ...pm.startingHexagon,
+                hex_q: hex.hex_q,
+                hex_r: hex.hex_r,
+                hex_s: hex.hex_s
+              }
+              updateHex(newHex)
+            } else if (hex.hex_id !== undefined) {
+              dispatch(changeStartingHexagon(hex))
+              dispatch(changeHexMoveEditModeToChosen())
+              dispatch(hexMoveDeselectDisableSwitch(false))
             }
-            updateHex(newHex)
-          } else if (hex.hex_id !== undefined) {
-            dispatch(changeStartingHexagon(hex))
-            dispatch(changeHexMoveEditModeToChosen())
-            dispatch(hexMoveDeselectDisableSwitch(false))
-          }
-          break
-        case EDIT_ON:
-          if (hex.hex_id !== undefined) {
-            dispatch(changeStartingHexagon(hex))
-            dispatch(changeHexMoveEditModeToChosen())
-            dispatch(hexMoveDeselectDisableSwitch(false))
-          }
-          break
+            break
+          case EDIT_ON:
+            if (hex.hex_id !== undefined) {
+              dispatch(changeStartingHexagon(hex))
+              dispatch(changeHexMoveEditModeToChosen())
+              dispatch(hexMoveDeselectDisableSwitch(false))
+            }
+            break
+        }
       }
     }
   }
