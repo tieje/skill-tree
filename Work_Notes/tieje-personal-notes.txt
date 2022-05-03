@@ -144,6 +144,11 @@ Five 12 hour days of work and two days off
 
 4/1/2022
 
+5/2/2022
+
+I'll do an additional two hours of deep work on deployment from 2-4pm.
+Then apply for jobs for like half an hour. Today is just not a good day.
+
 Helpful markdown functions:
 
 def markify(a: str) -> str:

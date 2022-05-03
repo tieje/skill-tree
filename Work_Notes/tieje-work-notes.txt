@@ -766,10 +766,20 @@ Got a lot done today.
 
 5/2/2022
 
-
+I need to start studying implementation for deployment. Deployment terrifies me.
+It was... so hard last time. I learned a lot, but it was really hard.
+I should work on planning out deployment every day.
 
 + replace loading or error in TeacherView with empty version
 + disable buttons while editing
+
+5/3/2022
+
+I think it's time to build a CI pipeline.
+I need some kind of product to show what I'm working on.
+I'm not sure when the MVP will be complete.
+If I build it in public, maybe something good will happen.
+It's a free app after all.
 
 Write an article about:
 
@@ -784,7 +794,7 @@ Write an article about:
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
-Tasks:
+Core Tasks:
 
 - design the left column of the tree picker page
 - build the static version of the left column of the tree picker page
@@ -797,7 +807,7 @@ Tasks:
 
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
-- Options in the lower right underneath the picture - dropdown for removing skill tree
+- options for removing skill tree
 - build the static form page
 - build the awaiting for email confirmation page
 - build the 404 page
@@ -828,4 +838,3 @@ Production
 - page 142 django for professionals - account email verification with sendgrid
 - send email with skill tree link to a list of students on a textarea form separated by a new-line
     I only do this because domain emails cost money in Google
-
