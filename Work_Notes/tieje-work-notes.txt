@@ -781,6 +781,36 @@ I'm not sure when the MVP will be complete.
 If I build it in public, maybe something good will happen.
 It's a free app after all.
 
+I'll probably run a chron job that runs `git pull origin main` every hour.
+But that's not exactly how docker works.
+#1. Dockerize your application.
+#2. Send to Dockerhub
+#3. Deploy from docker swarm whenever a new version is released.
+I won't need to shutdown Semblance because the server names would be different.
+
+5/5/2022
+
+It would be better though to simply have one nginx file instead of multiple. We'll see.
+To test the actual dev environment, I may need to port forward requests from port 80 or 443 to my macbook air to see things work in action.
+
++ Get down a general procedure of how you'll deploy your application
++ create your own production docker images for raspberry debian environment pi environment - linux/arm/v7 for the frontend and backend
++ check if postgreSQL database is still running
++ use scp command to move json data dump into new database
+    scp datadump.json thomasfrancis@192.168.1.35:/home/thomasfrancis
+    I actually did NOT need to do this
++ switch from sqlite db to postgreSQL db in django application
+    https://stackoverflow.com/questions/42125730/how-to-manage-py-loaddata-in-django
+    python3 manage.py dumpdata --natural-foreign --exclude=auth.permission --exclude=contenttypes --indent=4 > data.json
+    https://rasholayemi.medium.com/move-data-from-sqlite-to-postgresql-in-django-5e93a4c4ae42
+    python manage.py migrate --run-syncdb
+    Some constraints were lost so I had to run this in the postgreSQL db
+    alter table skilltree_skilltreethemes add constraint theme_unique_char UNIQUE(theme);
+    ./manage.py loaddata data.json
++ use .env file for database password, django secret key, and anything else, you'd like to keep secret
++ generate new secret key for django
++ save .env info in lastpass
+
 Write an article about:
 
 - the next skill tree update
@@ -793,6 +823,15 @@ Write an article about:
 
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
+
+CI Tasks:
+
+- create dev Dockerfiles for frontend and backend
+- create prod Dockerfiles for frontend and backend
+- create dev docker-compose.yml file
+- create prod docker-compose.yml file
+
+- get a business email for skilltrees.org - use zoho, they're pretty cheap
 
 Core Tasks:
 

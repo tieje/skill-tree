@@ -1,0 +1,33 @@
+Guidelines:
+Build a script for building up and tearing down your build. I CANNOT run all these commands by hand again.
+I only need to create the production environment. My dev environment is only my mac so it's fine.
+I have decided that I'll perform development on my mac. If I run out of space, that's just too bad.
+
+Docker Reference Page
+https://docs.docker.com/reference/
+
+I'm going to need to build a really good docker command
+I can use buildx within a Dockerfile:
+https://docs.docker.com/buildx/working-with-buildx/
+Docker bake is not ready yet, which means I can't use buildx in Dockerfile yet.
+But what I CAN do is build a general-purpose image and then use that image for development.
+If this is the case, then I will need two kinds of docker-compose and Dockerfile files:
+One set for my local dev environment and one set for the production environment.
+
+
+Prerequisites
++ Build or find a general-purpose raspberry pi environment (linux/arm/v7)
++ hook up the postgreSQL db to django
+
+- Dockerize your application
+    - create backend Dockerfile
+        - use environment variables in .env files
+    - create frontend Dockerfile
+    - create docker-compose.yml file
+    - build and push to Dockerhub with docker
+        docker buildx build --platform linux/arm/v7 -t tieje/skilltree_backend:latest --push ./Backend
+        docker buildx build --platform linux/arm/v7 -t tieje/skilltree_frontend:latest --push ./Frontend
+
+- Deploy from Docker Swarm
+    - SSL certification and renewal
+        https://finnian.io/blog/ssl-with-docker-swarm-lets-encrypt-and-nginx/

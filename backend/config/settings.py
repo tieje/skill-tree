@@ -12,22 +12,30 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from typing import List
+import environ
+import os
+
+env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pa^(u!e!c@u9dl$f*apuix1oe3^_0j3t$rp8kt_-umh4l%w6t2'
+#SECRET_KEY = 'django-insecure-pa^(u!e!c@u9dl$f*apuix1oe3^_0j3t$rp8kt_-umh4l%w6t2'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('SKILLTREE_DEV_ENV'):
+    DEBUG = True
+else:
+    DEBUG = env('DEBUG')
 # Allowed hosts is only effective when debug is False. Django app will only serve in a domain or subdomain specified on the list
 ALLOWED_HOSTS: List[str] = ['*']
-
 
 # Application definition
 
@@ -105,12 +113,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+    }
+}
+'''
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

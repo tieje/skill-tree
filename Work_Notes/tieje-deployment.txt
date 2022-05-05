@@ -1,4 +1,0 @@
-5/2/2022
-
-I'll start by planning out how I would deploy the application.
-Then I'll poke holes in it.

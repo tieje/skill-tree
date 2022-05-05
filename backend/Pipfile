@@ -20,6 +20,7 @@ gunicorn = "*"
 sendgrid = "*"
 djangorestframework-queryfields = "*"
 drf-spectacular = "*"
+django-environ = "*"
 
 [dev-packages]
 mypy = "*"
