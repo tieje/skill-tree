@@ -811,6 +811,18 @@ To test the actual dev environment, I may need to port forward requests from por
 + generate new secret key for django
 + save .env info in lastpass
 
+
+5/6/2022
+
+Portainer and Nginx Proxy manager works!
+
++ look into this article - keep in mind that there is an entire self-hosted community
+    https://noted.lol/what-are-your-most-used-self-hosted-applications/
++ rework your stack based on these new technologies that you've discovered
++ deploy portainer
++ deploy nginx proxy manager
++ practice using reverse proxy to send visual.semblance.us to http://192.168.1.33:8080/
+
 Write an article about:
 
 - the next skill tree update
@@ -824,7 +836,10 @@ Write an article about:
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
+
 CI Tasks:
+Referencing my old stuff for CI tasks
+https://github.com/tieje/semblance/
 
 - create dev Dockerfiles for frontend and backend
 - create prod Dockerfiles for frontend and backend
