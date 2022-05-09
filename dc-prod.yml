@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  backend:
+    image: tieje/skyskill_backend
+    command: sh setup.sh
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: skyskill_backend_dev
+    env_file:
+      - ./backend/.env
+    ports:
+      - 8000:8000
+    networks:
+      - skyskill-net
+  frontend:
+    image: tieje/skyskill_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: skyskill_frontend_dev
+    ports:
+      - 3000:3000
+    networks:
+      - skyskill-net
+networks:
+  skyskill-net:
+    driver: overlay

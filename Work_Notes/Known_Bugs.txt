@@ -6,6 +6,9 @@ Important
 
 Do Later
 
+- drf-yasg problem with the caching strategy. Check settings for static file storage
+    https://stackoverflow.com/questions/53859972/django-whitenoise-500-server-error-in-non-debug-mode
+    http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
 - Fix the width and height in ReactSVGPanZoom
 - The state resets but the sidebar needs to re-render to reflect these changes.
 - fix centering button to be the actual center

@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  backend:
+    #command: python3 manage.py runserver 0.0.0.0:8000 --verbosity 3
+    command: sh setup.sh
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    container_name: skyskill_backend_dev
+    env_file:
+      - ./backend/.env
+    ports:
+      - 8000:8000
+  frontend:
+    command: serve -s build
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-dev
+    container_name: skyskill_frontend_dev
+    ports:
+      - 3000:3000

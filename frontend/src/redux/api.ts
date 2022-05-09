@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HexagonType, LoginRequest, PathType, SkillTreePickerByUserIdType, SkillTreeType, UserResponse } from '../types/Types'
 import { RootState } from './store'
 
+
+
 const treeApi = createApi({
     reducerPath: 'treeApi',
     baseQuery: fetchBaseQuery({

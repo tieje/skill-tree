@@ -30,12 +30,13 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('SKILLTREE_DEV_ENV'):
-    DEBUG = True
-else:
-    DEBUG = env('DEBUG')
+DEBUG = False
 # Allowed hosts is only effective when debug is False. Django app will only serve in a domain or subdomain specified on the list
-ALLOWED_HOSTS: List[str] = ['*']
+ALLOWED_HOSTS: List[str] = [
+    '0.0.0.0',
+    '127.0.0.1',
+    'localhost',
+]
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     # Needed for django-allauth
     'django.contrib.sites',
 
@@ -74,6 +76,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # Default middleware
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -228,3 +231,10 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Create and share skill trees to help gamify education.',
     'VERSION': '1.0.0',
 }
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

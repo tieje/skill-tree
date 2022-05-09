@@ -159,3 +159,12 @@ Test Users
 
 testuser3
 I0W47G2NO9W#h8!QyD
+
+zoho domain and email management
+email management
+https://mailadmin.zoho.com/hosting?domain=skyskill.tech
+email login
+https://mail.zoho.com/zm/#mail/folder/inbox
+Domain management
+https://rr-n1-tor.opensrs.net/manage/index.cgi
+https://rr-n1-tor.opensrs.net/manage/index.cgi?action=modify_nameservers#

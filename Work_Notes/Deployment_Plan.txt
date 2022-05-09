@@ -47,6 +47,11 @@ Prerequisites
 + use environment variables in .env files for secrets
 
 Dockerize your application
++ deploy backend with gunicorn:
+    Command
+    gunicorn config.wsgi -b 0.0.0.0:8000
+- deploy frontend with serve:
+    Command
 - create backend Dockerfile
 - create frontend Dockerfile
     - you'll be serving with npm serve instead of Nginx
@@ -76,7 +81,6 @@ Portainer
 https://192.168.1.33:9443/#!/home
 http://192.168.1.33:8080
 ssh thomasfrancis@192.168.1.33
-ssh thomasfrancis@192.168.1.35
 sudo shutdown now
 ansible -i $ANSIBLE_HOSTS all -m ping
 sudo shutdown -r now

@@ -823,6 +823,30 @@ Portainer and Nginx Proxy manager works!
 + deploy nginx proxy manager
 + practice using reverse proxy to send visual.semblance.us to http://192.168.1.33:8080/
 
+5/9/2022
+
+Set STATIC_ROOT setting.
+Using WhiteNoise to serve static files in django without nginx.
+http://whitenoise.evans.io/en/stable/index.html
+Copying entrypoint.sh file. It's pretty good.
+I ran into a huge problem with whitenoise. The static files were not being served so I kept getting server 500.
+This is ultimately what solved the problem.
+https://stackoverflow.com/questions/53859972/django-whitenoise-500-server-error-in-non-debug-mode
+
++ add gunicorn for production django
+    gunicorn config.wsgi -b 0.0.0.0:8000
++ collect static files for the backend
++ create script for setup in the backend
++ gunicorn is working with proper CSS
++ install serve globally and serve build version of frontend locally
++ set up domain name and email on zoho
++ run npm build and install serve
++ create dev Dockerfiles for frontend and backend
++ create prod Dockerfiles for frontend and backend
++ create dev docker-compose.yml file
++ create prod docker-compose.yml file
++ made www, api, and visual subdomains of skyskill point to my IP address
+
 Write an article about:
 
 - the next skill tree update
@@ -841,12 +865,9 @@ CI Tasks:
 Referencing my old stuff for CI tasks
 https://github.com/tieje/semblance/
 
-- create dev Dockerfiles for frontend and backend
-- create prod Dockerfiles for frontend and backend
-- create dev docker-compose.yml file
-- create prod docker-compose.yml file
-
-- get a business email for skilltrees.org - use zoho, they're pretty cheap
+- use dc-prod.yml to push out images to dockerhub
+    https://docs.docker.com/compose/reference/push/
+- 
 
 Core Tasks:
 
@@ -886,6 +907,8 @@ Auth
 
 Production
 
+- django static files:
+    https://learndjango.com/tutorials/django-static-files?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_126
 - for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page
 - get down image uploading and usage so that you don't need to rely on external images
 - page 185 in Django for REST APIs

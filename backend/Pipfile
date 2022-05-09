@@ -21,6 +21,7 @@ sendgrid = "*"
 djangorestframework-queryfields = "*"
 drf-spectacular = "*"
 django-environ = "*"
+whitenoise = "*"
 
 [dev-packages]
 mypy = "*"
