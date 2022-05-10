@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   backend:
+    command: ["gunicorn", "config.wsgi"]
     image: tieje/skyskill_backend
-    command: sh setup.sh
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -15,6 +15,7 @@ services:
     networks:
       - skyskill-net
   frontend:
+    command: ["serve", "-s", "build"]
     image: tieje/skyskill_frontend
     build:
       context: ./frontend

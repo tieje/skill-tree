@@ -867,6 +867,38 @@ Let's downgrade Rust to 3.4.8 since Rust is required in later releases.
 https://cryptography.io/en/latest/changelog/
 It actually worked.
 docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
+For portainer, I'll use a custom docker-compose file instead.
+I can try a normal stack deploy from the command line.
+
+version: '3.8'
+services:
+  backend:
+    image: tieje/skyskill_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: skyskill_backend_prod
+    # Only need this for local development
+    #env_file:
+    #  - ./backend/.env
+    ports:
+      - 5000:5000
+    networks:
+      - skyskill-net
+  frontend:
+    image: tieje/skyskill_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: skyskill_frontend_prod
+    ports:
+      - 3000:3000
+    networks:
+      - skyskill-net
+networks:
+  skyskill-net:
+    driver: overlay
+
 
 Write an article about:
 
@@ -907,7 +939,8 @@ x use dc-prod.yml to push out images to dockerhub
     + downgraded to cryptography 3.4.8
         pipenv install cryptography==3.4.8
     + docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
-    docker stack deploy skyskill
+    git clone https://github.com/tieje/skill-tree.git
+    docker stack deploy --compose-file dc-skyskill-prod.yml skyskill
 
 Ignoring unsupported options: build Ignoring deprecated options: container_name: Setting the container name is not supported. failed to create service skyskill_backend: Error response from daemon: rpc error: code = InvalidArgument desc = port '8000' is already in use by service 'portainer_portainer' (tcltdilbt5vqoqw34iodvx68j) as an ingress port
 
