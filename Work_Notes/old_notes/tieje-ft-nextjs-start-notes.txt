@@ -1,0 +1,22 @@
+3/11/2022
+
+The objective is to create the nextjs template so that outlining the file structure is easier when
+going in depth in what will actually be built out.
+
+https://nextjs.org/docs/api-reference/create-next-app
+
+
++ set up basic nextjs template with the typescript flag
+    x choose a template
+        https://github.com/vercel/next.js/tree/canary/examples
+        https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+        It's best that I don't start with an example.
+        Bootstrapping with an example helps me get started at the cost of tech debt: I won't be sure how this works.
+        It's best to simply study the code on my own and then implement it on my own.
+    + npx create-next-app@latest frontend --ts --use-npm
+        npx vs npm
+        https://www.freecodecamp.org/news/npm-vs-npx-whats-the-difference/
+        NPM is a package manager, you can install node.js packages using NPM
+        NPX is a tool to execute node.js packages.
+        npM - Manager
+        npX - Execute

@@ -1,0 +1,35 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+psycopg2-binary = "*"
+graphene-django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+dj-rest-auth = "*"
+django-allauth = "*"
+graphene = "*"
+django-graphiql = "*"
+pyyaml = "*"
+uritemplate = "*"
+drf-yasg = "*"
+gunicorn = "*"
+sendgrid = "*"
+djangorestframework-queryfields = "*"
+drf-spectacular = "*"
+django-environ = "*"
+whitenoise = "*"
+
+[dev-packages]
+mypy = "*"
+autopep8 = "*"
+django-stubs = "*"
+ipython = "*"
+djangorestframework-stubs = "*"
+graphene-stubs = "*"
+
+[requires]
+python_version = "3.10"

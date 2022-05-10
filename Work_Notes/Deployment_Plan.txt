@@ -1,0 +1,86 @@
+Guidelines:
+Build a script for building up and tearing down your build. I CANNOT run all these commands by hand again.
+I only need to create the production environment. My dev environment is only my mac so it's fine.
+I have decided that I'll perform development on my mac. If I run out of space, that's just too bad.
+
+Docker Reference Page
+https://docs.docker.com/reference/
+
+I'm going to need to build a really good docker command
+I can use buildx within a Dockerfile:
+https://docs.docker.com/buildx/working-with-buildx/
+Docker bake is not ready yet, which means I can't use buildx in Dockerfile yet.
+But what I CAN do is build a general-purpose image and then use that image for development.
+If this is the case, then I will need two kinds of docker-compose and Dockerfile files:
+One set for my local dev environment and one set for the production environment.
+
+
+Prerequisites
++ Build or find a general-purpose raspberry pi environment (linux/arm/v7)
++ hook up the postgreSQL db to django
++ look into portainer
+    https://github.com/portainer/portainer
+    https://install.portainer.io/docker-swarm-linux
++ attempt to use and install portainer
+    curl -L https://downloads.portainer.io/portainer-ee-agent-stack.yml -o portainer-agent-stack.yml
+    docker stack deploy -c portainer-agent-stack.yml portainer
+    Access was acheived with this URL
+    https://192.168.1.33:9443/
+    https://192.168.1.33:9443/#!/
+    https://192.168.1.33:9443/#!/home
+    https://docs.portainer.io/v/ce-2.9/start/install/server/setup
+    I like it.
+    Consider getting more nodes.
+    https://docs.portainer.io/v/be-2.7/faq/concepts/what-is-a-node-for-licensing-purposes?_ga=2.265937871.1369468246.1651831955-198435013.1651831955
++ use nginx-proxy-manager
+    https://github.com/NginxProxyManager/nginx-proxy-manager
+    Set up and dealing with 502 bad gateway
+    https://www.the-digital-life.com/nginx-proxy-manager/
+    + create the nginx-proxy-manager.yml file
+    + scp nginx-proxy-manager.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+    x docker stack deploy -c nginx-proxy-manager.yml NginxProxyManager
+    x deploy from Portainer UI
+        Does not work this way.
+    + docker-compose up -d
+        http://192.168.1.33:81
+    It's working
++ use environment variables in .env files for secrets
+
+Dockerize your application
++ deploy backend with gunicorn:
+    Command
+    gunicorn config.wsgi -b 0.0.0.0:8000
+- deploy frontend with serve:
+    Command
+- create backend Dockerfile
+- create frontend Dockerfile
+    - you'll be serving with npm serve instead of Nginx
+    https://www.npmjs.com/package/serve
+- create docker-compose.yml file
+- build and push to Dockerhub with docker
+
+Deploy from Docker Swarm
+
+Add Data Visualization and Site Tracking
+- look into grafana
+    https://github.com/grafana/grafana
+- look into umami
+    https://github.com/mikecao/umami
+
+Referencing my old stuff
+https://github.com/tieje/semblance/
+Referencing new stuff
+https://noted.lol/what-are-your-most-used-self-hosted-applications/
+
+===============
+COMMON COMMANDS
+===============
+Nginx Proxy Manager
+http://192.168.1.33:81
+Portainer
+https://192.168.1.33:9443/#!/home
+http://192.168.1.33:8080
+ssh thomasfrancis@192.168.1.33
+sudo shutdown now
+ansible -i $ANSIBLE_HOSTS all -m ping
+sudo shutdown -r now

@@ -1,0 +1,121 @@
+3/11/2022
+
+- tailwind css implementation
+    Example
+    https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss
+    Tailwind Docs implementation for nextjs
+    https://tailwindcss.com/docs/guides/nextjs
+    Files created:
+        tailwind.config.js
+        globals.css
++ does animxyz work with d3 and tailwind css?
+    https://animxyz.com/docs#react-installation
+    It should work fine because it uses a custom xyz property rather than className
++ faunadb implementation. How would the implementation change if you choose one or the other.
+    Example
+    https://github.com/vercel/next.js/tree/canary/examples/with-fauna
+    It looks easy enough.
+
+- what does d3 implementation look like in React code?
+    https://www.freecodecamp.org/learn/data-visualization/#data-visualization-with-d3
+    - Create example histogram tutorial for d3
+        https://www.d3-graph-gallery.com/histogram.html
+    - Create example network graph tutorial for d3
+        https://www.d3-graph-gallery.com/network.html
+- API endpoints or graphQL?
+    according to the example, it doesn't need to be a binary choice
+    schema.gql file - simple graphql schema
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/schema.gql
+    fauna.js file - makes queries to faunadb
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/lib/fauna.js
+    index.js file for the api
+    https://github.com/vercel/next.js/blob/canary/examples/with-fauna/pages/api/entries/index.js
+    It turns out that I don't actually need a big complex backend framework like django... yet.
+- what are all the custom types that you'll need
+    according to the example, I only really need a types folder at the top level
+    https://github.com/vercel/next.js/blob/canary/examples/blog-starter-typescript/types/post.ts
+- Will I need a state manager like Redux or Apollo? If so, which one? What would the implementation look like.
+    https://www.smashingmagazine.com/2021/08/state-management-nextjs/
+    https://daveceddia.com/react-state-management/
+    Consider React Query as well as the vanilla React library components.
+    Even before considering a state manager, it's probably best to define exactly what state I'm trying to track.
+    - define what kinds of state you'll be managing?
+        - template
+            - state management
+            - data fetching
+        search bar
+            - whether something is being typed in or not
+            - no data fetching, just matches with list of existing nodes and tells the window to focus there
+        skill tree background
+            - whether a skill tree node has been clicked on. For teachers, clicking on the node yields buttons that have onclick effects that will effect the state of the skill tree, such as delete, add, and modify - CRUD
+            - The entire skill tree will need to be fetched. Perhaps parts at a time, though there really isn't that much data.
+                - It's probably better to just fetch the teacher's notes whenever the node is accessed so that nodes can be accessed quickly. After all, not all nodes will be accessed all the time.
+                - One idea is to make the api accessible to students if they want to create their own interface.
+        skill tree buttons
+            - CRUD of nodes on the skill tree
+        text form input
+            - checks whether there is
+        edit feedback button > makes feedback form visible
+        Done button > makes feedback form invisible > Posts data to database
+    - react query is a data-fetching library that simplifies data-fetching
+    - I have already created my own rendering system. It took some code: it was the poor-man's redux. It's not worth doing all that work again.
+    - A state machine is used to define which states are allowed for the application. This is overkill for my project.
+    - Avoid Context due performance and scaling issues unless there is a simple quick fix that you'll need
+    Wow, this is good:
+    https://blog.isquaredsoftware.com/2021/01/context-redux-differences/
+    - Redux is used for separating your state management layer from your UI layer
+    - I'll try out Redux as my state manager. Apollo is simply a fancy context provider for graphQL queries.
+        - I prefer redux because it is open-source as well. I can look at the code if I ever need to, unlike Apollo
+
+- this comment section is really making me consider a .NET Core backend API instead of just JavaScript
+    https://news.ycombinator.com/item?id=30654114
+    Instead of a real API, I'll stick with a simple JS API and scale from there. I've never done that before.
+
+- I'm going to use redux since it will be better to separate the d3 skill tree context from the UI context.
+
+Learn
+
+- redux
+    - state management: it's just better for scaling for this moderately complex app
+    - I may want to just use vanilla react...
+- nextjs
+    - server-side rendering
+- react testing library
+    - for writing tests
+    https://testing-library.com/docs/
+- Glean vscode plugin for improving app-building experience
+
+
+
+
+- redux doesn't make sense
+
+- formik for forms?
+- Unstated library - might just turn into the context API
+- redux is used for complex components... redux toolkit has reduced the boilerplate a lot
+
+- I'll just use Apollo since I'm using GraphQL anyways. The UI for this application is not complex at all.
+- Or React query? My state isn't typically very complex at all.
+
+Build in this order:
+
+d3 network graph background
+    - static
+    - stateful
+UI
+    - static
+    - stateful
+
+1. Break the app into components
+2. Build a static version of the app
+3. Determine what should be stateful
+4. Determine in which component each piece of state should live
+5. Hard-code initial states
+6. Add inverse data flow
+7. Add server communication
+
+I know what I'm going to do next:
+
+build the static d3 network graph
+then make it stateful
+

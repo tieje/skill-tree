@@ -1,0 +1,24 @@
+Important
+
+- Not particularly safe. If you're authenticated and you know a user ID, you can just update any hexagon or path
+- Deployment with React Router will likely fail unless the following is done:
+    https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+
+Do Later
+
+- drf-yasg problem with the caching strategy. Check settings for static file storage
+    https://stackoverflow.com/questions/53859972/django-whitenoise-500-server-error-in-non-debug-mode
+    http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
+- Fix the width and height in ReactSVGPanZoom
+- The state resets but the sidebar needs to re-render to reflect these changes.
+- fix centering button to be the actual center
+- turn off drifting for the svg
+- I can optimize the API by creating a separate table for the base skill tree and then add that to the API with a serializer. Even better, I could preload the data into state if needed.
+
+./manage.py spectacular --file schema.yml
+Warning #0: Fixed: LoginSerializer: registered extensions CookieTokenRefreshSerializerExtension for "dj_rest_auth.jwt_auth.CookieTokenRefreshSerializer" has an installed app but target class was not found.
+Warning #1: Fixed: registered extensions SimpleJWTCookieScheme for "dj_rest_auth.jwt_auth.JWTCookieAuthentication" has an installed app but target class was not found.
+Warning #2: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_paths". Consider using a type hint or @extend_schema_field. Defaulting to string.
+Warning #3: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_hexagons". Consider using a type hint or @extend_schema_field. Defaulting to string.
+Warning #4: SkillTreesViewSet: SkillTreesSerializer: unable to resolve type hint for function "get_hex_string_list". Consider using a type hint or @extend_schema_field. Defaulting to string.
+

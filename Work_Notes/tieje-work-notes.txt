@@ -1,0 +1,941 @@
+3/21/2022
+
+3/22/2022
+
+I might use the react testing library. Well, I want to use the react testing library.
+It's still very early on. I'm pretty sure I know what I want to do and it is fairly simple... I think.
+https://testing-library.com/docs/react-testing-library/intro/
+Do I need to make tests fo this application? Is it even big enough.
+Well it probably is... I'll learn it at the very end. I don't think it will help yet.
+
++ make a unique ID for every hexagon
+    The unique ID should be its position in the hexgrid.
+    I actually don't need to create a unique id for every hexagon.
+    I thought that I might need to create a unique id for every hexagon because I would be using path to refer to their position.
+    If I'm going to add a IDs to the hexagons, I'm going to either use a pull request or fork it myself...
+    Fortunately, I can use class instead. The pathfinding example pretty much has what I want. I won't need to fork it.
+    the unique classes are of the form of:
+    hexagon-group 18,3,-21
+    This is how it's done in the pathfinding example:
+    https://github.com/Hellenic/react-hexgrid/blob/master/examples/pathfinding/src/App.js
+    It may be a good idea to implement its cursor-finder as well.
++ create a custom initial zoom
+    For the custom initial zoom, I'm going to need to determine where I can get this from panZoom...
+    I certainly will not be using the fitToView functionf for this one.
+    https://github.com/chrvadala/react-svg-pan-zoom
+    I'll need to change the useEffect function...
+    https://github.com/chrvadala/react-svg-pan-zoom/blob/main/docs/documentation.md#methods
+    zoomOnViewerCenter(scaleFactor) - This is function I'll need.
+    It works but it's focusing on the true center of the window instead of the SVG...
+    It's assuming the SVG is rendered in the center of the window.
+    I'll try moving the SVG to the center of the window with Tailwind?
+    Or do I use fitToViewer in combination with zoomOnViewerCenter?
+    perhaps I'll just use the normal zoom() function instead
+    - Unfortunately, for smaller screens, it will start slightly to the left, which is not the worst thing.
++ bind v key for pointer
++ bind h key for hand scrolling
+    onKeyPress is for the input text field
+    This was insightful.
+    https://www.querythreads.com/listen-to-keypress-for-document-in-reactjs/
+    I may use this package though:
+    https://github.com/donavon/use-event-listener
+    The actual code was a bit confusing, but looking at the example allowed me to figure out how to accomplish tool changes.
+    https://github.com/chrvadala/react-svg-pan-zoom/blob/main/examples/controlled-component/src/App.js
++ install tailwind
++ Wrote an article on what I did in the past about searching for the right library.
+
+
+3/23/2022
+
+Consider buy this svg:
+https://www.vectorstock.com/royalty-free-vector/kawaii-school-background-with-cute-education-vector-15321280
+
+- make toolbar bigger for both desktop and mobile.
+    It's a bit... difficult. I'll need to do this later.
++ get cute pencil and office stationary wall-paper background
++ add a tool tip for image link
++ create static instructor interface
+    + Create static sidebar on the left. It must have:
+        + title input
+        + lesson text input
+        + feedback checkboxes
+            + quantitative
+            + verbal
+        + node picture link input
+            x default pics
+                no need yet
++ Write an article about binding keys to actions using the hook module and refer to the link that you found
+x create stateful instructor interface with json served by graphQL
+    I *can* do it. But I built the backend exactly how I want it AND I know how to update it so... I don't really need graphQL.
+
+3/28/2022
+
+I'll just use React Query instead of Axios. If I did use Axios, I would need to create my own promise and async await functions.
+
+Node Module Design
+Node text or node image, never both. If no node image, then the title will be used with ellipses in the hexagon.
+Look into React query.
+I'm going to need a state manager... Probably something like Redux.
+State that I need to manage:
+    - Drag mode vs pointer mode
+        - Within Pointer mode: Path creation mode:
+            While in pointer mode, paths can be created
+            Path Creation shortcut should probably be the "k" key
+            - Starting hexagon
+            - ending hexagon
+            - Paths can only be deleted and created, not updated
+    - pointer mode
+        - clicking on the node grabs note data for that node
+            Only the owner will have edit buttons for editing
+        - edit button changes the state of that component to edit mode
+    - theme
+Redux middleware: this is going to be useful for whenever I need to update the API
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/61
+Great graphic for what it means for me:
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/62
+
+Make sidebar stateful
+
++ breakdown the sidebar into components
++ try using Redux to manage pointer mode and drag mode
++ sidebar must disappear while in drag mode and appear while in pointer mode
+    So actually, There are two kinds of modes: keyboard shortcuts change visibility and dragging while one-screen buttons change only dragging.
+    This bug is now a feature. I need to make sure I don't reproduce this in other features
+
+3/29/2022
+https://blog.isquaredsoftware.com/presentations/react-redux-ts-intro-2020-12/#/62
+Use an existing skill tree
+Some logic like verbal, quantitative feedback will be updated frequently.
+I won't be using RTK Query because it's meant to be used with createAPI. I already have an API.
+It turns out that a lot of middleware is actually included by default.
+I should focus on createAsyncThunk and createEntityAdapter.
+extraReducers are used to respond to other action types beside the types generated.
+They are meant to reference external actions.
+https://redux-toolkit.js.org/api/createSlice
+extraReducers allows you to respond to an action in your slice reducer but does not create an action creator function
+For example, they would be used in responding to a createAsyncThunk action, or perhaps responding to an action from another slice.
+I'm actually supposed to use multiple slices - perhaps one slice per each functionality.
+x I'm going to wire up slices such that there is an extraReducer function handling the visibility of the sidebar...
+    I won't do this because I'm using useEffect already for this and it might get needlessly complicated.
+I'll use react query for CRUD functionality... It could actually replace redux because it's a server-state library.
+I'll use React Query for making post requests and see how it compares to Redux. I could just axios at this point... but we'll see.
+I'll use the second checkbox for comparison.
+Testing was successful for React Query. Posting seems simple enough. Updating... is a different matter.
+It looks like useState() is used a whole lot for keeping track of and updating local state within the function.
+It looks like the way that queryClient actually works is that it saves everything to the cache.
+This contrasts from Redux in that redux is functional and pure but storing variables in cache stores state...
+I figured out redux, but... well... It might be worth building with React Query instead. Someone who has gone through all of these
+libraries says not to learn redux and to just use anything else. It's not that hard.
+There's actually a little tidbit about how "React Query is not a replacement for local/client state management."
+It even cites cases where I should use a state manager.
+https://react-query.tanstack.com/guides/does-this-replace-client-state
+I've decided that I won't be using React Query because I'm going to need a real state manager for this project.
+
++ Image address will need an edit button
+x Change sidebar visibility logic to react query
+
+3/30/2022
+
+I can't use a normal useQuery because it refreshes too much.
+I can't use a hook query because updating re-rendering constantly is pretty bad for the client.
+Every time I move anything, setState causes a re-render of the whole thing.
+I don't think I actually need RTK Query...
+I need to figure out where and when to fetch data in redux.
+https://daveceddia.com/where-fetch-data-redux/
+
+3/31/2022
+4/1/2022
+I need to look at this later.
+https://redux-toolkit.js.org/usage/usage-guide
+There are no default paths to generate, but I can keep an object of paths.
+    Create new paths state in redux to keep track of >
+    Path. In this case, it's probably ok to do play Hex() objects within this state.
+    The only problem is creating the object.
+I'm running into a problem with RTK query. I'm not using is correctly. I need to redo the slice for everything.
+https://www.softkraft.co/how-to-setup-slices-with-redux-toolkit/
+There is an "old" way of doing this, and then there is the more streamlined approach.
+https://stackoverflow.com/questions/60290580/how-do-i-make-an-api-call-using-createslice#60325398
+It's not really an "old" way, more like a "custom" way to grab data.
+Mission accomplished. Paths were successfully applied and state is better managed by redux in the actual component.
+
++ how to create nested JSON with serializers in django rest apis
+
+4/2/2022
+
+Check page 72 of the Fullstack React with TypeScript book for a better idea of what you're trying to do.
+file:///Users/thomasfrancis/Desktop/fullstack-react-with-typescript-book-r11-basic.pdf
+I'm running into some big problems. The shortcuts are fighting with me.
+I need to make sure that the shortcuts only work when the SVG Pan is the current Ref.
+One thing at a time.
+
++ use RTK Query to GET data from skill_tree_id 3 and apply it to PanZoomHexGrid
+    + Grab data from API and apply it
+        + apply patterns
+        + apply paths
+        x memoize data with Immer in your custom fetch
+            That's... not how immer works...
++ apply data to sidebar
+    + create static data display for the sidebar: use jsx conditionals and useState
+    + change backend such that the notes are returned as well with skill trees
+    + make it so that only one text input can be edited at a time
+
+4/3/2022
+
+The way that the checkboxes work right now, make it a little complicated to have a shortcut for it.
+Well, it's probably for the best that checkboxes don't have shortcuts because they're so easy to mess up and miss.
+It feels like I'll need to extend the Hexagon component.
+
++ checkboxes allow quantitative feedback allow verbal feedback
+    x pass functions as props to function react component
+    + add checkbox state to store
+    + manually testing state changes
+    + test posting boolean data to skill tree with skill_tree_id of 3
+    x make git commit before fully switching to React Query
+    x checkboxes functional with React Query, DO NOT delete Redux-related code yet
++ automatically focus on input or textarea using refs: page 72 of Fullstack React TypeScript
++ SVG shortcuts will not work when something is being edited in the sidebar
++ create sidebar shortcuts that only activate when the sidebar is not invisible and when nothing is being edited in the sidebar:
+    for checkboxes
+        x e - quantitative
+        x w - verbal
+    for editing
+        + s - img address
+        + d - title
+        + f - body
++ pressing Enter submits the text to the input or textarea
+
+
+4/4/2022
+
+I need to save the last hexagon focused to localStorage.
+https://dev.to/link2twenty/react-redux-and-localstorage-2lih
+https://redux.js.org/api/createstore/
+If I were to create a localStorage, it would need to save and define ALL states, not just one state.
+Initial testing with Posting data to the API was a success.
+I'll need to return the new hex_id from the API every time a POST method is used for skilltreehexagons.
+
++ make it so that clicking on a hexagon loads that hexagon's sidebar data
+    x last hexagon focused should be saved in localStorage
+        Do this later and save this to user data instead on the backend instead of localStorage
++ Write an article about the static instructor sidebar interface that you made
+    It was more like an update on my progress for this project so far.
+    Below was part of the update:
+    + modern redux tool kit development
++ Write an articles about to how to safely delete a table in Django (do this on an example different project)
+
+4/5/2022
+
+I'll need to return the new hex_id from the API every time a POST method is used for skilltreehexagons.
+https://www.django-rest-framework.org/tutorial/2-requests-and-responses/
+https://www.django-rest-framework.org/api-guide/responses/
+https://redux-toolkit.js.org/rtk-query/usage/mutations
+It's better if I invalidate the query and grab again instead of generating a custom response.
+https://redux.js.org/tutorials/essentials/part-8-rtk-query-advanced#invalidating-specific-items
+Let's experiment with updating since. If I can figure out how update and invalidations work, maybe I can figure out how to reload for hexagon focused.
+I'll perform the update with checkboxes.
+https://restfulapi.net/rest-put-vs-post/
+I did not understand PUT operation well at all. Supposedly, this operation does what I already need it to do.
+If something already exist, then it will update it.
+If something does not already exist, then it will create it...
+I set up some basic logging in Django.
+It turns out the problem with my mutations is that I needed to add a slash to my URL... REALLY?
+PATCH is successful, and I'll probably use the PUT method later.
+I'll need to rethink my architecture though.
+The big question was should I use a GET hook for every piece of the sidebar component?
+Or just call it once?
+The GET hook should be fine since it's just going to grab it from the cache.
+What I'm doing right now is small experiments for seeing what works and what does not.
+PATCH method is working as intended.
+It looks like every component that re-renders state, WILL need to have their own GET hook.
+
+4/6/2022
+
+Get the PUT method working for checkboxes.
+If the hexagon is entirely new, clicking on the hexagon and changing the checkmark will create that hexagon.
+The checkbox will re-render, however, the entire SVG element will re-render as well.
+I can probably force a re-render by using useEffect to listen to hexagonFocused.
+This is becoming needlessly complex.
+I think I'll use a separate method of generating hexagons in the backend.
+With this, I can have an ID ready instead of needing to create hexagons on the fly.
+The initial load might be a lot, but ultimately it will be easier to work with.
+Probably the most important thing will be that I can finally use a proper useQuery Hook to update the hex grid.
+The useQuery hook will allow for the dynamic creation and update of Paths in the hex grid.
+This will work.
+The updated skill tree table will have a 256 new rows each labeled with their corresponding hex string.
+The input of each row will an unique hex ID for that specific column.
+This means that updating with the same hex ID will not be a problem.
+Instead of deleting the additional info, I'll just create another skill tree.
+
++ Update the backend such that each skill tree has 256 unique hexagons the ID will be the appropriate hex string
+    + Do NOT delete the Hexagon table
+    Form of:
+    h_0_1_m1
+    where m means "minus sign"
+
+4/8/2022
+
++ Update the frontend such that the hexgrid is generated from each db column
+
+4/9/2022
+
+You'll need to do two things:
+1. Create the new hexagon without invalidating queries.
+2. Update the Skill Tree hex string column and then invalidate the skill tree query.
+This doesn't work because I don't know what ID to use to update the skill tree.
+Instead, I'll need to update the skill tree after query invalidation.
+
+1. Create New Hexagon
+2. Skill Tree Query invalidates
+3. Skill Tree hexagons are grabbed and processed.
+4. If the Hexagon's hex_string matches hexagonFocused.hex_string, update hexagonFocused to be that Hexagon's properties.
+    This would include the hex_id.
+x Problem: Any hex_id would match the hex_string.
+x Solved: useState to set the original hex_strings. If the new hex_string is not in the original hex_strings then change hexagonFocus to that and set new useState.
+
+I don't actually need to update the skill tree.
+Only the Hexagons need to be updated... Then invalidate the skill tree.
+Later, I can optimize the API by creating a separate table for the base skill tree and then add that to the API with a serializer. Even better, I could preload the data into state if needed.
+Either way, it's very important that state comes from one place.
+
+1. Create New Hexagon
+2. Skill Tree Query invalidates
+3. Skill Tree hexagons are grabbed and processed.
+    hexagonFocus does not need to be updated because I can just go by the hex_string
+    If the hex_string for hexagonFocus matches the hex_string for an existing Hexagon, then assign hexagonFocus to that hex_id.
+
++ mutate hexagons data with sidebar
+
+4/11/2022
+
+Paths can only be created and deleted but not edited. This is to simplify the process.
+k and an on-screen button will be used for Path Edit mode
+    In path edit mode, the left sidebar will be invisible.
+    Creation
+    Instead of the sidebar, there will be a red sign with a transparent gray background that says "Path Edit Mode"
+    Clicking on the first hexagon will highlight that hexagon.
+        In the gray area, there will be button called DESELECT.
+        Alternatively, the shortcut ctrl + Z will Deselect it as well.
+    Clicking on the second hexagon will draw the path.
+    Deletion    
+    To delete a path, click on any path and either press the DELETE button in the sidebar or the backspace button.
+    The gray background will be slightly transparent with red text of PATH EDIT MODE.
+    Below path edit mode label, buttons will be listed below and will be disabled until they are needed or possible.
+    Shortcuts signs will appear next to the buttons.
+The states that will be needed:
+    startingHexagon
+        State will be cleared if deselect function is used
+    endingPathHexagon
+    pathEditMode
+        Can only be turned on if the edit modes for other states are false.
+        Button and shortcuts will appear at the top
+        This will actually be a string with preset options.
+            ON
+            OFF
+            INITIAL_CHOSEN
+
+
++ greyed out shortcut signs between the labels and the output
+BRANCH ft-node-module IS COMPLETE
++ merge ft-node-module into staging and begin working on a new branch called ft-path-module
++ POST path api hook
++ DELETE path api hook
++ create static variables:
+    + ON
+    + OFF
+    + initial chosen
++ pressing the k button when all other edit states are false, changes the sidebar to Path Edit Mode
+~ Path Edit mode will have a gray transparent background with a title of PATH EDIT MODE in red text
+    the normal yellow is fine
++ underneath path the edit mode label, there will be three buttons: deselect, delete, and exit path edit mode
+    + deselect - shortcut z key
+    + delete - shortcut backspace
+    + exit - shortcut q - this button will always be active
++ clicking on one node and then another node draws a path
++ when an initial node is selected, it changes appearance and the Deselect button is enabled as well as its shortcut
++ if deselect button is pressed or shortcut used, the initial node will be deselected and the appearance will revert
++ buttons will be disabled until they are needed or possible
++ if the exit button or its shortcut is used at any time during the process, the pathFocused state will reset and the normal sidebar will return
++ Your next update
+    x give an example of how the <pre> tag gets what you want, though without styling and an overly long horizontal scroll wheel
+    + update on your work schedule - how you choose Weekend wednesdays
+
+4/12/2022
+
+I'm not sure how I'm going to change styling.
+I did it by rendering an additional hexagon from data in the hexagonFocused state. Well that was easy.
+Now that the path module is completed, I need look into how to create the accounts module.
+Look into your django for REST APIs as well as custom django accounts.
+I don't think I'll need a custom django account...
+I think I can just create another table for additional info if I really need it.
+I need:
+    id
+    first name
+    last name
+    email
+It seems like W.S. Vincent is using CustomUser from abstract User. We'll see if I should use it, too.
+page 101 in Django for REST APIs
+https://gist.github.com/BaronKimaru/4a45928f6c5a35ea751d3007f2b7a8af
+Chapter 7: 115
+Chapter 8: 131
+Chapter 11: 177
+
+
+
++ add padding to path edit mode sidebar
++ if an existing path is clicked in path edit mode, the delete button and its shortcut will be enabled, allowing deletion
+    + add onClick functionality to path by rewriting the Path to something custom
++ make it so that clicking on a hexagon in pathEdit mode, changes it's fill color
++ make it so that clicking on a path in pathEdith mode, changes it's stroke color
++ make buttons functional
+BRANCH ft-path-module COMPLETE
++ make the sidebar y-scrollable
++ interpret newlines, tabs, and more
++ add shadow and hover effects to buttons related to path Edit mode
++ add text size limit title and note body. Title limit is 70. Body limit is 10,000
++ merge ft-path-module to staging and create a new branch called ft-account-module
+
+4/14/2022
+
+I'm going to put off creating the home page until core functionality is done.
+I'll create a simple login, logout, and account creation feature for the application.
+This will lead into creating a tree-viewing page. I should probably organize the tree-viewing page with up to four tags.
+I'll start with Final Form. I'll need react-final-form as well.
+For now, I'll focus on creating the Endpoints.
+I'll need to study React Router tonight.
+https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/installation#basic-installation
+
++ page 107 - set up owner
++ makemigrations
++ migrate
++ page 142 - login, logout, verification, authentication
++ page 131 - set up View Level Permissions so that only owners can read and update their skill tree
++ backend endpoints for account creation, verification
++ backend permissions so that only the owner can edit
++ install final-form
++ install react-final-form
++ Comment out other components in App.tsx
++ create a login page
++ Create your own version of how to get a url for pictures based on this wikihow:
+    https://www.wikihow.com/Get-the-URL-for-Pictures
+    I don't want users to get slowed down or annoyed by ads.
+    I believe this can be an ad-free experience.
+
+4/15/2022
+
+Routes specify attributes "path" and "element".
+Link specify attribute "to" which goes to the path specified in "/about". This is pretty simple actually.
+Routes can be a wrapper for multiple Route
+Fortunately, my clientside routing is not that complex.
+There is a specific use-case where I'll need to fetch data when component renders
+https://reactrouterdotcom.fly.dev/docs/en/v6/getting-started/overview
+It looks simple.
+For now, it will look like:
+/ > /login > /app
+Honestly, this is getting harder and harder. I wonder if this will take me two weeks.
+For now, it will look like:
+/ > send login mutation to the backend > receive Token from REST API > store token in RTK state > automatically use token whenever query is made
+backend login entry point:
+http://127.0.0.1:8000/api/v1/dj-rest-auth/login/
+I'll need to send something in the form of:
+{
+    "username": "",
+    "email": "",
+    "password": ""
+}
+React Router what to do after authentication:
+https://stackblitz.com/github/remix-run/react-router/tree/main/examples/auth?file=src/App.tsx
+I might need to redo the architecture on the frontend.
+It's possible to get a response from a POST. The response that I would like to get is the Hexagon Data of the new Hexagon.
+This would simplify and decrease chances of bugs when getting the new Hexagon.
+I probably won't do the above yet just because it's working and the new solution may not be significantly better than the old.
+I'll need to figure out the Forbidden Error eventually.
+I'll study this error tonight. In the meantime...
+I'll focus on creating various required pages.
+
++ import BrowserRouter and wrap it around the App
+~ use React router to go to the main application once credentials are confirmed
+~ Navbar at the top
+
+4/16/2022
+
+4/17/2022
+
+Study Django and permissions on why you're getting 403 forbidden error
+Permissions in Django
+https://testdriven.io/blog/django-permissions/?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_123
+Saving an authentication token to localstorage in Redux
+https://michaelwashburnjr.com/blog/best-way-to-store-tokens-redux
+The account module is complete.
+
++ work on permissions so that testuser3 can grab the skill tree
+    https://www.django-rest-framework.org/api-guide/authentication/
+    It was not permissions. Authentication was done with keyword "Token" instead of "Bearer" in the authorization header.
++ save the token in some long term storage
++ make it so that clicking on a different hexagon closes forms and resets the state of the hexagons.
+    It works but the intended affect was to close and reset the editing field.
+    The state resets but the sidebar needs to re-render to reflect these changes.
++ create a functioning logout button
++ add owner field to hexagon table due to permissions
++ reset all states, including tool state, upon logout
+    Perhaps I can't re-render it if it's invisible...
+    I cannot re-render if it's invisible. I can, though, reset the state by reloading the window...
+    The re-render was achieved by reloading the window upon logout.
+BRANCH ft-account-module IS COMPLETE
++ merge ft-account-module into staging and switch to ft-create-pages
+
+4/18/2022
+
+home page
+    > account registration
+        > email confirmation needed page (email confirmation optional during development)
+    > login
+        > skill tree picker page sorted by most recently viewed by default
+            - tabs for skill trees that you're the owner of, skill trees that you're a student of, and search for public skill trees.
+            - Each skill tree is going to need a unique profile picture and owner picture to more easily identify the skill tree.
+            - add other sort methods later - such as by subject/tags or by name
+            - There needs to be a way to invite students to skill trees. Simple email is a good idea.
+                Students can only be invited to a private skill tree by email.
+                    - For private skill trees, feedback will be automatically reset every year unless opted out or dates changed.
+                        - There will be no way to download this data to protect the privacy of students and teachers.
+                        - Feedback is for teacher's eyes only
+                Anyone can use and copy public skill trees.
+                    - there is no feedback for public skill trees other how many people chose to copy this skill tree and number of thumbs up and down
+                    - public skill trees can be found in the search for public skill trees tab
+                    - search is organized by tags
+                Public skill trees will be a must because creating skill trees from scratch can be rather tedious work.
+            
+            Teachers will need to be able to create classes that will be pointed to skill trees.
+                In this way, theoretically only one teacher needs to organize this.
+                Accounts created will be signaled by a checkmark next to them, grouped by checkmarks at the bottom
+        > User Settings page
+            - notifications?
+                I don't want to notify teachers at all. This is just a tool for optional feedback.
+            - appearance
+                - colorblind mode
+                - dark mode
+                - light mode
+            > Actual skill tree page
+
+I'm going to need drag and drop functionality for hexagons...
+Teacher > creates account > browses public skill trees for a template > Forks template > Edits template >
+wants to share skill tree with students > class creation page > gives list of emails > (optionally can create another class with a name)
+Drag and drop classes on the left side into the left container AND drag and drop skill trees on the right side into the right container. >
+Create Cohort and Send Emails. > Directed to My Cohorts Page organized by Dissolution Date >
+At the Dissolution Date 
+Skill trees need to be shared privately with a URL... This will be feature for later.
+These are all features that I can create later if a school district would like to adopt the system.
+It's possible to be made in a way that suits all needs but these are features that I don't need to create for an MVP.
+
+MVP
+- all trees
+    - are public
+    - have up to four tags
+    - Option to Make a copy and edit as a teacher
+    - to use tree as a student
+- instead of sending an email to students, students can search for the skill tree
+    Should I do a URL?, an ID?. Perhaps both.
+    - Teacher can share a URL made specifically for Students by sending it in an email to students.
+    - Can search for public skill trees by the ID number
+        I need two methods so that there can be confirmation.
+- Skill tree
+    ID
+        - Just the ID for it
+    settings
+        - Delete and reset feedback on these dates
+        - Theme
+        - Skill tree name
+        - tags
+        - profile picture
+    statistics
+        - Students's Average feeling of comprehension of topics in Skill tree (Quantitative)
+        - Forked
+        - Thumbs Up
+        - Thumbs Down
+        - download statistics as CSV button (feature for later if desired)
+Making skill trees public means that anyone can give feedback and that anyone can theoretically take the class.
+This is fine because it's an MVP.
+
+Main hub page
+    I would like for the initial state to be three boxes in a minimalistic style.
+    - search for skill trees
+        - copy and edit as teacher
+        - Copy link for students
+        - use as a student
+    - Teacher Skill trees - list of skill trees that you can edit, sorted by date last edited (recency)
+        - copy link for students
+        - Edit skill tree
+    - Student Skill Trees - Skill trees that you're using as a student will be listed, sorted by date last used (recency)
+        - Copy link for students
+        - Use skill tree as student
+
+Top navbar Middle to Right
+Logo (home page)
+User Settings
+
+Possible design layouts
+    - sidebar list on the left and Skill Tree specifics on the right
+        - I wish I knew how to do a mini screenshot just as a preview...
+        - I'll need to learn how to do a mini screenshot to serve as a preview
+        - search bar in the middle top
+        - underneath are tabs: Student | Teacher | Discover
+        - underneath tabs is a description of what the tab is for:
+            - Student
+                - Skill Trees that you are studying
+            - Teacher
+                - Skill Trees that you own
+            - Discover
+                - All skill trees. These trees can be copied or you can be a student of it
+        - list of skill trees
+            - profile picture - won't be needed if I can get a visual preview...
+            - label
+            - thumbs up
+            - thumbs down
+            - times copied
+        - clicking on the skill tree shows an expanded button list of options?
+
+honestly...
+Make all skill trees private. It's just too much work to make them public.
+Invite to a skill tree by link only.
+Share by screenshot.
+
+Tabs
+    Learn
+        List of Skill Trees that you're learning from
+    Teach
+        List of Skill Trees that you're teaching
+Lists are ordered by recently viewed.
+Copy Figma for design in creating a new skill tree around the top.
+
+I've given this a lot of thought. I have good idea of what I'm going to do now.
+Now, I will focus on actually designing and building it.
+
+4/19/2022
+
+With information above, turn this into a mastapiece.
+https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
+
++ design the tree picking page on Figma
+    + desktop
+    ~ mobile
+        I'm not going to do this since it's pretty simple to translate it to mobile
++ design the home page
+    + desktop
+        I made a very rough... thing.
+    ~ mobile
+
+4/21/2022
+
+I'll have a logo, but it's not going to be in the nav bar because this is a productivity tool where you don't want to
+be redirected to the frontpage, not even accidentally.
+
++ build the static navbar
++ build a static version of the tree picking page
+
+4/22/2022
+
+I don't need to redo security because even if they get into the main application,
+they can't even use it because you cannot access the data from the api. This is fine.
+Today is the day that I do an overhaul of Pan Zoom.
+1. Preload state with data in the form of:
+0,1,1: {
+    hex_q,
+    hex_r,
+    hex_s,
+}
+Returning user id with key
+https://stackoverflow.com/questions/44965908/django-rest-auth-registration-how-to-return-user-id-with-the-key-when-using-tok
+I didn't make the treepicker stateful, but I did make much-needed updates on the backend.
+
++ An underline and a blue text color should only appear for the chosen filter between Learn and Teach
++ update backend to include
+    + skill tree table
+        + tree picture
+        + last_edit_timestamp skill on every update or creation
+    + accounts table
+        Skill trees already have an owner so it's enough to grab them by owner.
+        I would need to create and another serializer for it though. But I'm building this anyways.
+        + build another table of user id and skill trees being learned
+            + id
+            + user id
+            + skill tree id
+        + in the serializer, you'll want to get a list of skill tree IDs and grab the info for all of them for each kind of relationship
+        + grab all skill trees being learned in the user serializer
+        serialize the following to get which skill trees are you the owner of
+                + grab all skill trees being taught in the user serializer
++ return user ID with Token
++ update the store to grab user_id in preloaded state
++ do an overhaul on the panzoom data. Make sure that the state is preloaded and build on top of that original state.
+
+4/23/2022
+
++ copy the gray hover state of the create button on figma
++ combine learning and teaching serialization in the backend
++ make Learn and Teach buttons stateful and working as intended
+
+4/24/2022
+
++ clicking on any skill tree, navigates to the test skill tree
+
+4/25/2022
+
++ make clicking on the skill tree go to the actual skill tree
++ Skill Trees to trees button for navigation
++ Fix width and height... for now... for ReactSVGPanZoom
++ in App.tsx make it so that the home page navigates to the intended skilltreepicker page
++ make it so that it's possible to create and edit skill trees on different pages
++ test path creation in other skill tree
++ replace useState hooks with Redux in PanZoomHexGrid
++ delete hexagon button at the very bottom
+x button for editing global skill tree settings (g button)
++ sign for shortcut for pointer mode and drag mode
+
+4/26/2022
+
+Drag and drop is some major functionality that I'll need to think of...
+It's going to need it's own variable...
+I might want to create a page state variable since there are essentially three or four page states:
+It might not be important to manage page state, if the sidebar disappears while moving a hexagon.
+onDragStart
+    Have hexagonFocused be this hexagon.
+    if the target has a hexagon ID, disallow drag
+onDragOver
+    Prevent moving hexagons from overwriting one another.
+    If the hexagon already has a hex ID, do not allow drop
+    https://github.com/Hellenic/react-hexgrid/blob/master/examples/drag-and-drop/src/GameLayout.js
+    Line 48
+    but I'll want to look into React TypeScript Chapter 1 for a way for the user to see a preview.
+    file:///Users/thomasfrancis/Desktop/fullstack-react-with-typescript-book-r11-basic.pdf
+    Page 107
+onDrop
+    Assign hexagonFocused's data to the hexagon dropped on.
+    Mutate the hex ID's hex coordinates in the backend
+onDragEnd
+    Clear the data of the source hexagon
+    I don't actually need to do this since onDrop would be enough.
+
+x drag and drop functionality for hexagons
+    Drag and drop cannot work because these states are already being used by ReactSVGPanZoom...
+    I can't do Drag and drop, but I can move hexagons by clicking.
++ Click Move node functionality for hexagons
+x in the sidebar components make it so that clicking on a hexagon where hex_id is undefined, does not grab data for it
+    It's not a big deal because the query will be cached
+
+4/27/2022
+
+Make the right column under the navbar...
+It might be a better idea to have global settings underneath hex information.
+
+I received a quiz from Deskpass. Let's do this.
+
+4/28/2022
+
++ completed the deskpass test
+
+4/29/2022
+
+For a teacher and student view, I'm going to need state...
+Viewer > The default viewstate should be student.
+When Viewer is the owner then it renders.
+This means that I don't need viewer state.
+All I need to do is to check if the user_id and the user of the skill tree match.
+I'll need to create another URL storage for the skill tree profile picture.
+
++ make it so that dragging on the side does not occur
+    It was just one value change sheesh.
++ remove the toolbar since it is no longer useful
++ Delete Node button only shows up only existing hexagons
++ create student 
+
+
+4/30/2022
+
+I guess development has been slowed down because I'm paying off my tech debt in the process.
+It looks like I'll need to use the useQuery once in the main sidebar so that the text input does not re-render twice.
+Got a lot done today.
+
++ Global Settings for the skill tree on the bottom of the left side
++ view as Student button: Student View Button
++ turn off edit shortcuts in Student view
++ have text only appear in Student View
++ Teacher View button
++ if the user_id matches the user of the skill_tree then teacher mode is displayed
++ There must be "Viewer" state to control the viewer mode.
++ turn off all other shortcuts in student view except for drag and pointer mode
++ test the useQuery in TeacherView - It works. Functionality isn't perfect, but it's good enough for my purposes.
++ get the text input and textarea working properly again
+
+5/2/2022
+
+I need to start studying implementation for deployment. Deployment terrifies me.
+It was... so hard last time. I learned a lot, but it was really hard.
+I should work on planning out deployment every day.
+
++ replace loading or error in TeacherView with empty version
++ disable buttons while editing
+
+5/3/2022
+
+I think it's time to build a CI pipeline.
+I need some kind of product to show what I'm working on.
+I'm not sure when the MVP will be complete.
+If I build it in public, maybe something good will happen.
+It's a free app after all.
+
+I'll probably run a chron job that runs `git pull origin main` every hour.
+But that's not exactly how docker works.
+#1. Dockerize your application.
+#2. Send to Dockerhub
+#3. Deploy from docker swarm whenever a new version is released.
+I won't need to shutdown Semblance because the server names would be different.
+
+5/5/2022
+
+It would be better though to simply have one nginx file instead of multiple. We'll see.
+To test the actual dev environment, I may need to port forward requests from port 80 or 443 to my macbook air to see things work in action.
+
++ Get down a general procedure of how you'll deploy your application
++ create your own production docker images for raspberry debian environment pi environment - linux/arm/v7 for the frontend and backend
++ check if postgreSQL database is still running
++ use scp command to move json data dump into new database
+    scp datadump.json thomasfrancis@192.168.1.35:/home/thomasfrancis
+    I actually did NOT need to do this
++ switch from sqlite db to postgreSQL db in django application
+    https://stackoverflow.com/questions/42125730/how-to-manage-py-loaddata-in-django
+    python3 manage.py dumpdata --natural-foreign --exclude=auth.permission --exclude=contenttypes --indent=4 > data.json
+    https://rasholayemi.medium.com/move-data-from-sqlite-to-postgresql-in-django-5e93a4c4ae42
+    python manage.py migrate --run-syncdb
+    Some constraints were lost so I had to run this in the postgreSQL db
+    alter table skilltree_skilltreethemes add constraint theme_unique_char UNIQUE(theme);
+    ./manage.py loaddata data.json
++ use .env file for database password, django secret key, and anything else, you'd like to keep secret
++ generate new secret key for django
++ save .env info in lastpass
+
+
+5/6/2022
+
+Portainer and Nginx Proxy manager works!
+
++ look into this article - keep in mind that there is an entire self-hosted community
+    https://noted.lol/what-are-your-most-used-self-hosted-applications/
++ rework your stack based on these new technologies that you've discovered
++ deploy portainer
++ deploy nginx proxy manager
++ practice using reverse proxy to send visual.semblance.us to http://192.168.1.33:8080/
+
+5/9/2022
+
+Set STATIC_ROOT setting.
+Using WhiteNoise to serve static files in django without nginx.
+http://whitenoise.evans.io/en/stable/index.html
+Copying entrypoint.sh file. It's pretty good.
+I ran into a huge problem with whitenoise. The static files were not being served so I kept getting server 500.
+This is ultimately what solved the problem.
+https://stackoverflow.com/questions/53859972/django-whitenoise-500-server-error-in-non-debug-mode
+
++ add gunicorn for production django
+    gunicorn config.wsgi -b 0.0.0.0:8000
++ collect static files for the backend
++ create script for setup in the backend
++ gunicorn is working with proper CSS
++ install serve globally and serve build version of frontend locally
++ set up domain name and email on zoho
++ run npm build and install serve
++ create dev Dockerfiles for frontend and backend
++ create prod Dockerfiles for frontend and backend
++ create dev docker-compose.yml file
++ create prod docker-compose.yml file
++ made www, api, and visual subdomains of skyskill point to my IP address
+
+5/10/2022
+
+https://docs.docker.com/compose/reference/push/
+The initial build step is not working or it's taking too long.
+I'm going to try building it normally and pushing it out to docker swarm.
+We'll see what happens.
+
+
+Write an article about:
+
+- the next skill tree update
+    Tree Picker Page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
+    https://i.ibb.co/t3c96Q2/Screen-Shot-2022-04-19-at-10-30-27-AM.png
+    Home page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
+    Your repo is now public
+
+Github Contributions
+- contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
+
+CI Tasks:
+Referencing my old stuff for CI tasks
+https://github.com/tieje/semblance/
+
+x use dc-prod.yml to push out images to dockerhub
+    docker-compose -f dc-skyskill-prod.yml build
+    docker-compose -f dc-skyskill-prod.yml push
+    docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
+    x docker-compose --no-start -f dc-skyskill-prod.yml up
++ use normmal docker-compose.yml to push out images to dockerhub
+    docker-compose build
+    x docker-compose push
+    x docker-compose build && docker-compose push
+    docker push tieje/skyskill_backend:latest
+    docker push tieje/skyskill_frontend:latest
+    docker push tieje/skyskill_backend:latest && docker push tieje/skyskill_frontend:latest
+    Just in case, I might want to have a build command:
+    docker buildx build --platform linux/arm/v7 -t tieje/skyskill_backend:latest --push ./backend
+    docker buildx build --platform linux/arm/v7 -t tieje/skyskill_frontend:latest --push ./frontend
++ transfer the compose file to the swarm
+    x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+    scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+- deploy stack in docker-swarm skyskill
+    docker stack deploy -c dc-skyskill-prod.yml
+
+Core Tasks:
+
+- design the left column of the tree picker page
+- build the static version of the left column of the tree picker page
+- build the stateful version of the tree picker page
+- left side column for tree data on tree picker page
+- theme field in the backend for tree picker page
+- Feature for owners to download their data in a JSON File from tree picker page
+- edit skill tree profile picture on skill tree picker page
+- add state for theme based on available multiple choice
+
+- get the "Create Skill Tree" Button working
+- fix permissions so that only the user can grab what they're learning and what they're teaching
+- options for removing skill tree
+- build the static form page
+- build the awaiting for email confirmation page
+- build the 404 page
+- build the static version of the home page after you have built the skyrim theme
+- Add statistics at the top of the left sidebar
+
+Figma
+
+- create student interface
+    - quantitative feedback form
+    - verbal feedback form
+- create custom themes
+    - The first custom theme must be a skyrim skill tree
+- create skill tree page to pick which skill tree to use
+    you'll probably need to use a search bar for this
+- make it so that there is an option for a user to save a copy of a skill tree as their own
+- use parallax affect for a stylish home page
+
+Auth
+
+- make it so that code 400 logging in says that the password is wrong
+
+Production
+
+- django static files:
+    https://learndjango.com/tutorials/django-static-files?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_126
+- for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page
+- get down image uploading and usage so that you don't need to rely on external images
+- page 185 in Django for REST APIs
+- page 142 django for professionals - account email verification with sendgrid
+- send email with skill tree link to a list of students on a textarea form separated by a new-line
+    I only do this because domain emails cost money in Google

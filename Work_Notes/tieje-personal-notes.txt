@@ -1,0 +1,170 @@
+3/5/2022
+
+Generally, I should always be devoting 2 or 3 hours to studying technology while also designing sites and creating posts.
+
+ended
+https://nextjs.org/learn/basics/create-nextjs-app/setup
+
+3/7/2022
+create-next-app can bootstrap next.js
+ended
+https://nextjs.org/learn/basics/navigate-between-pages
+
+3/8/2022
+
+ended
+https://nextjs.org/learn/basics/navigate-between-pages/client-side
+
+3/10/2021
+If you need to add attributes like, for example, className, add it to the a tag, not to the Link tag.
+
+Setting up TypeScript
+https://nextjs.org/learn/excel/typescript
+
+Install TypeScript
+npm install --save-dev typescript @types/react @types/node
+nextjs specific types
+https://nextjs.org/learn/excel/typescript/nextjs-types
+
+TASKS
+
+All posts can be found here:
+https://dev.to/dashboard
+
++ Write and share a post of your idea.
+    https://dev.to/tieje/the-beginning-of-project-skill-tree-1je2
++ Write and share a post of the tech stack for your idea.
+    https://dev.to/tieje/project-skill-tree-tech-stack-1274
++ go through user experience - write a post about it
+    https://dev.to/tieje/project-skill-tree-user-experience-part-1-defining-the-app-utilities-1kak
+    + make a post defining the App Utilities
+         I will not be making a part 2 of the Application.
+         I DO have a much better idea of what I would like to build though.
++ make a post on refining your idea and what problem you're trying to solve
+    https://dev.to/tieje/project-skill-tree-idea-refinement-48jc
++ Design the application page of the website on Figma
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A19
+    + student view application page
+        + desktop
+        + tablet
+        + mobile
+    + teacher view application page
+        + desktop
+        + tablet
+        + mobile
+- Design the technical frontend
+    + Write about what features you'll need for the frontend
+    + Make a post about Markdown document, edit, and preview using Forem open source code
+        The Markdown document editing feature is not core to the application and will instead be a feature that is nice to have.
+    + start with the create-app-nextjs command to help define file structure
+    - define file structure based on what you think is going to happen
+
+
+perhaps an alternative library
+Search bar
+Algola
+Menu drop down
+Tailwind CSS
+Statistics bar graph
+d3
+Overlay Node Data loading
+NextJS lazyLoading
+Image Upload
+skill tree line and node building
+d3
+
+- Design the technical backend
+- write tests for the frontend
+- write tests for the backend
+- build the technical frontend
+- build the technical backend
+- Design the rest of the website on Figma
+    - home page
+        - desktop
+        - tablet
+        - mobile
+    - user settings page
+    - sign-in page
+    - sign-out page
+    - password change page
+    - 404 error page
+
+STUDY FOR TWO TO THREE HOURS:
+
+- NextJS
+x Cypress
+- D3
+- FaunaDB
+
+TODO
+
+- Come up with a color schema.
+    - I should come up with several color schemas for the UI and leave that choice up to the user.
+- Think of how you're going to procedurally create the skill tree.
+- Think of how you're going to implement user view-navigation on the skill tree.
+- Think of the final visual design of the skill trees. I'm thinking of copying Skyrim.
+- Think of node icon defaults
+- Think of background image defaults. This will be the background beneath the skill tree.
+
+Potential Features
+
+- Instead of procedurally generating a skill tree, allow teachers to create points on a picture they upload.
+
+Utility Links
+Image Hosting in Article Writing
+https://imgbb.com/
+
+3/29/2022
+3/31/2022
+
+I'll need to work on my work schedule a bit better...
+I probably could have figured out the problem in 8 hours over 2 days rather than in 12 hours over 1 day.
+Working 12 hour days for two or three days and then taking two days off...
+
+Work gets easier to do with each passing day.
+
+Two 12 hour days of work and one day off
+24 / 3 = 8 hours of "work" per day
+
+Three 12 hour days of work and one day off
+36 / 4 = 9 hours of "work" per day
+
+6 hours of "work" every day
+6 hours of "work" per day
+
+Last week:
+
+Four 12 hour days of work and three days off
+48 / 7 = ~7 hours of "work" per day
+
+Or even
+
+Five 12 hour days of work and two days off
+60 / 7 = ~8.5 hours of "work" per day
+
+4/1/2022
+
+5/2/2022
+
+I'll do an additional two hours of deep work on deployment from 2-4pm.
+Then apply for jobs for like half an hour. Today is just not a good day.
+
+Helpful markdown functions:
+
+def markify(a: str) -> str:
+    return(a.lower().replace(' ', '-'))
+
+Test Users
+=========
+
+testuser3
+I0W47G2NO9W#h8!QyD
+
+zoho domain and email management
+email management
+https://mailadmin.zoho.com/hosting?domain=skyskill.tech
+email login
+https://mail.zoho.com/zm/#mail/folder/inbox
+Domain management
+https://rr-n1-tor.opensrs.net/manage/index.cgi
+https://rr-n1-tor.opensrs.net/manage/index.cgi?action=modify_nameservers#
