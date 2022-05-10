@@ -853,7 +853,20 @@ https://docs.docker.com/compose/reference/push/
 The initial build step is not working or it's taking too long.
 I'm going to try building it normally and pushing it out to docker swarm.
 We'll see what happens.
-Port 8000 is already being used. I'm going to change the backend to port 5000
+Port 8000 is already being used. I'm going to change the backend to port 5000.
+I cannot get around it. I'm going to need figure out the problem with the backend python dependencies.
+Might be a problem with rust actually.
+https://stackoverflow.com/questions/69743936/problem-installing-cryptography-on-raspberry-pi
+It's a Rust problem. The cryptography package requires Rust now.
+I installed Rust locally on the machines just in case,
+but I'm also telling cryptography not to build Rust in the Dockerfile with an environment variable.
+I need to figure out the cryptography problem.
+https://github.com/matrix-org/synapse/issues/9403
+It turns out that the python cryptography problem was such a big deal that the docker team themselves decided not to have arm/v7 images.
+Let's downgrade Rust to 3.4.8 since Rust is required in later releases.
+https://cryptography.io/en/latest/changelog/
+It actually worked.
+docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
 
 Write an article about:
 
@@ -891,6 +904,9 @@ x use dc-prod.yml to push out images to dockerhub
     x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
     scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
 - deploy stack in docker-swarm skyskill
+    + downgraded to cryptography 3.4.8
+        pipenv install cryptography==3.4.8
+    + docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
     docker stack deploy skyskill
 
 Ignoring unsupported options: build Ignoring deprecated options: container_name: Setting the container name is not supported. failed to create service skyskill_backend: Error response from daemon: rpc error: code = InvalidArgument desc = port '8000' is already in use by service 'portainer_portainer' (tcltdilbt5vqoqw34iodvx68j) as an ingress port

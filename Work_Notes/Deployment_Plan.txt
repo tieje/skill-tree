@@ -81,6 +81,7 @@ Portainer
 https://192.168.1.33:9443/#!/home
 http://192.168.1.33:8080
 ssh thomasfrancis@192.168.1.33
+ssh thomasfrancis@192.168.1.35
 sudo shutdown now
 ansible -i $ANSIBLE_HOSTS all -m ping
 sudo shutdown -r now
