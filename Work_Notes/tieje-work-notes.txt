@@ -853,7 +853,7 @@ https://docs.docker.com/compose/reference/push/
 The initial build step is not working or it's taking too long.
 I'm going to try building it normally and pushing it out to docker swarm.
 We'll see what happens.
-
+Port 8000 is already being used. I'm going to change the backend to port 5000
 
 Write an article about:
 
@@ -891,7 +891,9 @@ x use dc-prod.yml to push out images to dockerhub
     x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
     scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
 - deploy stack in docker-swarm skyskill
-    docker stack deploy -c dc-skyskill-prod.yml
+    docker stack deploy skyskill
+
+Ignoring unsupported options: build Ignoring deprecated options: container_name: Setting the container name is not supported. failed to create service skyskill_backend: Error response from daemon: rpc error: code = InvalidArgument desc = port '8000' is already in use by service 'portainer_portainer' (tcltdilbt5vqoqw34iodvx68j) as an ingress port
 
 Core Tasks:
 
