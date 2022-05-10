@@ -7,8 +7,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: skyskill_backend_prod
-    env_file:
-      - ./backend/.env
+    # Only need this for local development
+    #env_file:
+    #  - ./backend/.env
     ports:
       - 5000:5000
     networks:
