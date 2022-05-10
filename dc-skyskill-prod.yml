@@ -6,7 +6,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: skyskill_backend_dev
+    container_name: skyskill_backend_prod
     env_file:
       - ./backend/.env
     ports:
@@ -18,7 +18,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: skyskill_frontend_dev
+    container_name: skyskill_frontend_prod
     ports:
       - 3000:3000
     networks:

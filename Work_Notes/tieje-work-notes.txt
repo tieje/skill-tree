@@ -847,6 +847,14 @@ https://stackoverflow.com/questions/53859972/django-whitenoise-500-server-error-
 + create prod docker-compose.yml file
 + made www, api, and visual subdomains of skyskill point to my IP address
 
+5/10/2022
+
+https://docs.docker.com/compose/reference/push/
+The initial build step is not working or it's taking too long.
+I'm going to try building it normally and pushing it out to docker swarm.
+We'll see what happens.
+
+
 Write an article about:
 
 - the next skill tree update
@@ -860,14 +868,30 @@ Write an article about:
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
-
 CI Tasks:
 Referencing my old stuff for CI tasks
 https://github.com/tieje/semblance/
 
-- use dc-prod.yml to push out images to dockerhub
-    https://docs.docker.com/compose/reference/push/
-- 
+x use dc-prod.yml to push out images to dockerhub
+    docker-compose -f dc-skyskill-prod.yml build
+    docker-compose -f dc-skyskill-prod.yml push
+    docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
+    x docker-compose --no-start -f dc-skyskill-prod.yml up
++ use normmal docker-compose.yml to push out images to dockerhub
+    docker-compose build
+    x docker-compose push
+    x docker-compose build && docker-compose push
+    docker push tieje/skyskill_backend:latest
+    docker push tieje/skyskill_frontend:latest
+    docker push tieje/skyskill_backend:latest && docker push tieje/skyskill_frontend:latest
+    Just in case, I might want to have a build command:
+    docker buildx build --platform linux/arm/v7 -t tieje/skyskill_backend:latest --push ./backend
+    docker buildx build --platform linux/arm/v7 -t tieje/skyskill_frontend:latest --push ./frontend
++ transfer the compose file to the swarm
+    x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+    scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+- deploy stack in docker-swarm skyskill
+    docker stack deploy -c dc-skyskill-prod.yml
 
 Core Tasks:
 
