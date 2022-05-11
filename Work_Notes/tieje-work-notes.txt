@@ -951,6 +951,41 @@ Running docker images on an RPI
 https://www.instructables.com/Build-Docker-Image-for-Raspberry-Pi/
 It's up. I just need to push the docker images to docker hub and create a custom docker-compose file for deployment.
 It's much simpler to just build on the local machine than on my own for RPI.
+Docker stack deploy works, but the static files are not being served in the django backend.
+I've been through this before. It's like an internal django, nginx, whitenoise problem.
+
++ start over. Make sure that your dev docker files work on your local environment
++ make sure that your prod docker files work on the production. Debug from here.
+    + test build. Build was successful
+        docker-compose -f dc-skyskill-prod.yml build
+    + run build. It works but the backend probably blocks requests from other hosts.
+        docker-compose -f dc-skyskill-prod.yml up -d
+    x build image for RPI locally and push to dockerhub and run docker stack deploy
+        docker buildx build --platform linux/arm -t tieje/skyskill_backend:latest --push ./backend
+        docker buildx build --platform linux/arm -t tieje/skyskill_frontend:latest --push ./frontend
+        It might be too slow.
+        It would be faster to build locally on the RPI.
+    + get the backend working
+        docker-compose -f dc-skyskill-prod.yml up -d --build
+    + push to dockerhub
+        + try pushing the existing images
+            docker container commit f340aa2914be skyskill_backend:latest
+            docker image tag skyskill_backend:latest tieje/skyskill_backend:latest
+            docker push tieje/skyskill_backend:latest
+
+            docker container commit ce391bc32e2b skyskill_frontend:latest
+            docker image tag skyskill_frontend:latest tieje/skyskill_frontend:latest
+            docker push tieje/skyskill_frontend:latest
+
+    + docker stack deploy
+        docker stack deploy --compose-file dc-skyskill-stack-deploy.yml skyskill
+
+5/12/2022
+
+Links to look over. You'll need to solve it specifically for nginx proxy manager.
+https://stackoverflow.com/questions/66774079/how-to-make-static-files-works-using-django-docker-nginx-and-postgresql-since-it
+https://stackoverflow.com/questions/25271773/docker-nginx-django-and-how-to-serve-static-files
+https://duckduckgo.com/?q=django+docker+nginx+whitenoise+no+static&ia=web
 
 
 Write an article about:
@@ -970,30 +1005,7 @@ CI Tasks:
 Referencing my old stuff for CI tasks
 https://github.com/tieje/semblance/
 
-+ start over. Make sure that your dev docker files work on your local environment
-- make sure that your prod docker files work on the production. Debug from here.
-    + test build. Build was successful
-        docker-compose -f dc-skyskill-prod.yml build
-    + run build. It works but the backend probably blocks requests from other hosts.
-        docker-compose -f dc-skyskill-prod.yml up -d
-    x build image for RPI locally and push to dockerhub and run docker stack deploy
-        docker buildx build --platform linux/arm -t tieje/skyskill_backend:latest --push ./backend
-        docker buildx build --platform linux/arm -t tieje/skyskill_frontend:latest --push ./frontend
-        It might be too slow.
-        It would be faster to build locally on the RPI.
-    + get the backend working
-        docker-compose -f dc-skyskill-prod.yml up -d --build
-    + push to dockerhub
-        + try pushing the existing images
-            docker container commit a870bc83fb9f skyskill_frontend:latest
-            docker image tag skyskill_frontend:latest tieje/skyskill_frontend:latest
-            docker push tieje/skyskill_frontend:latest
-
-            docker container commit bbc873f710c3 skyskill_backend:latest
-            docker image tag skyskill_backend:latest tieje/skyskill_backend:latest
-            docker push tieje/skyskill_backend:latest
-    + docker stack deploy
-        docker-compose --compose-file dc-skyskill-stack-deploy.yml push
+- solve the internal whitenoise, django, docker, nginx problem
 
 Core Tasks:
 

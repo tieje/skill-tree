@@ -85,3 +85,40 @@ ssh thomasfrancis@192.168.1.35
 sudo shutdown now
 ansible -i $ANSIBLE_HOSTS all -m ping
 sudo shutdown -r now
+
+TEMPORARY COMPOSE DEPLOYMENT
+
+pull git to prod
+    git pull origin main
+compose up
+    docker-compose -f dc-skyskill-prod.yml up -d
+
+OPTIMIZED STACK DEPLOYMENT
+
+test locally
+    docker-compose up -d --build
+
+pull git to prod
+    git pull origin main
+
+collectstatic for django
+    cd backend/
+    python3 manage.py collectstatic --noinput
+
+test build in production
+    docker-compose -f dc-skyskill-prod.yml build
+
+test in production
+    docker-compose -f dc-skyskill-prod.yml up -d --build
+
+push running container images to dockerhub
+    docker container commit f340aa2914be skyskill_backend:latest
+    docker image tag skyskill_backend:latest tieje/skyskill_backend:latest
+    docker push tieje/skyskill_backend:latest
+
+    docker container commit ce391bc32e2b skyskill_frontend:latest
+    docker image tag skyskill_frontend:latest tieje/skyskill_frontend:latest
+    docker push tieje/skyskill_frontend:latest
+
+deploy to stack
+    docker stack deploy --compose-file dc-skyskill-stack-deploy.yml skyskill
