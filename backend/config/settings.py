@@ -36,6 +36,14 @@ ALLOWED_HOSTS: List[str] = [
     '0.0.0.0',
     '127.0.0.1',
     'localhost',
+    '192.168.1.33',
+    '192.168.1.35',
+    '96.32.2.83',
+    'skyskill.tech',
+    'www.skyskill.tech',
+    'api.skyskill.tech',
+    'visual.skyskill.tech',
+    'skyskill',
 ]
 
 # Application definition
