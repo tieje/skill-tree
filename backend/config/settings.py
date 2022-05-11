@@ -183,11 +183,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    '192.168.1.33',
+    '192.168.1.35',
+    '96.32.2.83',
+    'skyskill.tech',
+    'www.skyskill.tech',
+    'api.skyskill.tech',
+    'visual.skyskill.tech',
+    'skyskill',
 ]
 # page 122
 # https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-trusted-origins
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    '192.168.1.33',
+    '192.168.1.35',
+    '96.32.2.83',
+    'skyskill.tech',
+    'www.skyskill.tech',
+    'api.skyskill.tech',
+    'visual.skyskill.tech',
+    'skyskill',
 ]
 '''
 GRAPHENE = {
