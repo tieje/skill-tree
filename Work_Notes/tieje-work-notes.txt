@@ -869,6 +869,8 @@ It actually worked.
 docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
 For portainer, I'll use a custom docker-compose file instead.
 I can try a normal stack deploy from the command line.
+I'm going to try a manual deploy for now.
+
 
 version: '3.8'
 services:
@@ -899,24 +901,6 @@ networks:
   skyskill-net:
     driver: overlay
 
-
-Write an article about:
-
-- the next skill tree update
-    Tree Picker Page
-    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
-    https://i.ibb.co/t3c96Q2/Screen-Shot-2022-04-19-at-10-30-27-AM.png
-    Home page
-    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
-    Your repo is now public
-
-Github Contributions
-- contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
-
-CI Tasks:
-Referencing my old stuff for CI tasks
-https://github.com/tieje/semblance/
-
 x use dc-prod.yml to push out images to dockerhub
     docker-compose -f dc-skyskill-prod.yml build
     docker-compose -f dc-skyskill-prod.yml push
@@ -935,14 +919,54 @@ x use dc-prod.yml to push out images to dockerhub
 + transfer the compose file to the swarm
     x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
     scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
-- deploy stack in docker-swarm skyskill
+x deploy stack in docker-swarm skyskill
     + downgraded to cryptography 3.4.8
         pipenv install cryptography==3.4.8
     + docker-compose -f dc-skyskill-prod.yml build && docker-compose -f dc-skyskill-prod.yml push
     git clone https://github.com/tieje/skill-tree.git
     docker stack deploy --compose-file dc-skyskill-prod.yml skyskill
+x attempt manual deploy
+    backend
+    + pip3 install pipenv
+    - pipenv install --system
+    frontend
+    + curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+    - npm install -g npm
+    - npm install -g serve
+    - 
 
-Ignoring unsupported options: build Ignoring deprecated options: container_name: Setting the container name is not supported. failed to create service skyskill_backend: Error response from daemon: rpc error: code = InvalidArgument desc = port '8000' is already in use by service 'portainer_portainer' (tcltdilbt5vqoqw34iodvx68j) as an ingress port
+
+5/11/2022
+
+Don't give up yet.
+Study the docker swarm visualizer and see what they do that you're not doing.
+https://github.com/dockersamples/docker-swarm-visualizer
+https://hub.docker.com/r/alexellis2/visualizer-arm/tags/#!
+I need more discipline about how much time I'm going to spend on this per day.
+I need to accept that some things will take a long time.
+The big problem with what I did, was that I tried skipping a lot of steps.
+This is a big no-no. I need to introduce incremental changes and see what happens.
+
+Write an article about:
+
+- the next skill tree update
+    Tree Picker Page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=102%3A2
+    https://i.ibb.co/t3c96Q2/Screen-Shot-2022-04-19-at-10-30-27-AM.png
+    Home page
+    https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
+    Your repo is now public
+
+Github Contributions
+- contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
+
+CI Tasks:
+Referencing my old stuff for CI tasks
+https://github.com/tieje/semblance/
+
++ start over. Make sure that your dev docker files work on your local environment
+- make sure that your prod docker files work on the production. Debug from here.
+
 
 Core Tasks:
 

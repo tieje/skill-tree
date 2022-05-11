@@ -7,7 +7,7 @@ import { RootState } from './store'
 const treeApi = createApi({
     reducerPath: 'treeApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://127.0.0.1:8000/api/v1/',
+        baseUrl: 'http://127.0.0.1:5000/api/v1/',
         prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.token
             if (token !== 'null' && token !== null) {
