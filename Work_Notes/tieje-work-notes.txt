@@ -983,10 +983,18 @@ https://github.com/tieje/semblance/
         It would be faster to build locally on the RPI.
     + get the backend working
         docker-compose -f dc-skyskill-prod.yml up -d --build
-    - push to dockerhub
+    + push to dockerhub
+        + try pushing the existing images
+            docker container commit a870bc83fb9f skyskill_frontend:latest
+            docker image tag skyskill_frontend:latest tieje/skyskill_frontend:latest
+            docker push tieje/skyskill_frontend:latest
+
+            docker container commit bbc873f710c3 skyskill_backend:latest
+            docker image tag skyskill_backend:latest tieje/skyskill_backend:latest
+            docker push tieje/skyskill_backend:latest
+    + docker stack deploy
         docker-compose --compose-file dc-skyskill-stack-deploy.yml push
-    x run stack deploy
-        docker stack deploy --compose-file dc-skyskill-prod.yml skyskill
+
 Core Tasks:
 
 - design the left column of the tree picker page
