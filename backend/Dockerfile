@@ -1,5 +1,5 @@
 #FROM tieje/rpi4_backend:latest
-FROM python:3.10.4
+FROM python:3.10.4-buster
 #RUN apt-get update --allow-releaseinfo-change
 WORKDIR /backend
 COPY Pipfile Pipfile.lock /backend/
