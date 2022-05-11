@@ -919,6 +919,7 @@ x use dc-prod.yml to push out images to dockerhub
 + transfer the compose file to the swarm
     x scp dc-skyskill-prod.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
     scp docker-compose.yml thomasfrancis@192.168.1.33:/home/thomasfrancis
+    scp ./backend/.env thomasfrancis@192.168.1.33:/home/thomasfrancis/skill-tree/backend/
 x deploy stack in docker-swarm skyskill
     + downgraded to cryptography 3.4.8
         pipenv install cryptography==3.4.8
@@ -966,6 +967,7 @@ https://github.com/tieje/semblance/
 
 + start over. Make sure that your dev docker files work on your local environment
 - make sure that your prod docker files work on the production. Debug from here.
+    docker-compose -f dc-skyskill-prod.yml build
 
 
 Core Tasks:
