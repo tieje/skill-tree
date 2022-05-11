@@ -987,7 +987,6 @@ https://stackoverflow.com/questions/66774079/how-to-make-static-files-works-usin
 https://stackoverflow.com/questions/25271773/docker-nginx-django-and-how-to-serve-static-files
 https://duckduckgo.com/?q=django+docker+nginx+whitenoise+no+static&ia=web
 
-
 Write an article about:
 
 - the next skill tree update
