@@ -974,9 +974,14 @@ https://github.com/tieje/semblance/
         docker-compose -f dc-skyskill-prod.yml build
     + run build. It works but the backend probably blocks requests from other hosts.
         docker-compose -f dc-skyskill-prod.yml up -d
-    - build image for RPI locally and push to dockerhub and run docker stack deploy
+    x build image for RPI locally and push to dockerhub and run docker stack deploy
         docker buildx build --platform linux/arm/v7 -t tieje/skyskill_backend:latest --push ./backend
         docker buildx build --platform linux/arm/v7 -t tieje/skyskill_frontend:latest --push ./frontend
+        It might be too slow.
+        It would be faster to build locally on the RPI.
+    + get the backend working
+        docker-compose -f dc-skyskill-prod.yml up -d --build
+    - run stack deploy
 
 Core Tasks:
 
