@@ -1,4 +1,5 @@
-FROM tieje/rpi4_frontend:latest
+#FROM tieje/rpi4_frontend:latest
+FROM node:16.14.2
 WORKDIR /frontend
 RUN apt-get update
 RUN npm install -g npm
