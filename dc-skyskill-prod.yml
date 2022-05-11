@@ -1,8 +1,7 @@
 version: '3.8'
 services:
   backend:
-    command: ["gunicorn", "config.wsgi"]
-    image: tieje/skyskill_backend
+    command: gunicorn config.wsgi
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -12,10 +11,10 @@ services:
     #  - ./backend/.env
     ports:
       - 5000:5000
-    networks:
-      - skyskill-net
+    #networks:
+    #  - skyskill-net
   frontend:
-    command: ["serve", "-s", "build"]
+    command: serve -s build
     image: tieje/skyskill_frontend
     build:
       context: ./frontend
@@ -23,8 +22,8 @@ services:
     container_name: skyskill_frontend_prod
     ports:
       - 3000:3000
-    networks:
-      - skyskill-net
-networks:
-  skyskill-net:
-    driver: overlay
+    #networks:
+    #  - skyskill-net
+#networks:
+ # skyskill-net:
+ #   driver: overlay
