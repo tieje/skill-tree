@@ -949,6 +949,8 @@ The big problem with what I did, was that I tried skipping a lot of steps.
 This is a big no-no. I need to introduce incremental changes and see what happens.
 Running docker images on an RPI
 https://www.instructables.com/Build-Docker-Image-for-Raspberry-Pi/
+It's up. I just need to push the docker images to docker hub and create a custom docker-compose file for deployment.
+It's much simpler to just build on the local machine than on my own for RPI.
 
 
 Write an article about:
@@ -975,14 +977,16 @@ https://github.com/tieje/semblance/
     + run build. It works but the backend probably blocks requests from other hosts.
         docker-compose -f dc-skyskill-prod.yml up -d
     x build image for RPI locally and push to dockerhub and run docker stack deploy
-        docker buildx build --platform linux/arm/v7 -t tieje/skyskill_backend:latest --push ./backend
-        docker buildx build --platform linux/arm/v7 -t tieje/skyskill_frontend:latest --push ./frontend
+        docker buildx build --platform linux/arm -t tieje/skyskill_backend:latest --push ./backend
+        docker buildx build --platform linux/arm -t tieje/skyskill_frontend:latest --push ./frontend
         It might be too slow.
         It would be faster to build locally on the RPI.
     + get the backend working
         docker-compose -f dc-skyskill-prod.yml up -d --build
-    - run stack deploy
-
+    - push to dockerhub
+        docker-compose --compose-file dc-skyskill-stack-deploy.yml push
+    x run stack deploy
+        docker stack deploy --compose-file dc-skyskill-prod.yml skyskill
 Core Tasks:
 
 - design the left column of the tree picker page
