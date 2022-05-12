@@ -86,15 +86,20 @@ sudo shutdown now
 ansible -i $ANSIBLE_HOSTS all -m ping
 sudo shutdown -r now
 
+============================
 TEMPORARY COMPOSE DEPLOYMENT
+============================
 
+Get to manager1
+    ssh thomasfrancis@192.168.1.33
 pull git to prod
     git pull origin main
 compose up
-    docker-compose -f dc-skyskill-prod.yml up -d
+    docker-compose -f dc-skyskill-prod.yml up -d --build
 
+==========================
 OPTIMIZED STACK DEPLOYMENT
-
+==========================
 test locally
     docker-compose up -d --build
 

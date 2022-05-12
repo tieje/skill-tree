@@ -245,7 +245,21 @@ const PanZoomHexGrid = () => {
             {data?.hexagons.map((hex: HexagonType) => {
               let pid: string;
               if (hex.image_address) { pid = 'p' + hex.hex_string }
-              if (pm.hexagonFocused.hex_string === hex.hex_string) { dispatch(changeHexagonFocus(hex)) }
+              if (pm.hexagonFocused.hex_string === hex.hex_string) {
+                dispatch(changeHexagonFocus(hex))
+                return (
+                  <Hexagon
+                    key={nanoid()}
+                    id={hex.hex_string}
+                    q={hex.hex_q}
+                    r={hex.hex_r}
+                    s={hex.hex_s}
+                    fill={pid}
+                    onClick={() => handleHexagonClick(hex)}
+                    cellStyle={{ 'fill-opacity': '1', 'stroke': '#fd9420' }}
+                  />
+                )
+              }
               return (
                 <Hexagon
                   key={nanoid()}
@@ -255,6 +269,7 @@ const PanZoomHexGrid = () => {
                   s={hex.hex_s}
                   fill={pid}
                   onClick={() => handleHexagonClick(hex)}
+                  cellStyle={{ 'fill-opacity': '1' }}
                 />
               )
             })}

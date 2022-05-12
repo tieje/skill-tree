@@ -2,13 +2,14 @@ import { SkillTreePickerTreeType } from "../../types/Types"
 import ReactTimeago from "react-timeago"
 import { useNavigate } from "react-router-dom"
 import { ResetSidebarState } from "../SideBar/SideBarSlices"
-import { useReduxDispatch } from "../../redux/hooks"
+import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
 import { ResetPanModeState } from "../PanZoomHexGrid/PanModeSlices"
 import { changeTreePickerTreeFocused } from "./TreePickerSlice"
 
 const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
     const navigate = useNavigate()
     const dispatch = useReduxDispatch()
+    const treeFocused = useReduxSelector(state => state.treePicker.treeFocused)
     // functions
     const handleNavigation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         switch (e.detail) {
@@ -22,10 +23,15 @@ const SkillTreeItem = ({ props }: { props: SkillTreePickerTreeType }) => {
                 break
         }
     }
+    const baseBorderClass = 'relative rounded-lg grid border-2 h-72 focus:border-russian-blue focus:bg-gray '
+    let borderStyle = baseBorderClass + 'border-gray'
+    if (props.skill_tree_id === treeFocused.skill_tree_id) {
+        borderStyle = baseBorderClass + 'border-russian-blue'
+    }
     return (
         <button
             onClick={(e) => handleNavigation(e)}
-            className='relative rounded-lg grid border-2 border-gray h-72 focus:border-russian-blue focus:bg-gray'
+            className={borderStyle}
         >
             <div className='grid justify-center'>
                 <img

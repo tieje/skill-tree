@@ -1,5 +1,7 @@
 Important
 
+- Learn how to get Docker Swarm working django and whitenoise. This is critical for future projects.
+    - Literally make a repo for it if you can so that you don't need to go through this again.
 - Not particularly safe. If you're authenticated and you know a user ID, you can just update any hexagon or path
 - Deployment with React Router will likely fail unless the following is done:
     https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing

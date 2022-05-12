@@ -993,6 +993,13 @@ But at this point, dedicating an entire RPI4 for the site is probably good enoug
 Since this is just a small project, instead of using docker swarm, I'm just going to use docker-compose, but on worker1.
 Maybe not even on worker1. I could just use docker-compose on the manager and be done with it.
 
+x solve the internal whitenoise, django, docker, nginx problem
+    This is a much bigger problem than I am willing to commit to right now.
++ on the skill tree picker page, make it so that one click makes the border blue
++ decrease the width of paths
++ changed the color of the path to yellow
++ hovering on a hexagon results in a yellow outline
++ selected hexagons have an orange outline
 
 Write an article about:
 
@@ -1007,13 +1014,11 @@ Write an article about:
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
-CI Tasks:
-Referencing my old stuff for CI tasks
-https://github.com/tieje/semblance/
-
-- solve the internal whitenoise, django, docker, nginx problem
 
 Core Tasks:
+
+- create the gif asset for the front page
+- create the front page
 
 - design the left column of the tree picker page
 - build the static version of the left column of the tree picker page

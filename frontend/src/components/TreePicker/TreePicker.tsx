@@ -10,7 +10,6 @@ const TreePicker = () => {
     const user_id = useReduxSelector(state => state.auth.user_id)
     const { data, isLoading, error } = useGetSkillTreePickerDataByUserIdQuery(user_id)
     const treeFilter = useReduxSelector(state => state.treePicker.treeFilter)
-    const treeFocused = useReduxSelector(state => state.treePicker.treeFocused)
     const labels = [LEARN, TEACH]
     if (isLoading || error) {
         return (
