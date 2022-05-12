@@ -1018,6 +1018,7 @@ Github Contributions
 Core Tasks:
 
 + add user to paths model
++ fixed path deletion
 - create the gif asset for the front page
 - create the front page
 

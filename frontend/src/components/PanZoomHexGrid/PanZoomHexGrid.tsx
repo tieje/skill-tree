@@ -58,6 +58,7 @@ const PanZoomHexGrid = () => {
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   const editShortcuts = useReduxSelector(state => state.sideBar.editShortcuts)
+  const user_id = useReduxSelector(state => state.auth.user_id)
   // panMode selectors
   const pm = useReduxSelector(state => state.panMode)
   // Mutations
@@ -81,7 +82,7 @@ const PanZoomHexGrid = () => {
         case 'a':
           dispatch(pathDeleteDisableSwitch(true))
           dispatch(clearPathFocused())
-          deletePath({ path_id: pm.pathFocused.path_id })
+          deletePath({ path_id: pm.pathFocused.path_id, user: parseInt(user_id)})
           break
         case 'z':
           dispatch(clearStartingHexagon())
