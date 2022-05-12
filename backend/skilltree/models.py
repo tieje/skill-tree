@@ -64,6 +64,8 @@ class SkillTreePaths(Model):
     ending_hex_q: IntegerField = IntegerField(null=False)
     ending_hex_r: IntegerField = IntegerField(null=False)
     ending_hex_s: IntegerField = IntegerField(null=False)
+    user: ForeignKey = ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True)
 
     starting_hex_string: CharField = CharField(
         null=True, max_length=11, blank=True)
