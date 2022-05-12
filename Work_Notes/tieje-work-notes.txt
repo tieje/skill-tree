@@ -986,6 +986,13 @@ Links to look over. You'll need to solve it specifically for nginx proxy manager
 https://stackoverflow.com/questions/66774079/how-to-make-static-files-works-using-django-docker-nginx-and-postgresql-since-it
 https://stackoverflow.com/questions/25271773/docker-nginx-django-and-how-to-serve-static-files
 https://duckduckgo.com/?q=django+docker+nginx+whitenoise+no+static&ia=web
+The only way I'm going to figure this out is if I learn how nginx proxy manager works so I can use Advanced settings.
+https://github.com/NginxProxyManager/nginx-proxy-manager/blob/e91019feb91ca29187dbc106b96d5becda5679b1/backend/templates/proxy_host.conf
+I mean I could probably make it work if I tried really hard.
+But at this point, dedicating an entire RPI4 for the site is probably good enough.
+Since this is just a small project, instead of using docker swarm, I'm just going to use docker-compose, but on worker1.
+Maybe not even on worker1. I could just use docker-compose on the manager and be done with it.
+
 
 Write an article about:
 
@@ -1044,6 +1051,8 @@ Auth
 
 Production
 
+- optimize images in webpack
+    https://iamakulov.com/notes/optimize-images-webpack/
 - django static files:
     https://learndjango.com/tutorials/django-static-files?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_126
 - for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page

@@ -9,4 +9,3 @@ ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN pip install pipenv
 RUN pipenv install --system
 COPY . /backend
-RUN python3 manage.py collectstatic --noinput

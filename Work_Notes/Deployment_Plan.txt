@@ -101,10 +101,6 @@ test locally
 pull git to prod
     git pull origin main
 
-collectstatic for django
-    cd backend/
-    python3 manage.py collectstatic --noinput
-
 test build in production
     docker-compose -f dc-skyskill-prod.yml build
 
