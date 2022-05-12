@@ -147,7 +147,8 @@ const PanZoomHexGrid = () => {
               ending_hex_q: hex.hex_q,
               ending_hex_r: hex.hex_r,
               ending_hex_s: hex.hex_s,
-              skill_tree: parseInt(treeId)
+              skill_tree: parseInt(treeId),
+              user: parseInt(hex.user),
             })
             break
           case EDIT_ON:

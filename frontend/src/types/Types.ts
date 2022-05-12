@@ -26,6 +26,7 @@ type PathType = {
     skill_tree: number;
     starting_hex_string: string;
     ending_hex_string: string;
+    user: number
 }
 
 type HexagonType = {
