@@ -15,6 +15,10 @@ const PathEdit = () => {
             >
                 Path Edit Mode
             </h1>
+            <ol className='pb-2 opacity-50 text-lg'>
+                <li>1. Click a Node</li>
+                <li>2. Click another Node</li>
+            </ol>
             <button
                 className='bg-orange rounded-full p-1 px-2 shadow-lg hover:bg-dark-orange'
                 onClick={() => {

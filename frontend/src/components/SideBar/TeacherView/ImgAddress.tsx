@@ -97,7 +97,7 @@ const ImgAddress = ({ props }: { props: ImgAddressPropsType }) => {
             >
                 <label className='text-left text-xl' htmlFor={img_tag_id}>
                     Image Address
-                    <a href="https://www.wikihow.com/Get-the-URL-for-Pictures" className='pl-2 opacity-50'>
+                    <a href="https://dev.to/tieje/how-to-get-the-url-for-pictures-30o6" className='pl-2 opacity-50'>
                         (what's this?)
                     </a>
                 </label>

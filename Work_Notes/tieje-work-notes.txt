@@ -993,15 +993,6 @@ But at this point, dedicating an entire RPI4 for the site is probably good enoug
 Since this is just a small project, instead of using docker swarm, I'm just going to use docker-compose, but on worker1.
 Maybe not even on worker1. I could just use docker-compose on the manager and be done with it.
 I'm going to pivot towards getting th front page out. I want something to show at the very least with some kind of gif.
-1. Create the frontpage
-2. Create registration with final form
-3. Complete the skill tree picker page
-    - sidebar for universal settings
-    - 
-4. Add skyrim theme
-5. Add feedback functionality.
-    - feedback form for students
-    - load feedback for teachers
 
 x solve the internal whitenoise, django, docker, nginx problem
     This is a much bigger problem than I am willing to commit to right now.
@@ -1012,6 +1003,19 @@ x solve the internal whitenoise, django, docker, nginx problem
 + selected hexagons have an orange outline
 + add user to paths model
 + fixed path deletion and creation
+
+5/13/2022
+
+The problem is not a django, whitenoise problem, but rather an nginx proxy manager and docker swarm problem.
+This seems like it could work:
+https://stackoverflow.com/questions/61798289/nginx-proxydocker-swarm-load-balancer-not-working
+I may want to consider buying a course on Nginx. It seems really difficult to get Nginx info for some reason.
+https://www.udemy.com/cart/
+I don't think that I necessarily need to buy a whole course on nginx. Though, it might be nice to understand.
+It may be just as good to read the entire documentation of nginx, or just use it whenever I need it.
+https://nginx.org/en/docs/
+I'll try the stackoverflow solution above for now. I hope it works.
+I'm going to solve the docker swarm problem last because its faster to iterate with docker-compose while developing.
 
 Write an article about:
 
@@ -1027,56 +1031,72 @@ Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
 Core Tasks:
+Priorities
+1. Create the frontpage
+2. Create registration with final form
+3. Complete the skill tree picker page
+4. Add skyrim theme
+5. Add feedback functionality.
+6. Try fixing the nginx proxy manager and docker swarm problem
+
++ changed link for "what's this" in image address
++ add a description for move hexagons mode and path edit mode
++ temporarily remove verbal and quantitative feedback from the frontend UI
 
 Create the front page
 - design frontpage in figma
-- temporarily remove verbal and quantitative feedback from frontend UI
 - create the gif assets for the front page
+- create the static frontpage
+- make frontpage stateful
 - create a donation link with paypal
 
+Registration
+- create registration page with final form
+- routing to and from registration page
+- account creation on the backend
+- sendgrid email confirmation for new accounts
+    - page 185 in Django for REST APIs
+    - page 142 django for professionals - account email verification with sendgrid
+- build the awaiting for email confirmation page
+- forgot password module
+- sendgrid email for new password
+- add additional login methods like Google and Apple?
+
+Logging In
+- make it so that code 400 logging in says that the password is wrong
+
+Skill tree picker page
 - design the left column of the tree picker page
 - build the static version of the left column of the tree picker page
 - build the stateful version of the tree picker page
 - left side column for tree data on tree picker page
 - theme field in the backend for tree picker page
-- Feature for owners to download their data in a JSON File from tree picker page
+- Feature for owners to download data of the tree in a JSON File from tree picker page
 - edit skill tree profile picture on skill tree picker page
 - add state for theme based on available multiple choice
-
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 - options for removing skill tree
 - build the static form page
-- build the awaiting for email confirmation page
-- build the 404 page
-- build the static version of the home page after you have built the skyrim theme
 - Add statistics at the top of the left sidebar
 
-Figma
+Add the skyrim theme... Some way somehow
+- look into how other people can accomplish this
 
+Add feedback functionality
 - create student interface
     - quantitative feedback form
     - verbal feedback form
-- create custom themes
-    - The first custom theme must be a skyrim skill tree
-- create skill tree page to pick which skill tree to use
-    you'll probably need to use a search bar for this
-- make it so that there is an option for a user to save a copy of a skill tree as their own
-- use parallax affect for a stylish home page
+- create teacher interface
 
-Auth
+Fixing the nginx proxy manager and docker swarm problem
+- try fixing the nginx proxy manager and docker swarm problem:
+    https://stackoverflow.com/questions/61798289/nginx-proxydocker-swarm-load-balancer-not-working
 
-- make it so that code 400 logging in says that the password is wrong
-
-Production
-
+Miscellaneous
+- build the 404 page
+- search bar for skill tree picker page
 - optimize images in webpack
     https://iamakulov.com/notes/optimize-images-webpack/
-- django static files:
-    https://learndjango.com/tutorials/django-static-files?utm_campaign=Django%2BNewsletter&utm_medium=email&utm_source=Django_Newsletter_126
 - for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page
 - get down image uploading and usage so that you don't need to rely on external images
-- page 185 in Django for REST APIs
-- page 142 django for professionals - account email verification with sendgrid
-- send email with skill tree link to a list of students on a textarea form separated by a new-line
-    I only do this because domain emails cost money in Google

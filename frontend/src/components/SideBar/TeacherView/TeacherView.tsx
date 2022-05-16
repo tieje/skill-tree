@@ -1,8 +1,9 @@
 import { nanoid } from "nanoid"
 import { useDeleteHexMutation, useGetHexagonByIdQuery } from "../../../redux/api"
 import { useReduxSelector } from "../../../redux/hooks"
-import { QUANTITATIVE, STUDENT_VIEW, TOP_SIDEBAR_BUTTONS, VERBAL } from "../../../Variables/StaticVariables"
-import Checkbox from "./Checkbox"
+import { //QUANTITATIVE, VERBAL,
+    STUDENT_VIEW, TOP_SIDEBAR_BUTTONS } from "../../../Variables/StaticVariables"
+// import Checkbox from "./Checkbox"
 import FunctionalButton from "./FunctionalButton"
 import ImgAddress from "./ImgAddress"
 import NoteBody from "./NoteBody"
@@ -17,10 +18,10 @@ const TeacherView = () => {
         <section id='sidebar' className={sidebarBaseClass}>
             <FunctionalButton props={STUDENT_VIEW} />
             {TOP_SIDEBAR_BUTTONS.map((button) => { return (<FunctionalButton key={nanoid()} props={button} />) })}
-            <div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
+            {/*<div className='grid grid-cols-1 gap-3 p-5 m-3 justify-items-end rounded-lg bg-paper-yellow opacity-95'>
                 <Checkbox props={{ label: VERBAL, data: data, isLoading: isLoading, error: error }} />
                 <Checkbox props={{ label: QUANTITATIVE, data: data, isLoading: isLoading, error: error }} />
-            </div>
+            </div>*/}
             <ImgAddress props={{ data: data, isLoading: isLoading, error: error }} />
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
                 <NoteTitle props={{ data: data, isLoading: isLoading, error: error }} />
