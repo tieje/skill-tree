@@ -1017,6 +1017,19 @@ https://nginx.org/en/docs/
 I'll try the stackoverflow solution above for now. I hope it works.
 I'm going to solve the docker swarm problem last because its faster to iterate with docker-compose while developing.
 
+5/16/2022
+
+I think what I will do is use a single page non-draggable hexgrid to show the application.
+Scrolling switches the text on the right side.
+
++ changed link for "what's this" in image address
++ add a description for move hexagons mode and path edit mode
++ temporarily remove verbal and quantitative feedback from the frontend UI
++ removed hiding sidebar visibility in favor of always existing navigation
++ design frontpage in figma
++ create the static frontpage
++ make frontpage stateful
+
 Write an article about:
 
 - the next skill tree update
@@ -1039,15 +1052,9 @@ Priorities
 5. Add feedback functionality.
 6. Try fixing the nginx proxy manager and docker swarm problem
 
-+ changed link for "what's this" in image address
-+ add a description for move hexagons mode and path edit mode
-+ temporarily remove verbal and quantitative feedback from the frontend UI
-
 Create the front page
-- design frontpage in figma
-- create the gif assets for the front page
-- create the static frontpage
-- make frontpage stateful
+- perhaps make the frontpage scrollable
+- allow the page to be scrollable and add the same info. Scroll to the correct info upon clicking on the hexagon?
 - create a donation link with paypal
 
 Registration

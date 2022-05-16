@@ -1,7 +1,10 @@
 import { nanoid } from 'nanoid'
 import { useReduxDispatch, useReduxSelector } from '../../redux/hooks'
 import { TOOL_PAN } from 'react-svg-pan-zoom'
-import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleEditShortcutsOff, ToggleEditShortcutsOn, ToggleSidebarVisibilityOff, ToggleSidebarVisibilityOn, ViewerToStudent, ViewerToTeacher } from './SideBarSlices'
+import { ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleEditShortcutsOff, ToggleEditShortcutsOn,
+    //ToggleSidebarVisibilityOff,
+    //ToggleSidebarVisibilityOn,
+    ViewerToStudent, ViewerToTeacher } from './SideBarSlices'
 import useEventListener from '@use-it/event-listener'
 import { any } from '../../utils/utils'
 import { INVISIBLE, EDIT_ON, EDIT_CHOSEN, POINTER_MODE, TEACHER, STUDENT, EDIT_OFF } from '../../Variables/StaticVariables'
@@ -54,11 +57,11 @@ const SideBar = () => {
                     break
                 case 'v':
                     dispatch(changeToPointerMode())
-                    dispatch(ToggleSidebarVisibilityOn())
+                    //dispatch(ToggleSidebarVisibilityOn())
                     break
                 case 'h':
                     dispatch(changeToDragMode())
-                    dispatch(ToggleSidebarVisibilityOff())
+                    //dispatch(ToggleSidebarVisibilityOff())
                     break
             }
         }

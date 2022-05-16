@@ -1,7 +1,7 @@
 import './App.css'
 import LoginForm from './components/Auth/LoginForm'
 import { Route, Routes, Link, Outlet, useLocation, Navigate } from 'react-router-dom'
-import HomePage from './components/HomePage'
+import HomePage from './components/HomePage/HomePage'
 import { useReduxDispatch, useReduxSelector } from './redux/hooks'
 import { useLogoutMutation } from './redux/api'
 import { RemoveCredentials } from './components/Auth/AuthSlice'

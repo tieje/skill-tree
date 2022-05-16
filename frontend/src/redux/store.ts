@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import AuthReducer from '../components/Auth/AuthSlice';
+import HomePageSlice from '../components/HomePage/HomePageSlice';
 import PanModeSliceReducer from '../components/PanZoomHexGrid/PanModeSlices'
 import SideBarReducer from '../components/SideBar/SideBarSlices';
 import TreePickerSliceReducer from '../components/TreePicker/TreePickerSlice';
@@ -20,6 +21,7 @@ export const store = configureStore({
         sideBar: SideBarReducer,
         auth: AuthReducer,
         treePicker: TreePickerSliceReducer,
+        home: HomePageSlice,
         [treeApi.reducerPath]: treeApi.reducer,
     },
     devTools: true,

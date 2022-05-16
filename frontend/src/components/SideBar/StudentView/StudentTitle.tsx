@@ -1,5 +1,6 @@
 import { useReduxSelector } from "../../../redux/hooks";
 import { useGetHexagonByIdQuery } from "../../../redux/api";
+import SidebarDisplayTitle from "../../HomePage/SidebarDisplayTitle";
 
 const StudentTitle = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
@@ -15,11 +16,7 @@ const StudentTitle = () => {
         )
     }
     return (
-        <>
-            <h1 className='text-2xl text-center'>
-                {data.title === null || data.title === '' ? 'Title' : data.title}
-            </h1>
-        </>
+        <SidebarDisplayTitle title={data.title} />
     )
 }
 

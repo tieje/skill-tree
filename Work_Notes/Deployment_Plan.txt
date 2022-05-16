@@ -93,6 +93,7 @@ TEMPORARY COMPOSE DEPLOYMENT
 Get to manager1
     ssh thomasfrancis@192.168.1.33
 pull git to prod
+    cd skill-tree
     git pull origin main
 compose up
     docker-compose -f dc-skyskill-prod.yml up -d --build

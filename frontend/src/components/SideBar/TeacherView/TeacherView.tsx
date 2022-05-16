@@ -2,7 +2,9 @@ import { nanoid } from "nanoid"
 import { useDeleteHexMutation, useGetHexagonByIdQuery } from "../../../redux/api"
 import { useReduxSelector } from "../../../redux/hooks"
 import { //QUANTITATIVE, VERBAL,
-    STUDENT_VIEW, TOP_SIDEBAR_BUTTONS } from "../../../Variables/StaticVariables"
+    STUDENT_VIEW, TOP_SIDEBAR_BUTTONS
+} from "../../../Variables/StaticVariables"
+import SidebarDisplayContainer from "../../HomePage/SidebarDisplayContainer"
 // import Checkbox from "./Checkbox"
 import FunctionalButton from "./FunctionalButton"
 import ImgAddress from "./ImgAddress"
@@ -23,12 +25,12 @@ const TeacherView = () => {
                 <Checkbox props={{ label: QUANTITATIVE, data: data, isLoading: isLoading, error: error }} />
             </div>*/}
             <ImgAddress props={{ data: data, isLoading: isLoading, error: error }} />
-            <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-97'>
+            <SidebarDisplayContainer>
                 <NoteTitle props={{ data: data, isLoading: isLoading, error: error }} />
-            </div>
-            <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
+            </SidebarDisplayContainer>
+            <SidebarDisplayContainer>
                 <NoteBody props={{ data: data, isLoading: isLoading, error: error }} />
-            </div>
+            </SidebarDisplayContainer>
             {hexagonFocused.hex_id ? <div className='grid place-content-center'>
                 <button
                     className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple mb-5'

@@ -38,9 +38,12 @@ import {
 } from './PanModeSlices';
 import { PathType, HexagonType } from '../../types/Types';
 import { any } from '../../utils/utils';
-import { ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleSidebarVisibilityOn, ToggleSidebarVisibilityOff } from '../SideBar/SideBarSlices';
+import {
+  ResetSidebarState, ImgAddressSwitch, NoteBodySwitch, NoteTitleSwitch, ToggleSidebarVisibilityOn,
+  //ToggleSidebarVisibilityOff,
+} from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery, useUpdateHexMutation } from '../../redux/api';
-import { INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE } from '../../Variables/StaticVariables';
+import { INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE, TEACHER } from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
 import { useParams } from 'react-router-dom';
 
@@ -58,6 +61,8 @@ const PanZoomHexGrid = () => {
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   const editShortcuts = useReduxSelector(state => state.sideBar.editShortcuts)
+  const viewerMode = useReduxSelector(state => state.sideBar.viewer)
+  // auth selectors
   const user_id = useReduxSelector(state => state.auth.user_id)
   // panMode selectors
   const pm = useReduxSelector(state => state.panMode)
@@ -82,7 +87,7 @@ const PanZoomHexGrid = () => {
         case 'a':
           dispatch(pathDeleteDisableSwitch(true))
           dispatch(clearPathFocused())
-          deletePath({ path_id: pm.pathFocused.path_id, user: parseInt(user_id)})
+          deletePath({ path_id: pm.pathFocused.path_id, user: parseInt(user_id) })
           break
         case 'z':
           dispatch(clearStartingHexagon())
@@ -105,6 +110,7 @@ const PanZoomHexGrid = () => {
           break
       }
     }
+    // teacher view shortcuts
     if (!any([editImgAddress, editNoteBody, editNoteTitle]) &&
       pm.pathEditMode === EDIT_OFF &&
       pm.hexMoveEditMode === EDIT_OFF &&
@@ -118,7 +124,6 @@ const PanZoomHexGrid = () => {
         // close all forms before making sidebar invisible and changing to drag mode
         case 'h':
           dispatch(changeToDragMode())
-          dispatch(ToggleSidebarVisibilityOff())
           if (editImgAddress) dispatch(ImgAddressSwitch())
           if (editNoteTitle) dispatch(NoteTitleSwitch())
           if (editNoteBody) dispatch(NoteBodySwitch())
@@ -286,9 +291,9 @@ const PanZoomHexGrid = () => {
                     s={value.hex_s}
                     onClick={() => handleHexagonClick(value)}
                   >
-                    <Text key={nanoid()}>
+                    {viewerMode === TEACHER ? <Text key={nanoid()}>
                       {[value.hex_q, value.hex_r, value.hex_s].join(',')}
-                    </Text>
+                    </Text> : null}
                   </Hexagon>
                 )
               }
