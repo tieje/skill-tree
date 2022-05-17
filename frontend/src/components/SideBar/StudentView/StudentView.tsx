@@ -1,7 +1,7 @@
 // import { nanoid } from "nanoid"
 import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
 import { PAN_MODE } from "../../../Variables/StaticVariables"
-import SidebarDisplayContainer from "../../HomePage/SidebarDisplayContainer"
+import SidebarDisplayContainer from "../SidebarDisplayContainer"
 import { ViewerToStudent } from "../SideBarSlices"
 import FunctionalButton from "../TeacherView/FunctionalButton"
 import StudentNoteBody from "./StudentNoteBody"

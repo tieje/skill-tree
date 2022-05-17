@@ -1,13 +1,25 @@
+import { useWindowHeight } from "@react-hook/window-size"
 import { useReduxSelector } from "../../redux/hooks"
-import SidebarDisplayContainer from "./SidebarDisplayContainer"
-import SidebarDisplayNote from "./SidebarDisplayNote"
-import SidebarDisplayTitle from "./SidebarDisplayTitle"
+import SidebarDisplayContainer from "../SideBar/SidebarDisplayContainer"
+import SidebarDisplayNote from "../SideBar/SidebarDisplayNote"
+import SidebarDisplayTitle from "../SideBar/SidebarDisplayTitle"
 
 const HomeSideBar = () => {
-    const sidebarBaseClass = useReduxSelector(state => state.sideBar.sidebarBaseClass)
+    let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/md:fixed/g, '')
+    // sidebar display on mobile devices
+    const height = useWindowHeight()
+    if (height < 760) {
+        sidebarClass = sidebarClass.replace(/absolute/g, '')
+    }
     const hm = useReduxSelector(state => state.home)
+    if (hm.homeHexagonFocused.hex_id === 9) {
+        return (
+            <section id='sidebar' className={sidebarClass}>
+            </section>
+        )
+    }
     return (
-        <section id='sidebar' className={sidebarBaseClass}>
+        <section id='sidebar' className={sidebarClass}>
             <SidebarDisplayContainer>
                 <SidebarDisplayTitle title={hm.homeHexagonFocused.title} />
             </SidebarDisplayContainer>

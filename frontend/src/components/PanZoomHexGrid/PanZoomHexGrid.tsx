@@ -248,38 +248,6 @@ const PanZoomHexGrid = () => {
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-            {/*Put all hexagons with data first*/}
-            {data?.hexagons.map((hex: HexagonType) => {
-              let pid: string;
-              if (hex.image_address) { pid = 'p' + hex.hex_string }
-              if (pm.hexagonFocused.hex_string === hex.hex_string) {
-                dispatch(changeHexagonFocus(hex))
-                return (
-                  <Hexagon
-                    key={nanoid()}
-                    id={hex.hex_string}
-                    q={hex.hex_q}
-                    r={hex.hex_r}
-                    s={hex.hex_s}
-                    fill={pid}
-                    onClick={() => handleHexagonClick(hex)}
-                    cellStyle={{ 'fill-opacity': '1', 'stroke': '#fd9420' }}
-                  />
-                )
-              }
-              return (
-                <Hexagon
-                  key={nanoid()}
-                  id={hex.hex_string}
-                  q={hex.hex_q}
-                  r={hex.hex_r}
-                  s={hex.hex_s}
-                  fill={pid}
-                  onClick={() => handleHexagonClick(hex)}
-                  cellStyle={{ 'fill-opacity': '1' }}
-                />
-              )
-            })}
             {data ? Object.entries(pm.hexFiller).map(([key, value]) => {
               if (!data.hex_string_list.includes(key)) {
                 return (
@@ -336,6 +304,38 @@ const PanZoomHexGrid = () => {
                 pathStyle={{ stroke: '#fd9420' }}
               />
               : null}
+            {/*All hexagons with data*/}
+            {data?.hexagons.map((hex: HexagonType) => {
+              let pid: string;
+              if (hex.image_address) { pid = 'p' + hex.hex_string }
+              if (pm.hexagonFocused.hex_string === hex.hex_string) {
+                dispatch(changeHexagonFocus(hex))
+                return (
+                  <Hexagon
+                    key={nanoid()}
+                    id={hex.hex_string}
+                    q={hex.hex_q}
+                    r={hex.hex_r}
+                    s={hex.hex_s}
+                    fill={pid}
+                    onClick={() => handleHexagonClick(hex)}
+                    cellStyle={{ 'fill-opacity': '1', 'stroke': '#fd9420' }}
+                  />
+                )
+              }
+              return (
+                <Hexagon
+                  key={nanoid()}
+                  id={hex.hex_string}
+                  q={hex.hex_q}
+                  r={hex.hex_r}
+                  s={hex.hex_s}
+                  fill={pid}
+                  onClick={() => handleHexagonClick(hex)}
+                  cellStyle={{ 'fill-opacity': '1' }}
+                />
+              )
+            })}
           </Layout>
           {data?.hexagons.map((hex: HexagonType) => {
             let pid: string;

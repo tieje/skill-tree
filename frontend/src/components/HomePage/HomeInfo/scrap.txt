@@ -1,0 +1,53 @@
+Incentives for Students
+
+    • There is a lot to learn out there. A skill tree can help make learning less overwhelming by visualizing the bigger picture.
+    • Students can have a central place to access their teacher's notes.
+    • Students are empowered to forge their own educational journey by looking ahead of the lesson plan.
+
+Future Features will allow students to:
+
+    • provide quantitative and verbal feedback to teachers to enhance the student-teacher feedback loop.
+    • visually keep track of how confident they feel about a subject.
+        
+
+        <div className='grid grid-cols-12 w-screen'>
+            <div className='grid col-span-3'></div>
+            <HomeSection>
+                <HomeTextSectionContainer>
+                </HomeTextSectionContainer>
+                <HomeExampleSectionContainer>
+                </HomeExampleSectionContainer>
+            </HomeSection>
+            <HomeTextSectionContainer>
+                Impress your students and colleagues with a visual skill tree of your syllabus or lesson plans.
+                Built with productivity in mind: keyboard shortcuts can be used for almost every action.
+                A visual skill tree can help improve your students's memory of your lessons through loci of the hippocampus. cite this.
+                Future Features will allow teachers to download their data in the form of a csv file to prevent vendor lock-in.
+                Future Features will allow quantitative and verbal feedback from students to make the learning process more collaborative.
+            </HomeTextSectionContainer>
+            <HomeExampleSectionContainer>
+                Some example
+            </HomeExampleSectionContainer>
+            <section className='invisible'>
+                Sign up today and receive all future features for free forever!
+            </section>
+            <HomeTextSectionContainer>
+                Your information is YOURS.
+                We Do Not Sell or Share User Data
+            </HomeTextSectionContainer>
+            <HomeExampleSectionContainer>
+                Some example
+            </HomeExampleSectionContainer>
+            <HomeTextSectionContainer>
+                Please Consider Donating
+                At certain donation thresholds I will add certain features and modules.
+                Add Color-blind mode
+                "Skyrim" Skill tree alternative theme
+                Add Quantitative feedback loop for students and teachers
+                Add Verbal feedback loop for students and teachers
+                Add Skill Tree Discovery feature to filter through and discover existing skill trees
+                Add downloading your skill tree data in the form of a csv file.
+                Make the Main Notes Input section Markdown-friendly.
+            </HomeTextSectionContainer>
+            <div className='grid col-span-3'></div>
+        </div>

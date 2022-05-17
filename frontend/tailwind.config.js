@@ -25,7 +25,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'stationary-pattern': "url('/src/assets/images/stationary3.jpg')"
+        'stationary-pattern': "url('/src/assets/images/stationary3.jpg')",
+        'stationary-pattern-clinical': 'url("/src/assets/images/stationary2.jpeg")',
       }
     },
   },
