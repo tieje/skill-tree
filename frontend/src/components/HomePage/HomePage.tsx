@@ -1,6 +1,7 @@
 import HomeHexGrid from "./HomeHexGrid"
 import HomeSideBar from "./HomeSideBar"
 import HomeInfo from "./HomeInfo/HomeInfo"
+import HomeFooter from "./HomeFooter"
 
 const HomePage = () => {
     return (
@@ -8,6 +9,7 @@ const HomePage = () => {
             <HomeHexGrid />
             <HomeSideBar />
             <HomeInfo />
+            <HomeFooter />
         </main>
     )
 }

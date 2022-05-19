@@ -1043,8 +1043,12 @@ You'll need to make the home page scrollable so that it can be viewable by mobil
 5/19/2022
 
 + create a big skill tree
-+ create main frontpage component
-- change initial zoom to be near the bottom instead of the middle
++ create main frontpage marketing component
++ create Footer
+
+5/20/2022
+
+- create the future features page
 
 Write an article about:
 
@@ -1059,7 +1063,6 @@ Write an article about:
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
 
-Core Tasks:
 Priorities
 1. Create the frontpage
 2. Create registration with final form
@@ -1068,9 +1071,11 @@ Priorities
 5. Add feedback functionality.
 6. Try fixing the nginx proxy manager and docker swarm problem
 
+Core Tasks:
+- change initial zoom to be near the bottom instead of the middle
+
 Create the front page
-- make the homepage viewable by mobile by making it scrollable
-- allow the page to be scrollable and add the same info. Scroll to the correct info upon clicking on the hexagon?
+- create future features component
 
 Registration
 - create registration page with final form

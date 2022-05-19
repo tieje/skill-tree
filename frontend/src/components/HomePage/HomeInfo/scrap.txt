@@ -39,7 +39,8 @@ Future Features will allow students to:
                 Some example
             </HomeExampleSectionContainer>
             <HomeTextSectionContainer>
-                Please Consider Donating
+                Please consider donating.
+                It's just me right now.
                 At certain donation thresholds I will add certain features and modules.
                 Add Color-blind mode
                 "Skyrim" Skill tree alternative theme

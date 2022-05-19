@@ -1,5 +1,8 @@
 import sun from '../assets/images/da_sun.jpeg'
 import thomas from '../assets/images/Thomas_Paine.jpeg'
+import shortcut_example from '../assets/images/shortcuts_example.png'
+import skilltree_example from '../assets/images/skilltree_example.png'
+import { HomeInfoSectionPropsType } from '../components/HomePage/HomeInfo/HomeInfoSection'
 import { HexagonType, PathType } from "../types/Types"
 const exampleString = 'example'
 const welcomeHex: Partial<HexagonType> = {
@@ -172,10 +175,37 @@ const HomePagePaths: Partial<PathType>[] = [
         ending_hex_s: -5
     },
 ]
+
+const HOME_INFO_SECTION_STATE: HomeInfoSectionPropsType[] = [
+    {
+        header: "There's a lot to learn out there.",
+        subheader: "Learning is often an overwhelming process for everyone. A skill tree can help by providing a visualization of the bigger picture.",
+        image: skilltree_example,
+        width: 1000,
+        height: 1000,
+    },
+    {
+        header: "Built with productivity in mind.",
+        subheader: "Keyboard shortcuts can be used for almost every action.",
+        image: shortcut_example,
+        width: 1000,
+        height: 1000,
+    },
+    // You'll want a picture of a CSV file.
+    /*{
+        header: "Your information is YOURS.",
+        subheader: "We do not sell nor share user data.",
+        image: skilltree_example,
+        width: 1000,
+        height: 1000,
+    }*/
+]
+
 export {
     exampleString,
     welcomeHex,
     HomePageHexes,
     HomePagePaths,
-    HomePageHexStringList
+    HomePageHexStringList,
+    HOME_INFO_SECTION_STATE,
 }
