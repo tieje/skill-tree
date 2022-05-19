@@ -1,4 +1,4 @@
-import { useWindowHeight } from "@react-hook/window-size"
+import { useWindowSize } from "@react-hook/window-size"
 import { useReduxSelector } from "../../redux/hooks"
 import SidebarDisplayContainer from "../SideBar/SidebarDisplayContainer"
 import SidebarDisplayNote from "../SideBar/SidebarDisplayNote"
@@ -7,8 +7,8 @@ import SidebarDisplayTitle from "../SideBar/SidebarDisplayTitle"
 const HomeSideBar = () => {
     let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/md:fixed/g, '')
     // sidebar display on mobile devices
-    const height = useWindowHeight()
-    if (height < 760) {
+    const [width, height] = useWindowSize()
+    if (height < 760 && width < 380) {
         sidebarClass = sidebarClass.replace(/absolute/g, '')
     }
     const hm = useReduxSelector(state => state.home)

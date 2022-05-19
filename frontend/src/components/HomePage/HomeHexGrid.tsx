@@ -19,10 +19,8 @@ import { changeHomeHexagonFocused } from './HomePageSlice';
 const HomeHexGrid = () => {
     let [width, height] = useWindowSize()
     // Dimension-fixing for mobile
-    if (height < 760) {
+    if (height < 760 && width < 380) {
         height = height - 300
-    }
-    if (width < 400) {
         width = width + 14
     }
     const hm = useReduxSelector(state => state.home)
