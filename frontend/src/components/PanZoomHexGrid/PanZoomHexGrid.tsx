@@ -2,7 +2,7 @@ import {
   HexGrid,
   Layout,
   Hexagon,
-  Text,
+  //Text,
   Pattern,
   Hex,
 } from 'react-hexgrid';
@@ -43,7 +43,10 @@ import {
   //ToggleSidebarVisibilityOff,
 } from '../SideBar/SideBarSlices';
 import { useCreatePathMutation, useDeletePathMutation, useGetTreeByIdQuery, useUpdateHexMutation } from '../../redux/api';
-import { INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE, TEACHER } from '../../Variables/StaticVariables';
+import {
+  INITIAL_PATH_HEX_STATE, EDIT_CHOSEN, EDIT_OFF, EDIT_ON, INITIAL_HEX_STATE,
+  //TEACHER
+} from '../../Variables/StaticVariables';
 import CustomPath from './CustomPath';
 import { useParams } from 'react-router-dom';
 
@@ -61,7 +64,7 @@ const PanZoomHexGrid = () => {
   const editNoteTitle = useReduxSelector(state => state.sideBar.editNoteTitle)
   const editNoteBody = useReduxSelector(state => state.sideBar.editNoteBody)
   const editShortcuts = useReduxSelector(state => state.sideBar.editShortcuts)
-  const viewerMode = useReduxSelector(state => state.sideBar.viewer)
+  //const viewerMode = useReduxSelector(state => state.sideBar.viewer)
   // auth selectors
   const user_id = useReduxSelector(state => state.auth.user_id)
   // panMode selectors
@@ -259,9 +262,9 @@ const PanZoomHexGrid = () => {
                     s={value.hex_s}
                     onClick={() => handleHexagonClick(value)}
                   >
-                    {viewerMode === TEACHER ? <Text key={nanoid()}>
+                    {/*viewerMode === TEACHER ? <Text key={nanoid()}>
                       {[value.hex_q, value.hex_r, value.hex_s].join(',')}
-                    </Text> : null}
+                    </Text> : null*/}
                   </Hexagon>
                 )
               }

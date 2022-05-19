@@ -1,3 +1,5 @@
+import sun from '../assets/images/da_sun.jpeg'
+import thomas from '../assets/images/Thomas_Paine.jpeg'
 import { HexagonType, PathType } from "../types/Types"
 const exampleString = 'example'
 const welcomeHex: Partial<HexagonType> = {
@@ -7,7 +9,7 @@ const welcomeHex: Partial<HexagonType> = {
     hex_s: -3,
     title: 'Welcome',
     note: `
-    The aim of this application is to make education more student-centered by making it a more fun game to play. To this end, Sky Skill will never be an instrument to measure student ability. Instead, Sky Skill aims to be another avenue for improving the student-teacher feedback loop as well as encouraging students to forge their own educational paths.`,
+    The aim of this application is to make education more student-centered by making it a more fun game to play. To this end, Sky Skill will never be a means to measure student ability. Instead, Sky Skill aims to be another avenue for improving the student-teacher feedback loop as well as encouraging students to forge their own educational paths.`,
     hex_string: '2,1,-3',
 }
 
@@ -99,7 +101,8 @@ Future Features will allow teachers to:
         In December 1793, he was arrested and was taken to Luxembourg Prison in Paris. While in prison, he continued to work on The Age of Reason (1793–1794). James Monroe, a future President of the United States, used his diplomatic connections to get Paine released in November 1794. Paine became notorious because of his pamphlets and attacks on his former allies, who he felt had betrayed him. In The Age of Reason and other writings he advocated Deism, promoted reason and freethought, and argued against institutionalized religions in general and the Christian doctrine in particular.[6][7][8] In 1796, he published a bitter open letter to George Washington, whom he denounced as an incompetent general and a hypocrite. He published the pamphlet Agrarian Justice (1797), discussing the origins of property and introduced the concept of a guaranteed minimum income through a one-time inheritance tax on landowners. In 1802, he returned to the U.S. When he died on June 8, 1809, only six people attended his funeral, as he had been ostracized for his ridicule of Christianity[9] and attacks on the nation's leaders.
 `,
         hex_string: '2,3,-5',
-        image_address: 'https://totallyhistory.com/wp-content/uploads/2012/02/Thomas_Paine.jpg',
+        //image_address: 'https://totallyhistory.com/wp-content/uploads/2012/02/Thomas_Paine.jpg',
+        image_address: thomas
     },
     {
         hex_id: 8,
@@ -116,7 +119,8 @@ Future Features will allow teachers to:
         A nuclear fusion process that produces atomic nuclei lighter than iron-56 or nickel-62 will generally release energy. These elements have a relatively small mass and a relatively large binding energy per nucleon. Fusion of nuclei lighter than these releases energy (an exothermic process), while the fusion of heavier nuclei results in energy retained by the product nucleons, and the resulting reaction is endothermic. The opposite is true for the reverse process, called nuclear fission. Nuclear fusion uses lighter elements, such as hydrogen and helium, which are in general more fusible; while the heavier elements, such as uranium, thorium and plutonium, are more fissionable. The extreme astrophysical event of a supernova can produce enough energy to fuse nuclei into elements heavier than iron.
 `,
         hex_string: '1,3,-4',
-        image_address: 'https://blogs-images.forbes.com/ethansiegel/files/2015/08/SDO-1940x1940.jpg',
+        //image_address: 'https://blogs-images.forbes.com/ethansiegel/files/2015/08/SDO-1940x1940.jpg',
+        image_address: sun
     },
     {
         hex_id: 9,

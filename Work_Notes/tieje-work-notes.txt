@@ -1040,6 +1040,12 @@ You'll need to make the home page scrollable so that it can be viewable by mobil
 + add scrollable portion for homepage
 + create a donation link with paypal
 
+5/19/2022
+
++ create a big skill tree
++ create main frontpage component
+- change initial zoom to be near the bottom instead of the middle
+
 Write an article about:
 
 - the next skill tree update
