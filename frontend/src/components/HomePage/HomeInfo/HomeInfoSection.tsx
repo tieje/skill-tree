@@ -11,7 +11,7 @@ const HomeInfoSection = ({ props }: { props: HomeInfoSectionPropsType }) => {
     return (
         <section className='grid grid-cols-12 col-span-12 h-screen'>
             <div className='col-span-3 bg-white'></div>
-            <div className='grid grid-cols-12 col-span-6 place-content-center bg-white text-center'>
+            <div className='grid grid-cols-12 col-span-6 place-content-center bg-white text-center mb-5'>
                 <h1 className='col-span-12 text-5xl font-bold pb-5'>
                     {props.header}
                 </h1>
