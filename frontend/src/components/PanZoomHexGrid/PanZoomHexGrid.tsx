@@ -208,7 +208,7 @@ const PanZoomHexGrid = () => {
   // single use useEffects
   useEffect(() => {
     hexElement.current.fitToViewer()
-    hexElement.current.zoom(75, 75, 16)
+    hexElement.current.zoom(60, 250, 16)
   }, [])
   // isLoading handler creates the initial DOM that will be updated later.
   if (isLoading) {

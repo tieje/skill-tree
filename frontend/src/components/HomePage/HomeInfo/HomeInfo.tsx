@@ -11,8 +11,8 @@ const HomeInfo = () => {
                     <HomeInfoSection key={nanoid()} props={val} />
                 )
             })}
-        </div >
+            
+        </div>
     )
 }
-
 export default HomeInfo

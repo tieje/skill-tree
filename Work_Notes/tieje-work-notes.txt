@@ -1048,7 +1048,12 @@ You'll need to make the home page scrollable so that it can be viewable by mobil
 
 5/20/2022
 
-- create the future features page
+I'm going to focus on building the core application right now.
+The skill tree picker page needs a lot of work right now.
+I need to get down the MVP for the core application first.
+
++ decrease font size for mobile app
++ change initial zoom to be near the bottom instead of the middle
 
 Write an article about:
 
@@ -1071,11 +1076,14 @@ Priorities
 5. Add feedback functionality.
 6. Try fixing the nginx proxy manager and docker swarm problem
 
-Core Tasks:
-- change initial zoom to be near the bottom instead of the middle
-
-Create the front page
-- create future features component
+Skill tree picker page
+- design the left column of the tree picker page
+- build the static version of the left column of the tree picker page
+- build the stateful version of the tree picker page
+- edit skill tree profile picture on skill tree picker page
+- get the "Create Skill Tree" Button working
+- fix permissions so that only the user can grab what they're learning and what they're teaching
+- options for removing skill tree
 
 Registration
 - create registration page with final form
@@ -1087,25 +1095,10 @@ Registration
 - build the awaiting for email confirmation page
 - forgot password module
 - sendgrid email for new password
-- add additional login methods like Google and Apple?
 
 Logging In
 - make it so that code 400 logging in says that the password is wrong
 
-Skill tree picker page
-- design the left column of the tree picker page
-- build the static version of the left column of the tree picker page
-- build the stateful version of the tree picker page
-- left side column for tree data on tree picker page
-- theme field in the backend for tree picker page
-- Feature for owners to download data of the tree in a JSON File from tree picker page
-- edit skill tree profile picture on skill tree picker page
-- add state for theme based on available multiple choice
-- get the "Create Skill Tree" Button working
-- fix permissions so that only the user can grab what they're learning and what they're teaching
-- options for removing skill tree
-- build the static form page
-- Add statistics at the top of the left sidebar
 
 Add the skyrim theme... Some way somehow
 - look into how other people can accomplish this
@@ -1127,3 +1120,15 @@ Miscellaneous
     https://iamakulov.com/notes/optimize-images-webpack/
 - for navigation (maybe nginx), make it so that if the user is already logged in, it goes straight to the treepicker page
 - get down image uploading and usage so that you don't need to rely on external images
+
+Home Page Additional Features
+- create future features component
+
+Skill tree picker page - Additional Features
+- Feature for owners to download data of the tree in a JSON File from tree picker page
+- Add statistics at the top of the left sidebar
+- theme field in the backend for tree picker page
+- add state for theme based on available multiple choice
+
+Registration Additional Features
+- add additional login methods like Google and Apple?
