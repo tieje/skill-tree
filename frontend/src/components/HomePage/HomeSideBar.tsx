@@ -5,10 +5,10 @@ import SidebarDisplayNote from "../SideBar/SidebarDisplayNote"
 import SidebarDisplayTitle from "../SideBar/SidebarDisplayTitle"
 
 const HomeSideBar = () => {
-    let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/md:fixed/g, '')
+    let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/lg:fixed/g, '')
     // sidebar display on mobile devices
     const [width, height] = useWindowSize()
-    if (height < 760 && width < 380) {
+    if (width < 920 && height < 1400) {
         sidebarClass = sidebarClass.replace(/absolute/g, '')
     }
     const hm = useReduxSelector(state => state.home)

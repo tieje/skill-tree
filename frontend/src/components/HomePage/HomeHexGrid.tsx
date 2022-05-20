@@ -19,7 +19,7 @@ import { changeHomeHexagonFocused } from './HomePageSlice';
 const HomeHexGrid = () => {
     let [width, height] = useWindowSize()
     // Dimension-fixing for mobile
-    if (height < 760 && width < 380) {
+    if (width < 1024) {
         height = height - 300
         width = width + 14
     }
