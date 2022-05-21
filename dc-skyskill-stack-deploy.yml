@@ -1,6 +1,7 @@
-version: '3.8'
+version: "3.8"
 services:
   backend:
+    restart: always
     image: tieje/skyskill_backend
     command: gunicorn config.wsgi
     build:
@@ -14,6 +15,7 @@ services:
     #networks:
     #  - skyskill-net
   frontend:
+    restart: always
     image: tieje/skyskill_frontend
     command: serve -s build
     build:
@@ -25,5 +27,5 @@ services:
     #networks:
     #  - skyskill-net
 #networks:
- # skyskill-net:
- #   driver: overlay
+# skyskill-net:
+#   driver: overlay
