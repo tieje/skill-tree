@@ -1,7 +1,7 @@
 // import { nanoid } from "nanoid"
 import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
 import { PAN_MODE } from "../../../Variables/StaticVariables"
-import SidebarDisplayContainer from "../SidebarDisplayContainer"
+import SideBarItemContainer from "../SideBarItemContainer"
 import { ViewerToStudent } from "../SideBarSlices"
 import FunctionalButton from "../TeacherView/FunctionalButton"
 import StudentNoteBody from "./StudentNoteBody"
@@ -14,12 +14,12 @@ const StudentView = () => {
     return (
         <section id='sidebar' className={sidebarBaseClass}>
             <FunctionalButton props={PAN_MODE} />
-            <SidebarDisplayContainer>
+            <SideBarItemContainer>
                 <StudentTitle />
-            </SidebarDisplayContainer>
-            <SidebarDisplayContainer>
+            </SideBarItemContainer>
+            <SideBarItemContainer>
                 <StudentNoteBody />
-            </SidebarDisplayContainer>
+            </SideBarItemContainer>
         </section >
     )
 }

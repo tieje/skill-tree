@@ -1055,6 +1055,55 @@ I need to get down the MVP for the core application first.
 + decrease font size for mobile app
 + change initial zoom to be near the bottom instead of the middle
 
+5/30/2022
+
+It's been a while. I've been working on other stuff and I have not been able to work on this project.
+I will complete this project, however.
+Instead of building the *correct* thing the first time, I've decided that building in the order of:
+
+As a solo developer, it's better to build everything
+    1. static
+    2. stateful
+And then once everything is built out:
+    1. Refactor
+    2. test
+
+The great tech debt of using Redux is that components are more difficult to make reusable.
+This is fine for SPAs where there can be a ton of custom components.
+However, in terms of reusability I would need to pass in many props from the top.
+
+It's ok to build up tech debt for now, because I'll figure out how to refactor later when the application is relatively
+finished.
+It's better to copy code now and then merge them later because at least when you don't need to worry about
+all edge cases while you're developing for both.
+Even better would be to reiterate and build anew on top of the old so that I look at the old and new.
+It takes a bit of new thought.
+One big question is whether I should separate edit mode from display.
+I think I should keep the edit mode with the display because the edit mode will never simply be used on its own.
+In this way, everything is contained in one.
+I do not reuse edits... yet.
+The more reusable that I want to make a component, the more complex that it becomes.
+
+I have a much better idea of what I'm going to do now.
+Reusability is key.
+
+Each component needs to be wrapped by the SideBarItemContainer.
+There may a new component called SideBarItem that may have a few choices.
+The SideBarItem will be given the following properties as props:
+- which kind of component to use
+- default display name of component when there is nothing to display
+- create method
+- update method
+- delete method
+- shortcut key
+- shortcut method
+
+x design the left column of the tree picker page
+x build the static version of the left column of the tree picker page
+x build the stateful version of the tree picker page
+x edit skill tree profile picture on skill tree picker page
++ break down the SideBar Title Component into reusable component
+
 Write an article about:
 
 - the next skill tree update
@@ -1077,11 +1126,16 @@ Priorities
 6. Try fixing the nginx proxy manager and docker swarm problem
 
 Skill tree picker page
-- design the left column of the tree picker page
-- build the static version of the left column of the tree picker page
-- build the stateful version of the tree picker page
-- edit skill tree profile picture on skill tree picker page
+
+- create the mutation methods for Skill Trees in the API
+    - createTree
+    - updateTree
 - get the "Create Skill Tree" Button working
+
+- make the note title a pure component
+- make the side bar a pure component
+- make the image address a pure component
+
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 - options for removing skill tree
 

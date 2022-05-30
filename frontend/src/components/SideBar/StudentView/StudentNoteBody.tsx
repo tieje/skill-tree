@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useReduxSelector } from "../../../redux/hooks";
 import { useGetHexagonByIdQuery } from "../../../redux/api";
-import SidebarDisplayNote from "../SidebarDisplayNote";
+import SideBarNote from "../SideBarNote";
 
 const StudentNoteBody = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
@@ -17,7 +17,7 @@ const StudentNoteBody = () => {
         )
     }
     return (
-        <SidebarDisplayNote note={data.note} />
+        <SideBarNote note={data.note} />
     )
 }
 export default StudentNoteBody

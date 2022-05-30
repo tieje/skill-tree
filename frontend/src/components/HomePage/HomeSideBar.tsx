@@ -1,8 +1,7 @@
 import { useWindowSize } from "@react-hook/window-size"
 import { useReduxSelector } from "../../redux/hooks"
-import SidebarDisplayContainer from "../SideBar/SidebarDisplayContainer"
-import SidebarDisplayNote from "../SideBar/SidebarDisplayNote"
-import SidebarDisplayTitle from "../SideBar/SidebarDisplayTitle"
+import SideBarNote from "../SideBar/SideBarNote"
+import SideBarTitle, { SideBarTitlePropsType } from "../SideBar/SideBarTitle"
 
 const HomeSideBar = () => {
     let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/lg:fixed/g, '')
@@ -18,14 +17,13 @@ const HomeSideBar = () => {
             </section>
         )
     }
+    const TitleProps: SideBarTitlePropsType = {
+        title: hm.homeHexagonFocused.title
+    }
     return (
         <section id='sidebar' className={sidebarClass}>
-            <SidebarDisplayContainer>
-                <SidebarDisplayTitle title={hm.homeHexagonFocused.title} />
-            </SidebarDisplayContainer>
-            <SidebarDisplayContainer>
-                <SidebarDisplayNote note={hm.homeHexagonFocused.note} />
-            </SidebarDisplayContainer>
+            <SideBarTitle props={TitleProps} />
+            <SideBarNote note={hm.homeHexagonFocused.note} />
         </section>
     )
 }
