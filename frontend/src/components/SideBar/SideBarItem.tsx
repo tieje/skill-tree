@@ -1,19 +1,25 @@
-// import { useReduxDispatch } from "../../redux/hooks"
-import SideBarTitle, { SideBarTitlePropsType } from "./SideBarTitle"
+import SideBarItemContainer from "./SideBarItemContainer"
+import SideBarTitleContainer, { SideBarTitleContainerPropsType } from "./SideBarTitleContainer"
 
 type ComponentTypes = 'Title' | 'Note' | 'Image Address'
 type SideBarItemPropsType = {
     componentType: ComponentTypes
+    skill_tree_id?: number
+    hex_id?: number
+    title?: string
 }
 const SideBarItem = ({ props }: { props: SideBarItemPropsType }) => {
-    // const dispatch = useReduxDispatch()
+    if (props.title === undefined) { props.title = '' }
     if (props.componentType === 'Title') {
-        const TitleProps: SideBarTitlePropsType = {
-            title: props.componentType,
-            //updateMethod: dispatch(createHex())
+        const TitleProps: SideBarTitleContainerPropsType = {
+            skill_tree_id: props.skill_tree_id,
+            title: props.title,
+            
         }
         return (
-            <SideBarTitle props={TitleProps} />
+            <SideBarItemContainer>
+                <SideBarTitleContainer props={TitleProps} />
+            </SideBarItemContainer>
         )
     }
 }

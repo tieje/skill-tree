@@ -10,7 +10,7 @@ import {
     // MutationTrigger,
 } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
-type undefinedPayloadType = {
+type ReduxMethod = {
     payload: undefined;
     type: string;
 }
@@ -74,7 +74,7 @@ type IncomingData = {
 
 type EditButtonPropsType = {
     label?: string;
-    editMethod(): { payload: undefined; type: string; }
+    editMethod(): ReduxMethod
 }
 
 type FunctionalButtonPropsType = {
@@ -123,6 +123,9 @@ type SidebarState = {
     sidebarBaseClass: string
     textareaCursorLocation: number
     textareaLastKeyPress: string
+    editTreeTitle: boolean
+    treeTitle: string
+    ChangeTitleMethod?(payload: any): ReduxMethod
 }
 
 type UserResponse = {
@@ -158,9 +161,10 @@ type TreePickerStateType = {
     treeFilter: string
     treeFocused: Partial<SkillTreePickerTreeType>,
 }
+type UpdateMethodType = 'updateTreeById' | 'updateHexagonById'
 
 export type {
-    undefinedPayloadType,
+    ReduxMethod,
     SkillTreeType,
     HexagonType,
     PathType,
@@ -180,4 +184,5 @@ export type {
     SkillTreePickerByUserIdType,
     FunctionalButtonPropsType,
     TreePickerStateType,
+    UpdateMethodType,
 }

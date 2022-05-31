@@ -86,6 +86,11 @@ const SideBarSlice = createSlice({
         ToggleSidebarVisibilityOn: state => {
             state.sidebarBaseClass = BASE_SECTION_CLASS
         },
+        // Skill Tree Picker Edit State
+        ToggleEditTreeTitleTrue: state => { state.editTreeTitle = true },
+        ToggleEditTreeTitleFalse: state => { state.editTreeTitle = false },
+        ChangeTreeTitle: (state, action) => { state.treeTitle = action.payload },
+        ChangeTitleMethod: (state, action) => { state.ChangeTitleMethod = action.payload }
     }
 })
 
@@ -105,5 +110,8 @@ export const {
     ToggleEditShortcutsOn,
     ToggleSidebarVisibilityOff,
     ToggleSidebarVisibilityOn,
+    ToggleEditTreeTitleFalse,
+    ToggleEditTreeTitleTrue,
+    ChangeTreeTitle,
 } = SideBarSlice.actions
 export default SideBarSlice.reducer

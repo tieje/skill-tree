@@ -1,6 +1,6 @@
 import { useReduxSelector } from "../../../redux/hooks";
 import { useGetHexagonByIdQuery } from "../../../redux/api";
-import SideBarTitle, { SideBarTitlePropsType } from "../SideBarTitle";
+import SideBarTitleContainer, { SideBarTitleContainerPropsType } from "../SideBarTitleContainer";
 
 const StudentTitle = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
@@ -15,11 +15,11 @@ const StudentTitle = () => {
             </>
         )
     }
-    const TitleProps: SideBarTitlePropsType = {
+    const TitleProps: SideBarTitleContainerPropsType = {
         title: data.title
     }
     return (
-        <SideBarTitle props={TitleProps} />
+        <SideBarTitleContainer props={TitleProps} />
     )
 }
 

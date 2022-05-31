@@ -46,6 +46,9 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
     sidebarBaseClass: BASE_SECTION_CLASS,
     textareaCursorLocation: 0,
     textareaLastKeyPress: 'a',
+    editTreeTitle: false,
+    treeTitle: '',
+    ChangeTitleMethod: undefined,
 }
 
 const INITIAL_PAN_MODE_STATE: PanState = {

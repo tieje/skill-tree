@@ -2,8 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HexagonType, LoginRequest, PathType, SkillTreePickerByUserIdType, SkillTreeType, UserResponse } from '../types/Types'
 import { RootState } from './store'
 
-
-
 const treeApi = createApi({
     reducerPath: 'treeApi',
     baseQuery: fetchBaseQuery({
@@ -39,6 +37,25 @@ const treeApi = createApi({
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
             providesTags: ['SkillTree'],
+        }),
+        createTree: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
+            query: (info) => ({
+                url: `skilltrees/`,
+                method: `POST`,
+                body: {
+                    ...info,
+                    last_edit_timestamp: Date.now(),
+                },
+            }),
+            invalidatesTags: ['SkillTreePicker']
+        }),
+        deleteTree: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
+            query: (info) => ({
+                url: `skilltrees/${info.skill_tree_id}`,
+                method: `DELETE`,
+                body: info,
+            }),
+            invalidatesTags: ['SkillTreePicker']
         }),
         updateTreeById: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
             query: (info) => ({
@@ -101,11 +118,13 @@ const treeApi = createApi({
 export const {
     useGetSkillTreePickerDataByUserIdQuery,
     useGetTreeByIdQuery,
+    useCreateTreeMutation,
+    useUpdateTreeByIdMutation,
+    useDeleteTreeMutation,
     useGetHexagonByIdQuery,
     useCreateHexMutation,
     useUpdateHexMutation,
     useDeleteHexMutation,
-    useUpdateTreeByIdMutation,
     useCreatePathMutation,
     useDeletePathMutation,
     useLoginMutation,

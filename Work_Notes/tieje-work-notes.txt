@@ -1104,6 +1104,11 @@ x build the stateful version of the tree picker page
 x edit skill tree profile picture on skill tree picker page
 + break down the SideBar Title Component into reusable component
 
+5/31/2022
+
+Instead of passing off methods as props, I can avoid prop drilling altogether by
+using Redux to change methods based on what is being interacted with.
+
 Write an article about:
 
 - the next skill tree update
@@ -1127,15 +1132,18 @@ Priorities
 
 Skill tree picker page
 
-- create the mutation methods for Skill Trees in the API
-    - createTree
-    - updateTree
-- get the "Create Skill Tree" Button working
++ create the mutation methods for Skill Trees in the API
+    + createTree
+    + updateTreeById
+    + deleteTree
+
+- make it so that Redux handles which functions are being used for which components instead of using prop drilling
 
 - make the note title a pure component
 - make the side bar a pure component
 - make the image address a pure component
 
+- get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 - options for removing skill tree
 
