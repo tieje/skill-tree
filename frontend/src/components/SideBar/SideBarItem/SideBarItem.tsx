@@ -1,24 +1,26 @@
+import { ReduxMethod, UpdateMethodType } from "../../../types/Types"
 import SideBarItemContainer from "./SideBarItemContainer"
-import SideBarTitleContainer, { SideBarTitleContainerPropsType } from "./SideBarTitleContainer"
+import SideBarTitleContainer from "./SideBarTitle/SideBarTitleContainer"
 
 type ComponentTypes = 'Title' | 'Note' | 'Image Address'
 type SideBarItemPropsType = {
     componentType: ComponentTypes
+    editable?: boolean
     skill_tree_id?: number
     hex_id?: number
+    EditState?: boolean
+    updateMethod?: UpdateMethodType
+    shortcutKey?: string
+    toggleEditFalseMethod?(): ReduxMethod
+    toggleEditTrueMethod?(): ReduxMethod
+    changeTitleMethod?(payload: any): ReduxMethod
     title?: string
 }
 const SideBarItem = ({ props }: { props: SideBarItemPropsType }) => {
-    if (props.title === undefined) { props.title = '' }
     if (props.componentType === 'Title') {
-        const TitleProps: SideBarTitleContainerPropsType = {
-            skill_tree_id: props.skill_tree_id,
-            title: props.title,
-            
-        }
         return (
             <SideBarItemContainer>
-                <SideBarTitleContainer props={TitleProps} />
+                <SideBarTitleContainer props={props} />
             </SideBarItemContainer>
         )
     }

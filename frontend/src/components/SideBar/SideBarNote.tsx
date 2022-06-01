@@ -1,4 +1,4 @@
-import SideBarItemContainer from "./SideBarItemContainer"
+import SideBarItemContainer from "./SideBarItem/SideBarItemContainer"
 
 const SideBarNote = ({ note }: { note: string }) => {
     return (

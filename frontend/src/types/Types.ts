@@ -123,9 +123,6 @@ type SidebarState = {
     sidebarBaseClass: string
     textareaCursorLocation: number
     textareaLastKeyPress: string
-    editTreeTitle: boolean
-    treeTitle: string
-    ChangeTitleMethod?(payload: any): ReduxMethod
 }
 
 type UserResponse = {
@@ -160,6 +157,8 @@ type SkillTreePickerByUserIdType = {
 type TreePickerStateType = {
     treeFilter: string
     treeFocused: Partial<SkillTreePickerTreeType>,
+    editTreeTitle: boolean
+    treeTitle: string
 }
 type UpdateMethodType = 'updateTreeById' | 'updateHexagonById'
 

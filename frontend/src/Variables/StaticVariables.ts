@@ -46,9 +46,6 @@ const INITIAL_SIDEBAR_STATE: SidebarState = {
     sidebarBaseClass: BASE_SECTION_CLASS,
     textareaCursorLocation: 0,
     textareaLastKeyPress: 'a',
-    editTreeTitle: false,
-    treeTitle: '',
-    ChangeTitleMethod: undefined,
 }
 
 const INITIAL_PAN_MODE_STATE: PanState = {
@@ -146,6 +143,8 @@ const INITIAL_TREEPICKER_TREE_FOCUSED: Partial<SkillTreePickerTreeType> = {
 const INITIAL_TREE_PICKER_STATE: Partial<TreePickerStateType> = {
     treeFilter: LEARN,
     treeFocused: INITIAL_TREEPICKER_TREE_FOCUSED,
+    editTreeTitle: false,
+    treeTitle: '',
 }
 export {
     VERBAL,

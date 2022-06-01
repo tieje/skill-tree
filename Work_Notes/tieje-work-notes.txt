@@ -1108,6 +1108,21 @@ x edit skill tree profile picture on skill tree picker page
 
 Instead of passing off methods as props, I can avoid prop drilling altogether by
 using Redux to change methods based on what is being interacted with.
+Experiment was a failure. I cannot control which methods are used.
+But when I think about it, I really should not be writing the code that way.
+It looks like I'll be engaging in some prop drilling.
+It's not actually prop drilling, rather it's prop combining.
+I have opted to decouple keyboard shortcuts from the SideBar component.
+This is because the logic for each sidebar can be rather specific.
+
+
++ create the mutation methods for Skill Trees in the API
+    + createTree
+    + updateTreeById
+    + deleteTree
+x make it so that Redux handles which functions are being used for which components instead of using prop drilling
++ make the note title a pure component
++ add keyboard shortcut to sidebar title component
 
 Write an article about:
 
@@ -1132,14 +1147,9 @@ Priorities
 
 Skill tree picker page
 
-+ create the mutation methods for Skill Trees in the API
-    + createTree
-    + updateTreeById
-    + deleteTree
-
-- make it so that Redux handles which functions are being used for which components instead of using prop drilling
-
-- make the note title a pure component
+- fix StudentViewByTeacher - props.changeTitleMethod is not a function
+- fix Post Method not allowed on the backend
+- fix studentTitle and HomeSideBar
 - make the side bar a pure component
 - make the image address a pure component
 

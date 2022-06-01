@@ -4,7 +4,7 @@ import { useReduxSelector } from "../../../redux/hooks"
 import { //QUANTITATIVE, VERBAL,
     STUDENT_VIEW, TOP_SIDEBAR_BUTTONS
 } from "../../../Variables/StaticVariables"
-import SideBarItemContainer from "../SideBarItemContainer"
+import SideBarItemContainer from "../SideBarItem/SideBarItemContainer"
 // import Checkbox from "./Checkbox"
 import FunctionalButton from "./FunctionalButton"
 import ImgAddress from "./ImgAddress"
