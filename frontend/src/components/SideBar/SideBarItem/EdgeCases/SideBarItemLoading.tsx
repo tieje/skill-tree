@@ -1,5 +1,5 @@
-import SideBarContainer from "../SideBarContainer"
-import SideBarItemContainer from "./SideBarItemContainer"
+import SideBarContainer from "../../SideBarContainer"
+import SideBarItemContainer from "../SideBarItemContainer"
 
 const SideBarItemLoading = () => {
     return (

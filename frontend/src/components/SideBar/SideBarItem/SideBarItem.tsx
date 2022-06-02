@@ -1,9 +1,10 @@
-import { ReduxMethod, UpdateMethodType } from "../../../types/Types"
-import SideBarItemContainer from "./SideBarItemContainer"
-import SideBarTitleContainer from "./SideBarTitle/SideBarTitleContainer"
+import { ComponentTypes, ReduxMethod, UpdateMethodType } from "../../../types/Types"
+import SideBarImgAddress from "./SideBarImgAddress"
+import SideBarItemEditable from "./SideBarItemEditable/SideBarItemEditable"
+import SideBarItemEditStateTrue from "./SideBarItemEditStateTrue/SideBarItemEditStateTrue"
+import SideBarTitle from "./SideBarTitle"
 
-type ComponentTypes = 'Title' | 'Note' | 'Image Address'
-type SideBarItemPropsType = {
+interface SideBarItemPropsType {
     componentType: ComponentTypes
     editable?: boolean
     skill_tree_id?: number
@@ -13,19 +14,52 @@ type SideBarItemPropsType = {
     shortcutKey?: string
     toggleEditFalseMethod?(): ReduxMethod
     toggleEditTrueMethod?(): ReduxMethod
-    changeTitleMethod?(payload: any): ReduxMethod
+    changeTextMethod?(payload: any): ReduxMethod
     title?: string
+    imageAddress?: string
 }
 const SideBarItem = ({ props }: { props: SideBarItemPropsType }) => {
-    if (props.componentType === 'Title') {
+    if (props.EditState) {
         return (
-            <SideBarItemContainer>
-                <SideBarTitleContainer props={props} />
-            </SideBarItemContainer>
+            <>
+                <SideBarItemEditStateTrue props={props} />
+            </>
         )
+    }
+    if (props.editable) {
+        switch (props.componentType) {
+            case 'Image Address':
+                return (
+                    <>
+                        <SideBarItemEditable props={props} />
+                        <SideBarImgAddress imageAddress={props.imageAddress} />
+                    </>
+                )
+            case 'Title':
+                return (
+                    <>
+                        <SideBarItemEditable props={props} />
+                        <SideBarTitle title={props.title} />
+                    </>
+                )
+        }
+    }
+    switch (props.componentType) {
+        case 'Image Address':
+            return (
+                <>
+                    <SideBarImgAddress imageAddress={props.imageAddress} />
+                </>
+            )
+        case 'Title':
+            return (
+                <>
+                    <SideBarTitle title={props.title} />
+                </>
+            )
     }
 }
 export type {
-    SideBarItemPropsType
+    SideBarItemPropsType,
 }
 export default SideBarItem

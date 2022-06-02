@@ -144,7 +144,9 @@ const INITIAL_TREE_PICKER_STATE: Partial<TreePickerStateType> = {
     treeFilter: LEARN,
     treeFocused: INITIAL_TREEPICKER_TREE_FOCUSED,
     editTreeTitle: false,
+    editTreeImageAddress: false,
     treeTitle: '',
+    treeImageAddress: '',
 }
 export {
     VERBAL,

@@ -3,6 +3,7 @@ import { useReduxSelector } from "../../../redux/hooks"
 import { TEACHER_VIEW } from "../../../Variables/StaticVariables"
 import SideBarContainer from "../SideBarContainer"
 import SideBarItem, { SideBarItemPropsType } from "../SideBarItem/SideBarItem"
+import { ChangeNoteTitle } from "../SideBarSlices"
 import FunctionalButton from "../TeacherView/FunctionalButton"
 import StudentNoteBody from "./StudentNoteBody"
 
@@ -11,8 +12,8 @@ const StudentViewByTeacher = () => {
     const SideBarItemTitleProps: SideBarItemPropsType = {
         componentType: 'Title',
         editable: false,
-        title: hexagonFocused.title
-        
+        title: hexagonFocused.title,
+        changeTextMethod: ChangeNoteTitle
     }
     return (
         <SideBarContainer>

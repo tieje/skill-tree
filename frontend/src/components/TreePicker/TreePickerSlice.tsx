@@ -12,6 +12,9 @@ const TreePickerSlice = createSlice({
         ToggleEditTreeTitleTrue: state => { state.editTreeTitle = true },
         ToggleEditTreeTitleFalse: state => { state.editTreeTitle = false },
         ChangeTreeTitle: (state, action) => { state.treeTitle = action.payload },
+        ChangeTreeImageAddress: (state, action) => { state.treeImageAddress = action.payload },
+        ToggleEditTreeImageAddressTrue: state => { state.editTreeImageAddress = true },
+        ToggleEditTreeImageAddressFalse: state => { state.editTreeImageAddress = false },
     }
 })
 
@@ -22,5 +25,8 @@ export const {
     ToggleEditTreeTitleFalse,
     ToggleEditTreeTitleTrue,
     ChangeTreeTitle,
+    ChangeTreeImageAddress,
+    ToggleEditTreeImageAddressFalse,
+    ToggleEditTreeImageAddressTrue,
 } = TreePickerSlice.actions
 export default TreePickerSlice.reducer

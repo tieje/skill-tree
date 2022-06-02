@@ -60,7 +60,7 @@ const treeApi = createApi({
         updateTreeById: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
             query: (info) => ({
                 url: `skilltrees/${info.skill_tree_id}/`,
-                method: `POST`,
+                method: `PATCH`,
                 body: {
                     ...info,
                     last_edit_timestamp: Date.now(),

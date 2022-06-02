@@ -1123,6 +1123,19 @@ This is because the logic for each sidebar can be rather specific.
 x make it so that Redux handles which functions are being used for which components instead of using prop drilling
 + make the note title a pure component
 + add keyboard shortcut to sidebar title component
++ fix Post Method not allowed on the backend for skill tree
+    I needed to PATCH method, not POST
+
+
+6/1/2022
+
+
+
++ fix StudentViewByTeacher - props.changeTextMethod is not a function
++ fix studentTitle and HomeSideBar
+~ make the side bar a pure component
+    I got it as pure as I could.
++ change SideBarError component to have the name of whatever component it's supposed to be
 
 Write an article about:
 
@@ -1147,11 +1160,8 @@ Priorities
 
 Skill tree picker page
 
-- fix StudentViewByTeacher - props.changeTitleMethod is not a function
-- fix Post Method not allowed on the backend
-- fix studentTitle and HomeSideBar
-- make the side bar a pure component
-- make the image address a pure component
++ make the image address a pure component
+- get the image component working
 
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching

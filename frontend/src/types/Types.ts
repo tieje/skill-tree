@@ -45,13 +45,14 @@ type HexagonType = {
 }
 
 type SkillTreeType = {
-    skill_tree_id: number;
-    paths?: PathType[];
-    hexagons?: HexagonType[];
-    name: string;
-    theme?: string;
+    skill_tree_id: number
+    paths?: PathType[]
+    hexagons?: HexagonType[]
+    name: string
+    theme?: string
     hex_string_list?: string[]
-    user?: number,
+    user?: number
+    image_address?: string
 }
 
 type GenHexType = {
@@ -159,8 +160,11 @@ type TreePickerStateType = {
     treeFocused: Partial<SkillTreePickerTreeType>,
     editTreeTitle: boolean
     treeTitle: string
+    editTreeImageAddress: boolean
+    treeImageAddress: string
 }
 type UpdateMethodType = 'updateTreeById' | 'updateHexagonById'
+type ComponentTypes = 'Title' | 'Note' | 'Image Address'
 
 export type {
     ReduxMethod,
@@ -184,4 +188,5 @@ export type {
     FunctionalButtonPropsType,
     TreePickerStateType,
     UpdateMethodType,
+    ComponentTypes,
 }
