@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { GenHexObjectType, HexagonType, PathType } from "../types/Types";
+import { GenHexObjectType, HexagonType, PathType, SkillTreePickerTreeType } from "../types/Types";
 
 function CustomRectHexGridGenerator(mapWidth: number, mapHeight: number, addHexes?: HexagonType[]): GenHexObjectType {
     const hexagons = {}
@@ -109,6 +109,13 @@ function UnZipStringList(arr: string[][]): string[] {
     return newArray
 }
 
+function OrderByTimeStamp(arr: SkillTreePickerTreeType[]): SkillTreePickerTreeType[] {
+    return (
+        [...arr].sort((a: SkillTreePickerTreeType, b: SkillTreePickerTreeType) => {
+            return (b.last_edit_timestamp - a.last_edit_timestamp)
+        })
+    )
+}
 export {
     CustomRectHexGridGenerator,
     CustomRectHexGrid,
@@ -120,4 +127,5 @@ export {
     ToHexString,
     HexEntryNameToNumbers,
     UnZipStringList,
+    OrderByTimeStamp,
 }

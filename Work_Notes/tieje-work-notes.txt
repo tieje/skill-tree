@@ -1145,6 +1145,10 @@ Sick today, but I made a lot of changes that will make components more pure.
 
 I won't allow users to delete their skill tree for now, only because it requires creating a second authentication page to prevent accidental clicking.
 
++ get the image component working
++ fix skilltreepicker learning serializer
++ make it so that the edit button and Img address are only showing for owner of the skill tree
++ order skill trees in skill tree picker by time stamp
 
 Write an article about:
 
@@ -1170,9 +1174,7 @@ Priorities
 
 Skill tree picker page
 
-+ get the image component working
-+ fix skilltreepicker learning serializer
-- make it so that the edit button and Img address are only showing for owner of the skill tree
+- fix the student view. The Sidebar is not appearing for the student view.
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
 

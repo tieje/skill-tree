@@ -1,6 +1,8 @@
 import { nanoid } from "nanoid"
 import { useGetSkillTreePickerDataByUserIdQuery } from "../../redux/api"
 import { useReduxSelector } from "../../redux/hooks"
+import { SkillTreePickerTreeType } from "../../types/Types"
+import { OrderByTimeStamp } from "../../utils/utils"
 import { LEARN, TEACH } from "../../Variables/StaticVariables"
 import SkillTreeItem from "./SkillTreeItem"
 import CreateSkillTree from "./SkillTreeOptions"
@@ -33,6 +35,8 @@ const TreePicker = () => {
             </section>
         )
     }
+    const learningTreesOrderedByTimeStamp: SkillTreePickerTreeType[] = OrderByTimeStamp(data.learning)
+    const teachingTreesOrderedByTimeStamp: SkillTreePickerTreeType[] = OrderByTimeStamp(data.teaching)
     return (
         <>
             <TreePickerSideBar />
@@ -53,11 +57,11 @@ const TreePicker = () => {
                     </h1>
                     <CreateSkillTree />
                     <div className='grid grid-cols-4 gap-5'>
-                        {treeFilter === LEARN ? data.learning.map((item) => {
+                        {treeFilter === LEARN ? learningTreesOrderedByTimeStamp.map((item: SkillTreePickerTreeType) => {
                             return (
                                 <SkillTreeItem key={nanoid()} props={item} />
                             )
-                        }) : treeFilter === TEACH ? data.teaching.map((item) => {
+                        }) : treeFilter === TEACH ? teachingTreesOrderedByTimeStamp.map((item: SkillTreePickerTreeType) => {
                             return (
                                 <SkillTreeItem key={nanoid()} props={item} />
                             )
@@ -69,11 +73,5 @@ const TreePicker = () => {
         </>
     )
 }
-/*
-const TreePickerContainer: React.FC = (children) => {
-    return (
-        
-    )
-}*/
 
 export default TreePicker

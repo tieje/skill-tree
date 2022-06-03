@@ -23,7 +23,9 @@ const TreePickerSideBar = () => {
     }
     // shortcuts
     const handleShortcuts = (event: KeyboardEvent) => {
-        if (!any([tp.editTreeTitle, tp.editTreeImageAddress])) {
+        if (!any([tp.editTreeTitle, tp.editTreeImageAddress]) &&
+            editPermission
+        ) {
             switch (event.key) {
                 case titleShortcut:
                     dispatch(ToggleEditTreeTitleTrue())
