@@ -74,7 +74,7 @@ const SideBarItemInput = ({ props }: { props: SideBarItemPropsType }) => {
             value={value}
             onChange={e => dispatch(props.changeTextMethod(e.target.value))}
             onKeyDown={handleAddText}
-            maxLength={70}
+            maxLength={1000}
         />
     )
 }

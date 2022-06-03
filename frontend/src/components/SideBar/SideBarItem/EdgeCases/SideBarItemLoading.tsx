@@ -1,13 +1,10 @@
-import SideBarContainer from "../../SideBarContainer"
-import SideBarItemContainer from "../SideBarItemContainer"
+import DefaultSideBarItemContainer from "../DefaultSideBarItemContainer"
 
 const SideBarItemLoading = () => {
     return (
-        <SideBarContainer>
-            <SideBarItemContainer>
-                Loading
-            </SideBarItemContainer>
-        </SideBarContainer>
+        <DefaultSideBarItemContainer>
+            Loading
+        </DefaultSideBarItemContainer>
     )
 }
 export default SideBarItemLoading

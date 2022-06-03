@@ -6,36 +6,54 @@ import SideBarItemError from "../SideBar/SideBarItem/EdgeCases/SideBarItemError"
 import SideBarItemLoading from "../SideBar/SideBarItem/EdgeCases/SideBarItemLoading"
 import { ChangeTreeImageAddress, ChangeTreeTitle, ToggleEditTreeImageAddressFalse, ToggleEditTreeImageAddressTrue, ToggleEditTreeTitleFalse, ToggleEditTreeTitleTrue } from "./TreePickerSlice"
 import useEventListener from '@use-it/event-listener'
-import SideBarItemContainer from "../SideBar/SideBarItem/SideBarItemContainer"
+import DefaultSideBarItemContainer from "../SideBar/SideBarItem/DefaultSideBarItemContainer"
+import { any } from "../../utils/utils"
 
 const TreePickerSideBar = () => {
     const tp = useReduxSelector(state => state.treePicker)
+    const userId = useReduxSelector(state => state.auth.user_id)
     const { data, isLoading, error } = useGetTreeByIdQuery(String(tp.treeFocused.skill_tree_id))
     const titleShortcut = 'd'
     const imageAddressShortcut = 's'
     const dispatch = useReduxDispatch()
+    // edit privilege
+    let editPermission = false
+    if (userId === String(tp.treeFocused.user_id)) {
+        editPermission = true
+    }
+    // shortcuts
     const handleShortcuts = (event: KeyboardEvent) => {
-        if (!tp.editTreeTitle) {
+        if (!any([tp.editTreeTitle, tp.editTreeImageAddress])) {
             switch (event.key) {
                 case titleShortcut:
                     dispatch(ToggleEditTreeTitleTrue())
+                    break
+                case imageAddressShortcut:
+                    dispatch(ToggleEditTreeImageAddressTrue())
                     break
             }
         }
     }
     useEventListener('keypress', handleShortcuts)
-    if (isLoading) { return (<SideBarItemLoading />) }
+    if (isLoading) {
+        return (
+            <SideBarContainer>
+                <SideBarItemLoading />
+                <SideBarItemLoading />
+            </SideBarContainer>
+        )
+    }
     if (error) {
         return (
-            <>
+            <SideBarContainer>
                 <SideBarItemError componentType={'Title'} />
                 <SideBarItemError componentType={'Image Address'} />
-            </>
+            </SideBarContainer>
         )
     }
     const SideBarItemTitleProps: SideBarItemPropsType = {
         componentType: 'Title',
-        editable: true,
+        editable: editPermission,
         skill_tree_id: tp.treeFocused.skill_tree_id,
         EditState: tp.editTreeTitle,
         updateMethod: 'updateTreeById',
@@ -47,7 +65,7 @@ const TreePickerSideBar = () => {
     }
     const SideBarItemImageAddressProps: SideBarItemPropsType = {
         componentType: 'Image Address',
-        editable: true,
+        editable: editPermission,
         skill_tree_id: tp.treeFocused.skill_tree_id,
         EditState: tp.editTreeImageAddress,
         updateMethod: 'updateTreeById',
@@ -59,12 +77,12 @@ const TreePickerSideBar = () => {
     }
     return (
         <SideBarContainer>
-            <SideBarItemContainer>
+            <DefaultSideBarItemContainer>
                 <SideBarItem props={SideBarItemTitleProps} />
-            </SideBarItemContainer>
-            <SideBarItemContainer>
+            </DefaultSideBarItemContainer>
+            <DefaultSideBarItemContainer>
                 <SideBarItem props={SideBarItemImageAddressProps} />
-            </SideBarItemContainer>
+            </DefaultSideBarItemContainer>
         </SideBarContainer>
     )
 }

@@ -66,7 +66,7 @@ const treeApi = createApi({
                     last_edit_timestamp: Date.now(),
                 },
             }),
-            invalidatesTags: ['SkillTree']
+            invalidatesTags: ['SkillTreePicker', 'SkillTree']
         }),
         getHexagonById: build.query<HexagonType, string>({
             query: (id) => `skilltreehexagons/${id}`,

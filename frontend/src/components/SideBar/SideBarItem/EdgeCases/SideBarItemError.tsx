@@ -1,16 +1,13 @@
 import { ComponentTypes } from "../../../../types/Types"
-import SideBarContainer from "../../SideBarContainer"
-import SideBarItemContainer from "../SideBarItemContainer"
+import DefaultSideBarItemContainer from "../DefaultSideBarItemContainer"
 
 const SideBarItemError = ({ componentType }: { componentType: ComponentTypes }) => {
     return (
-        <SideBarContainer>
-            <SideBarItemContainer>
-                <h1 className='text-2xl text-left'>
-                    {componentType}
-                </h1>
-            </SideBarItemContainer>
-        </SideBarContainer>
+        <DefaultSideBarItemContainer>
+            <h1 className='text-2xl text-left'>
+                {componentType}
+            </h1>
+        </DefaultSideBarItemContainer>
     )
 }
 export default SideBarItemError

@@ -1087,7 +1087,7 @@ The more reusable that I want to make a component, the more complex that it beco
 I have a much better idea of what I'm going to do now.
 Reusability is key.
 
-Each component needs to be wrapped by the SideBarItemContainer.
+Each component needs to be wrapped by the DefaultSideBarItemContainer.
 There may a new component called SideBarItem that may have a few choices.
 The SideBarItem will be given the following properties as props:
 - which kind of component to use
@@ -1129,13 +1129,22 @@ x make it so that Redux handles which functions are being used for which compone
 
 6/1/2022
 
-
-
 + fix StudentViewByTeacher - props.changeTextMethod is not a function
 + fix studentTitle and HomeSideBar
 ~ make the side bar a pure component
     I got it as pure as I could.
 + change SideBarError component to have the name of whatever component it's supposed to be
+
+6/2/2022
+
+Sick today, but I made a lot of changes that will make components more pure.
+
++ make the image address a pure component
+
+6/3/2022
+
+I won't allow users to delete their skill tree for now, only because it requires creating a second authentication page to prevent accidental clicking.
+
 
 Write an article about:
 
@@ -1149,6 +1158,7 @@ Write an article about:
 
 Github Contributions
 - contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
+- contribute to ChemPy
 
 Priorities
 1. Create the frontpage
@@ -1160,12 +1170,11 @@ Priorities
 
 Skill tree picker page
 
-+ make the image address a pure component
-- get the image component working
-
++ get the image component working
++ fix skilltreepicker learning serializer
+- make it so that the edit button and Img address are only showing for owner of the skill tree
 - get the "Create Skill Tree" Button working
 - fix permissions so that only the user can grab what they're learning and what they're teaching
-- options for removing skill tree
 
 Registration
 - create registration page with final form
@@ -1207,6 +1216,7 @@ Home Page Additional Features
 - create future features component
 
 Skill tree picker page - Additional Features
+- make it so that users can delete a skill tree with a pop up screen asking for validation
 - Feature for owners to download data of the tree in a JSON File from tree picker page
 - Add statistics at the top of the left sidebar
 - theme field in the backend for tree picker page
@@ -1214,3 +1224,6 @@ Skill tree picker page - Additional Features
 
 Registration Additional Features
 - add additional login methods like Google and Apple?
+
+HexGrid
+- allow users to paste in data when creating a skill tree

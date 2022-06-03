@@ -4,7 +4,7 @@ import { useReduxSelector } from "../../../redux/hooks"
 import { //QUANTITATIVE, VERBAL,
     STUDENT_VIEW, TOP_SIDEBAR_BUTTONS
 } from "../../../Variables/StaticVariables"
-import SideBarItemContainer from "../SideBarItem/SideBarItemContainer"
+import DefaultSideBarItemContainer from "../SideBarItem/DefaultSideBarItemContainer"
 // import Checkbox from "./Checkbox"
 import FunctionalButton from "./FunctionalButton"
 import ImgAddress from "./ImgAddress"
@@ -25,12 +25,12 @@ const TeacherView = () => {
                 <Checkbox props={{ label: QUANTITATIVE, data: data, isLoading: isLoading, error: error }} />
             </div>*/}
             <ImgAddress props={{ data: data, isLoading: isLoading, error: error }} />
-            <SideBarItemContainer>
+            <DefaultSideBarItemContainer>
                 <NoteTitle props={{ data: data, isLoading: isLoading, error: error }} />
-            </SideBarItemContainer>
-            <SideBarItemContainer>
+            </DefaultSideBarItemContainer>
+            <DefaultSideBarItemContainer>
                 <NoteBody props={{ data: data, isLoading: isLoading, error: error }} />
-            </SideBarItemContainer>
+            </DefaultSideBarItemContainer>
             {hexagonFocused.hex_id ? <div className='grid place-content-center'>
                 <button
                     className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple mb-5'

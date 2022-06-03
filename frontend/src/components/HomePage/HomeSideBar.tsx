@@ -3,6 +3,7 @@ import { useReduxSelector } from "../../redux/hooks"
 import SideBarNote from "../SideBar/SideBarNote"
 import SideBarItem, { SideBarItemPropsType } from "../SideBar/SideBarItem/SideBarItem"
 import { ChangeNoteTitle } from "../SideBar/SideBarSlices"
+import DefaultSideBarItemContainer from "../SideBar/SideBarItem/DefaultSideBarItemContainer"
 
 const HomeSideBar = () => {
     let sidebarClass = useReduxSelector(state => state.sideBar.sidebarBaseClass).replace(/lg:fixed/g, '')
@@ -28,7 +29,9 @@ const HomeSideBar = () => {
     }
     return (
         <section id='sidebar' className={sidebarClass}>
-            <SideBarItem props={SideBarItemTitleProps} />
+            <DefaultSideBarItemContainer>
+                <SideBarItem props={SideBarItemTitleProps} />
+            </DefaultSideBarItemContainer>
             <SideBarNote note={hm.homeHexagonFocused.note} />
         </section>
     )

@@ -3,7 +3,7 @@ import { useGetHexagonByIdQuery } from "../../../redux/api"
 import { useReduxDispatch, useReduxSelector } from "../../../redux/hooks"
 import { PAN_MODE } from "../../../Variables/StaticVariables"
 import SideBarItem, { SideBarItemPropsType } from "../SideBarItem/SideBarItem"
-import SideBarItemContainer from "../SideBarItem/SideBarItemContainer"
+import DefaultSideBarItemContainer from "../SideBarItem/DefaultSideBarItemContainer"
 import SideBarItemError from "../SideBarItem/EdgeCases/SideBarItemError"
 import SideBarItemLoading from "../SideBarItem/EdgeCases/SideBarItemLoading"
 import { ChangeNoteTitle, ViewerToStudent } from "../SideBarSlices"
@@ -25,13 +25,13 @@ const StudentView = () => {
         changeTextMethod: ChangeNoteTitle
     }
     return (
-        <SideBarItemContainer>
+        <DefaultSideBarItemContainer>
             <FunctionalButton props={PAN_MODE} />
             <SideBarItem props={SideBarItemTitleProps} />
-            <SideBarItemContainer>
+            <DefaultSideBarItemContainer>
                 <StudentNoteBody />
-            </SideBarItemContainer>
-        </SideBarItemContainer>
+            </DefaultSideBarItemContainer>
+        </DefaultSideBarItemContainer>
     )
 }
 export default StudentView

@@ -3,6 +3,7 @@ from rest_framework import serializers
 from skilltree.models import SkillTrees, SkillTreeHexagons, SkillTreePaths, SkillTreeBeingLearnedByUser
 from drf_queryfields import QueryFieldsMixin
 from django.contrib.auth import get_user_model
+from accounts.models import CustomUser
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -58,23 +59,31 @@ class SkillTreesSerializer(QueryFieldsMixin, serializers.ModelSerializer):
 
 class SkillTreePickerSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     class Meta:
-        model = get_user_model()
+        model = CustomUser
         fields = ['id', 'learning', 'teaching']
     learning = serializers.SerializerMethodField()
     teaching = serializers.SerializerMethodField()
 
     def get_learning(self, obj) -> QuerySet:
         '''Get all the skill trees that the user is currently trying to learn'''
+        '''
         ids: QuerySet = SkillTreeBeingLearnedByUser.objects.filter(
-            user=obj.id
+            user_id=obj.id
         ).values_list('user', flat=True)
+        '''
+        relationships: QuerySet = SkillTreeBeingLearnedByUser.objects.filter(
+            user_id=obj.id
+        ).values_list('skill_tree_id', flat=True)
         skill_trees_learned: QuerySet = SkillTrees.objects.filter(
-            skill_tree_id__in=ids
+            skill_tree_id__in=relationships
         ).values()
         return skill_trees_learned
+        '''
+        return relationships
+        '''
 
     def get_teaching(self, obj) -> QuerySet:
-        '''Get all the skill trees that the user is an owner (changed to "user") of'''
+        '''Get all the skill trees that the user is an owner(changed to "user") of'''
         skill_trees: QuerySet = SkillTrees.objects.filter(
             user=obj.id
         ).values()
