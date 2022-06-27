@@ -3,6 +3,7 @@ import { TOOL_NONE } from 'react-svg-pan-zoom'
 import { hexagonFiller } from "./HexFiller"
 import { INITIAL_VALUE } from 'react-svg-pan-zoom'
 
+const UNTITLED: string = 'Untitled'
 const VERBAL: string = 'Verbal Feedback'
 const QUANTITATIVE: string = 'Quantitative Feedback'
 const INVISIBLE: string = 'invisible'
@@ -52,10 +53,10 @@ const INITIAL_PAN_MODE_STATE: PanState = {
     tool: TOOL_NONE,
     hexagonFocused: {
         hex_id: undefined,
-        hex_string: '8,1,-9',
-        hex_q: 8,
-        hex_r: 1,
-        hex_s: -9,
+        hex_string: '7, 10, -17',
+        hex_q: 7,
+        hex_r: 10,
+        hex_s: -17,
     },
     pathFocused: INITIAL_PATH_HEX_STATE,
     startingHexagon: INITIAL_HEX_STATE,
@@ -149,6 +150,7 @@ const INITIAL_TREE_PICKER_STATE: Partial<TreePickerStateType> = {
     treeImageAddress: '',
 }
 export {
+    UNTITLED,
     VERBAL,
     QUANTITATIVE,
     INVISIBLE,
@@ -183,4 +185,5 @@ export {
     TOP_SIDEBAR_BUTTONS,
     BOTTOM_SIDEBAR_BUTTONS,
     INITIAL_TREE_PICKER_STATE,
+    INITIAL_TREEPICKER_TREE_FOCUSED,
 }

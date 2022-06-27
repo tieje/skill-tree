@@ -2,6 +2,7 @@ import { nanoid } from "nanoid"
 import { useReduxSelector } from "../../../redux/hooks"
 import { TEACHER_VIEW } from "../../../Variables/StaticVariables"
 import SideBarContainer from "../SideBarContainer"
+import DefaultSideBarItemContainer from "../SideBarItem/DefaultSideBarItemContainer"
 import SideBarItem, { SideBarItemPropsType } from "../SideBarItem/SideBarItem"
 import { ChangeNoteTitle } from "../SideBarSlices"
 import FunctionalButton from "../TeacherView/FunctionalButton"
@@ -17,7 +18,9 @@ const StudentViewByTeacher = () => {
     }
     return (
         <SideBarContainer>
-            <SideBarItem props={SideBarItemTitleProps} />
+            <DefaultSideBarItemContainer>
+                <SideBarItem props={SideBarItemTitleProps} />
+            </DefaultSideBarItemContainer>
             <div className='relative bg-paper-yellow p-5 pt-10 m-3 rounded-lg grid grid-cols-1 place-content-start opacity-98'>
                 <StudentNoteBody key={nanoid()} />
             </div>

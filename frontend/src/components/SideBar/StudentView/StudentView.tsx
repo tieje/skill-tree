@@ -9,14 +9,31 @@ import SideBarItemLoading from "../SideBarItem/EdgeCases/SideBarItemLoading"
 import { ChangeNoteTitle, ViewerToStudent } from "../SideBarSlices"
 import FunctionalButton from "../TeacherView/FunctionalButton"
 import StudentNoteBody from "./StudentNoteBody"
+import SideBarContainer from "../SideBarContainer"
 
 const StudentView = () => {
     const hexagonFocused = useReduxSelector(state => state.panMode.hexagonFocused)
-    const { data, error, isLoading } = useGetHexagonByIdQuery(String(hexagonFocused.hex_id))
+    const { data, isLoading, error } = useGetHexagonByIdQuery(String(hexagonFocused))
     const dispatch = useReduxDispatch()
     dispatch(ViewerToStudent())
-    if (isLoading) { return (<SideBarItemLoading />) }
-    if (error) { return (<SideBarItemError componentType={'Title'} />) }
+    if (isLoading) {
+        return (
+            <SideBarContainer>
+                <SideBarItemLoading />
+                <SideBarItemLoading />
+            </SideBarContainer>
+        )
+    }
+    if (error) {
+        return (
+            <SideBarContainer>
+                <SideBarItemError componentType={'Title'} />
+                <DefaultSideBarItemContainer>
+                    <StudentNoteBody />
+                </DefaultSideBarItemContainer>
+            </SideBarContainer>
+        )
+    }
     const SideBarItemTitleProps: SideBarItemPropsType = {
         componentType: 'Title',
         editable: false,
@@ -25,13 +42,15 @@ const StudentView = () => {
         changeTextMethod: ChangeNoteTitle
     }
     return (
-        <DefaultSideBarItemContainer>
+        <SideBarContainer>
             <FunctionalButton props={PAN_MODE} />
-            <SideBarItem props={SideBarItemTitleProps} />
+            <DefaultSideBarItemContainer>
+                <SideBarItem props={SideBarItemTitleProps} />
+            </DefaultSideBarItemContainer>
             <DefaultSideBarItemContainer>
                 <StudentNoteBody />
             </DefaultSideBarItemContainer>
-        </DefaultSideBarItemContainer>
+        </SideBarContainer>
     )
 }
 export default StudentView

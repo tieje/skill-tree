@@ -11,6 +11,7 @@ import { NavButtonPropsType } from './types/Types'
 import { LOGIN, LOGOUT, SETTINGS, SIGN_UP, TREES } from './Variables/StaticVariables'
 import TreePicker from './components/TreePicker/TreePicker'
 import MainApp from './components/MainApp'
+import { Registration } from './components/Registration/Registration'
 
 const App = () => {
   return (
@@ -18,7 +19,10 @@ const App = () => {
       <Routes>
         <Route element={<Navbar />}>
           <Route path='/'
-            element={<HomePage />} />
+            element={<HomePage />}
+          />
+          <Route path='/registration' element={<Registration />}>
+          </Route>
           <Route path='login' element={<LoginForm />} />
           <Route path='trees' element={
             <RequireAuth>

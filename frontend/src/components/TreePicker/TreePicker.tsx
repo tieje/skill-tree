@@ -5,7 +5,7 @@ import { SkillTreePickerTreeType } from "../../types/Types"
 import { OrderByTimeStamp } from "../../utils/utils"
 import { LEARN, TEACH } from "../../Variables/StaticVariables"
 import SkillTreeItem from "./SkillTreeItem"
-import CreateSkillTree from "./SkillTreeOptions"
+import CreateButton, { CreateButtonPropsType } from "./CreateButton"
 import TreeFilter from "./TreeFilter"
 import TreePickerSideBar from "./TreePickerSideBar"
 
@@ -14,6 +14,12 @@ const TreePicker = () => {
     const { data, isLoading, error } = useGetSkillTreePickerDataByUserIdQuery(user_id)
     const treeFilter = useReduxSelector(state => state.treePicker.treeFilter)
     const labels = [LEARN, TEACH]
+    const CreateButtonProps: CreateButtonPropsType = {
+        symbolLeft: '&#9998;',
+        buttonText: ' New Skill Tree ',
+        symbolRight: '+',
+        createMethod: 'createTree',
+    }
     if (isLoading || error) {
         return (
             <section>
@@ -28,7 +34,7 @@ const TreePicker = () => {
                     <h1 className='text-sm opacity-60'>
                         Recently Viewed
                     </h1>
-                    <CreateSkillTree />
+                    <CreateButton props={CreateButtonProps} />
                     <div className='grid grid-cols-5 gap-5'>
                     </div>
                 </div>
@@ -55,7 +61,7 @@ const TreePicker = () => {
                     <h1 className='text-sm opacity-60'>
                         Recently Viewed
                     </h1>
-                    <CreateSkillTree />
+                    <CreateButton props={CreateButtonProps} />
                     <div className='grid grid-cols-4 gap-5'>
                         {treeFilter === LEARN ? learningTreesOrderedByTimeStamp.map((item: SkillTreePickerTreeType) => {
                             return (

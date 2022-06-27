@@ -165,6 +165,7 @@ type TreePickerStateType = {
 }
 type UpdateMethodType = 'updateTreeById' | 'updateHexagonById'
 type ComponentTypes = 'Title' | 'Note' | 'Image Address'
+type CreateMethodType = 'createTree'
 
 export type {
     ReduxMethod,
@@ -189,4 +190,5 @@ export type {
     TreePickerStateType,
     UpdateMethodType,
     ComponentTypes,
+    CreateMethodType,
 }

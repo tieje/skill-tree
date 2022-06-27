@@ -36,7 +36,7 @@ const treeApi = createApi({
         }),
         getTreeById: build.query<SkillTreeType, string>({
             query: (id) => `skilltrees/${id}`,
-            providesTags: ['SkillTree'],
+            providesTags: ['SkillTree', 'SkillTreePicker'],
         }),
         createTree: build.mutation<SkillTreeType, Partial<SkillTreeType>>({
             query: (info) => ({

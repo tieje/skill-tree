@@ -6,7 +6,7 @@ import {
   Pattern,
   Hex,
 } from 'react-hexgrid';
-import React, {
+import {
   useRef,
   useEffect,
 } from 'react';
@@ -228,7 +228,7 @@ const PanZoomHexGrid = () => {
       >
         <HexGrid width={1} height={1} viewBox="-10 -9 268 313">
           <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
-            <Hexagon q={8} r={1} s={-9} />
+            <Hexagon q={pm.hexagonFocused.hex_q} r={pm.hexagonFocused.hex_r} s={pm.hexagonFocused.hex_s} />
           </Layout>
         </HexGrid>
       </ReactSVGPanZoom>
@@ -265,6 +265,9 @@ const PanZoomHexGrid = () => {
                     {/*viewerMode === TEACHER ? <Text key={nanoid()}>
                       {[value.hex_q, value.hex_r, value.hex_s].join(',')}
                     </Text> : null*/}
+                    {/*<Text key={nanoid()}>
+                      {[value.hex_q, value.hex_r, value.hex_s].join(',')}
+                    </Text>*/}
                   </Hexagon>
                 )
               }

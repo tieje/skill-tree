@@ -1,13 +1,15 @@
-import { useGetTreeByIdQuery } from "../../redux/api"
+import { useDeleteTreeMutation, useGetTreeByIdQuery } from "../../redux/api"
 import { useReduxDispatch, useReduxSelector } from "../../redux/hooks"
 import SideBarContainer from "../SideBar/SideBarContainer"
 import SideBarItem, { SideBarItemPropsType } from "../SideBar/SideBarItem/SideBarItem"
 import SideBarItemError from "../SideBar/SideBarItem/EdgeCases/SideBarItemError"
 import SideBarItemLoading from "../SideBar/SideBarItem/EdgeCases/SideBarItemLoading"
-import { ChangeTreeImageAddress, ChangeTreeTitle, ToggleEditTreeImageAddressFalse, ToggleEditTreeImageAddressTrue, ToggleEditTreeTitleFalse, ToggleEditTreeTitleTrue } from "./TreePickerSlice"
+import { ChangeTreeImageAddress, changeTreePickerTreeFocused, ChangeTreeTitle, ToggleEditTreeImageAddressFalse, ToggleEditTreeImageAddressTrue, ToggleEditTreeTitleFalse, ToggleEditTreeTitleTrue } from "./TreePickerSlice"
 import useEventListener from '@use-it/event-listener'
 import DefaultSideBarItemContainer from "../SideBar/SideBarItem/DefaultSideBarItemContainer"
 import { any } from "../../utils/utils"
+import { INITIAL_TREEPICKER_TREE_FOCUSED } from "../../Variables/StaticVariables"
+import { useRef } from "react"
 
 const TreePickerSideBar = () => {
     const tp = useReduxSelector(state => state.treePicker)
@@ -16,6 +18,7 @@ const TreePickerSideBar = () => {
     const titleShortcut = 'd'
     const imageAddressShortcut = 's'
     const dispatch = useReduxDispatch()
+    const [deleteTree] = useDeleteTreeMutation()
     // edit privilege
     let editPermission = false
     if (userId === String(tp.treeFocused.user_id)) {
@@ -77,6 +80,15 @@ const TreePickerSideBar = () => {
         toggleEditTrueMethod: ToggleEditTreeImageAddressTrue,
         changeTextMethod: ChangeTreeImageAddress
     }
+    if (tp.treeFocused.user_id !== parseInt(userId)) {
+        return (
+            <SideBarContainer>
+                <DefaultSideBarItemContainer>
+                    <SideBarItem props={SideBarItemTitleProps} />
+                </DefaultSideBarItemContainer>
+            </SideBarContainer>
+        )
+    }
     return (
         <SideBarContainer>
             <DefaultSideBarItemContainer>
@@ -85,6 +97,19 @@ const TreePickerSideBar = () => {
             <DefaultSideBarItemContainer>
                 <SideBarItem props={SideBarItemImageAddressProps} />
             </DefaultSideBarItemContainer>
+            <div
+                className="grid place-content-center mt-52"
+            >
+                <button
+                    className='bg-red text-white px-2 py-1 border border-red-purple rounded-lg hover:border-russian-blue hover:bg-red-purple mb-5'
+                    onClick={() => {
+                        changeTreePickerTreeFocused(INITIAL_TREEPICKER_TREE_FOCUSED)
+                        deleteTree(tp.treeFocused)
+                    }}
+                >
+                    Delete Tree
+                </button>
+            </div>
         </SideBarContainer>
     )
 }

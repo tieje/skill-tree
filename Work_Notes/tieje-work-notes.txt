@@ -1150,6 +1150,23 @@ I won't allow users to delete their skill tree for now, only because it requires
 + make it so that the edit button and Img address are only showing for owner of the skill tree
 + order skill trees in skill tree picker by time stamp
 
+6/5/2022
+
++ fix the student view. The Sidebar is not appearing for the student view.
++ make the Create Skill Tree button a pure reusable component
++ remove image URL from unowned skill trees
++ move the initial selected hexagon selected to QRS of 7, 10, -17
++ get the "Create Skill Tree" Button working
+
+6/27/2022
+
+It's been a while.
+
+x add a doubleclick to the New Skill Tree button
+    - kinda difficult to implement, and not really necessary
++ create an add and remove skill tree to learning in the top bar
++ fix permissions so that only the user can grab what they're learning and what they're teaching
+
 Write an article about:
 
 - the next skill tree update
@@ -1160,10 +1177,6 @@ Write an article about:
     https://www.figma.com/file/2HIVXfIRBTeEJy5QnTphSY/skill-tree?node-id=3%3A21
     Your repo is now public
 
-Github Contributions
-- contribute to django - either make sure that populating data automatically does not violate existing SQL rules or go by each row one-by-one manually
-- contribute to ChemPy
-
 Priorities
 1. Create the frontpage
 2. Create registration with final form
@@ -1172,19 +1185,16 @@ Priorities
 5. Add feedback functionality.
 6. Try fixing the nginx proxy manager and docker swarm problem
 
-Skill tree picker page
-
-- fix the student view. The Sidebar is not appearing for the student view.
-- get the "Create Skill Tree" Button working
-- fix permissions so that only the user can grab what they're learning and what they're teaching
-
 Registration
+- read sendgrid email confirmation for new accounts
+    - page 185 in Django for REST APIs
+        file:///Users/thomasfrancis/Desktop/Books/djangoforapis-pdf.pdf
+    - page 142 django for professionals - account email verification with sendgrid
+        file:///Users/thomasfrancis/Desktop/Books/djangoforprofessionals-pdf.pdf
+- create the API call on the frontend
 - create registration page with final form
 - routing to and from registration page
 - account creation on the backend
-- sendgrid email confirmation for new accounts
-    - page 185 in Django for REST APIs
-    - page 142 django for professionals - account email verification with sendgrid
 - build the awaiting for email confirmation page
 - forgot password module
 - sendgrid email for new password
