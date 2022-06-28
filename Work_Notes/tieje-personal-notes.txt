@@ -168,3 +168,6 @@ https://mail.zoho.com/zm/#mail/folder/inbox
 Domain management
 https://rr-n1-tor.opensrs.net/manage/index.cgi
 https://rr-n1-tor.opensrs.net/manage/index.cgi?action=modify_nameservers#
+
+Account registration
+https://api.skyskill.tech/api/v1/dj-rest-auth/registration/

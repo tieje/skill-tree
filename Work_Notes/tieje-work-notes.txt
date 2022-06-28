@@ -1167,6 +1167,20 @@ x add a doubleclick to the New Skill Tree button
 + create an add and remove skill tree to learning in the top bar
 + fix permissions so that only the user can grab what they're learning and what they're teaching
 
+6/28/2022
+
+Because I don't really have a revenue stream for the site, I don't think I'm going to implement email authentication.
+I'm simply going to create a registration page and call it a day.
+I'm kinda burnt out from creating Sky Skill.
+Knowing what I know now, I might want to rebuild it from scratch in the future.
+But for now, I just want to work on something else.
+Maybe work on my new portfolio or something. IDK.
+I would like to contribute to hex grid maybe...
+I think I'm just going to cop out and let all users use testuser3 for playing around with the application.
+The MVP is ready.
+I have officially stopped working on this project until I can come back.
+I still believe in the core message.
+
 Write an article about:
 
 - the next skill tree update
@@ -1186,22 +1200,8 @@ Priorities
 6. Try fixing the nginx proxy manager and docker swarm problem
 
 Registration
-- read sendgrid email confirmation for new accounts
-    - page 185 in Django for REST APIs
-        file:///Users/thomasfrancis/Desktop/Books/djangoforapis-pdf.pdf
-    - page 142 django for professionals - account email verification with sendgrid
-        file:///Users/thomasfrancis/Desktop/Books/djangoforprofessionals-pdf.pdf
-- create the API call on the frontend
 - create registration page with final form
 - routing to and from registration page
-- account creation on the backend
-- build the awaiting for email confirmation page
-- forgot password module
-- sendgrid email for new password
-
-Logging In
-- make it so that code 400 logging in says that the password is wrong
-
 
 Add the skyrim theme... Some way somehow
 - look into how other people can accomplish this

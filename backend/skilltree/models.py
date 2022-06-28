@@ -15,7 +15,7 @@ class SkillTreeThemes(Model):
 class SkillTrees(Model):
     skill_tree_id: AutoField = AutoField(primary_key=True)
     name: CharField = CharField(max_length=title_length)
-    theme: CharField = ForeignKey(
+    theme: ForeignKey = ForeignKey(
         SkillTreeThemes, on_delete=SET_NULL, to_field='theme', null=True)
     user: ForeignKey = ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=CASCADE, null=True)

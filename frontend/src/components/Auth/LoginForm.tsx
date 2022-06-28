@@ -29,6 +29,9 @@ const LoginForm = () => {
     const inputRef = useFocusInput()
     return (
         <section className="grid place-content-center h-screen w-screen bg-white">
+            <p className='whitespace-pre-wrap'>Please use the following username and password:</p>
+            <p>testuser3</p>
+            <p>I0W47G2NO9W#h8!QyD</p>
             <div className='border border-solid'>
                 <Form onSubmit={(values: LoginRequest) => onSubmit(values)}>
                     {props => (
@@ -77,6 +80,11 @@ const LoginForm = () => {
                     )}
                 </Form>
             </div>
+            <p className='pre-whitespace'>I appreciate you coming this far, however,</p>
+            <p>I've decided to stop working on this project for a variety of <a className='text-blue underline underline-offset-4' href='https://github.com/tieje/skill-tree/blob/main/README.md'>reasons</a>.</p>
+            <p>Feel free to play around with the app.</p>
+            <p>For inquiries, you can contact me at toj320</p>
+            <p>@gmail.com</p>
         </section>
     )
 }
